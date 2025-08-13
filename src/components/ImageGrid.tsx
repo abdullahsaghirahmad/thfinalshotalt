@@ -1,3 +1,5 @@
+'use client';
+
 import { useGalleryStore } from '@/store/store';
 import { Image as ImageType } from '@/lib/supabase';
 import { ImageCard } from './ImageCard';

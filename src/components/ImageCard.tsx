@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { Image as ImageType } from '@/lib/supabase';
 import { useGalleryStore } from '@/store/store';
