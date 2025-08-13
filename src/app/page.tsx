@@ -1,14 +1,21 @@
 import { ImageGrid } from '@/components/ImageGrid';
 import { getImages } from '@/lib/supabase';
+import { Suspense } from 'react';
 
-export const revalidate = 3600; // Revalidate every hour
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
-export default async function Home() {
+async function FeaturedImages() {
   const images = await getImages('featured');
+  return <ImageGrid images={images} />;
+}
 
+export default function Home() {
   return (
     <main className="min-h-screen bg-white">
-      <ImageGrid images={images} />
+      <Suspense fallback={<div className="mt-16 p-4">Loading...</div>}>
+        <FeaturedImages />
+      </Suspense>
     </main>
   );
 }
