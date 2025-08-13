@@ -1,0 +1,12 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "images": {
+    "sizes": [640, 750, 828, 1080, 1200, 1920],
+    "domains": ["your-supabase-storage-domain.supabase.co"],
+    "formats": ["image/avif", "image/webp"]
+  }
+}

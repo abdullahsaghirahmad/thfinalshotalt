@@ -3,8 +3,8 @@ import { getImages } from '@/lib/supabase';
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default async function Home() {
-  const images = await getImages('featured');
+export default async function FilmPage() {
+  const images = await getImages('film');
 
   return (
     <main className="min-h-screen bg-white">
