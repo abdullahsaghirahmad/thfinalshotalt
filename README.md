@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Final Shot
 
-## Getting Started
+A minimalist portfolio website that renders images based on cursor movement.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Images appear based on cursor movement
+- Threshold controller to adjust cursor sensitivity
+- Image counter to track viewing progress
+- Multiple category support (Featured, Europe, Himalayas, Info)
+- Maximum of 10 images visible at once
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Install dependencies:
+   ```
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Start the server:
+   ```
+   npm start
+   ```
 
-## Learn More
+3. Open your browser to `http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase Integration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site is configured to work with Supabase for image storage. To use this:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Obtain your Supabase anon key
+2. Update the `SUPABASE_KEY` variable in `script.js`
+3. Ensure your Supabase database has an 'images' table with the following schema:
+   - id: number (primary key)
+   - category: string (e.g., 'featured', 'europe', 'himalayas', 'info')
+   - url: string (image URL)
+   - content: string (optional, for text content)
 
-## Deploy on Vercel
+If Supabase is not configured, the site will use fallback placeholder images from Unsplash.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Move your cursor to render images
+- Click menu items to switch categories
+- Use threshold controls to adjust cursor sensitivity:
+  - Lower threshold (minimum 20): Images appear with smaller cursor movements
+  - Higher threshold (maximum 200): Images require larger cursor movements
+
+## Reference
+
+This project is inspired by [bridget.pictures](https://bridget.pictures/)
+
+

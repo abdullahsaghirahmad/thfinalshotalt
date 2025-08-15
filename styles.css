@@ -1,0 +1,261 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: white;
+    color: black;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Media Queries for Responsive Design */
+/* Large screens (desktops) */
+@media screen and (min-width: 1200px) {
+    .image-item {
+        width: 40vw;
+        max-width: 600px;
+    }
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+    .image-item {
+        width: 50vw;
+        max-width: 500px;
+    }
+}
+
+/* Small screens (mobile) */
+@media screen and (max-width: 767px) {
+    .image-item {
+        width: 70vw;
+        max-width: 400px;
+    }
+    
+    .focused-image {
+        max-width: 90vw;
+        max-height: 70vh;
+    }
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Images container */
+.images-container {
+    width: 100%;
+    height: calc(100% - 50px);
+    position: relative;
+    overflow: hidden;
+    /* Ensure container adapts to different screen sizes */
+    min-height: 400px;
+}
+
+.image-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.5s ease;
+    cursor: pointer;
+    /* Add container sizing based on viewport */
+    width: 40vw;
+    max-width: 600px;
+}
+
+.image-item img {
+    /* Maintain natural dimensions within the container */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Focused image view */
+.focused-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 50px);
+    background-color: rgba(255, 255, 255, 0.98);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.focused-view.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* When in focused mode, fade other images */
+.focused-mode .image-item {
+    opacity: 0.2;
+    transition: opacity 0.5s ease;
+}
+
+.focused-image {
+    /* Responsive sizing for focused image */
+    width: auto;
+    height: auto;
+    max-width: 80vw;
+    max-height: 80vh;
+    transition: transform 0.5s ease;
+    object-fit: contain;
+}
+
+.cursor-label {
+    position: fixed;
+    pointer-events: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    color: white;
+    background-color: transparent;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    z-index: 2000;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-label.visible {
+    opacity: 1;
+}
+
+/* Menu bar */
+.menu-bar {
+    width: 100%;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 20px;
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.portfolio-name {
+    font-weight: 500;
+    grid-column: 1;
+    justify-self: start;
+}
+
+.menu-items {
+    display: flex;
+    gap: 15px;
+    grid-column: 2;
+    justify-self: center;
+}
+
+.menu-item {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    opacity: 1;
+    font-style: italic;
+}
+
+/* Right side controls */
+.right-controls {
+    grid-column: 3;
+    justify-self: end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Threshold control */
+.threshold-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.threshold-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Counter */
+.counter {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* Info page styles */
+.info-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
+    font-size: 16px;
+    text-align: left;
+}
+
+.info-content h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.info-content p {
+    margin-bottom: 20px;
+}
+
+.contact-links {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.contact-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.contact-links a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 40px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+

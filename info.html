@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info - The Final Shot</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles specific to the info page */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .info-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .info-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            font-size: 16px;
+            text-align: left;
+        }
+        
+        .info-content h1 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        
+        .info-content p {
+            margin-bottom: 20px;
+        }
+        
+        .contact-links {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-links a {
+            display: block;
+            margin-bottom: 10px;
+            color: black;
+            text-decoration: none;
+        }
+        
+        .contact-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="container">
+        <div class="info-container">
+            <div class="info-content">
+                <h1>Abdullah Ahmad</h1>
+                <p style="text-align: justify;">Abdullah is a self-taught storyteller from India who uses frames, films, and fiction to tell stories that deliver a feeling. His north star is to introduce people to hitherto unexperienced horizons of beauty. To inspire them to be more, to do more. To be the versions of themselves that they are low-key happy about on the inside.</p>
+                <p style="text-align: justify;"></p>His work has been viewed millions of times on various social media platforms, magazines, online publications, film festivals, and on the cover of a book. He constantly works towards creating something that delivers a feeling.</p>
+                <div class="contact-links">
+                    <a href="mailto:abdullahsaghirahmad@gmail.com" target="_blank">Email ↗</a>
+                    <a href="https://instagram.com/the.final.shot" target="_blank">Instagram ↗</a>
+                </div>
+                <div class="copyright">
+                    © <script>document.write(new Date().getFullYear())</script> The Final Shot. All rights reserved.
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-bar">
+            <div class="portfolio-name">The Final Shot</div>
+            
+            <div class="menu-items">
+                <div class="menu-item" data-category="featured">
+                    <a href="/">Featured</a>
+                </div>
+                <div class="menu-item" data-category="europe">
+                    <a href="/?category=europe">Europe</a>
+                </div>
+                <div class="menu-item" data-category="himalayas">
+                    <a href="/?category=himalayas">Himalayas</a>
+                </div>
+                <div class="menu-item active" data-category="info">
+                    <a href="/info">Info</a>
+                </div>
+            </div>
+            
+            <div class="right-controls">
+                <!-- Empty div to maintain the grid layout -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

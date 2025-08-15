@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Final Shot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container" class="container">
+        <div id="images-container" class="images-container"></div>
+        
+        <div id="focused-view" class="focused-view">
+            <img id="focused-image" class="focused-image" src="" alt="Focused image">
+        </div>
+        
+        <div id="cursor-label" class="cursor-label"></div>
+        
+        <div class="menu-bar">
+            <div class="portfolio-name">The Final Shot</div>
+            
+            <div class="menu-items">
+                <div class="menu-item active" data-category="featured">Featured</div>
+                <div class="menu-item" data-category="europe">Europe</div>
+                <div class="menu-item" data-category="himalayas">Himalayas</div>
+                <div class="menu-item" data-category="info">
+                    <a href="/info" style="text-decoration: none; color: inherit;">Info</a>
+                </div>
+            </div>
+            
+            <div class="right-controls">
+                <div class="threshold-control">
+                    <span>Threshold:</span>
+                    <button class="threshold-btn" id="threshold-decrease">－</button>
+                    <span id="threshold-value">0080</span>
+                    <button class="threshold-btn" id="threshold-increase">＋</button>
+                </div>
+                
+                <div class="counter" id="counter">0000 / 0000</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- External Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Cloudinary browser library -->
+    <script src="cloudinary-browser.js"></script>
+    
+    <!-- Main application script -->
+    <script src="script.js"></script>
+</body>
+</html>
+
