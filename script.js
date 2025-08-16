@@ -24,16 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
         // Will proceed with Cloudinary or local fallback images for demo
     }
 
+    // Detect if we're on a mobile device
+    const isMobileDevice = detectMobileDevice();
+    
     // State variables
     let imagesData = {}; // Will hold all images by category
     let currentCategory = 'featured';
-    let threshold = 80;
+    let threshold = isMobileDevice ? 60 : 80; // Lower threshold for mobile devices
     let lastCursorPosition = { x: 0, y: 0 };
     let imagesRendered = 0;
     let totalImages = 0;
     let renderedElements = [];
     let MAX_VISIBLE_IMAGES = 10; // Now dynamic based on threshold
     let firstMovementDone = false;
+    
+    // Touch handling state variables
+    let touchStartX = null;
+    let touchStartY = null;
+    let touchStartTime = null;
+    let isSwiping = false;
+    let isHolding = false;
+    let lastMoveTime = null;
     
     // State preservation for focus mode
     let savedState = {
@@ -154,12 +165,26 @@ document.addEventListener('DOMContentLoaded', () => {
         focusedView.classList.add('active');
         container.classList.add('focused-mode');
         
-        // Disable regular cursor move handler to prevent background image rendering
-        container.removeEventListener('mousemove', handleCursorMove);
+        // Remove the appropriate event listeners based on device type
+        if (isMobileDevice) {
+            container.removeEventListener('touchstart', handleTouchStart);
+            container.removeEventListener('touchmove', handleTouchMove);
+            container.removeEventListener('touchend', handleTouchEnd);
+            
+            // Add touch-specific event listeners for focused view
+            document.addEventListener('touchstart', handleFocusedTouchStart);
+            document.addEventListener('touchmove', handleFocusedTouchMove);
+            document.addEventListener('touchend', handleFocusedTouchEnd);
+        } else {
+            // Disable regular cursor move handler to prevent background image rendering
+            container.removeEventListener('mousemove', handleCursorMove);
+            
+            // Setup mouse event listeners for focused mode
+            document.addEventListener('mousemove', handleFocusedMouseMove);
+            focusedView.addEventListener('click', handleFocusedClick);
+        }
         
-        // Setup event listeners for focused mode
-        document.addEventListener('mousemove', handleFocusedMouseMove);
-        focusedView.addEventListener('click', handleFocusedClick);
+        // Add keyboard navigation for all devices
         document.addEventListener('keydown', handleKeyDown);
     }
     
@@ -204,9 +229,17 @@ document.addEventListener('DOMContentLoaded', () => {
         imagesContainer.innerHTML = '';
         renderedElements = [];
         
-        // Remove focus mode event listeners
-        document.removeEventListener('mousemove', handleFocusedMouseMove);
-        focusedView.removeEventListener('click', handleFocusedClick);
+        // Remove focus mode event listeners based on device type
+        if (isMobileDevice) {
+            document.removeEventListener('touchstart', handleFocusedTouchStart);
+            document.removeEventListener('touchmove', handleFocusedTouchMove);
+            document.removeEventListener('touchend', handleFocusedTouchEnd);
+        } else {
+            document.removeEventListener('mousemove', handleFocusedMouseMove);
+            focusedView.removeEventListener('click', handleFocusedClick);
+        }
+        
+        // Remove keyboard navigation for all devices
         document.removeEventListener('keydown', handleKeyDown);
         
         // Hide cursor label
@@ -219,8 +252,14 @@ document.addEventListener('DOMContentLoaded', () => {
         isFocusedMode = false;
         focusedImageIndex = -1;
         
-        // Re-enable regular cursor move handler
-        container.addEventListener('mousemove', handleCursorMove);
+        // Re-enable regular interaction handlers based on device type
+        if (isMobileDevice) {
+            container.addEventListener('touchstart', handleTouchStart);
+            container.addEventListener('touchmove', handleTouchMove);
+            container.addEventListener('touchend', handleTouchEnd);
+        } else {
+            container.addEventListener('mousemove', handleCursorMove);
+        }
     }
     
     // Function to restore the exact state from before focus mode
@@ -406,6 +445,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // Detect if we're on a mobile device
+    function detectMobileDevice() {
+        const isMobile = (window.innerWidth <= 767) || 
+                         ('ontouchstart' in window) || 
+                         (navigator.maxTouchPoints > 0);
+        
+        // Log detection results for testing
+        console.log('Device detection:', {
+            width: window.innerWidth,
+            hasTouch: 'ontouchstart' in window,
+            touchPoints: navigator.maxTouchPoints,
+            isMobile: isMobile
+        });
+        
+        return isMobile;
+    }
+    
     async function init() {
         // Initialize MAX_VISIBLE_IMAGES based on starting threshold
         MAX_VISIBLE_IMAGES = calculateMaxVisibleImages();
@@ -418,8 +474,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // Start loading images for current category
         loadImages(currentCategory);
         
-        // Event listeners
-        container.addEventListener('mousemove', handleCursorMove);
+        // Set up appropriate event listeners based on device type
+        if (isMobileDevice) {
+            console.log('Mobile device detected, setting up touch handlers');
+            // Touch event listeners for mobile devices
+            container.addEventListener('touchstart', handleTouchStart);
+            container.addEventListener('touchmove', handleTouchMove);
+            container.addEventListener('touchend', handleTouchEnd);
+            
+            // Add swipe indicator for first-time users
+            showSwipeIndicator();
+        } else {
+            console.log('Desktop device detected, using mouse handlers');
+            // Mouse event listener for desktop
+            container.addEventListener('mousemove', handleCursorMove);
+        }
         
         // Listen for image loading completion
         window.addEventListener('imagesLoaded', (event) => {
@@ -699,5 +768,228 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = totalImages.toString().padStart(4, '0');
         counter.textContent = `${current} / ${total}`;
         console.log('Counter updated:', current, '/', total);
+    }
+    
+    // Touch event handlers for mobile devices
+    function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        isSwiping = false;
+        isHolding = false;
+        lastMoveTime = Date.now();
+        
+        // Start monitoring hold state
+        if (isMobileDevice) {
+            requestAnimationFrame(checkHoldState);
+        }
+    }
+    
+    function handleTouchMove(e) {
+        if (!touchStartX || !touchStartY) return;
+        
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        const distance = calculateDistance(touchStartX, touchStartY, touchX, touchY);
+        
+        // If moved beyond a minimum threshold, consider it a swipe
+        if (distance > 10) {
+            isSwiping = true;
+            lastMoveTime = Date.now();
+            
+            // If moving beyond our render threshold, render a new image
+            if (distance >= threshold * 0.8) { // Slightly lower threshold for touch
+                renderImage(touchX, touchY);
+                
+                // Update the reference point for future distance calculation
+                touchStartX = touchX;
+                touchStartY = touchY;
+                
+                if (!firstMovementDone) {
+                    firstMovementDone = true;
+                    
+                    // Hide swipe indicator after first successful swipe
+                    hideSwipeIndicator();
+                }
+            }
+            
+            // Detect if user is holding after a swipe (continuous movement)
+            if (e.touches.length === 1) {
+                isHolding = true;
+            }
+        }
+        
+        // Prevent scrolling when swiping inside container
+        if (isSwiping) {
+            e.preventDefault();
+        }
+    }
+    
+    function handleTouchEnd(e) {
+        // Check if it was a tap (quick touch with minimal movement)
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchStartTime;
+        
+        if (touchStartX !== null && touchStartY !== null) {
+            const touchX = e.changedTouches[0].clientX;
+            const touchY = e.changedTouches[0].clientY;
+            const distance = calculateDistance(touchStartX, touchStartY, touchX, touchY);
+            
+            // If short duration and minimal movement, it's a tap
+            if (touchDuration < 300 && distance < 10) {
+                // Find if the tap is on an image
+                const element = document.elementFromPoint(touchX, touchY);
+                const imageElement = element?.closest('.image-item');
+                
+                if (imageElement) {
+                    // Handle tap on image (open focused view)
+                    focusImage(imageElement);
+                } else if (!firstMovementDone) {
+                    // If this is the first interaction and it's a tap in empty space,
+                    // render the first image at the tap location
+                    renderImage(touchX, touchY);
+                    firstMovementDone = true;
+                    
+                    // Hide swipe indicator
+                    hideSwipeIndicator();
+                }
+            }
+        }
+        
+        // Reset touch tracking
+        touchStartX = null;
+        touchStartY = null;
+        isSwiping = false;
+        isHolding = false;
+    }
+    
+    // Touch handlers for focused view
+    function handleFocusedTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+    }
+    
+    function handleFocusedTouchMove(e) {
+        if (!touchStartX) return;
+        
+        const touchX = e.touches[0].clientX;
+        const diffX = touchX - touchStartX;
+        const windowWidth = window.innerWidth;
+        
+        // Show visual indicator based on swipe direction
+        if (diffX < -50) {
+            cursorLabel.textContent = 'Next';
+            cursorLabel.style.left = `${touchX}px`;
+            cursorLabel.style.top = `${e.touches[0].clientY - 20}px`;
+            cursorLabel.classList.add('visible');
+        } else if (diffX > 50) {
+            cursorLabel.textContent = 'Prev';
+            cursorLabel.style.left = `${touchX}px`;
+            cursorLabel.style.top = `${e.touches[0].clientY - 20}px`;
+            cursorLabel.classList.add('visible');
+        } else {
+            cursorLabel.textContent = 'Close';
+            cursorLabel.style.left = `${touchX}px`;
+            cursorLabel.style.top = `${e.touches[0].clientY - 20}px`;
+            cursorLabel.classList.add('visible');
+        }
+        
+        // Prevent default to avoid browser navigation gestures
+        e.preventDefault();
+    }
+    
+    function handleFocusedTouchEnd(e) {
+        if (!touchStartX) return;
+        
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchStartTime;
+        const touchX = e.changedTouches[0].clientX;
+        const diffX = touchX - touchStartX;
+        const distance = Math.abs(diffX);
+        
+        // Swipe gesture (significant horizontal movement)
+        if (distance > 50) {
+            if (diffX < 0) {
+                showNextImage();
+            } else {
+                showPrevImage();
+            }
+        } 
+        // Tap gesture (minimal movement, short duration)
+        else if (distance < 10 && touchDuration < 300) {
+            closeFocusedView();
+        }
+        
+        touchStartX = null;
+        cursorLabel.classList.remove('visible');
+    }
+    
+    // Function to check if user is holding their finger in place
+    function checkHoldState() {
+        if (isHolding && lastMoveTime && Date.now() - lastMoveTime > 100) {
+            // User is holding but not actively moving
+            // We can pause rendering here
+            
+            // If holding continues for more than 500ms without movement, show indicator
+            if (Date.now() - lastMoveTime > 500) {
+                showHoldIndicator();
+            }
+        }
+        
+        // Continue checking while touching
+        if (touchStartX !== null) {
+            requestAnimationFrame(checkHoldState);
+        } else {
+            hideHoldIndicator();
+        }
+    }
+    
+    // Functions for showing/hiding mobile-specific UI elements
+    function showSwipeIndicator() {
+        // Create swipe indicator if it doesn't exist
+        let swipeIndicator = document.getElementById('swipe-indicator');
+        if (!swipeIndicator) {
+            swipeIndicator = document.createElement('div');
+            swipeIndicator.id = 'swipe-indicator';
+            swipeIndicator.className = 'swipe-indicator';
+            swipeIndicator.innerHTML = '<div class="swipe-icon">←→</div><div class="swipe-text">Swipe to explore</div>';
+            container.appendChild(swipeIndicator);
+        }
+        swipeIndicator.classList.add('visible');
+        
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            hideSwipeIndicator();
+        }, 3000);
+    }
+    
+    function hideSwipeIndicator() {
+        const swipeIndicator = document.getElementById('swipe-indicator');
+        if (swipeIndicator) {
+            swipeIndicator.classList.remove('visible');
+        }
+    }
+    
+    function showHoldIndicator() {
+        // Only show if we're still holding
+        if (!isHolding || touchStartX === null) return;
+        
+        let holdIndicator = document.getElementById('hold-indicator');
+        if (!holdIndicator) {
+            holdIndicator = document.createElement('div');
+            holdIndicator.id = 'hold-indicator';
+            holdIndicator.className = 'hold-indicator';
+            holdIndicator.innerHTML = '<div class="hold-text">Hold + move to continue</div>';
+            container.appendChild(holdIndicator);
+        }
+        holdIndicator.classList.add('visible');
+    }
+    
+    function hideHoldIndicator() {
+        const holdIndicator = document.getElementById('hold-indicator');
+        if (holdIndicator) {
+            holdIndicator.classList.remove('visible');
+        }
     }
 });
