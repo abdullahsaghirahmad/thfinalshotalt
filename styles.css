@@ -77,6 +77,67 @@ body {
     }
 }
 
+/* Extra small screens (narrow mobile) */
+@media screen and (max-width: 400px) {
+    /* Further optimize menu for very narrow screens */
+    .menu-bar {
+        padding: 8px 10px;
+    }
+    
+    .portfolio-name {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    .menu-items {
+        margin: 6px 0;
+        gap: 10px;
+        font-size: 14px;
+    }
+    
+    /* Make threshold controls more compact */
+    .threshold-control {
+        gap: 5px;
+        font-size: 13px;
+    }
+    
+    .threshold-btn {
+        font-size: 14px;
+        padding: 2px 5px;
+    }
+    
+    #threshold-value {
+        min-width: 36px; /* Ensure consistent width */
+        text-align: center;
+    }
+    
+    /* Make counter more compact */
+    .counter {
+        font-size: 13px;
+    }
+    
+    /* Reduce bottom margin on right controls */
+    .right-controls {
+        gap: 5px;
+        margin-bottom: 2px;
+    }
+    
+    /* For extremely narrow screens, optimize threshold control further */
+    @media screen and (max-width: 320px) {
+        .threshold-control span:first-child {
+            display: none; /* Hide "Threshold:" label on smallest screens */
+        }
+        
+        .threshold-control {
+            gap: 3px;
+        }
+        
+        .menu-items {
+            gap: 8px;
+        }
+    }
+}
+
 .container {
     width: 100%;
     height: 100%;
@@ -91,6 +152,20 @@ body {
     overflow: hidden;
     /* Ensure container adapts to different screen sizes */
     min-height: 400px;
+}
+
+/* Adjust container height for mobile layouts with taller menu bar */
+@media screen and (max-width: 767px) {
+    .images-container {
+        height: calc(100% - 120px); /* Account for taller menu on mobile */
+    }
+}
+
+/* Further adjust container height for extra small screens */
+@media screen and (max-width: 400px) {
+    .images-container {
+        height: calc(100% - 140px); /* Extra space for menu on very narrow devices */
+    }
 }
 
 .image-item {
@@ -132,6 +207,19 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Adjust focused view height for mobile layouts */
+@media screen and (max-width: 767px) {
+    .focused-view {
+        height: calc(100% - 120px); /* Match container height on mobile */
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .focused-view {
+        height: calc(100% - 140px); /* Match container height on smallest screens */
+    }
 }
 
 .focused-view.active {
