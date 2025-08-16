@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "A portfolio website that renders images based on cursor movement",
   "main": "server.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
+    "build": "mkdir -p public/manifests && node manifest-generator.js",
     "vercel-build": "mkdir -p public/manifests && node manifest-generator.js"
   },
   "dependencies": {
