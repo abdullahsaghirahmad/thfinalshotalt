@@ -1,5 +1,9 @@
 // Cloudinary API handler for server-side operations
-require('dotenv').config({ path: '.env.local' });
+try {
+  require('dotenv').config({ path: '.env.local' });
+} catch (err) {
+  console.log('No .env.local file found, using environment variables');
+}
 
 // Check if we have API credentials
 let cloudinary;

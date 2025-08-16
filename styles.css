@@ -180,7 +180,10 @@ body {
     color: inherit;
 }
 
-.menu-item:hover,
+.menu-item:hover {
+    opacity: 1;
+}
+
 .menu-item.active {
     opacity: 1;
     font-style: italic;

@@ -4,7 +4,8 @@
   "description": "A portfolio website that renders images based on cursor movement",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "vercel-build": "mkdir -p public/manifests && node manifest-generator.js"
   },
   "dependencies": {
     "express": "^4.18.2",

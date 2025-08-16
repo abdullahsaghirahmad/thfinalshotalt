@@ -148,5 +148,15 @@ module.exports = {
 if (require.main === module) {
   generateAllManifests().then(() => {
     console.log('Manifest generation complete.');
+    // Exit process when running in build environment (like Vercel)
+    if (process.env.VERCEL) {
+      console.log('Running in Vercel build environment, exiting process');
+      process.exit(0);
+    }
+  }).catch(err => {
+    console.error('Error generating manifests:', err);
+    if (process.env.VERCEL) {
+      process.exit(1);
+    }
   });
 }

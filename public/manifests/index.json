@@ -1,9 +1,9 @@
 {
-  "updated_at": "2025-08-16T06:30:44.172Z",
+  "updated_at": "2025-08-16T07:30:44.226Z",
   "categories": [
     {
       "name": "featured",
-      "count": 14,
+      "count": 16,
       "path": "/manifests/featured.json"
     },
     {
