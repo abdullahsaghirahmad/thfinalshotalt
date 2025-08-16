@@ -1,0 +1,15 @@
+{
+  "updated_at": "2025-08-16T06:30:44.172Z",
+  "categories": [
+    {
+      "name": "featured",
+      "count": 14,
+      "path": "/manifests/featured.json"
+    },
+    {
+      "name": "bnw",
+      "count": 27,
+      "path": "/manifests/bnw.json"
+    }
+  ]
+}

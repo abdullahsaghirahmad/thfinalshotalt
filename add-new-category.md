@@ -125,13 +125,30 @@ const isLoading = {
 };
 ```
 
-## Step 5: Add Images to Cloudinary
+## Step 5: Update Manifest Generator
+
+Edit `manifest-generator.js` to include your new category:
+
+```js
+// Find this array and add your category
+const categories = ['featured', 'bnw', 'info', 'your-category-name'];
+```
+
+Then generate the initial manifest for your new category:
+
+```bash
+node manifest-generator.js
+```
+
+This will create a cached manifest for faster image loading for your new category.
+
+## Step 6: Add Images to Cloudinary
 
 1. Login to your Cloudinary dashboard
 2. Create a new folder with the same name as your category (if it doesn't exist)
 3. Upload images to this folder
 
-## Step 6: Update Legacy Implementation
+## Step 7: Update Legacy Implementation
 
 You also need to update the vanilla JS implementation in `index.html`:
 

@@ -30,9 +30,39 @@ export function buildCloudinaryUrl(
   return `${API_URL}/${transformation}/${publicId}`;
 }
 
-// Fetch images from Cloudinary via our server API
+// Fetch images from manifest or fallback to API
 export const getCloudinaryImages = cache(async (folder: string): Promise<CloudinaryImage[]> => {
   try {
+    // First try to get images from the manifest (much faster)
+    try {
+      console.log(`Trying to fetch manifest for ${folder}...`);
+      const manifestResponse = await fetch(`/api/manifests/${folder}`, {
+        next: { revalidate: 3600 } // Cache for 1 hour
+      });
+      
+      if (manifestResponse.ok) {
+        const manifest = await manifestResponse.json();
+        console.log(`Using manifest for ${folder} with ${manifest.count} images`);
+        
+        // Return the images directly from the manifest
+        return manifest.images.map((image: any): CloudinaryImage => ({
+          id: image.id || image.public_id,
+          public_id: image.public_id,
+          secure_url: image.secure_url,
+          width: image.width,
+          height: image.height,
+          format: image.format,
+          created_at: image.created_at || new Date().toISOString(),
+          folder: image.folder || folder
+        }));
+      }
+    } catch (manifestError) {
+      console.warn(`Manifest not available for ${folder}, falling back to API: ${manifestError.message}`);
+      // Continue to fallback method
+    }
+    
+    // Fallback to regular API if manifest isn't available
+    console.log(`Falling back to API for ${folder}`);
     const response = await fetch(`/api/cloudinary-images?folder=${folder}`, {
       next: { revalidate: 3600 } // Cache for 1 hour
     });

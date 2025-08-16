@@ -17,7 +17,7 @@ export function Navigation() {
       <div className="flex items-center space-x-1">
         <Link 
           href="/" 
-          className="font-mono text-sm hover:opacity-60 transition-opacity"
+          className="hover:opacity-60 transition-opacity" /* Removed font-mono and text-sm to match menu items */
         >
           The Final Shot
         </Link>

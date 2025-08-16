@@ -81,7 +81,7 @@ const pendingRequests = {};
 // Keep track of event listeners to avoid duplicates
 let eventListenersRegistered = false;
 
-// Fetch images directly from the server API - simplified and optimized
+// Fetch images directly from the server API - using manifest for faster loading
 async function fetchImagesForCategory(category) {
   // Check if we have a pending request for this category
   if (pendingRequests[category]) {
@@ -108,7 +108,30 @@ async function fetchImagesForCategory(category) {
     // Create a promise for this request and store it
     pendingRequests[category] = (async () => {
       console.log(`Fetching images for category: ${category}`);
-      const response = await fetch(`/api/cloudinary-images?folder=${category}`);
+      
+      // First try to fetch from manifest (much faster)
+      try {
+        console.log(`Trying manifest first for ${category}...`);
+        const manifestResponse = await fetch(`/api/manifests/${category}`);
+        
+        if (manifestResponse.ok) {
+          const manifest = await manifestResponse.json();
+          console.log(`✅ Using manifest for ${category} with ${manifest.count} images`);
+          
+          // Convert manifest format to match the expected structure
+          return {
+            resources: manifest.images,
+            total_count: manifest.count
+          };
+        }
+      } catch (manifestError) {
+        console.warn(`Manifest not available for ${category}, falling back to API: ${manifestError.message}`);
+        // Continue to fallback method
+      }
+      
+      // Fallback to regular API if manifest isn't available
+      console.log(`Falling back to API for ${category}`);
+      const response = await fetch(`/api/cloudinary-images?folder=${category}&manifest=false`);
       
       if (!response.ok) {
         throw new Error(`Failed to fetch images: ${response.statusText}`);

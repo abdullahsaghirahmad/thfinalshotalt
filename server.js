@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const cloudinaryApi = require('./cloudinary-api');
+const manifestGenerator = require('./manifest-generator');
 
 // Serve static files with caching
 app.use(express.static(__dirname, {
@@ -20,6 +21,7 @@ app.use(express.static(__dirname, {
 app.get('/api/cloudinary-images', async (req, res) => {
   try {
     const folder = req.query.folder || 'featured';
+    const useManifest = req.query.manifest !== 'false'; // Default to using manifest
     
     // Add cache headers - cache for 1 hour
     res.set('Cache-Control', 'public, max-age=3600');
@@ -32,7 +34,25 @@ app.get('/api/cloudinary-images', async (req, res) => {
       return res.status(304).end();
     }
     
-    const result = await cloudinaryApi.listImagesInFolder(folder);
+    let result;
+    
+    // Try to use the manifest for faster response
+    if (useManifest) {
+      const manifest = await manifestGenerator.getManifest(folder);
+      if (manifest) {
+        // Convert manifest format to match Cloudinary API response
+        result = {
+          resources: manifest.images,
+          total_count: manifest.count
+        };
+      } else {
+        // Fall back to direct API call if manifest not available
+        result = await cloudinaryApi.listImagesInFolder(folder);
+      }
+    } else {
+      // Direct API call if manifest is disabled
+      result = await cloudinaryApi.listImagesInFolder(folder);
+    }
     
     // Set ETag for caching
     res.set('ETag', `W/"${folder}-cache"`);
@@ -49,6 +69,41 @@ app.get('/info', (req, res) => {
   res.sendFile(path.join(__dirname, 'info.html'));
 });
 
+// API endpoint to directly access image manifests
+app.get('/api/manifests/:category', async (req, res) => {
+  try {
+    const { category } = req.params;
+    
+    // Set cache headers
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
+    
+    const manifest = await manifestGenerator.getManifest(category);
+    if (manifest) {
+      res.json(manifest);
+    } else {
+      res.status(404).json({ error: `Manifest for ${category} not found` });
+    }
+  } catch (error) {
+    console.error(`Error serving manifest: ${error}`);
+    res.status(500).json({ error: 'Failed to serve manifest' });
+  }
+});
+
+// API endpoint to list all available manifests
+app.get('/api/manifests', (req, res) => {
+  try {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.sendFile(path.join(__dirname, 'public', 'manifests', 'index.json'));
+  } catch (error) {
+    console.error(`Error serving manifest index: ${error}`);
+    res.status(500).json({ 
+      error: 'Failed to serve manifest index',
+      categories: manifestGenerator.categories
+    });
+  }
+});
+
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -57,4 +112,8 @@ app.get('*', (req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+  
+  // Initialize manifest generator when server starts
+  manifestGenerator.scheduleRegenerateManifests();
+  console.log('Image manifest generator initialized');
 });
