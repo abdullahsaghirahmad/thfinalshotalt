@@ -3,6 +3,17 @@
 // and access them through the global scope, but here's how we'd reference them
 // const { getImageUrl, preloadImage, preloadImages } = imageUtils;
 
+// Check for mobile device immediately when script loads
+function checkMobileDevice() {
+    const isMobile = window.innerWidth <= 767;
+    if (isMobile) {
+        document.body.classList.add('mobile-device');
+    }
+}
+
+// Run detection once before DOM is fully loaded to prevent flicker
+checkMobileDevice();
+
 document.addEventListener('DOMContentLoaded', () => {
     // Cloudinary will be our primary image provider
     // This utility is loaded from cloudinary-browser.js
@@ -447,19 +458,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Detect if we're on a mobile device
     function detectMobileDevice() {
-        const isMobile = (window.innerWidth <= 767) || 
-                         ('ontouchstart' in window) || 
-                         (navigator.maxTouchPoints > 0);
+        // For UI adaptations, we only care about screen width
+        const isMobile = window.innerWidth <= 767;
         
-        // Log detection results for testing
-        console.log('Device detection:', {
-            width: window.innerWidth,
-            hasTouch: 'ontouchstart' in window,
-            touchPoints: navigator.maxTouchPoints,
-            isMobile: isMobile
-        });
+        // Add a class to the body for CSS targeting
+        if (isMobile) {
+            document.body.classList.add('mobile-device');
+        } else {
+            document.body.classList.remove('mobile-device');
+        }
         
-        return isMobile;
+        // For touch event handling, we still want to detect touch capabilities
+        return isMobile || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     }
     
     async function init() {
@@ -470,6 +480,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize UI
         updateThresholdDisplay();
         updateCounter();
+        
+        // Check for mobile device and apply appropriate UI adaptations
+        detectMobileDevice();
+        
+        // Listen for window resizing to update mobile detection
+        window.addEventListener('resize', detectMobileDevice);
         
         // Start loading images for current category
         loadImages(currentCategory);

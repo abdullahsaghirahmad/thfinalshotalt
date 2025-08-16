@@ -43,99 +43,82 @@ body {
         max-height: 70vh;
     }
     
-    /* Mobile-specific menu layout */
-    .menu-bar {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, auto);
-        height: auto;
-        padding: 10px 15px;
-    }
-    
-    .portfolio-name {
-        grid-row: 1;
-        justify-self: center;
-        margin-bottom: 8px;
-    }
-    
-    .menu-items {
-        grid-row: 2;
-        justify-self: center;
-        margin: 8px 0;
-    }
-    
-    .right-controls {
-        grid-row: 3;
-        justify-self: center;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-    
     /* Swipe indicator is only shown on mobile */
     .swipe-indicator {
         display: block;
     }
 }
 
-/* Extra small screens (narrow mobile) */
-@media screen and (max-width: 400px) {
-    /* Further optimize menu for very narrow screens */
-    .menu-bar {
-        padding: 8px 10px;
-    }
-    
-    .portfolio-name {
-        font-size: 14px;
-        margin-bottom: 6px;
-    }
-    
-    .menu-items {
-        margin: 6px 0;
-        gap: 10px;
-        font-size: 14px;
-    }
-    
-    /* Make threshold controls more compact */
-    .threshold-control {
-        gap: 5px;
-        font-size: 13px;
-    }
-    
-    .threshold-btn {
-        font-size: 14px;
-        padding: 2px 5px;
-    }
-    
-    #threshold-value {
-        min-width: 36px; /* Ensure consistent width */
-        text-align: center;
-    }
-    
-    /* Make counter more compact */
-    .counter {
-        font-size: 13px;
-    }
-    
-    /* Reduce bottom margin on right controls */
-    .right-controls {
-        gap: 5px;
-        margin-bottom: 2px;
-    }
-    
-    /* For extremely narrow screens, optimize threshold control further */
-    @media screen and (max-width: 320px) {
-        .threshold-control span:first-child {
-            display: none; /* Hide "Threshold:" label on smallest screens */
-        }
-        
-        .threshold-control {
-            gap: 3px;
-        }
-        
-        .menu-items {
-            gap: 8px;
-        }
-    }
+/* Mobile-specific adaptations - applied using a class instead of media query for precision */
+.mobile-device .menu-bar {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    height: 40px;
+    padding: 0;
+    align-items: center;
+}
+
+.mobile-device .portfolio-name {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: start;
+    margin: 0;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.mobile-device .menu-items {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+    margin: 0;
+    padding-right: 10px;
+    display: flex;
+    gap: 15px; /* Smaller gap between icons */
+}
+
+.mobile-device .right-controls {
+    display: none;
+}
+
+/* Hide counter and threshold controls on mobile */
+.mobile-device .counter,
+.mobile-device .threshold-control {
+    display: none;
+}
+
+/* Menu icon styles */
+.menu-icon {
+    display: none;
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+.mobile-device .menu-icon {
+    display: inline-block;
+}
+
+.mobile-device .menu-item {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: opacity 0.2s ease;
+}
+
+.mobile-device .menu-item:hover,
+.mobile-device .menu-item:active {
+    opacity: 0.7;
+}
+
+.mobile-device .menu-item .menu-icon {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Hide text labels completely in mobile */
+.mobile-device .menu-text {
+    display: none;
 }
 
 .container {
@@ -152,20 +135,6 @@ body {
     overflow: hidden;
     /* Ensure container adapts to different screen sizes */
     min-height: 400px;
-}
-
-/* Adjust container height for mobile layouts with taller menu bar */
-@media screen and (max-width: 767px) {
-    .images-container {
-        height: calc(100% - 120px); /* Account for taller menu on mobile */
-    }
-}
-
-/* Further adjust container height for extra small screens */
-@media screen and (max-width: 400px) {
-    .images-container {
-        height: calc(100% - 140px); /* Extra space for menu on very narrow devices */
-    }
 }
 
 .image-item {
@@ -207,19 +176,6 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-/* Adjust focused view height for mobile layouts */
-@media screen and (max-width: 767px) {
-    .focused-view {
-        height: calc(100% - 120px); /* Match container height on mobile */
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .focused-view {
-        height: calc(100% - 140px); /* Match container height on smallest screens */
-    }
 }
 
 .focused-view.active {
