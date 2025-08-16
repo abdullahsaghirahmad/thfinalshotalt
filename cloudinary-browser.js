@@ -57,24 +57,21 @@ function generateCloudinaryUrl(publicId, options = {}) {
 // Image categories and their Cloudinary folder paths
 const imageFolders = {
   featured: 'featured',
-  europe: 'featured',
-  himalayas: 'featured',
-  info: 'featured'
+  bnw: 'bnw',
+  info: 'info'
 };
 
 // Cache of loaded images by category
 const imageCache = {
   featured: [],
-  europe: [],
-  himalayas: [],
+  bnw: [],
   info: []
 };
 
 // Flag to track if we're currently loading images for a category
 const isLoading = {
   featured: false,
-  europe: false,
-  himalayas: false,
+  bnw: false,
   info: false
 };
 
@@ -231,7 +228,12 @@ async function getImagesForCategory(category, count) {
     return [];
   }
   
-  // Return the exact count requested, cycling through available images if needed
+  // If count is 0 or not specified, return all available images
+  if (!count) {
+    return images.map((image, i) => ({...image, id: i + 1}));
+  }
+  
+  // Otherwise, return the exact count requested, cycling through available images if needed
   const result = [];
   for (let i = 0; i < count; i++) {
     const index = i % images.length;
@@ -246,6 +248,11 @@ async function getImagesForCategory(category, count) {
 function generateImageMetadata(category, count) {
   // If we have cached images, use them
   if (imageCache[category] && imageCache[category].length > 0) {
+    // If count is 0 or not specified, return all available images
+    if (!count) {
+      return imageCache[category].map((image, i) => ({...image, id: i + 1}));
+    }
+    
     const images = [];
     for (let i = 0; i < count; i++) {
       const index = i % imageCache[category].length;

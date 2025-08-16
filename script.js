@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Use actual Cloudinary images - no more mock images
     console.log('Using Cloudinary for image delivery');
-    const imageCount = 14; // We saw 14 images in the Cloudinary folder
+    // Use all available images from the Cloudinary folder, no hardcoded limit
     
     // Initialize empty image data structure - we'll load only what we need
     const cloudinaryImages = {
@@ -471,7 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Loading images for category: ${category}`);
             
             // Use our new async function to get images for this category only
-            const images = await imageUtils.getImagesForCategory(category, imageCount);
+            // Pass 0 to indicate we want all available images
+            const images = await imageUtils.getImagesForCategory(category, 0);
             
             if (images && images.length > 0) {
                 // Store in our local data

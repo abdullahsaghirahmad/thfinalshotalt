@@ -8,8 +8,7 @@ export function Navigation() {
   const pathname = usePathname();
   const sections = [
     { name: 'Featured', path: '/' },
-    { name: 'Digital', path: '/digital' },
-    { name: 'Film', path: '/film' },
+    { name: 'BnW', path: '/bnw' },
     { name: 'Info', path: '/info' },
   ];
 

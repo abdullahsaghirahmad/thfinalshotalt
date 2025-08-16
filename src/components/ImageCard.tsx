@@ -21,7 +21,10 @@ export function ImageCard({ image, isActive, onClick }: ImageCardProps) {
       onClick={onClick}
     >
       <Image
-        src={`${image.path}?tr=th-${threshold}`}
+        src={image.path.includes('?') 
+          ? `${image.path}&tr=th-${threshold}`  // If URL already has query params
+          : `${image.path}?tr=th-${threshold}`  // If URL has no query params
+        }
         alt="Gallery image"
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

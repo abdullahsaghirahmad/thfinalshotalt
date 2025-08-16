@@ -30,9 +30,11 @@ async function listImagesInFolder(folderPath) {
     try {
       console.log(`Fetching images from Cloudinary for category: ${folderPath}`);
       
-      // Don't filter by folder/tags at all - just get all images
-      // This is the most reliable approach since we don't know how the images are organized
-      const searchExpression = 'resource_type:image';
+      // Filter images by folder path
+      // Use the folder path as the folder name in Cloudinary
+      const searchExpression = `folder=${folderPath} AND resource_type:image`;
+      
+      console.log(`Searching with expression: ${searchExpression}`);
       
       const result = await cloudinary.search
         .expression(searchExpression)
