@@ -2,11 +2,11 @@ import { create } from 'zustand';
 import { Image } from '@/lib/supabase';
 
 interface GalleryState {
-  currentSection: 'featured' | 'bnw' | 'info';
+  currentSection: 'featured' | 'bnw' | 'about' | 'info';
   threshold: number;
   currentImageIndex: number;
   images: Image[];
-  setCurrentSection: (section: 'featured' | 'bnw' | 'info') => void;
+  setCurrentSection: (section: 'featured' | 'bnw' | 'about' | 'info') => void;
   setThreshold: (threshold: number) => void;
   setCurrentImageIndex: (index: number) => void;
   setImages: (images: Image[]) => void;

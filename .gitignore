@@ -42,3 +42,4 @@ yarn-error.log*
 next-env.d.ts
 cloudinary-config.js
 add-new-category.md
+*.bak

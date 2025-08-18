@@ -58,6 +58,7 @@ function generateCloudinaryUrl(publicId, options = {}) {
 const imageFolders = {
   featured: 'featured',
   bnw: 'bnw',
+  about: 'about',
   info: 'info'
 };
 
@@ -65,6 +66,7 @@ const imageFolders = {
 const imageCache = {
   featured: [],
   bnw: [],
+  about: [],
   info: []
 };
 
@@ -72,6 +74,7 @@ const imageCache = {
 const isLoading = {
   featured: false,
   bnw: false,
+  about: false,
   info: false
 };
 

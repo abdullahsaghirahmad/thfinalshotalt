@@ -9,6 +9,7 @@ export function Navigation() {
   const sections = [
     { name: 'Featured', path: '/' },
     { name: 'BnW', path: '/bnw' },
+    { name: 'About', path: '/about' },
     { name: 'Info', path: '/info' },
   ];
 

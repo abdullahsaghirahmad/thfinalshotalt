@@ -24,3 +24,86 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* About page two-section layout */
+.about-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 50px); /* Full height minus menu bar */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Section A - top section for bio */
+.section-a {
+  width: 100%;
+  height: auto; /* Auto height to fit content */
+  min-height: 250px; /* Minimum height to ensure it's not too small */
+  max-height: 350px; /* Maximum height to prevent it from being too large */
+  background-color: rgba(255, 0, 0, 0.1); /* Red tint for debugging */
+  z-index: 10;
+  cursor: default !important; /* Normal cursor in bio section */
+  overflow-y: auto; /* Allow scrolling if bio content is tall */
+  /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
+}
+
+/* Section B - bottom section for images */
+.section-b {
+  width: 100%;
+  flex: 1; /* Take up all remaining space */
+  background-color: rgba(0, 0, 255, 0.1); /* Blue tint for debugging */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bio section styles */
+.bio-section {
+  max-width: 70%;
+  margin: 30px auto 0;
+ /* padding: 20px; */
+  text-align: justify;
+  cursor: default !important; /* Override any image cursor styles */
+}
+
+/* For Next.js only */
+.hidden {
+  display: none;
+}
+
+.bio-section h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.bio-section p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.bio-section .contact-links {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 20px;
+  max-width: 100%;
+}
+
+.bio-section .contact-link {
+  display: block;
+  /*margin-bottom: 8px;*/
+  text-decoration: none;
+  color: var(--foreground);
+}
+
+.bio-section .contact-link:hover {
+  text-decoration: underline;
+}
+
+.bio-section .copyright {
+  margin-top: 10px;
+  margin-bottom: 10px; /* Reduce bottom margin to minimize space */
+  font-size: 14px;
+  color: #666;
+}

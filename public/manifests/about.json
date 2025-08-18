@@ -1,0 +1,31 @@
+{
+  "category": "about",
+  "updated_at": "2025-08-18T11:24:41.542Z",
+  "count": 3,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "3_iibwql",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755500040/3_iibwql.png",
+      "width": 614,
+      "height": 459,
+      "format": "png"
+    },
+    {
+      "id": 2,
+      "public_id": "2_s8hxrs",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755500036/2_s8hxrs.png",
+      "width": 1003,
+      "height": 246,
+      "format": "png"
+    },
+    {
+      "id": 3,
+      "public_id": "IMG_20220820_171918-16x9-1_1_tto6dx",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755499923/IMG_20220820_171918-16x9-1_1_tto6dx.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg"
+    }
+  ]
+}

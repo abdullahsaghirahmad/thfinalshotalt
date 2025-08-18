@@ -101,6 +101,22 @@ document.addEventListener('DOMContentLoaded', () => {
         'featured': [],
         'europe': [],
         'himalayas': [],
+        'about': [{ 
+            id: 1, 
+            url: '', 
+            content: `<div class="bio-section">
+                <h1>Abdullah Ahmad</h1>
+                <p>Abdullah is a self-taught storyteller from India who uses frames, films, and fiction to tell stories that deliver a feeling. His north star is to introduce people to hitherto unexperienced horizons of beauty. To inspire them to be more, to do more. To be the versions of themselves that they are low-key happy about on the inside.</p>
+                <p>His work has been viewed millions of times on various social media platforms, magazines, online publications, film festivals, and on the cover of a book. He constantly works towards creating something that delivers a feeling.</p>
+                <div class="contact-links">
+                    <a href="mailto:info@example.com" class="contact-link">Email ↗</a>
+                    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="contact-link">Instagram ↗</a>
+                </div>
+                <div class="copyright">
+                    © 2025 The Final Shot. All rights reserved.
+                </div>
+            </div>` 
+        }],
         'info': [{ 
             id: 1, 
             url: '', 
@@ -206,8 +222,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
         
+        // For the About page, target section B specifically
+        if (currentCategory === 'about') {
+            const sectionB = document.getElementById('section-b');
+            if (sectionB) {
+                console.log('About page: Rendering multiple images to section-b');
+                const sectionRect = sectionB.getBoundingClientRect();
+                // Use coordinates within section B
+                const sectionCenterY = sectionRect.top + (sectionRect.height / 2);
+                renderMultipleImagesFromPosition(centerX, sectionCenterY, sectionB);
+                return;
+            }
+        }
+        
+        // Standard behavior for other pages
+        renderMultipleImagesFromPosition(centerX, centerY);
+    }
+    
+    function renderMultipleImagesFromPosition(centerX, centerY, customContainer = null) {
         // Render the current image first (the hero image)
-        renderImage(centerX, centerY);
+        renderImage(centerX, centerY, customContainer);
         
         // Render additional images in a pattern around the center
         // We'll create a spiral-like pattern of images
@@ -223,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Only render if within visible bounds
             if (x > 0 && x < window.innerWidth && y > 0 && y < window.innerHeight - 50) {
-                renderImage(x, y);
+                renderImage(x, y, customContainer);
             }
         }
     }
@@ -238,9 +272,26 @@ document.addEventListener('DOMContentLoaded', () => {
                   'Current images rendered:', imagesRendered,
                   'Elements to restore:', savedState.renderedElements.length);
         
-        // Clear existing images
-        imagesContainer.innerHTML = '';
-        renderedElements = [];
+        // Special handling for About page to preserve its two-section layout
+        if (currentCategory === 'about') {
+            // Only clear section B (images section), preserve section A (bio section)
+            const sectionB = document.getElementById('section-b');
+            if (sectionB) {
+                // Clear only section B
+                sectionB.innerHTML = '';
+                renderedElements = [];
+                console.log('About page: Preserving two-section layout, only clearing section B');
+            } else {
+                // Fallback if section B is not found (shouldn't happen)
+                console.warn('About page: section-b not found, reverting to default clear');
+                imagesContainer.innerHTML = '';
+                renderedElements = [];
+            }
+        } else {
+            // Standard behavior for other pages
+            imagesContainer.innerHTML = '';
+            renderedElements = [];
+        }
         
         // Remove focus mode event listeners based on device type
         if (isMobileDevice) {
@@ -293,6 +344,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         console.log('Restoring', savedState.renderedElementsData.length, 'images with counter at', imagesRendered);
         
+        // Determine the correct container for restoration
+        const targetContainer = currentCategory === 'about' ? 
+            document.getElementById('section-b') || imagesContainer : 
+            imagesContainer;
+            
+        if (currentCategory === 'about') {
+            console.log('About page: Restoring images to section-b container');
+        }
+        
         // Recreate each image element in its exact position
         savedState.renderedElementsData.forEach(data => {
             const imageData = imagesData[currentCategory][data.index];
@@ -331,8 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 imageElement.style.maxWidth = '600px';
             }
             
-            // Add to container
-            imagesContainer.appendChild(imageElement);
+            // Add to the appropriate container (section B for About page, or main container for others)
+            targetContainer.appendChild(imageElement);
             
             // Add to tracked elements
             renderedElements.push(imageElement);
@@ -613,19 +673,68 @@ document.addEventListener('DOMContentLoaded', () => {
         const cursorX = e.clientX;
         const cursorY = e.clientY;
         
-        // Calculate distance moved
-        const distance = calculateDistance(lastCursorPosition.x, lastCursorPosition.y, cursorX, cursorY);
-        
-        // If this is the first movement or the distance exceeds the threshold
-        if (!firstMovementDone || distance >= threshold) {
-            renderImage(cursorX, cursorY);
+        if (currentCategory === 'about') {
+            // Check which section the cursor is in
+            const elements = document.elementsFromPoint(cursorX, cursorY);
             
-            // Update last position
-            lastCursorPosition = { x: cursorX, y: cursorY };
+            // Check if we're in section A (bio)
+            const inSectionA = elements.some(el => 
+                el.classList && (el.classList.contains('section-a') || el.id === 'section-a')
+            );
             
-            // Mark first movement as done
-            if (!firstMovementDone) {
-                firstMovementDone = true;
+            // Check if we're in section B (images)
+            const sectionB = document.getElementById('section-b');
+            const inSectionB = elements.some(el => 
+                el.classList && (el.classList.contains('section-b') || el.id === 'section-b')
+            );
+            
+            // If we're in section A (bio section), use normal cursor and skip rendering
+            if (inSectionA) {
+                document.body.style.cursor = 'default';
+                return; // Don't process cursor movement in bio section
+            } else {
+                // Reset cursor for section B
+                document.body.style.cursor = '';
+            }
+            
+            // If we're in section B (image section)
+            if (inSectionB) {
+                // Calculate distance moved
+                const distance = calculateDistance(lastCursorPosition.x, lastCursorPosition.y, cursorX, cursorY);
+                
+                // If this is the first movement or the distance exceeds the threshold
+                if (!firstMovementDone || distance >= threshold) {
+                    // Render the image in section B
+                    renderImage(cursorX, cursorY, sectionB);
+                    
+                    // Update last position
+                    lastCursorPosition = { x: cursorX, y: cursorY };
+                    
+                    // Mark first movement as done
+                    if (!firstMovementDone) {
+                        firstMovementDone = true;
+                    }
+                }
+            }
+        } else {
+            // Reset cursor for non-about pages
+            document.body.style.cursor = '';
+            
+            // Standard behavior for other categories
+            // Calculate distance moved
+            const distance = calculateDistance(lastCursorPosition.x, lastCursorPosition.y, cursorX, cursorY);
+            
+            // If this is the first movement or the distance exceeds the threshold
+            if (!firstMovementDone || distance >= threshold) {
+                renderImage(cursorX, cursorY);
+                
+                // Update last position
+                lastCursorPosition = { x: cursorX, y: cursorY };
+                
+                // Mark first movement as done
+                if (!firstMovementDone) {
+                    firstMovementDone = true;
+                }
             }
         }
     }
@@ -634,7 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
     
-    function renderImage(x, y) {
+    function renderImage(x, y, customContainer = null) {
         // Get next image to render
         if (imagesRendered >= totalImages) {
             // We've shown all images, restart
@@ -651,6 +760,26 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!imageData) return;
         
+        // Robust error handling for the about page
+        if (currentCategory === 'about') {
+            // For about page, ensure we're only rendering actual images with URLs
+            if (!imageData.url) {
+                // Skip non-image content and move to the next item
+                imagesRendered++;
+                
+                // Safety check if we've reached the end
+                if (imagesRendered >= totalImages) {
+                    imagesRendered = 0;
+                    console.log('Reached end of images, resetting counter');
+                    return;
+                }
+                
+                // Recursively try the next image
+                console.log('Skipping non-image content in About page');
+                return renderImage(x, y, customContainer);
+            }
+        }
+        
         // Create image element
         const imageElement = document.createElement('div');
         imageElement.className = 'image-item';
@@ -665,9 +794,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add loading="lazy" for better performance
             img.loading = "lazy";
             
-            // Position the image relative to cursor
-            imageElement.style.top = `${y}px`;
-            imageElement.style.left = `${x}px`;
+            // Special positioning for About page section B
+            if (currentCategory === 'about' && customContainer && customContainer.id === 'section-b') {
+                // Get section B's position and dimensions
+                const sectionBRect = customContainer.getBoundingClientRect();
+                // Position relative to section B's top, not the viewport
+                const relativeY = y - sectionBRect.top;
+                // Apply position within section B
+                imageElement.style.top = `${relativeY}px`;
+                imageElement.style.left = `${x}px`;
+            } else {
+                // Standard positioning for all other cases
+                imageElement.style.top = `${y}px`;
+                imageElement.style.left = `${x}px`;
+            }
+            
             imageElement.style.transform = 'translate(-50%, -50%)';
             
             // Store image data for focused view
@@ -694,8 +835,9 @@ document.addEventListener('DOMContentLoaded', () => {
             imageElement.style.margin = '0 auto';
         }
         
-        // Add to container
-        imagesContainer.appendChild(imageElement);
+        // Add to container - either custom or default
+        const targetContainer = customContainer || imagesContainer;
+        targetContainer.appendChild(imageElement);
         
         // Add to tracked elements
         renderedElements.push(imageElement);
@@ -737,13 +879,99 @@ document.addEventListener('DOMContentLoaded', () => {
         imagesRendered = 0;
         firstMovementDone = false;
         
-        // Special handling for info category
+        // Special handling for info and about categories
         if (category === 'info') {
             // For info category, redirect to the dedicated info page
             window.location.href = '/info';
             return;
+        } else if (category === 'about') {
+            // For about category, create a two-section layout
+            console.log('About category selected, creating two-section layout');
+            
+            // First clear the container and create the structure
+            imagesContainer.innerHTML = '';
+            
+            // Create the layout container
+            const aboutLayout = document.createElement('div');
+            aboutLayout.className = 'about-layout';
+            imagesContainer.appendChild(aboutLayout);
+            
+            // Create section A (bio)
+            const sectionA = document.createElement('div');
+            sectionA.className = 'section-a';
+            sectionA.id = 'section-a';
+            aboutLayout.appendChild(sectionA);
+            
+            // Create section B (images)
+            const sectionB = document.createElement('div');
+            sectionB.className = 'section-b';
+            sectionB.id = 'section-b';
+            aboutLayout.appendChild(sectionB);
+            
+            // Add bio content to section A
+            const bioElement = document.createElement('div');
+            bioElement.className = 'bio-section';
+            bioElement.innerHTML = `
+                <h1>Abdullah Ahmad</h1>
+                <p>
+                    Abdullah is a self-taught storyteller from India who uses frames, films, and
+                    fiction to tell stories that deliver a feeling. His north star is to introduce
+                    people to hitherto unexperienced horizons of beauty. To inspire them to be
+                    more, to do more. To be the versions of themselves that they are low-key
+                    happy about on the inside.
+                </p>
+                <p>
+                    His work has been viewed millions of times on various social media platforms,
+                    magazines, online publications, film festivals, and on the cover of a book. He
+                    constantly works towards creating something that delivers a feeling.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:abdullahsaghirahmad@gmail.com" class="contact-link">Email ↗</a>
+                    <a href="https://instagram.com/the.final.shot" target="_blank" rel="noopener noreferrer" class="contact-link">Instagram ↗</a>
+                    <a href="https://youtube.com/abdullahsaghirahmad" target="_blank" rel="noopener noreferrer" class="contact-link">YouTube ↗</a>
+                    <a href="https://unsplash.com/@thefinalshot" target="_blank" rel="noopener noreferrer" class="contact-link">Unsplash ↗</a>
+                    <a href="https://thefinalshot.beehiiv.com/" target="_blank" rel="noopener noreferrer" class="contact-link">Newsletter ↗</a>
+                    <a href="https://linkedin.com/in/abdullahsaghirahmad" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn ↗</a>
+                </div>
+                <div class="copyright">
+                    © 2025 The Final Shot. All rights reserved.
+                </div>
+            `;
+            sectionA.appendChild(bioElement);
+            
+            // Load images for the About section
+            loadImages(category).then(() => {
+                // We don't need to shift or manage bio content anymore
+                // since we're directly embedding the bio HTML
+                
+                console.log(`Setting up image rendering for ${category} with ${imagesData[category].length} images`);
+                
+                // Set firstMovementDone to false to require cursor movement before rendering images
+                firstMovementDone = false;
+                
+                // Add a visual indicator for the image section
+                const indicator = document.createElement('div');
+                indicator.className = 'section-indicator';
+                indicator.textContent = 'Move cursor here to view images';
+                indicator.style.position = 'absolute';
+                indicator.style.top = '50%';
+                indicator.style.left = '50%';
+                indicator.style.transform = 'translate(-50%, -50%)';
+                indicator.style.opacity = '0.5';
+                indicator.style.fontSize = '14px';
+                indicator.style.pointerEvents = 'none';
+                sectionB.appendChild(indicator);
+                
+                // Make indicator fade out after 3 seconds
+                setTimeout(() => {
+                    indicator.style.transition = 'opacity 1s ease';
+                    indicator.style.opacity = '0';
+                }, 3000);
+            });
+            
+            return; // Exit early, we've handled everything
         } else {
-            // For image categories, load images and wait for mouse movement
+            // For other image categories, load images and wait for mouse movement
             loadImages(category).then(() => {
                 // Don't auto-render the first image, wait for mouse movement
                 // This preserves the original behavior

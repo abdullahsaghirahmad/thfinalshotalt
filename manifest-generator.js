@@ -12,7 +12,7 @@ if (!fs.existsSync(MANIFEST_DIR)) {
 }
 
 // List of categories to generate manifests for
-const categories = ['featured', 'bnw', 'info'];
+const categories = ['featured', 'bnw', 'about', 'info'];
 
 // How often to regenerate the manifest (in ms) - 1 hour by default
 const CACHE_DURATION = process.env.MANIFEST_CACHE_DURATION || 3600000;
