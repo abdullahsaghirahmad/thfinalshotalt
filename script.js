@@ -6,9 +6,25 @@
 // Check for mobile device immediately when script loads
 function checkMobileDevice() {
     const isMobile = window.innerWidth <= 767;
-    if (isMobile) {
-        document.body.classList.add('mobile-device');
-    }
+    
+    // DEBUG: Force mobile mode regardless of screen width
+    document.body.classList.add('mobile-device');
+    
+    // DEBUG: Add visual indicator showing device width and detection status
+    const debugElement = document.createElement('div');
+    debugElement.id = 'debug-info';
+    debugElement.style.position = 'fixed';
+    debugElement.style.top = '0';
+    debugElement.style.left = '0';
+    debugElement.style.backgroundColor = 'rgba(255,0,0,0.7)';
+    debugElement.style.color = 'white';
+    debugElement.style.padding = '5px';
+    debugElement.style.fontSize = '10px';
+    debugElement.style.zIndex = '9999';
+    debugElement.textContent = `Width: ${window.innerWidth}, Mobile: ${isMobile}`;
+    document.body.appendChild(debugElement);
+    
+    console.log('DEBUG: Device width: ' + window.innerWidth + ', isMobile: ' + isMobile);
 }
 
 // Run detection once before DOM is fully loaded to prevent flicker
@@ -486,6 +502,29 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Listen for window resizing to update mobile detection
         window.addEventListener('resize', detectMobileDevice);
+        
+        // DEBUG: Check if menu elements exist in the DOM
+        const menuBar = document.querySelector('.menu-bar');
+        console.log('DEBUG: Menu bar exists:', menuBar !== null);
+        if (menuBar) {
+            console.log('DEBUG: Menu bar display style:', getComputedStyle(menuBar).display);
+            console.log('DEBUG: Menu bar position:', getComputedStyle(menuBar).position);
+            console.log('DEBUG: Menu bar dimensions:', menuBar.offsetWidth, 'x', menuBar.offsetHeight);
+            
+            // Add second debug element showing menu info
+            const menuDebug = document.createElement('div');
+            menuDebug.id = 'menu-debug';
+            menuDebug.style.position = 'fixed';
+            menuDebug.style.top = '25px';
+            menuDebug.style.left = '0';
+            menuDebug.style.backgroundColor = 'rgba(0,0,255,0.7)';
+            menuDebug.style.color = 'white';
+            menuDebug.style.padding = '5px';
+            menuDebug.style.fontSize = '10px';
+            menuDebug.style.zIndex = '9999';
+            menuDebug.textContent = `Menu: ${menuBar.offsetWidth}x${menuBar.offsetHeight}, Pos: ${getComputedStyle(menuBar).position}`;
+            document.body.appendChild(menuDebug);
+        }
         
         // Start loading images for current category
         loadImages(currentCategory);
