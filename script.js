@@ -1036,38 +1036,89 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const touchX = e.touches[0].clientX;
         const touchY = e.touches[0].clientY;
-        const distance = calculateDistance(touchStartX, touchStartY, touchX, touchY);
         
-        // If moved beyond a minimum threshold, consider it a swipe
-        if (distance > 10) {
-            isSwiping = true;
-            lastMoveTime = Date.now();
+        // Special handling for About page to respect section boundaries
+        if (currentCategory === 'about') {
+            // Check if touch is in section A (bio) - if so, don't render images
+            const elements = document.elementsFromPoint(touchX, touchY);
+            const inSectionA = elements.some(el => 
+                el.classList && (
+                    el.classList.contains('section-a') || 
+                    el.id === 'section-a' || 
+                    el.classList.contains('bio-section')
+                )
+            );
             
-            // If moving beyond our render threshold, render a new image
-            if (distance >= threshold * 0.8) { // Slightly lower threshold for touch
-                renderImage(touchX, touchY);
+            // If in section A (bio), allow normal touch scrolling and don't render images
+            if (inSectionA) {
+                // Don't prevent default to allow normal scrolling in bio section
+                return;
+            }
+            
+            // Get section B for positioning
+            const sectionB = document.getElementById('section-b');
+            if (sectionB) {
+                const distance = calculateDistance(touchStartX, touchStartY, touchX, touchY);
                 
-                // Update the reference point for future distance calculation
-                touchStartX = touchX;
-                touchStartY = touchY;
-                
-                if (!firstMovementDone) {
-                    firstMovementDone = true;
+                // If moved beyond a minimum threshold, consider it a swipe
+                if (distance > 10) {
+                    isSwiping = true;
+                    lastMoveTime = Date.now();
                     
-                    // Hide swipe indicator after first successful swipe
-                    hideSwipeIndicator();
+                    // If moving beyond our render threshold, render a new image in section B
+                    if (distance >= threshold * 0.8) { // Slightly lower threshold for touch
+                        renderImage(touchX, touchY, sectionB);
+                        
+                        // Update the reference point for future distance calculation
+                        touchStartX = touchX;
+                        touchStartY = touchY;
+                        
+                        if (!firstMovementDone) {
+                            firstMovementDone = true;
+                            hideSwipeIndicator();
+                        }
+                    }
+                    
+                    // Detect if user is holding after a swipe
+                    if (e.touches.length === 1) {
+                        isHolding = true;
+                    }
+                    
+                    // Prevent default only in section B
+                    e.preventDefault();
                 }
             }
+        } else {
+            // Standard behavior for other categories
+            const distance = calculateDistance(touchStartX, touchStartY, touchX, touchY);
             
-            // Detect if user is holding after a swipe (continuous movement)
-            if (e.touches.length === 1) {
-                isHolding = true;
+            // If moved beyond a minimum threshold, consider it a swipe
+            if (distance > 10) {
+                isSwiping = true;
+                lastMoveTime = Date.now();
+                
+                // If moving beyond our render threshold, render a new image
+                if (distance >= threshold * 0.8) { // Slightly lower threshold for touch
+                    renderImage(touchX, touchY);
+                    
+                    // Update the reference point for future distance calculation
+                    touchStartX = touchX;
+                    touchStartY = touchY;
+                    
+                    if (!firstMovementDone) {
+                        firstMovementDone = true;
+                        hideSwipeIndicator();
+                    }
+                }
+                
+                // Detect if user is holding after a swipe
+                if (e.touches.length === 1) {
+                    isHolding = true;
+                }
+                
+                // Prevent scrolling when swiping in standard categories
+                e.preventDefault();
             }
-        }
-        
-        // Prevent scrolling when swiping inside container
-        if (isSwiping) {
-            e.preventDefault();
         }
     }
     
@@ -1081,23 +1132,66 @@ document.addEventListener('DOMContentLoaded', () => {
             const touchY = e.changedTouches[0].clientY;
             const distance = calculateDistance(touchStartX, touchStartY, touchX, touchY);
             
-            // If short duration and minimal movement, it's a tap
-            if (touchDuration < 300 && distance < 10) {
-                // Find if the tap is on an image
-                const element = document.elementFromPoint(touchX, touchY);
-                const imageElement = element?.closest('.image-item');
+            // Special handling for About page to respect section boundaries
+            if (currentCategory === 'about') {
+                // Check if touch is in section A (bio) - if so, don't render images
+                const elements = document.elementsFromPoint(touchX, touchY);
+                const inSectionA = elements.some(el => 
+                    el.classList && (
+                        el.classList.contains('section-a') || 
+                        el.id === 'section-a' || 
+                        el.classList.contains('bio-section')
+                    )
+                );
                 
-                if (imageElement) {
-                    // Handle tap on image (open focused view)
-                    focusImage(imageElement);
-                } else if (!firstMovementDone) {
-                    // If this is the first interaction and it's a tap in empty space,
-                    // render the first image at the tap location
-                    renderImage(touchX, touchY);
-                    firstMovementDone = true;
+                // If tap is in section A (bio), don't render images
+                if (inSectionA) {
+                    // Reset touch tracking
+                    touchStartX = null;
+                    touchStartY = null;
+                    isSwiping = false;
+                    isHolding = false;
+                    return;
+                }
+                
+                // If in section B and it's a tap
+                if (touchDuration < 300 && distance < 10) {
+                    // Find if the tap is on an image
+                    const element = document.elementFromPoint(touchX, touchY);
+                    const imageElement = element?.closest('.image-item');
                     
-                    // Hide swipe indicator
-                    hideSwipeIndicator();
+                    if (imageElement) {
+                        // Handle tap on image (open focused view)
+                        focusImage(imageElement);
+                    } else if (!firstMovementDone) {
+                        // If this is the first interaction and it's a tap in empty space in section B,
+                        // render the first image at the tap location in section B
+                        const sectionB = document.getElementById('section-b');
+                        if (sectionB) {
+                            renderImage(touchX, touchY, sectionB);
+                            firstMovementDone = true;
+                            hideSwipeIndicator();
+                        }
+                    }
+                }
+            } else {
+                // Standard behavior for other categories
+                // If short duration and minimal movement, it's a tap
+                if (touchDuration < 300 && distance < 10) {
+                    // Find if the tap is on an image
+                    const element = document.elementFromPoint(touchX, touchY);
+                    const imageElement = element?.closest('.image-item');
+                    
+                    if (imageElement) {
+                        // Handle tap on image (open focused view)
+                        focusImage(imageElement);
+                    } else if (!firstMovementDone) {
+                        // If this is the first interaction and it's a tap in empty space,
+                        // render the first image at the tap location
+                        renderImage(touchX, touchY);
+                        firstMovementDone = true;
+                        hideSwipeIndicator();
+                    }
                 }
             }
         }
