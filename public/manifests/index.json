@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-08-18T15:33:00.300Z",
+  "updated_at": "2025-08-19T20:33:59.403Z",
   "categories": [
     {
       "name": "featured",
@@ -13,7 +13,7 @@
     },
     {
       "name": "about",
-      "count": 3,
+      "count": 11,
       "path": "/manifests/about.json"
     }
   ]

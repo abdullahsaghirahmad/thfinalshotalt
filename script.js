@@ -5,7 +5,14 @@
 
 // Check for mobile device immediately when script loads
 function checkMobileDevice() {
+    // Check for fine pointer control (mouse) - this is more reliable than just width
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
     const isMobile = window.innerWidth <= 767;
+    
+    // Only consider it mobile if small screen AND no fine pointer
+    const isTrueMobile = isMobile && !hasFinePointer;
+    
+    // For CSS purposes, we still use width-based classification
     if (isMobile) {
         document.body.classList.add('mobile-device');
     } else {
@@ -518,20 +525,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Detect if we're on a mobile device
+    // Detect if we're on a mobile device - improved version that works better across browsers
     function detectMobileDevice() {
-        // For UI adaptations, we only care about screen width
-        const isMobile = window.innerWidth <= 767;
+        // Check for fine pointer control (mouse) - this is more reliable than just width
+        const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
         
-        // Add a class to the body for CSS targeting
-        if (isMobile) {
+        // Check for screen width for responsive UI - this is still useful for CSS layout
+        const isNarrowScreen = window.innerWidth <= 767;
+        
+        // For CSS targeting - only add mobile-device class if screen is narrow
+        // This ensures proper styling based on screen size regardless of input method
+        if (isNarrowScreen) {
             document.body.classList.add('mobile-device');
         } else {
             document.body.classList.remove('mobile-device');
         }
         
-        // For touch event handling, we still want to detect touch capabilities
-        return isMobile || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        // This is the key fix: Consider a device as mobile only if it:
+        // 1. Has a narrow screen AND
+        // 2. Does NOT have fine pointer control (mouse)
+        // This correctly identifies Windows Chrome with a mouse as NOT mobile
+        return isNarrowScreen && !hasFinePointer;
     }
     
     async function init() {
