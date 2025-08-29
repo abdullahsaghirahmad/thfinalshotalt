@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Musings - The Final Shot</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles specific to the random musings page */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .random-musings-container {
+            flex: 1;
+            width: 100%;
+            padding: 1rem;
+            margin: 0;
+            overflow: auto;
+        }
+        
+        .musings-container {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, calc((100vh - 100px) / 2)); /* Equal rows: (viewport - nav areas) ÷ 2 */
+            max-width: 100%;
+            height: calc(100vh - 100px); /* Total available height */
+        }
+
+        .musing-card {
+            background: rgba(250, 250, 250, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            height: 100%; /* Fill grid cell completely */
+            display: flex;
+            flex-direction: column;
+            opacity: 1.0; /* Default full opacity */
+            cursor: pointer; /* Entire card is clickable */
+        }
+
+        .musing-card:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+            /* Opacity managed by JavaScript for sophisticated focus system */
+        }
+
+        .musing-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+            margin-top: 0;
+        }
+
+        .musing-title {
+            color: #333;
+            transition: opacity 0.3s ease;
+        }
+
+        .musing-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        .musing-images {
+            margin: 0.25rem 0;
+        }
+
+        .musing-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        /* Removed gimmicky image hover transformation */
+
+        .musing-image:last-child {
+            margin-bottom: 0;
+        }
+
+        .musing-content {
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 0;
+            white-space: pre-line;
+            text-align: justify;
+            flex: 1; /* Take up remaining space in card */
+            overflow-y: auto; /* Allow scrolling if content exceeds */
+            padding-bottom: 0.5rem; /* Space at bottom for last line */
+        }
+
+
+
+
+
+        .loading-message, .error-message {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .error-message {
+            color: #dc2626;
+        }
+
+        .musings-wrapper {
+            width: 100%;
+        }
+
+        /* Navigation pagination styles */
+        .nav-pagination {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .nav-pagination-btn {
+            background: none;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .nav-pagination-btn:hover:not(:disabled) {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-pagination-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-pagination-page {
+            color: #666;
+            min-width: 15px;
+            text-align: center;
+        }
+
+        /* Navigation animations - 1.5s pseudo loader */
+        .nav-visible {
+            opacity: 1;
+            transform: translateX(0);
+            visibility: visible;
+            transition: all 1.5s ease;
+        }
+
+        .nav-fade-out {
+            opacity: 0;
+            transform: translateX(-10px);
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 1.5s ease;
+        }
+
+        .nav-fade-in {
+            opacity: 1;
+            transform: translateX(0);
+            visibility: visible;
+            transition: all 1.5s ease;
+        }
+
+        .nav-center {
+            position: relative;
+            /* Dynamic centering applied via JavaScript - no fixed transform */
+            transition: all 1.5s ease;
+        }
+
+        /* Disable non-functional menu items */
+        .menu-item.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Tablet optimizations */
+        @media screen and (max-width: 1024px) and (min-width: 768px) {
+            .musings-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, calc((100vh - 140px) / 3)); /* Equal rows: viewport ÷ 3 */
+            }
+        }
+
+        /* Mobile optimizations */
+        @media screen and (max-width: 767px) {
+            .musings-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, calc((100vh - 140px) / 6)); /* Equal rows: viewport ÷ 6 */
+                gap: 0.5rem;
+                padding: 0.5rem;
+                height: calc(100vh - 140px);
+            }
+            
+            .musing-card {
+                padding: 0.75rem;
+            }
+            
+            .musing-title {
+                font-size: 1.125rem;
+            }
+
+            .musing-image {
+                height: 100px;
+            }
+
+            .musing-content {
+                font-size: 0.8rem;
+            }
+
+
+            
+            .nav-pagination {
+                gap: 0.3rem;
+            }
+            
+            .nav-pagination-btn {
+                width: 18px;
+                height: 18px;
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="container">
+        <div class="random-musings-container">
+            <div id="musings-content">
+                <div class="loading-message">Loading musings...</div>
+            </div>
+        </div>
+        
+        <div class="menu-bar">
+            <div class="portfolio-name"><a href="/" class="final-shot-link" style="text-decoration: none; color: inherit;">The Final Shot</a></div>
+            
+            <div class="menu-items">
+                <div class="menu-item nav-fade-out disabled" data-category="featured">
+                    <a href="/">Featured</a>
+                </div>
+                <div class="menu-item nav-fade-out disabled" data-category="bnw">
+                    <a href="/bnw">BnW</a>
+                </div>
+                <div class="menu-item nav-fade-out disabled" data-category="about">
+                    <a href="/about">About</a>
+                </div>
+                <div class="menu-item active nav-center" data-category="random-musings" style="margin-left: 2em;">
+                    <a href="/random-musings">Random Musings</a>
+                </div>
+                <div class="menu-item nav-fade-out disabled" data-category="info">
+                    <a href="/info">Info</a>
+                </div>
+            </div>
+            
+            <div class="right-controls">
+                <!-- Threshold control (faded out on Random Musings) -->
+                <div id="threshold-control" class="nav-fade-out" style="margin-right: 1rem;">
+                    <!-- Placeholder for threshold control styling -->
+                    <span style="opacity: 0.3; font-size: 0.75rem;">○</span>
+                </div>
+                
+                                       <!-- Pagination controls (fade in on Random Musings) -->
+                       <div id="pagination-nav" class="nav-pagination nav-visible">
+                    <span id="pagination-page" class="nav-pagination-page">1</span>
+                    <button id="first-btn" class="nav-pagination-btn" title="First page">⇤</button>
+                    <button id="prev-btn" class="nav-pagination-btn" title="Previous page">←</button>
+                    <button id="next-btn" class="nav-pagination-btn" title="Next page">→</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pagination state
+        let currentPage = 1;
+        let nextCursor = null;
+        let currentMusings = [];
+        let hasMore = true;
+        let cursors = [null]; // Track cursors for each page to enable back navigation
+        
+        // Fetch and display Random Musings from Notion API
+        async function loadRandomMusings(cursor = null, pageIndex = 0) {
+            const musingsContent = document.getElementById('musings-content');
+            
+            // 🚀 Check for preloaded data (only for first page)
+            if (!cursor && pageIndex === 0) {
+                console.log('🔍 Checking for preloaded data on page load...');
+                const preloaded = sessionStorage.getItem('preloadedMusings');
+                console.log('📦 Found in sessionStorage:', preloaded ? 'YES' : 'NO');
+                
+                if (preloaded) {
+                    try {
+                        const cached = JSON.parse(preloaded);
+                        const age = Date.now() - cached.timestamp;
+                        console.log(`⏱️ Preloaded data age: ${age}ms`);
+                        
+                        // Use preloaded data if fresh (within 5 seconds)
+                        if (age < 5000 && cached.data && cached.data.musings) {
+                            console.log(`⚡ Using preloaded data (age: ${age}ms) - INSTANT LOAD!`);
+                            sessionStorage.removeItem('preloadedMusings'); // Clean up
+                            
+                            const data = cached.data;
+                            currentMusings = data.musings || [];
+                            hasMore = data.hasMore || false;
+                            nextCursor = data.nextCursor || null;
+                            
+                            renderMusings(currentMusings);
+                            updateNavigationPagination();
+                            return; // Skip normal fetch - data already loaded!
+                        } else {
+                            console.log('⏰ Preloaded data too stale, fetching fresh');
+                            sessionStorage.removeItem('preloadedMusings');
+                        }
+                    } catch (error) {
+                        console.log('⚠️ Invalid preloaded data, fetching fresh:', error);
+                        sessionStorage.removeItem('preloadedMusings');
+                    }
+                }
+            }
+            
+            // 📡 Normal fetch (fallback or pagination)
+            musingsContent.innerHTML = '<div class="loading-message">Loading musings...</div>';
+            
+            try {
+                let url = '/api/notion-musings?pageSize=6';
+                if (cursor) {
+                    url += `&cursor=${cursor}`;
+                }
+                
+                console.log(`📡 Fetching from API: ${url}`);
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch musings');
+                }
+                
+                const data = await response.json();
+                
+                if (data.musings.length === 0) {
+                    musingsContent.innerHTML = '<div class="error-message">No musings found.</div>';
+                    return;
+                }
+                
+                // Always replace current musings (never append)
+                currentMusings = data.musings;
+                hasMore = data.hasMore;
+                nextCursor = data.nextCursor;
+                
+                // Store cursor for next page navigation
+                if (data.nextCursor && pageIndex + 1 >= cursors.length) {
+                    cursors.push(data.nextCursor);
+                }
+                
+                renderMusings();
+                
+            } catch (error) {
+                console.error('Error loading musings:', error);
+                musingsContent.innerHTML = `<div class="error-message">Error loading musings: ${error.message}</div>`;
+            }
+        }
+        
+        function renderMusings() {
+            const musingsContent = document.getElementById('musings-content');
+            
+            // Create wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'musings-wrapper';
+            
+            // Create musings grid
+            const musingsContainer = document.createElement('div');
+            musingsContainer.className = 'musings-container';
+            
+                            currentMusings.forEach(musing => {
+                                    const card = document.createElement('article');
+                    card.className = 'musing-card';
+                    card.onclick = () => window.open(musing.url, '_blank', 'noopener,noreferrer');
+                    
+                    // Auto-scroll variables for this card
+                    let hoverTimer = null;
+                    let autoScrollInterval = null;
+                    let userHasScrolled = false;
+                    let lastAutoScrollPosition = 0; // Track last programmatic scroll position
+                    let lastScrollTime = 0; // Track when user last scrolled
+                    let resumeTimer = null; // Timer to resume after manual scroll stops
+
+                    const title = document.createElement('h2');
+                    title.className = 'musing-title';
+                    title.textContent = musing.title; // Remove nested link, entire card is clickable
+                    card.appendChild(title);
+                
+                // Add images if any
+                if (musing.images && musing.images.length > 0) {
+                    console.log('Rendering images for:', musing.title, 'Image count:', musing.images.length);
+                    const imagesContainer = document.createElement('div');
+                    imagesContainer.className = 'musing-images';
+                    
+                    musing.images.forEach((imageUrl, index) => {
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = `Content image ${index + 1}`;
+                        img.className = 'musing-image';
+                        img.loading = 'lazy';
+                        imagesContainer.appendChild(img);
+                    });
+                    
+                    card.appendChild(imagesContainer);
+                } else {
+                    console.log('No images for:', musing.title);
+                }
+                
+                // Add rich content (full content - let CSS handle overflow)
+                if (musing.content) {
+                    console.log('Rendering content for:', musing.title, 'Content length:', musing.content.length);
+                    const content = document.createElement('div');
+                    content.className = 'musing-content';
+                    content.innerHTML = musing.content.replace(/\n/g, '<br>');
+                    card.appendChild(content);
+                } else {
+                    console.log('No content for:', musing.title);
+                }
+
+                                    // Set up auto-scroll functionality
+                    const contentElement = card.querySelector('.musing-content');
+                    if (contentElement) {
+                        // Track manual scrolling using position comparison
+                        contentElement.addEventListener('scroll', () => {
+                            const currentPosition = contentElement.scrollTop;
+                            
+                            // Check if this scroll is from our auto-scroll by comparing position
+                            if (autoScrollInterval && currentPosition === lastAutoScrollPosition) {
+                                // This is our programmatic scroll, ignore it
+                                return;
+                            }
+                            
+                            // This is actual user scrolling
+                            lastScrollTime = Date.now();
+                            
+                            // Stop current auto-scroll if running
+                            if (autoScrollInterval) {
+                                console.log('User scrolled manually - pausing auto-scroll');
+                                userHasScrolled = true;
+                                clearInterval(autoScrollInterval);
+                                autoScrollInterval = null;
+                            }
+                            
+                            // Clear any existing resume timer
+                            if (resumeTimer) {
+                                clearTimeout(resumeTimer);
+                            }
+                            
+                            // Set timer to resume auto-scroll after 1 second of inactivity
+                            resumeTimer = setTimeout(() => {
+                                if (Date.now() - lastScrollTime >= 1000) { // 1 second since last manual scroll
+                                    console.log('Resuming auto-scroll from current position');
+                                    userHasScrolled = false; // Reset flag to allow auto-scroll
+                                    
+                                    // Start auto-scrolling from current position
+                                    if (contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
+                                        autoScrollInterval = setInterval(() => {
+                                            if (!userHasScrolled && contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
+                                                lastAutoScrollPosition = contentElement.scrollTop + 1; // Track expected position
+                                                contentElement.scrollTop += 1;
+                                                console.log('Resume scrolling to:', contentElement.scrollTop);
+                                            } else {
+                                                console.log('Resume auto-scroll stopped - reached end');
+                                                clearInterval(autoScrollInterval);
+                                                autoScrollInterval = null;
+                                            }
+                                        }, 60); // 25fps for comfortable resume too
+                                    }
+                                }
+                            }, 1000); // Resume after 1 second of inactivity
+                        });
+
+                        // Mouse enter - sophisticated focus + auto-scroll
+                        card.addEventListener('mouseenter', () => {
+                            // Focus system: grey out all other cards
+                            const allCards = document.querySelectorAll('.musing-card');
+                            allCards.forEach(otherCard => {
+                                if (otherCard !== card) {
+                                    otherCard.style.opacity = '0.6';
+                                } else {
+                                    otherCard.style.opacity = '1.0';
+                                }
+                            });
+                            
+                            userHasScrolled = false;
+                            hoverTimer = setTimeout(() => {
+                                if (!userHasScrolled && contentElement.scrollHeight > contentElement.clientHeight) {
+                                    console.log('Starting auto-scroll for:', musing.title, 'ScrollHeight:', contentElement.scrollHeight, 'ClientHeight:', contentElement.clientHeight);
+                                    // Start auto-scrolling (smooth and continuous)
+                                    autoScrollInterval = setInterval(() => {
+                                        if (!userHasScrolled && contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
+                                            lastAutoScrollPosition = contentElement.scrollTop + 1; // Track expected position
+                                            contentElement.scrollTop += 1; // 25px/second (1px every 40ms) - slow reading pace
+                                            console.log('Scrolling to:', contentElement.scrollTop);
+                                        } else {
+                                            // Reached end or user scrolled
+                                            console.log('Auto-scroll stopped - reached end or user scrolled');
+                                            clearInterval(autoScrollInterval);
+                                            autoScrollInterval = null;
+                                        }
+                                    }, 60); // 25fps - comfortable reading speed
+                                }
+                            }, 1250); // 1.25-second delay
+                        });
+
+                        // Mouse leave - restore all cards + clean up timers
+                        card.addEventListener('mouseleave', () => {
+                            // Restore all cards to full opacity
+                            const allCards = document.querySelectorAll('.musing-card');
+                            allCards.forEach(anyCard => {
+                                anyCard.style.opacity = '1.0';
+                            });
+                            
+                            if (hoverTimer) {
+                                clearTimeout(hoverTimer);
+                                hoverTimer = null;
+                            }
+                            if (autoScrollInterval) {
+                                clearInterval(autoScrollInterval);
+                                autoScrollInterval = null;
+                            }
+                            if (resumeTimer) {
+                                clearTimeout(resumeTimer);
+                                resumeTimer = null;
+                            }
+                            userHasScrolled = false;
+                            lastAutoScrollPosition = 0;
+                        });
+                    }
+
+                    musingsContainer.appendChild(card);
+                });
+            
+            wrapper.appendChild(musingsContainer);
+            
+            // Update navigation pagination controls
+            updateNavigationPagination();
+            
+            musingsContent.innerHTML = '';
+            musingsContent.appendChild(wrapper);
+        }
+        
+        // Update navigation pagination controls
+        function updateNavigationPagination() {
+            const paginationNav = document.getElementById('pagination-nav');
+            const pageSpan = document.getElementById('pagination-page');
+            const firstBtn = document.getElementById('first-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (paginationNav && pageSpan && firstBtn && prevBtn && nextBtn) {
+                // Update page number
+                pageSpan.textContent = currentPage.toString();
+                
+                // Update button states
+                firstBtn.disabled = currentPage === 1;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = !hasMore;
+                
+                // Update button handlers
+                firstBtn.onclick = () => {
+                    currentPage = 1;
+                    cursors = [null];
+                    nextCursor = null;
+                    loadRandomMusings(null, 0);
+                };
+                
+                prevBtn.onclick = () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        const prevCursor = cursors[currentPage - 1];
+                        loadRandomMusings(prevCursor, currentPage - 1);
+                    }
+                };
+                
+                nextBtn.onclick = () => {
+                    if (hasMore && nextCursor) {
+                        currentPage++;
+                        loadRandomMusings(nextCursor, currentPage - 1);
+                    }
+                };
+            }
+        }
+
+        // Initialize navigation animations on page load
+        function initializeNavigation() {
+            // Pagination controls should be visible immediately
+            const paginationNav = document.getElementById('pagination-nav');
+            if (paginationNav) {
+                paginationNav.classList.remove('nav-fade-in');
+                paginationNav.classList.add('nav-visible');
+            }
+        }
+        
+        // Handle reverse animation when clicking "The Final Shot"
+        function handleFinalShotClick(e) {
+            e.preventDefault();
+            
+            // Preload the home page
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'prefetch';
+            preloadLink.href = '/';
+            document.head.appendChild(preloadLink);
+            
+            // Start reverse animation
+            const menuItems = document.querySelectorAll('.menu-item[data-category]:not([data-category="random-musings"])');
+            const thresholdControl = document.querySelector('#threshold-control');
+            const paginationNav = document.querySelector('#pagination-nav');
+            const randomMusingsItem = document.querySelector('[data-category="random-musings"]');
+            
+            // Fade out pagination controls
+            if (paginationNav) {
+                paginationNav.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                paginationNav.style.opacity = '0';
+                paginationNav.style.transform = 'translateX(20px)';
+            }
+            
+            // Move Random Musings back from center (reset to original position)
+            if (randomMusingsItem) {
+                randomMusingsItem.style.transition = 'transform 0.25s ease';
+                randomMusingsItem.style.transform = 'translateX(0)';
+                console.log('🔄 Reset Random Musings position to original');
+            }
+            
+            // Fade in other menu items
+            menuItems.forEach(item => {
+                item.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            });
+            
+            // Fade in threshold control
+            if (thresholdControl) {
+                thresholdControl.style.transition = 'opacity 0.25s ease';
+                thresholdControl.style.opacity = '1';
+            }
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 250);
+        }
+
+        // Load musings when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply centering IMMEDIATELY on page load (no transition)
+            const randomMusingsItem = document.querySelector('[data-category="random-musings"]');
+            if (randomMusingsItem) {
+                try {
+                    const viewportWidth = window.innerWidth;
+                    const itemRect = randomMusingsItem.getBoundingClientRect();
+                    const itemCenter = itemRect.left + (itemRect.width / 2);
+                    const viewportCenter = viewportWidth / 2;
+                    const centerOffset = viewportCenter - itemCenter;
+                    
+                    // Apply centering WITHOUT transition (immediate positioning)
+                    randomMusingsItem.style.transition = 'none';
+                    randomMusingsItem.style.transform = `translateX(${centerOffset}px)`;
+                    
+                    // Restore transition after positioning for future animations
+                    setTimeout(() => {
+                        randomMusingsItem.style.transition = 'all 1.5s ease';
+                    }, 10);
+                    
+                    console.log(`🎯 Immediate page centering: offset=${centerOffset}px`);
+                } catch (error) {
+                    console.log('⚠️ Page centering failed', error);
+                }
+            }
+            
+            initializeNavigation();
+            loadRandomMusings(null, 0);
+            
+            // Add click handler to The Final Shot
+            const finalShotLink = document.querySelector('.final-shot-link');
+            if (finalShotLink) {
+                finalShotLink.addEventListener('click', handleFinalShotClick);
+            }
+        });
+    </script>
+</body>
+</html>

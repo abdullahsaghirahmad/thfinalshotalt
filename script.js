@@ -378,7 +378,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Position the image at its original position
                 imageElement.style.top = data.position.top;
                 imageElement.style.left = data.position.left;
-                imageElement.style.transform = 'translate(-50%, -50%)';
+                
+                // 📐 Proportional scaling: About section B has ~60% viewport space
+                if (currentCategory === 'about') {
+                    // Scale images to 60% to maintain proportional sizing
+                    imageElement.style.transform = 'scale(0.6) translate(-50%, -50%)';
+                } else {
+                    // Full size for pages with 100% viewport space (Featured, BnW, Info)
+                    imageElement.style.transform = 'translate(-50%, -50%)';
+                }
                 
                 // Store image data for focused view
                 imageElement.dataset.index = data.index;
@@ -581,6 +589,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Mouse event listener for desktop
             container.addEventListener('mousemove', handleCursorMove);
         }
+        
+        // 🌐 Make handleCursorMove globally accessible for navigation cleanup (after function is defined)
+        window.handleCursorMove = handleCursorMove;
+        console.log('🌐 Made handleCursorMove globally accessible');
         
         // Listen for image loading completion
         window.addEventListener('imagesLoaded', (event) => {
@@ -817,13 +829,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Apply position within section B
                 imageElement.style.top = `${relativeY}px`;
                 imageElement.style.left = `${x}px`;
+                
+                // 📐 Proportional scaling: About section B has ~60% viewport space
+                // Scale images to 60% to maintain proportional sizing
+                imageElement.style.transform = 'scale(0.6) translate(-50%, -50%)';
             } else {
-                // Standard positioning for all other cases
+                // Standard positioning for all other cases (Featured, BnW, Info)
                 imageElement.style.top = `${y}px`;
                 imageElement.style.left = `${x}px`;
+                
+                // Full size for pages with 100% viewport space
+                imageElement.style.transform = 'translate(-50%, -50%)';
             }
-            
-            imageElement.style.transform = 'translate(-50%, -50%)';
             
             // Store image data for focused view
             imageElement.dataset.index = imagesRendered;

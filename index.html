@@ -33,7 +33,11 @@
                 <div class="menu-item" data-category="about">
                     <span class="menu-icon">ℹ</span>
                     <span class="menu-text">About</span>
-                </div>                
+                </div>
+                <div class="menu-item" data-category="random-musings" style="margin-left: 2em;">
+                    <span class="menu-icon">📝</span>
+                    <span class="menu-text"><a href="/random-musings" class="random-musings-trigger" style="text-decoration: none; color: inherit;">Random Musings</a></span>
+                </div>
             </div>
             
             <div class="right-controls">
@@ -57,6 +61,127 @@
     
     <!-- Main application script -->
     <script src="script.js"></script>
+    
+    <script>
+        // Handle Random Musings navigation animation
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔧 Setting up Random Musings click handler...');
+            const randomMusingsTrigger = document.querySelector('.random-musings-trigger');
+            console.log('🔍 Found trigger element:', randomMusingsTrigger);
+            
+            if (randomMusingsTrigger) {
+                randomMusingsTrigger.addEventListener('click', (e) => {
+                    console.log('🎯 CLICK DETECTED! Starting preload + animation...');
+                    e.preventDefault();
+
+                    // 🚀 IMMEDIATELY start API fetch (parallel with animation)
+                    console.log('🚀 Starting preload fetch during animation...');
+                    fetch('/api/notion-musings?pageSize=6')
+                        .then(response => {
+                            console.log('📡 Preload fetch response received');
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Store preloaded data for instant page load
+                            sessionStorage.setItem('preloadedMusings', JSON.stringify({
+                                data: data,
+                                timestamp: Date.now(),
+                                pageIndex: 0
+                            }));
+                            console.log('💾 Preloaded musings data cached successfully');
+                        })
+                        .catch(error => {
+                            console.log('⚠️ Preload failed, will fallback to normal fetch:', error);
+                            sessionStorage.removeItem('preloadedMusings');
+                        });
+
+                    // 🛡️ IMMEDIATELY disable Cloudinary handlers to prevent backup images
+                    const container = document.getElementById('container');
+                    if (container && window.handleCursorMove) {
+                        container.removeEventListener('mousemove', window.handleCursorMove);
+                        console.log('🚫 Disabled Cloudinary handlers for clean transition');
+                    }
+                    
+                    // Start animation
+                    const menuItems = document.querySelectorAll('.menu-item:not([data-category="random-musings"])');
+                    const thresholdControl = document.querySelector('.right-controls');
+                    const randomMusingsItem = document.querySelector('[data-category="random-musings"]');
+                    
+                    // Start preloading the page immediately
+                    const preloadLink = document.createElement('link');
+                    preloadLink.rel = 'prefetch';
+                    preloadLink.href = '/random-musings';
+                    document.head.appendChild(preloadLink);
+                    
+                    // Start loading API data
+                    fetch('/api/notion-musings?pageSize=6').catch(() => {
+                        // Preload API call, ignore errors
+                    });
+                    
+                    // Sequential fade out: About → BnW → Featured (cascading effect)
+                    const aboutItem = document.querySelector('[data-category="about"]');
+                    const bnwItem = document.querySelector('[data-category="bnw"]');
+                    const featuredItem = document.querySelector('[data-category="featured"]');
+                    
+                    // About fades first (0ms delay)
+                    if (aboutItem) {
+                        aboutItem.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+                        aboutItem.style.opacity = '0';
+                        aboutItem.style.transform = 'translateX(-10px)';
+                    }
+                    
+                    // BnW fades second (200ms delay)
+                    setTimeout(() => {
+                        if (bnwItem) {
+                            bnwItem.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+                            bnwItem.style.opacity = '0';
+                            bnwItem.style.transform = 'translateX(-10px)';
+                        }
+                    }, 200);
+                    
+                    // Featured fades last (400ms delay)
+                    setTimeout(() => {
+                        if (featuredItem) {
+                            featuredItem.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+                            featuredItem.style.opacity = '0';
+                            featuredItem.style.transform = 'translateX(-10px)';
+                        }
+                    }, 400);
+                    
+                    // Fade out threshold control
+                    if (thresholdControl) {
+                        thresholdControl.style.transition = 'opacity 1.5s ease';
+                        thresholdControl.style.opacity = '0';
+                    }
+                    
+                    // Move Random Musings to center (with fallback)
+                    if (randomMusingsItem) {
+                        randomMusingsItem.style.transition = 'transform 1.5s ease';
+                        
+                        // Try dynamic centering using viewport center
+                        try {
+                            const viewportWidth = window.innerWidth;
+                            const itemRect = randomMusingsItem.getBoundingClientRect();
+                            const itemCenter = itemRect.left + (itemRect.width / 2);
+                            const viewportCenter = viewportWidth / 2;
+                            const centerOffset = viewportCenter - itemCenter;
+                            
+                            randomMusingsItem.style.transform = `translateX(${centerOffset}px)`;
+                            console.log(`🎯 Viewport centering: offset=${centerOffset}px, itemCenter=${itemCenter}, viewportCenter=${viewportCenter}`);
+                        } catch (error) {
+                            console.log('⚠️ Viewport centering failed, using fallback', error);
+                            randomMusingsItem.style.transform = 'translateX(-50px)';
+                        }
+                    }
+                    
+                    // Navigate after 1.5s animation (pseudo loader)
+                    setTimeout(() => {
+                        window.location.href = '/random-musings';
+                    }, 1500);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

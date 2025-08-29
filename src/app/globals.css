@@ -71,8 +71,248 @@ body {
   display: none;
 }
 
+/* Random Musings styles */
+.musings-wrapper {
+  width: 100%;
+}
+
+.musings-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, calc((100vh - 140px) / 2)); /* Equal rows: (viewport - nav areas) ÷ 2 */
+  max-width: 100%;
+  padding: 1rem;
+  height: calc(100vh - 140px); /* Total available height */
+}
+
+.musing-card {
+  background: rgba(250, 250, 250, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  height: 100%; /* Fill grid cell completely */
+  display: flex;
+  flex-direction: column;
+  opacity: 1.0; /* Default full opacity */
+  cursor: pointer; /* Entire card is clickable */
+}
+
+.musing-card:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  /* Opacity managed by JavaScript for sophisticated focus system */
+}
+
+.musing-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.musing-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.musing-title a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.musing-content {
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 0;
+  text-align: justify;
+  flex: 1; /* Take up remaining space in card */
+  overflow-y: auto; /* Allow scrolling if content exceeds */
+  padding-bottom: 0.5rem; /* Space at bottom for last line */
+}
+
+
+
+/* Pagination styles */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pagination-info {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.pagination-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Navigation pagination styles */
+.pagination-nav {
+  font-family: monospace;
+}
+
+.nav-pagination-btn {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.nav-pagination-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav-pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Navigation animations - 1.5s pseudo loader */
+.nav-visible {
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+  transition: all 1.5s ease;
+}
+
+.nav-fade-out {
+  opacity: 0;
+  transform: translateX(-10px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 1.5s ease;
+}
+
+.nav-fade-in {
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+  transition: all 1.5s ease;
+}
+
+.nav-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 1.5s ease;
+}
+
+.nav-center {
+  position: relative;
+  /* Dynamic centering applied via JavaScript - no fixed transform */
+  transition: all 1.5s ease;
+}
+
+/* Sequential fade animations for cascading effect */
+.nav-fade-about {
+  opacity: 0;
+  transform: translateX(-10px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 1.5s ease;
+  transition-delay: 0ms; /* About fades first */
+}
+
+.nav-fade-bnw {
+  opacity: 0;
+  transform: translateX(-10px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 1.5s ease;
+  transition-delay: 200ms; /* BnW fades second */
+}
+
+.nav-fade-featured {
+  opacity: 0;
+  transform: translateX(-10px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 1.5s ease;
+  transition-delay: 400ms; /* Featured fades last */
+}
+
+/* Tablet Optimizations */
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+    .musings-container {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, calc((100vh - 140px) / 3)); /* Equal rows: viewport ÷ 3 */
+    }
+  }
+
 /* Mobile Optimizations */
-@media screen and (max-width: 767px) {
+  @media screen and (max-width: 767px) {
+    /* Random Musings mobile optimizations */
+    .musings-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(6, calc((100vh - 140px) / 6)); /* Equal rows: viewport ÷ 6 */
+      gap: 0.5rem;
+      padding: 0.5rem;
+      height: calc(100vh - 140px);
+    }
+
+    .musing-card {
+      padding: 0.75rem;
+    }
+
+    .musing-title {
+      font-size: 1.125rem;
+    }
+
+    .musing-image {
+      height: 100px;
+    }
+
+    .musing-content {
+      font-size: 0.8rem;
+    }
+  
+  .pagination-nav {
+    gap: 0.3rem !important;
+  }
+  
+  .nav-pagination-btn {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 10px !important;
+  }
+  
   /* About page mobile optimizations */
   .section-a {
     height: auto;
