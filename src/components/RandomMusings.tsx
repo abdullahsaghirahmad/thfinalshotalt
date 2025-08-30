@@ -2,6 +2,13 @@
 
 import { useEffect, useState, useRef } from 'react';
 
+// Declare global autoScroller for TypeScript
+declare global {
+  interface Window {
+    autoScroller: any;
+  }
+}
+
 interface NotionEntry {
   id: string;
   title: string;
@@ -168,59 +175,11 @@ export function RandomMusings() {
     let lastScrollTime = 0 // Track when user last scrolled
     let resumeTimer: NodeJS.Timeout | null = null // Timer to resume after manual scroll stops
 
-    // Track manual scrolling using position comparison
+    // Track manual scrolling using the new cross-platform utility
     const handleScroll = () => {
-      const timers = timersRef.current[musingId]
-      const currentPosition = contentElement.scrollTop
-      
-      // Check if this scroll is from our auto-scroll by comparing position
-      if (timers && timers.scrollInterval && currentPosition === lastAutoScrollPosition) {
-        // This is our programmatic scroll, ignore it
-        return
+      if ((window as any).autoScroller) {
+        (window as any).autoScroller.markUserScroll(musingId);
       }
-      
-      // This is actual user scrolling
-      lastScrollTime = Date.now()
-      
-      // Stop current auto-scroll if running
-      if (timers && timers.scrollInterval) {
-        console.log('User scrolled manually - pausing auto-scroll');
-        timers.userScrolled = true
-        clearInterval(timers.scrollInterval)
-        timers.scrollInterval = null
-      }
-      
-      // Clear any existing resume timer
-      if (resumeTimer) {
-        clearTimeout(resumeTimer)
-      }
-      
-      // Set timer to resume auto-scroll after 1 second of inactivity
-      resumeTimer = setTimeout(() => {
-        if (Date.now() - lastScrollTime >= 1000) { // 1 second since last manual scroll
-          console.log('Resuming auto-scroll from current position')
-          if (timers) {
-            timers.userScrolled = false // Reset flag to allow auto-scroll
-          }
-          
-          // Start auto-scrolling from current position
-          if (contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
-            if (timers) {
-              timers.scrollInterval = setInterval(() => {
-                if (!timers.userScrolled && contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
-                  lastAutoScrollPosition = contentElement.scrollTop + 1 // Track expected position
-                  contentElement.scrollTop += 1
-                  console.log('Resume scrolling to:', contentElement.scrollTop);
-                } else {
-                  console.log('Resume auto-scroll stopped - reached end')
-                  clearInterval(timers.scrollInterval!)
-                  timers.scrollInterval = null
-                }
-              }, 60) // 25fps for comfortable resume too
-            }
-          }
-        }
-      }, 1000) // Resume after 1 second of inactivity
     }
 
     contentElement.addEventListener('scroll', handleScroll)
@@ -243,19 +202,19 @@ export function RandomMusings() {
       timers.userScrolled = false
       timers.hoverTimer = setTimeout(() => {
         if (!timers.userScrolled && contentElement.scrollHeight > contentElement.clientHeight) {
-          console.log('Starting auto-scroll for:', musingId, 'ScrollHeight:', contentElement.scrollHeight, 'ClientHeight:', contentElement.clientHeight);
-          // Start auto-scrolling
-          timers.scrollInterval = setInterval(() => {
-            if (!timers.userScrolled && contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
-              lastAutoScrollPosition = contentElement.scrollTop + 1 // Track expected position
-              contentElement.scrollTop += 1 // 25px/second - slow reading pace
-              console.log('Scrolling to:', contentElement.scrollTop);
-            } else {
-              console.log('Auto-scroll stopped - reached end or user scrolled')
-              clearInterval(timers.scrollInterval!)
-              timers.scrollInterval = null
-            }
-          }, 60) // 25fps - comfortable reading speed
+          console.log('Starting cross-platform auto-scroll for:', musingId);
+          // Use hardware-accelerated cross-platform scroll
+          if (window.autoScroller) {
+            window.autoScroller.startAutoScroll(musingId, contentElement, {
+              delay: 0, // Already delayed by hoverTimer
+              onComplete: () => {
+                console.log('Auto-scroll completed for:', musingId);
+              },
+              onUserInterrupt: () => {
+                timers.userScrolled = true;
+              }
+            });
+          }
         }
       }, 1250) // 1.25-second delay
     }
@@ -275,10 +234,12 @@ export function RandomMusings() {
         clearTimeout(timers.hoverTimer)
         timers.hoverTimer = null
       }
-      if (timers.scrollInterval) {
-        clearInterval(timers.scrollInterval)
-        timers.scrollInterval = null
+      
+      // Clean up auto-scroll using new utility
+      if ((window as any).autoScroller) {
+        (window as any).autoScroller.stopAutoScroll(musingId);
       }
+      
       if (resumeTimer) {
         clearTimeout(resumeTimer)
         resumeTimer = null

@@ -242,6 +242,9 @@
             }
         }
     </style>
+    
+    <!-- Cross-platform scroll utility -->
+    <script src="scroll-utils.js"></script>
 </head>
 <body>
     <div id="container" class="container">
@@ -442,54 +445,9 @@
                                     // Set up auto-scroll functionality
                     const contentElement = card.querySelector('.musing-content');
                     if (contentElement) {
-                        // Track manual scrolling using position comparison
+                        // Track manual scrolling using the new cross-platform utility
                         contentElement.addEventListener('scroll', () => {
-                            const currentPosition = contentElement.scrollTop;
-                            
-                            // Check if this scroll is from our auto-scroll by comparing position
-                            if (autoScrollInterval && currentPosition === lastAutoScrollPosition) {
-                                // This is our programmatic scroll, ignore it
-                                return;
-                            }
-                            
-                            // This is actual user scrolling
-                            lastScrollTime = Date.now();
-                            
-                            // Stop current auto-scroll if running
-                            if (autoScrollInterval) {
-                                console.log('User scrolled manually - pausing auto-scroll');
-                                userHasScrolled = true;
-                                clearInterval(autoScrollInterval);
-                                autoScrollInterval = null;
-                            }
-                            
-                            // Clear any existing resume timer
-                            if (resumeTimer) {
-                                clearTimeout(resumeTimer);
-                            }
-                            
-                            // Set timer to resume auto-scroll after 1 second of inactivity
-                            resumeTimer = setTimeout(() => {
-                                if (Date.now() - lastScrollTime >= 1000) { // 1 second since last manual scroll
-                                    console.log('Resuming auto-scroll from current position');
-                                    userHasScrolled = false; // Reset flag to allow auto-scroll
-                                    
-                                    // Start auto-scrolling from current position
-                                    if (contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
-                                        autoScrollInterval = setInterval(() => {
-                                            if (!userHasScrolled && contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
-                                                lastAutoScrollPosition = contentElement.scrollTop + 1; // Track expected position
-                                                contentElement.scrollTop += 1;
-                                                console.log('Resume scrolling to:', contentElement.scrollTop);
-                                            } else {
-                                                console.log('Resume auto-scroll stopped - reached end');
-                                                clearInterval(autoScrollInterval);
-                                                autoScrollInterval = null;
-                                            }
-                                        }, 60); // 25fps for comfortable resume too
-                                    }
-                                }
-                            }, 1000); // Resume after 1 second of inactivity
+                            window.autoScroller.markUserScroll(`musing-${musing.id}`);
                         });
 
                         // Mouse enter - sophisticated focus + auto-scroll
@@ -507,20 +465,17 @@
                             userHasScrolled = false;
                             hoverTimer = setTimeout(() => {
                                 if (!userHasScrolled && contentElement.scrollHeight > contentElement.clientHeight) {
-                                    console.log('Starting auto-scroll for:', musing.title, 'ScrollHeight:', contentElement.scrollHeight, 'ClientHeight:', contentElement.clientHeight);
-                                    // Start auto-scrolling (smooth and continuous)
-                                    autoScrollInterval = setInterval(() => {
-                                        if (!userHasScrolled && contentElement.scrollTop < contentElement.scrollHeight - contentElement.clientHeight) {
-                                            lastAutoScrollPosition = contentElement.scrollTop + 1; // Track expected position
-                                            contentElement.scrollTop += 1; // 25px/second (1px every 40ms) - slow reading pace
-                                            console.log('Scrolling to:', contentElement.scrollTop);
-                                        } else {
-                                            // Reached end or user scrolled
-                                            console.log('Auto-scroll stopped - reached end or user scrolled');
-                                            clearInterval(autoScrollInterval);
-                                            autoScrollInterval = null;
+                                    console.log('Starting cross-platform auto-scroll for:', musing.title);
+                                    // Use hardware-accelerated cross-platform scroll
+                                    window.autoScroller.startAutoScroll(`musing-${musing.id}`, contentElement, {
+                                        delay: 0, // Already delayed by hoverTimer
+                                        onComplete: () => {
+                                            console.log('Auto-scroll completed for:', musing.title);
+                                        },
+                                        onUserInterrupt: () => {
+                                            userHasScrolled = true;
                                         }
-                                    }, 60); // 25fps - comfortable reading speed
+                                    });
                                 }
                             }, 1250); // 1.25-second delay
                         });
@@ -537,14 +492,10 @@
                                 clearTimeout(hoverTimer);
                                 hoverTimer = null;
                             }
-                            if (autoScrollInterval) {
-                                clearInterval(autoScrollInterval);
-                                autoScrollInterval = null;
-                            }
-                            if (resumeTimer) {
-                                clearTimeout(resumeTimer);
-                                resumeTimer = null;
-                            }
+                            
+                            // Clean up auto-scroll using new utility
+                            window.autoScroller.stopAutoScroll(`musing-${musing.id}`);
+                            
                             userHasScrolled = false;
                             lastAutoScrollPosition = 0;
                         });
