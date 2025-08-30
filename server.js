@@ -66,6 +66,10 @@ app.get('/cloudinary-browser.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'cloudinary-browser.js'));
 });
 
+app.get('/scroll-utils.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'scroll-utils.js'));
+});
+
 app.get('/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, 'styles.css'));
 });
