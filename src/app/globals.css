@@ -278,6 +278,36 @@ body {
 
 /* Mobile Optimizations */
   @media screen and (max-width: 767px) {
+    /* Hide Random Musings button on mobile */
+    .mobile-hide-random-musings {
+      display: none !important;
+    }
+    
+    /* Mobile threshold control button styles - pressed/buried effect */
+    .flex.items-center.space-x-2.font-mono.text-sm button {
+      background: rgba(0, 0, 0, 0.05) !important;
+      border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      border-radius: 4px !important;
+      padding: 8px 12px !important;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+      transition: all 0.15s ease !important;
+    }
+    
+    .flex.items-center.space-x-2.font-mono.text-sm button:hover {
+      background: rgba(0, 0, 0, 0.1) !important;
+      box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+      transform: translateY(1px) !important;
+      text-decoration: none !important;
+      font-style: normal !important;
+    }
+    
+    .flex.items-center.space-x-2.font-mono.text-sm button:active {
+      background: rgba(0, 0, 0, 0.15) !important;
+      box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+      transform: translateY(2px) !important;
+    }
+
+    
     /* Random Musings mobile optimizations */
     .musings-container {
       grid-template-columns: 1fr;

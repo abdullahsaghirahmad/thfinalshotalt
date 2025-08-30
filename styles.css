@@ -48,6 +48,8 @@ body {
         display: block;
     }
     
+
+    
     /* About page mobile optimizations */
     .section-a {
         height: auto;
@@ -68,7 +70,7 @@ body {
     .bio-section p {
         font-size: 8px; /* Smaller paragraph text */
         margin-bottom: 10px;
-        line-height: 1;
+        line-height: 1 !important;
     }
     
     .bio-section .contact-links {
@@ -82,9 +84,9 @@ body {
     }
     
     .bio-section .copyright { 
-        margin-top: 3px;
+        margin-top: 3px; 
         margin-bottom: 3px;
-        font-size: 5px !important; 
+        font-size: 6px !important; 
     }
 }
 
@@ -128,10 +130,42 @@ body {
     display: none;
 }
 
-/* Hide counter and threshold controls on mobile */
-.mobile-device .counter,
+/* Hide counter on mobile */
+.mobile-device .counter {
+    display: none;
+}
+
+/* Hide threshold controls on mobile */
 .mobile-device .threshold-control {
     display: none;
+}
+
+/* Mobile-specific menu styling */
+.mobile-device .menu-item.active {
+    font-style: normal !important;
+}
+
+.mobile-device .menu-items {
+    gap: 0px !important;
+}
+
+/* Grey out non-active menu items for better visual hierarchy */
+.menu-item {
+    transition: opacity 0.3s ease;
+}
+
+.menu-item:not(.active) {
+    opacity: 0.4;
+}
+
+.menu-item.active {
+    opacity: 1;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.menu-item:hover {
+    opacity: 0.7;
 }
 
 /* Menu icon styles */
@@ -307,15 +341,7 @@ body {
     color: inherit;
 }
 
-.menu-item:hover {
-    opacity: 1;
-}
 
-.menu-item.active {
-    opacity: 1;
-    font-style: italic;
-    text-decoration: underline;
-}
 
 /* Right side controls */
 .right-controls {

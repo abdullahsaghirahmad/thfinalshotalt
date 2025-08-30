@@ -983,7 +983,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add a visual indicator for the image section
                 const indicator = document.createElement('div');
                 indicator.className = 'section-indicator';
-                indicator.textContent = 'Move cursor here to view images';
+                //indicator.textContent = 'Move cursor here to view images';
                 indicator.style.position = 'absolute';
                 indicator.style.top = '50%';
                 indicator.style.left = '50%';

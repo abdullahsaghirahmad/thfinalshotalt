@@ -157,7 +157,7 @@ export function Navigation() {
               };
 
               return (
-                <span key={section.path}>
+                <span key={section.path} className="mobile-hide-random-musings">
                   {index > 0 && <span className="text-neutral-400">,</span>}
                   <Link
                     href={section.path}
