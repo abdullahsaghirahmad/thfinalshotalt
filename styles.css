@@ -140,6 +140,11 @@ body {
     display: none;
 }
 
+/* Hide Random Musings ONLY on mobile */
+.mobile-device .mobile-hide-random-musings {
+    display: none !important;
+}
+
 /* Mobile-specific menu styling */
 .mobile-device .menu-item.active {
     font-style: normal !important;
