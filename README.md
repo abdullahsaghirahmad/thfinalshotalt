@@ -6,7 +6,7 @@ An experimental web application that transforms passive image browsing into an i
 
 ![Portfolio in action](https://github.com/abdullahsaghirahmad/thfinalshotalt/blob/main/heroAlt.gif)
 
-## 🎯 Product Vision
+## Product Vision
 
 As a photographer and product manager fascinated by user interaction patterns, I wanted to challenge the traditional grid-based portfolio format. This project explores:
 
