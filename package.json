@@ -4,7 +4,7 @@
   "description": "A portfolio website that renders images based on cursor movement",
   "main": "server.js",
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   },
   "type": "commonjs",
   "scripts": {

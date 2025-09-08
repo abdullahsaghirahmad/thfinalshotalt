@@ -4,7 +4,7 @@
 
 An experimental web application that transforms passive image browsing into an interactive performance, where cursor movement reveals photography in real-time. Built to explore the intersection of user experience design, technical implementation, and artistic expression.
 
-![Portfolio in action](https://github.com/abdullahsaghirahmad/thefinalshotalt/blob/main/public/heroAlt.gif)
+![Portfolio in action](https://github.com/abdullahsaghirahmad/thfinalshotalt/blob/main/heroAlt.gif)
 
 ## 🎯 Product Vision
 
