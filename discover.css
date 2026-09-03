@@ -404,6 +404,10 @@ body.gallery-index--isclosing .gallery-thumbs__item {
               top  0.79s cubic-bezier(0.77, 0, 0.175, 1) !important;
   transition-delay: calc(var(--startdelay, 0) * 15ms) !important;
 }
+/* Suppress inner element's transition:all during close so implicit width change is instant */
+body.gallery-index--isclosing .gallery-thumbs__item .gallery-thumb-inner {
+  transition: none !important;
+}
 
 /* Main photo fades during animation (matches reference) */
 body.gallery-index--isopening .gallery-focus,
