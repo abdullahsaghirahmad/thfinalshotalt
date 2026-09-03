@@ -113,13 +113,11 @@ class DiscoverGallery {
     self.activeTag   = activeTag || sourceId;
     self.entryType   = sourceType;   // stored so tag bar can hide for category entries
     self.clickedImageId = clickedImageId || null;
-    console.log('[Gallery] load:', {sourceId, sourceType, activeTag, clickedImageId});
     var images = [];
     try {
       if (sourceType === 'category') {
         var res  = await fetch('/api/manifests/' + encodeURIComponent(sourceId));
         var data = await res.json();
-        console.log('[Gallery] category manifest images[0]:', data.images && data.images[0] ? {tags: data.images[0].tags, public_id: data.images[0].public_id} : 'none');
         images = (data.images || []).map(function(img, i) {
           return { id: i, url: img.secure_url || img.url || '',
                    publicId: img.public_id || '', tags: img.tags || [],
@@ -128,7 +126,6 @@ class DiscoverGallery {
       } else {
         var res2  = await fetch('/api/tag-images?tag=' + encodeURIComponent(sourceId));
         var data2 = await res2.json();
-        console.log('[Gallery] tag-images images[0]:', data2.images && data2.images[0] ? {tags: data2.images[0].tags, public_id: data2.images[0].public_id} : 'none');
         images = (data2.images || []).map(function(img, i) {
           return { id: i, url: img.secure_url || img.url || '',
                    publicId: img.public_id || '', tags: img.tags || [],
@@ -167,7 +164,6 @@ class DiscoverGallery {
       if (self.focusItems[initialIndex]) {
         self.focusItems[initialIndex].classList.add('is--active');
         self.activeIndex = initialIndex;
-        console.log('[Gallery] initial idx:', initialIndex, 'tags:', images[initialIndex] ? images[initialIndex].tags : 'NO IMAGE', 'clickedId:', self.clickedImageId);
         self._updateTagBar(images[initialIndex].tags || []);
       }
 

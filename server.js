@@ -90,7 +90,7 @@ app.get('/api/cloudinary-images', async (req, res) => {
     const useManifest = req.query.manifest !== 'false'; // Default to using manifest
     
     // Add cache headers - cache for 1 hour
-    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
     res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
     
     // Check if we have a cached version using ETag
@@ -293,7 +293,7 @@ app.get('/api/manifests/:category', async (req, res) => {
     console.log(`Manifest request for category: ${category}`);
     
     // Set cache headers
-    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
     res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
     
     // In Vercel, we might not have pre-generated manifests, so generate on-demand
@@ -334,7 +334,7 @@ app.get('/api/manifests/:category', async (req, res) => {
 // API endpoint to list all available manifests
 app.get('/api/manifests', (req, res) => {
   try {
-    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
     const indexPath = path.join(__dirname, 'public', 'manifests', 'index.json');
     
     // Check if file exists first, if not generate categories dynamically
@@ -363,7 +363,7 @@ app.get('/api/manifests', (req, res) => {
 // Returns every image with its tags so discover.js can drive click-to-gallery by tag.
 app.get('/api/all-images', async (req, res) => {
   try {
-    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
     res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
 
     const cld = cloudinaryApi.cloudinary;
@@ -408,7 +408,7 @@ app.get('/api/tag-images', async (req, res) => {
   if (!tag) return res.status(400).json({ error: 'tag query parameter required' });
 
   try {
-    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
     res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
 
     // Try cached manifest first (instant disk read — generated at server startup)
@@ -455,7 +455,7 @@ app.get('/api/tag-images', async (req, res) => {
 // API: all unique tags in the Cloudinary account (for search autocomplete)
 app.get('/api/available-tags', async (req, res) => {
   try {
-    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
     res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
 
     const cld = cloudinaryApi.cloudinary;
