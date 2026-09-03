@@ -164,7 +164,6 @@ class DiscoverGallery {
       if (self.focusItems[initialIndex]) {
         self.focusItems[initialIndex].classList.add('is--active');
         self.activeIndex = initialIndex;
-        console.log('[Gallery] initial tags for idx', initialIndex, ':', images[initialIndex] ? images[initialIndex].tags : 'NO IMAGE');
         self._updateTagBar(images[initialIndex].tags || []);
       }
 
