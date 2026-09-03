@@ -537,11 +537,11 @@ class DiscoverGallery {
         // body.height stays 'auto' — spring stays at 0 while INDEX grid is open
 
         // Restart bell-curve with all cur values reset to 0 so translateX
-        // doesn't immediately re-apply the accumulated offset from the animation
+        // doesn't immediately re-apply the accumulated offset from the animation.
+        // NOTE: autoSelectEnabled stays FALSE while INDEX is open — the bell-curve
+        // must not change activeIndex based on grid positions.
         self.thumbItems.forEach(function(el) { self.itemPositions.set(el, 0); });
         self._initBellCurve();
-        // Re-enable auto-select after spring has settled
-        setTimeout(function() { self.autoSelectEnabled = true; }, 300);
       }, dur + 50);
     }, 20);
   }
