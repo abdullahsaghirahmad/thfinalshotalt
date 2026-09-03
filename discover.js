@@ -567,48 +567,57 @@ class DiscoverGallery {
       el.style.setProperty('--startdelay', d);
     });
 
-    // 1. Read GRID positions while items are still in grid layout.
-    //    (body.height='auto' means scrollY=0, phatEl.top=0 — positions are correct)
+    // 1. Read GRID positions while gallery-index--open is still active (items at 176px)
     var gridPos = items.map(function(el) { return el.getBoundingClientRect(); });
 
-    // 2. Remove INDEX open state → items snap back to filmstrip column layout.
-    //    phat-scroll is at top=0 (spring has been frozen at 0 since INDEX opened).
-    document.body.classList.remove('gallery-index--open');
-    if (self.indexBtn) self.indexBtn.classList.remove('is--active');
-
-    // 3. Explicitly ensure phat-scroll top is 0 (it should be, but be explicit)
-    self.phatEl.style.top = '0px';
-
-    // 4. Read filmstrip BCRs AFTER layout switch (synchronous — getBCR forces layout).
-    //    Scroll is 0, phat-scroll is at 0: items are at their natural top positions.
-    var filmPos = items.map(function(el) { return el.getBoundingClientRect(); });
-
-    // 5. Add closing class + pin items at GRID positions (no transition yet)
-    document.body.classList.add('gallery-index--isclosing');
+    // 2. Calculate FILMSTRIP target positions mathematically.
+    //    This avoids DOM reading after gallery-index--open is removed, which would
+    //    cause a "filmstrip crumple" paint frame before items can be re-pinned.
+    //    Filmstrip layout: padding-left=16px, gap=16px, padding-top=50vh - firstH/2
+    var FILM_X = 16, FILM_GAP = 16;
+    var filmH = self.images.map(function(img) {
+      return (img.imgWidth && img.imgHeight) ? Math.round(img.imgHeight / img.imgWidth * 80) : 60;
+    });
+    var filmPadTop = Math.max(0, window.innerHeight / 2 - (filmH[0] || 60) / 2);
+    var filmPos = []; var cumY = filmPadTop;
     items.forEach(function(el, i) {
-      el.style.transition = 'none';
-      el.style.left  = gridPos[i].left + 'px';
-      el.style.top   = gridPos[i].top  + 'px';
-      el.style.width = '176px';
+      filmPos[i] = { left: FILM_X, top: cumY };
+      cumY += (filmH[i] || 60) + FILM_GAP;
     });
 
-    // 6. Apply position:fixed — 1ms reference timing
+    // 3. Remove gallery-index--open + SYNCHRONOUSLY pin items at grid positions.
+    //    Setting position:fixed here (before any setTimeout) prevents the browser
+    //    from ever rendering the "filmstrip at 80px" intermediate state.
+    document.body.classList.remove('gallery-index--open');
+    if (self.indexBtn) self.indexBtn.classList.remove('is--active');
+    self.phatEl.style.top = '0px';
+
+    items.forEach(function(el, i) {
+      el.style.position   = 'fixed';
+      el.style.transition = 'none';
+      el.style.left       = gridPos[i].left + 'px';
+      el.style.top        = gridPos[i].top  + 'px';
+      el.style.width      = '176px';
+      el.style.transform  = 'none';
+    });
+
+    // 4. Add isclosing class 1ms later (after pinned state has been rendered).
+    //    CSS transition:!important will apply only from this point onward.
     setTimeout(function() {
-      items.forEach(function(el) { el.style.position = 'fixed'; });
+      document.body.classList.add('gallery-index--isclosing');
     }, 1);
 
-    // 7. Enable transition + fly to filmstrip positions — 20ms reference timing
-    //    left, top AND width all animate simultaneously (no pre-shrink, no pile-up)
+    // 5. Start animation at 20ms: fly from grid → filmstrip, shrink 176→80px
     setTimeout(function() {
       items.forEach(function(el, i) {
         el.style.left  = filmPos[i].left + 'px';
         el.style.top   = filmPos[i].top  + 'px';
-        el.style.width = '80px'; // animates WITH left/top via isclosing transition
+        el.style.width = '80px';
       });
 
       var dur = 800 + 15 * Math.min(maxDelay, 40);
       setTimeout(function() {
-        // 8. Release items back into filmstrip flow
+        // 6. Release items back into filmstrip flow
         items.forEach(function(el) {
           el.style.position  = '';
           el.style.left      = '';
@@ -619,23 +628,21 @@ class DiscoverGallery {
         });
         document.body.classList.remove('gallery-index--isclosing', 'gallery-index--ispreparing');
 
-        // 9. Restore body height for virtual scroll (re-enables scrolling)
+        // 7. Restore body height for virtual scroll (re-enables scrolling)
         var h = self.phatEl.offsetHeight || self.thumbsEl.scrollHeight;
         if (h > 100) { document.body.style.height = h + 'px'; self._cachedBodyH = h; }
 
-        // 10. Snap filmstrip to center the active item instantly.
-        //     Set BOTH scrollY AND springY to targetY so there's no spring drift
-        //     that would cause the bell-curve to briefly auto-select the wrong image.
+        // 8. Snap filmstrip to center the active item instantly
         if (self.thumbItems[activeIdx]) {
           var el = self.thumbItems[activeIdx];
           var targetY = Math.max(0, el.offsetTop + el.offsetHeight / 2 - window.innerHeight / 2);
           window.scrollTo({ top: targetY });
           self.scrollY = targetY;
-          self.springY = targetY;                    // instant snap — no drift
-          self.phatEl.style.top = -targetY + 'px';  // apply immediately
+          self.springY = targetY;
+          self.phatEl.style.top = -targetY + 'px';
         }
 
-        // 11. Restart bell-curve with cur=0, then re-enable auto-select
+        // 9. Restart bell-curve with cur=0, then re-enable auto-select
         self.thumbItems.forEach(function(el) { self.itemPositions.set(el, 0); });
         self._initBellCurve();
         setTimeout(function() { self.autoSelectEnabled = true; }, 300);
