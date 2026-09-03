@@ -448,8 +448,11 @@ class DiscoverGallery {
     var self = this, items = self.thumbItems, activeIdx = self.activeIndex;
     if (!items.length) return;
 
-    // 1. Stop bell-curve from fighting with us
+    // 1. Stop bell-curve from fighting with us + pause it during animation
+    //    (without pausing, the bell-curve accumulates translateX from items'
+    //     fixed positions during flight → applies ~64px offset on release → jerk)
     self.autoSelectEnabled = false;
+    if (self.bellRafId) { cancelAnimationFrame(self.bellRafId); self.bellRafId = null; }
 
     // 2. INSTANTLY reset scroll/spring to 0 — this is the core fix.
     //    All items are now at their natural filmstrip positions (from the top).
@@ -532,6 +535,13 @@ class DiscoverGallery {
         document.body.classList.add('gallery-index--open');
         if (self.indexBtn) self.indexBtn.classList.add('is--active');
         // body.height stays 'auto' — spring stays at 0 while INDEX grid is open
+
+        // Restart bell-curve with all cur values reset to 0 so translateX
+        // doesn't immediately re-apply the accumulated offset from the animation
+        self.thumbItems.forEach(function(el) { self.itemPositions.set(el, 0); });
+        self._initBellCurve();
+        // Re-enable auto-select after spring has settled
+        setTimeout(function() { self.autoSelectEnabled = true; }, 300);
       }, dur + 50);
     }, 20);
   }
@@ -544,6 +554,10 @@ class DiscoverGallery {
      *                                                                          */
     var self = this, items = self.thumbItems, activeIdx = self.activeIndex;
     if (!items.length) return;
+
+    // Pause bell-curve for same reason as _openIndex (accumulated translateX)
+    self.autoSelectEnabled = false;
+    if (self.bellRafId) { cancelAnimationFrame(self.bellRafId); self.bellRafId = null; }
 
     // Stagger from active item
     var maxDelay = 0;
@@ -620,7 +634,9 @@ class DiscoverGallery {
           self.phatEl.style.top = -targetY + 'px';  // apply immediately
         }
 
-        // 11. Re-enable bell-curve auto-select after spring has started settling
+        // 11. Restart bell-curve with cur=0, then re-enable auto-select
+        self.thumbItems.forEach(function(el) { self.itemPositions.set(el, 0); });
+        self._initBellCurve();
         setTimeout(function() { self.autoSelectEnabled = true; }, 300);
       }, dur + 50);
     }, 20);
