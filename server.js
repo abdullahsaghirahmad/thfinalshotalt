@@ -74,6 +74,15 @@ app.get('/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, 'styles.css'));
 });
 
+// Discover page assets — explicit routes needed on Vercel serverless
+// (express.static(__dirname) can miss root-level files in that context)
+app.get('/discover.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'discover.js'));
+});
+app.get('/discover.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'discover.css'));
+});
+
 // API endpoint to fetch Cloudinary images
 app.get('/api/cloudinary-images', async (req, res) => {
   try {
