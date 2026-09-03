@@ -116,7 +116,7 @@ class DiscoverGallery {
     var images = [];
     try {
       if (sourceType === 'category') {
-        var res  = await fetch('/api/manifests/' + encodeURIComponent(sourceId));
+        var res  = await fetch('/api/manifests/' + encodeURIComponent(sourceId), { cache: 'no-store' });
         var data = await res.json();
         images = (data.images || []).map(function(img, i) {
           return { id: i, url: img.secure_url || img.url || '',
@@ -124,7 +124,7 @@ class DiscoverGallery {
                    imgWidth: img.width || 0, imgHeight: img.height || 0 };
         });
       } else {
-        var res2  = await fetch('/api/tag-images?tag=' + encodeURIComponent(sourceId));
+        var res2  = await fetch('/api/tag-images?tag=' + encodeURIComponent(sourceId), { cache: 'no-store' });
         var data2 = await res2.json();
         images = (data2.images || []).map(function(img, i) {
           return { id: i, url: img.secure_url || img.url || '',
@@ -777,7 +777,7 @@ class DiscoverCarousel {
 
     // Primary: entire library via /api/all-images
     try {
-      var res = await fetch('/api/all-images');
+      var res = await fetch('/api/all-images', { cache: 'no-store' });
       var data = await res.json();
       (data.images || []).forEach(function(img) {
         var tags   = img.tags || [];
@@ -1077,7 +1077,7 @@ class DiscoverCarousel {
   /* ── Search bar ──────────────────────────────────────────────── */
   async _loadAvailableTags() {
     try {
-      var res = await fetch('/api/available-tags');
+      var res = await fetch('/api/available-tags', { cache: 'no-store' });
       var data = await res.json();
       this.availableTags = data.tags || [];
       this._renderPills(this.availableTags);
