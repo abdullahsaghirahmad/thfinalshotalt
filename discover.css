@@ -387,6 +387,15 @@ body.gallery-index--measuring .gallery-thumbs {
 body.gallery-index--measuring .gallery-thumbs__item {
   width: 176px !important; transform: none !important; transition: none !important;
 }
+/* height:auto + width:176px = same as gallery-index--open img rule.
+   Without this, items use thumbH (80px-scale) → row heights too small →
+   all y-positions wrong → major vertical snap on release.               */
+body.gallery-index--measuring .gallery-thumbs__item img {
+  width: 176px !important; height: auto !important;
+}
+body.gallery-index--measuring .gallery-thumbs__item .gallery-thumb-inner {
+  transform: none !important; transition: none !important;
+}
 
 /* Animation: items fly between filmstrip and grid (position:fixed in JS) */
 body.gallery-index--isopening .gallery-thumbs__item,
