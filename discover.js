@@ -477,46 +477,13 @@ class DiscoverGallery {
       el.style.setProperty('--startdelay', d);
     });
 
-    // 6. Calculate exact grid target positions mathematically.
-    //    This replaces DOM-based pseudo-item BCR reading, which had subpixel
-    //    discrepancies vs the actual gallery-thumbs container (different fixed-
-    //    element widths, box-sizing, scrollbar state) that caused a horizontal snap.
-    //
-    //    Mirrors CSS: justify-content:center, flex-wrap:wrap, gap:96px,
-    //                 padding-top:80px, item-width:176px, align-items:flex-start
-    var IW = 176, GX = 96, GY = 96, PAD = 80;
-    var CW = window.innerWidth;   // container width (no scrollbar — body.height='auto' above)
-    var perRow = Math.max(1, Math.floor((CW + GX) / (IW + GX)));
-
-    // Pre-compute row heights (max item height in each row) for correct top values
-    var rowH = [], maxH = 0;
-    items.forEach(function(el, i) {
-      var img = self.images[i];
-      var h = (img && img.imgWidth && img.imgHeight)
-        ? Math.round(img.imgHeight / img.imgWidth * IW)
-        : 264;
-      maxH = Math.max(maxH, h);
-      if ((i + 1) % perRow === 0 || i === items.length - 1) {
-        rowH.push(maxH); maxH = 0;
-      }
-    });
-
-    // Compute per-item position — each row is independently centered (partial rows too)
-    var gridPos = items.map(function(el, i) {
-      var r = Math.floor(i / perRow);
-      var c = i % perRow;
-
-      // Items in this row (may be fewer than perRow on the last row)
-      var rowCount = Math.min(perRow, items.length - r * perRow);
-      var rowTotalW = rowCount * IW + (rowCount - 1) * GX;
-      var x = (CW - rowTotalW) / 2 + c * (IW + GX);
-
-      // Top = padding + sum of row heights above
-      var y = PAD;
-      for (var k = 0; k < r; k++) y += rowH[k] + GY;
-
-      return { left: x, top: y, width: IW };
-    });
+    // 6. Read exact grid target positions from gallery-thumbs itself (measuring phase).
+    //    Since springY = 0 above, phat-scroll is at top:0, so BCRs are viewport-correct.
+    //    This uses the EXACT same container and layout as gallery-index--open, so
+    //    positions are guaranteed to match when items land — no snap possible.
+    document.body.classList.add('gallery-index--measuring');
+    var gridPos = items.map(function(el) { return el.getBoundingClientRect(); });
+    document.body.classList.remove('gallery-index--measuring');
 
     // 7. Read current filmstrip BCRs (scroll is 0, all items at natural positions)
     var filmPos = items.map(function(el) {
