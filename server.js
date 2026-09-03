@@ -428,6 +428,7 @@ app.get('/api/tag-images', async (req, res) => {
     const result = await cld.search
       .expression(`tags=${tag} AND resource_type:image`)
       .sort_by('created_at', 'desc')
+      .with_field('tags')   // needed so r.tags is populated (not in default fields)
       .max_results(100)
       .execute();
 

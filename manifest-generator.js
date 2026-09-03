@@ -53,9 +53,15 @@ async function generateManifestForTag(tag) {
       }))
     };
 
-    const filePath = path.join(MANIFEST_DIR, `tag-${tag.replace(/[^a-z0-9_-]/gi, '_')}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(manifest, null, 2));
-    console.log(`✅ Tag manifest saved: ${tag} (${manifest.count} images)`);
+    // Try to cache to disk — may fail on read-only runtimes (Vercel serverless).
+    // Always return the manifest data regardless of whether the write succeeds.
+    try {
+      const filePath = path.join(MANIFEST_DIR, `tag-${tag.replace(/[^a-z0-9_-]/gi, '_')}.json`);
+      fs.writeFileSync(filePath, JSON.stringify(manifest, null, 2));
+      console.log(`✅ Tag manifest saved: ${tag} (${manifest.count} images)`);
+    } catch (writeErr) {
+      console.warn(`⚠️  Could not write manifest for "${tag}" (read-only fs?): ${writeErr.message}`);
+    }
     return manifest;
   } catch (err) {
     console.error(`❌ Error generating tag manifest for "${tag}":`, err.message);
