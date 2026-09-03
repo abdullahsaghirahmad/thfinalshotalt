@@ -404,8 +404,18 @@ body.gallery-index--isclosing .gallery-thumbs__item {
               top  0.79s cubic-bezier(0.77, 0, 0.175, 1) !important;
   transition-delay: calc(var(--startdelay, 0) * 15ms) !important;
 }
-/* Suppress inner element's transition:all during close so implicit width change is instant */
+/* On close: also animate width so items shrink as they fly (not before) */
+body.gallery-index--isclosing .gallery-thumbs__item {
+  transition: left 0.79s cubic-bezier(0.77, 0, 0.175, 1),
+              top  0.79s cubic-bezier(0.77, 0, 0.175, 1),
+              width 0.79s cubic-bezier(0.77, 0, 0.175, 1) !important;
+}
+/* Suppress inner element's transition:all during close so it doesn't double-animate */
 body.gallery-index--isclosing .gallery-thumbs__item .gallery-thumb-inner {
+  transition: none !important;
+}
+/* Images fill item width during flight */
+body.gallery-index--isclosing .gallery-thumbs__item img {
   transition: none !important;
 }
 

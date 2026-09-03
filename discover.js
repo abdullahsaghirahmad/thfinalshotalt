@@ -598,12 +598,12 @@ class DiscoverGallery {
     }, 1);
 
     // 7. Enable transition + fly to filmstrip positions — 20ms reference timing
-    //    No width change here — items fly at 176px (grid size).
-    //    Width snaps to filmstrip 80px via CSS when inline styles are cleared at the end.
+    //    left, top AND width all animate simultaneously (no pre-shrink, no pile-up)
     setTimeout(function() {
       items.forEach(function(el, i) {
         el.style.left  = filmPos[i].left + 'px';
         el.style.top   = filmPos[i].top  + 'px';
+        el.style.width = '80px'; // animates WITH left/top via isclosing transition
       });
 
       var dur = 800 + 15 * Math.min(maxDelay, 40);
