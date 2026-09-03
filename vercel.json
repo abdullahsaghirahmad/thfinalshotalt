@@ -16,6 +16,14 @@
       "dest": "server.js"
     }
   ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ],
   "git": {
     "deploymentEnabled": {
       "main": true
