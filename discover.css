@@ -374,7 +374,8 @@ body.gallery-index--measuring .gallery-thumbs {
   width: 100% !important; padding: 80px 0 !important;
   gap: 96px !important; display: flex !important;
   flex-flow: row wrap !important; justify-content: center !important;
-  align-items: flex-start !important; visibility: hidden !important;
+  align-items: flex-start !important; align-content: flex-start !important;
+  visibility: hidden !important;
 }
 body.gallery-index--measuring .gallery-thumbs__item {
   width: 176px !important; transform: none !important; transition: none !important;
@@ -407,6 +408,7 @@ body.gallery-index--isclosing .gallery-tag-line {
 body.gallery-index--open .gallery-tag-line {
   opacity: 1;
   transition: opacity 0.35s ease 0.1s;
+  background: transparent; /* no background in grid view — images scroll behind it */
 }
 
 /* Images fill their 176px containers during animation so they look correct */
@@ -419,9 +421,11 @@ body.gallery-index--open .gallery-thumbs {
   padding-top: 80px !important;
   padding-bottom: 80px !important;
   padding-left: 0 !important;
+  padding-right: 0 !important;          /* explicitly match pseudo container */
   gap: 96px !important; display: flex !important;
   flex-flow: row wrap !important; justify-content: center !important;
-  align-items: flex-start !important;  /* MUST match pseudo container — center causes row-offset snap */
+  align-items: flex-start !important;   /* MUST match pseudo container */
+  align-content: flex-start !important; /* MUST match pseudo container — prevents row distribution mismatch */
 }
 body.gallery-index--open .gallery-thumbs__item {
   width: 176px !important; transform: none !important; transition: none !important;
