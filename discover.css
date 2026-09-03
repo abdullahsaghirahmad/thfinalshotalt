@@ -1,0 +1,440 @@
+/* ================================================================
+   discover.css — styles for /discover (carousel + filmstrip gallery)
+   
+   Measurement sources:
+     - Filmstrip: gregorcollienne.com .c-element-gallery (inspected live)
+     - Cubic-bezier: cubic-bezier(0.77, 0, 0.175, 1) from site
+     - Bell-curve formula lives in discover.js (pure JS, no CSS rule needed)
+   ================================================================ */
+
+/* ── Root scale ───────────────────────────────────────────────── */
+/* gregorcollienne uses 10px root font-size so 1rem = 10px.
+   We match the thumb/gap pixel values directly without changing
+   our own root font-size; all measurements are in px. */
+
+/* ── Shared page reset for discover ──────────────────────────── */
+.discover-menu-bar {
+  /* Override the position:absolute from styles.css; fix to viewport bottom */
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 200;
+  background-color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   STATE 1: DISCOVER CAROUSEL
+   ════════════════════════════════════════════════════════════════ */
+
+.discover-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* background shows through Three.js alpha renderer */
+  background: #fafafa;
+}
+
+/* Three.js canvas fills the entire viewport */
+.three-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  outline: none;
+}
+
+/* ── Search bar ─────────────────────────────────────────────── */
+.discover-search-bar {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  padding-bottom: 6px;
+  max-width: 420px;
+  width: calc(100% - 48px);
+}
+
+.discover-search-prefix {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(0, 0, 0, 0.35);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.discover-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  outline: none;
+  caret-color: transparent;
+}
+
+.discover-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.22);
+}
+
+.discover-search-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  animation: discover-blink 1.1s step-end infinite;
+}
+
+@keyframes discover-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Hide the custom cursor when the input has real caret */
+.discover-search-input:focus ~ .discover-search-cursor {
+  display: none;
+}
+.discover-search-input:focus {
+  caret-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ── Tag pills (autocomplete) ───────────────────────────────── */
+.tag-pills {
+  position: absolute;
+  top: 58px;
+  left: 24px;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 480px;
+}
+
+.tag-pill {
+  padding: 3px 10px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tag-pill:hover,
+.tag-pill.tag-pill--match {
+  border-color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.tag-pill.tag-pill--dimmed {
+  border-color: rgba(0, 0, 0, 0.07);
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* ── Card hover label ───────────────────────────────────────── */
+.card-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.75);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 5px 11px;
+  border-radius: 2px;
+  white-space: nowrap;
+  transform: translate(-50%, 0);
+}
+
+/* ── Carousel scroll hint ───────────────────────────────────── */
+.carousel-hint {
+  position: absolute;
+  bottom: 66px; /* above the fixed nav bar */
+  right: 20px;
+  z-index: 20;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   STATE 2: FILMSTRIP GALLERY
+   Background stays static via position:fixed on the gallery wrapper.
+   Layout matches gregorcollienne.com (bg: #f5f3f0, 80px thumbs, fixed photo).
+   ════════════════════════════════════════════════════════════════ */
+
+/* Fixed wrapper — covers the viewport so body background can scroll
+   behind it without showing through (fixes the "background moves" bug). */
+.discover-gallery {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: rgb(245, 243, 240);
+}
+
+/* Body needs a large height to allow virtual-scroll to read window.scrollY */
+body.gallery-is-open {
+  overflow-y: auto;
+}
+
+/* ── Site nav bar override ─────────────────────────────────────
+   Reuses the existing .menu-bar class so layout is identical
+   to every other page. Override position and background only.  */
+.gallery-site-nav.menu-bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  z-index: 500;   /* high enough to be above all gallery layers */
+  background: rgb(245, 243, 240) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  pointer-events: auto;
+}
+/* Keep center menu items readable on light bg */
+.gallery-site-nav .menu-item {
+  cursor: pointer;
+}
+.gallery-site-nav .menu-item.is--active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-style: normal;
+}
+
+/* ── Tag navigation line ───────────────────────────────────────
+   Centered over the photo area (same horizontal span as gallery-focus).
+   Font matches the site nav bar: normal case, underline for active.    */
+.gallery-tag-line {
+  position: fixed;
+  top: 0;
+  /* Match exact horizontal span of the main photo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100vw - 352px);
+  height: 50px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: rgb(245, 243, 240);
+  overflow: hidden;
+}
+.gallery-tag-label {
+  /* Inherit font exactly from the nav bar — no override */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #0c0c0c;
+  transition: opacity 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+.gallery-tag-label.is--active {
+  opacity: 1;
+  text-decoration: underline;         /* underline like nav active state */
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.gallery-tag-label:not(.is--active) { opacity: 0.4; }
+.gallery-tag-label:hover { opacity: 0.7; }
+
+/* ── Filmstrip column ──────────────────────────────────────────
+   gregorcollienne live: width=80px, gap=16px, position=relative.
+   Spans the full viewport height (no header blocking the top).  */
+.gallery-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 80px;
+  padding-top:    calc(50vh - var(--first-item-h, 60px) / 2);
+  padding-bottom: calc(50vh - var(--last-item-h,  60px) / 2);
+  padding-left: 16px;
+  overflow: visible;
+  position: relative;
+  z-index: 11;
+}
+.gallery-thumbs__item {
+  width: 80px; flex-shrink: 0; cursor: pointer;
+}
+.gallery-thumbs__item .gallery-thumb-inner {
+  transition: all 0.79s cubic-bezier(0.77, 0, 0.175, 1);
+  transform: translateX(-112px);
+  transition-delay: calc(var(--startdelay, 0) * 0.03s);
+}
+body.gallery-has-loaded .gallery-thumbs__item .gallery-thumb-inner { transform: none; }
+.gallery-thumbs__item img {
+  display: block; width: 80px; height: auto;
+  object-fit: cover; pointer-events: none; user-select: none;
+}
+
+/* ── Fixed main photo area ─────────────────────────────────────
+   Matches the reference formula: left: 50%, width: calc(100vw - 352px)
+   → effective left edge at (352/2) = 176px, which clears the filmstrip
+     (80px width + 16px padding + 64px max bell-curve pop = 160px).
+   There is a 16px safety margin before the photo starts.            */
+.gallery-focus {
+  position: fixed;
+  z-index: 9;
+  top: 50px;     /* below tag line */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100vw - 352px);   /* = 176px from each side */
+  bottom: 50px;  /* above nav bar */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+body.gallery-has-loaded .gallery-focus { opacity: 1; }
+.gallery-focus__item {
+  position: absolute; inset: 0;
+  opacity: 0;
+  /* No transition — image updates are instant on scroll (matches gregorcollienne.com).
+     The bell-curve spring on the filmstrip is the only animation during scroll. */
+}
+.gallery-focus__item.is--active { opacity: 1; }
+.gallery-focus__item img {
+  display: block; width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  pointer-events: none; user-select: none;
+}
+
+/* ── INFO panel ────────────────────────────────────────────────*/
+.gallery-info-panel {
+  position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%);
+  z-index: 60; background: rgb(245,243,240);
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 24px; max-width: 400px; width: calc(100% - 48px);
+  max-height: 40vh; overflow-y: auto;
+}
+.gallery-info-close {
+  position: absolute; top: 8px; right: 8px;
+  background: none; border: none;
+  color: rgba(0,0,0,0.35); cursor: pointer; font-size: 14px;
+}
+.gallery-info-content {
+  font-size: 12px; line-height: 1.7;
+  color: rgba(0,0,0,0.55); letter-spacing: 0.03em;
+}
+
+/* ── INDEX grid ────────────────────────────────────────────────*/
+
+/* ── INDEX pseudo container (always fixed, always in grid layout) ──────
+   Mirrors the INDEX grid but is position:fixed and visibility:hidden.
+   Lives OUTSIDE phat-scroll so its BCRs are unaffected by springY.
+   This is the exact gregorcollienne.com "indexpseudo" pattern.             */
+#gallery-pseudo-index {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;    /* MUST match gallery-index--open .gallery-thumbs exactly */
+  align-content: flex-start;
+  padding-top: 80px;   /* matches gallery-index--open padding */
+  padding-bottom: 80px;
+  padding-left: 0;
+  gap: 96px;           /* matches gallery-index--open gap */
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -999;
+}
+.gallery-pseudo-item {
+  width: 176px;        /* matches gallery-index--open item width */
+  flex-shrink: 0;
+}
+
+/* Measuring state: KEPT as fallback only, but scroll is reset to 0 first
+   so positions are now viewport-correct even with this approach.         */
+body.gallery-index--measuring .gallery-thumbs {
+  width: 100% !important; padding: 80px 0 !important;
+  gap: 96px !important; display: flex !important;
+  flex-flow: row wrap !important; justify-content: center !important;
+  align-items: flex-start !important; visibility: hidden !important;
+}
+body.gallery-index--measuring .gallery-thumbs__item {
+  width: 176px !important; transform: none !important; transition: none !important;
+}
+
+/* Animation: items fly between filmstrip and grid (position:fixed in JS) */
+body.gallery-index--isopening .gallery-thumbs__item,
+body.gallery-index--isclosing .gallery-thumbs__item {
+  transition: left 0.79s cubic-bezier(0.77, 0, 0.175, 1),
+              top  0.79s cubic-bezier(0.77, 0, 0.175, 1) !important;
+  transition-delay: calc(var(--startdelay, 0) * 15ms) !important;
+}
+
+/* Main photo fades during animation (matches reference) */
+body.gallery-index--isopening .gallery-focus,
+body.gallery-index--isclosing  .gallery-focus,
+body.gallery-index--ispreparing .gallery-focus { opacity: 0 !important; pointer-events: none; }
+
+/* Tag line: invisible during animation phases (opacity, not display — allows fade-in)
+   NOTE: category galleries still get display:none from JS (_updateTagBar), which
+   takes precedence; this only affects tag-type galleries.                         */
+body.gallery-index--ispreparing .gallery-tag-line,
+body.gallery-index--isopening .gallery-tag-line,
+body.gallery-index--isclosing .gallery-tag-line {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
+/* Fade in smoothly once INDEX is fully open (after all items have landed) */
+body.gallery-index--open .gallery-tag-line {
+  opacity: 1;
+  transition: opacity 0.35s ease 0.1s;
+}
+
+/* Images fill their 176px containers during animation so they look correct */
+body.gallery-index--isopening .gallery-thumbs__item img,
+body.gallery-index--isclosing  .gallery-thumbs__item img { width: 100% !important; height: auto !important; }
+
+/* INDEX fully open */
+body.gallery-index--open .gallery-thumbs {
+  width: 100% !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+  padding-left: 0 !important;
+  gap: 96px !important; display: flex !important;
+  flex-flow: row wrap !important; justify-content: center !important;
+  align-items: flex-start !important;  /* MUST match pseudo container — center causes row-offset snap */
+}
+body.gallery-index--open .gallery-thumbs__item {
+  width: 176px !important; transform: none !important; transition: none !important;
+}
+body.gallery-index--open .gallery-thumbs__item img { width: 176px !important; height: auto !important; } /* height: auto overrides inline thumbH (80px-scale) — prevents height jerk on open */
+body.gallery-index--open .gallery-thumbs__item .gallery-thumb-inner { transform: none !important; transition: none !important; }
+body.gallery-index--open .gallery-focus { opacity: 0 !important; pointer-events: none; }
+body.gallery-index--open #gallery-index-btn { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .gallery-focus { width: calc(100vw - 160px); left: 50%; transform: translateX(-50%); }
+  .gallery-tag-line { left: 84px; }
+  .gallery-thumbs { padding-left: 12px; }
+  .gallery-thumbs__item, .gallery-thumbs__item img { width: 64px; }
+}

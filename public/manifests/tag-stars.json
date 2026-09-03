@@ -1,0 +1,23 @@
+{
+  "tag": "stars",
+  "updated_at": "2026-09-03T14:29:20.958Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "astro",
+        "night sky",
+        "purple",
+        "star trail",
+        "stars",
+        "nature"
+      ]
+    }
+  ]
+}

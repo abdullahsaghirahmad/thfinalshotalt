@@ -1,0 +1,21 @@
+{
+  "tag": "silhouette",
+  "updated_at": "2026-09-03T14:29:20.031Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n.jpg",
+      "width": 1920,
+      "height": 1280,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "sunset",
+        "bird",
+        "silhouette"
+      ]
+    }
+  ]
+}

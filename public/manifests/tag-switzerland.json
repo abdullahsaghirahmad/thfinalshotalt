@@ -1,0 +1,21 @@
+{
+  "tag": "switzerland",
+  "updated_at": "2026-09-03T14:29:23.152Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC03193-Edit_vdtqr8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "nature",
+        "landscape",
+        "switzerland",
+        "blue"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "tag": "lucknow",
+  "updated_at": "2026-09-03T14:29:12.086Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv.jpg",
+      "width": 640,
+      "height": 427,
+      "format": "jpg",
+      "tags": [
+        "architecture",
+        "landscape",
+        "india",
+        "lucknow"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar.jpg",
+      "width": 640,
+      "height": 913,
+      "format": "jpg",
+      "tags": [
+        "framing",
+        "architecture",
+        "india",
+        "lucknow",
+        "red"
+      ]
+    }
+  ]
+}

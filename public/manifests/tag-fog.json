@@ -1,0 +1,25 @@
+{
+  "tag": "fog",
+  "updated_at": "2026-09-03T14:29:04.822Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
+      "width": 640,
+      "height": 360,
+      "format": "jpg",
+      "tags": [
+        "brown",
+        "fog",
+        "himachal pradesh",
+        "india",
+        "minimal",
+        "mountain",
+        "landscape",
+        "nature"
+      ]
+    }
+  ]
+}

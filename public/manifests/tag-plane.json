@@ -1,0 +1,21 @@
+{
+  "tag": "plane",
+  "updated_at": "2026-09-03T14:29:18.075Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "15_jnar5l",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/15_jnar5l.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "clouds",
+        "plane",
+        "green"
+      ]
+    }
+  ]
+}

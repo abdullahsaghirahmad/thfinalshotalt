@@ -1,0 +1,21 @@
+{
+  "tag": "thunder",
+  "updated_at": "2026-09-03T14:29:24.058Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash.jpg",
+      "width": 640,
+      "height": 427,
+      "format": "jpg",
+      "tags": [
+        "night sky",
+        "purple",
+        "thunder",
+        "nature"
+      ]
+    }
+  ]
+}

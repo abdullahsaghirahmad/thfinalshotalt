@@ -1,0 +1,78 @@
+{
+  "tag": "blue",
+  "updated_at": "2026-09-03T14:28:59.529Z",
+  "count": 5,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "16_l8zvxq",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/16_l8zvxq.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "moon",
+        "blue"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03193-Edit_vdtqr8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "nature",
+        "landscape",
+        "switzerland",
+        "blue"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC04033-Edit_dz0ibj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
+      "width": 1540,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "sea",
+        "blue",
+        "nature",
+        "landscape",
+        "france"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp.jpg",
+      "width": 640,
+      "height": 1138,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "conceptual",
+        "blue",
+        "summer"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "minimal",
+        "moon",
+        "blue"
+      ]
+    }
+  ]
+}

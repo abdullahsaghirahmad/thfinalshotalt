@@ -1,0 +1,122 @@
+{
+  "tag": "night sky",
+  "updated_at": "2026-09-03T14:29:16.307Z",
+  "count": 9,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "13_a1a8j6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518941/13_a1a8j6.jpg",
+      "width": 1600,
+      "height": 1224,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night",
+        "city"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "14_vilxig",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518937/14_vilxig.jpg",
+      "width": 1600,
+      "height": 631,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "10_tbauki",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518813/10_tbauki.jpg",
+      "width": 1600,
+      "height": 900,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "6_oclk75",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/6_oclk75.jpg",
+      "width": 1600,
+      "height": 900,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "23_h3xuym",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518067/23_h3xuym.jpg",
+      "width": 1600,
+      "height": 1000,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "22_u3dww8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/22_u3dww8.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "18_oix9hy",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/18_oix9hy.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "night"
+      ]
+    },
+    {
+      "id": 8,
+      "public_id": "abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash.jpg",
+      "width": 640,
+      "height": 427,
+      "format": "jpg",
+      "tags": [
+        "night sky",
+        "purple",
+        "thunder",
+        "nature"
+      ]
+    },
+    {
+      "id": 9,
+      "public_id": "abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "astro",
+        "night sky",
+        "purple",
+        "star trail",
+        "stars",
+        "nature"
+      ]
+    }
+  ]
+}

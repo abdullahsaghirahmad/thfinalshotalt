@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Final Shot — Discover</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="discover.css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+
+  <!-- ── Nav bar (same structure as index.html, Discover active, BnW absent) ── -->
+  <div class="menu-bar discover-menu-bar">
+    <div class="portfolio-name">
+      <a href="/" style="text-decoration:none;color:inherit;">The Final Shot</a>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-item" data-category="featured">
+        <span class="menu-icon">★</span>
+        <span class="menu-text">
+          <a href="/" style="text-decoration:none;color:inherit;">Featured</a>
+        </span>
+      </div>
+      <div class="menu-item active" data-category="discover">
+        <span class="menu-icon">⊕</span>
+        <span class="menu-text">Discover</span>
+      </div>
+      <div class="menu-item" data-category="about">
+        <span class="menu-icon">ℹ</span>
+        <span class="menu-text">
+          <a href="/?category=about" style="text-decoration:none;color:inherit;">About</a>
+        </span>
+      </div>
+      <div class="menu-item mobile-hide-random-musings" data-category="random-musings" style="margin-left:2em;">
+        <span class="menu-icon">📝</span>
+        <span class="menu-text">
+          <a href="/random-musings" style="text-decoration:none;color:inherit;">Random Musings</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- placeholder right controls to keep layout consistent -->
+    <div class="right-controls" style="visibility:hidden;">
+      <div class="threshold-control">
+        <span>Threshold:</span>
+        <button class="threshold-btn">－</button>
+        <span>0080</span>
+        <button class="threshold-btn">＋</button>
+      </div>
+      <div class="counter">0000 / 0000</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STATE 1 — DISCOVER CAROUSEL (Three.js)
+       Visible by default; hidden when gallery opens.
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="discover-carousel" class="discover-carousel">
+
+    <!-- Search bar overlaid on the canvas -->
+    <div id="discover-search-bar" class="discover-search-bar">
+      <span class="discover-search-prefix">discover</span>
+      <input
+        id="discover-search"
+        class="discover-search-input"
+        type="text"
+        placeholder="type a feeling, technique, vibe..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+      <span id="discover-search-cursor" class="discover-search-cursor"></span>
+    </div>
+
+    <!-- Tag pills — populated by JS from /api/available-tags -->
+    <div id="tag-pills" class="tag-pills"></div>
+
+    <!-- Three.js renders into this canvas -->
+    <canvas id="three-canvas" class="three-canvas"></canvas>
+
+    <!-- Hover label — positioned over the hovered card by JS -->
+    <div id="card-label" class="card-label" style="display:none;"></div>
+
+    <!-- Scroll hint removed per design decision -->
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STATE 2 — FILMSTRIP GALLERY
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="discover-gallery" class="discover-gallery" style="display:none;">
+
+    <!-- Virtual-scroll anchor — JS sets style.top = -springY.
+         Contains ONLY the filmstrip column; runs the full viewport height. -->
+    <div id="phat-scroll-gallery" style="position:fixed;top:0;left:0;width:100%;pointer-events:none;">
+      <div id="gallery-thumbs" class="gallery-thumbs" style="pointer-events:auto;">
+        <!-- .gallery-thumbs__item elements injected by DiscoverGallery.load() -->
+      </div>
+    </div>
+
+    <!-- Tag navigation line — centered, above the main photo.
+         Shows active tag bold + other image tags lighter for one-click navigation. -->
+    <div id="gallery-tag-line" class="gallery-tag-line"></div>
+
+    <!-- Fixed main photo area -->
+    <div id="gallery-focus" class="gallery-focus">
+      <!-- .gallery-focus__item elements injected by DiscoverGallery.load() -->
+    </div>
+
+    <!-- Site nav bar — same structure as the rest of the site.
+         Center items are INFO / INDEX / BACK instead of the usual tabs. -->
+    <div class="gallery-site-nav menu-bar">
+      <div class="portfolio-name">
+        <a href="/" style="text-decoration:none;color:inherit;">The Final Shot</a>
+      </div>
+      <div class="menu-items">
+        <span class="menu-item" id="gallery-info-btn" role="button" tabindex="0">Info</span>
+        <span class="menu-item" id="gallery-index-btn" role="button" tabindex="0">Index</span>
+        <span class="menu-item" id="gallery-back-bottom" role="button" tabindex="0">Back</span>
+      </div>
+      <!-- No right-controls (no threshold in gallery mode) -->
+    </div>
+
+    <!-- INFO panel -->
+    <div id="gallery-info-panel" class="gallery-info-panel" style="display:none;">
+      <div id="gallery-info-content" class="gallery-info-content"></div>
+      <button id="gallery-info-close" class="gallery-info-close" type="button">✕</button>
+    </div>
+
+    <!-- INDEX pseudo grid — position:fixed, outside phat-scroll.
+         Always in flex-wrap grid layout so BCRs are stable regardless
+         of phat-scroll offset (exact gregorcollienne.com indexpseudo pattern).
+         Populated by _injectDOM(); read by _openIndex() for target positions. -->
+    <div id="gallery-pseudo-index" aria-hidden="true"></div>
+
+  </div>
+
+  <!-- ── Scripts ─────────────────────────────────────────────────────── -->
+  <!-- Three.js (pinned) — required for the 3D carousel -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+  <!-- Shared Cloudinary browser utilities -->
+  <script src="cloudinary-browser.js"></script>
+
+  <!-- Discover page logic -->
+  <script src="discover.js"></script>
+
+</body>
+</html>

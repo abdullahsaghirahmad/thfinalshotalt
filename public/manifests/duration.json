@@ -1,0 +1,207 @@
+{
+  "category": "duration",
+  "updated_at": "2026-09-03T13:05:46.749Z",
+  "count": 25,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "13_a1a8j6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518941/13_a1a8j6.jpg",
+      "width": 1600,
+      "height": 1224,
+      "format": "jpg"
+    },
+    {
+      "id": 2,
+      "public_id": "16_l8zvxq",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/16_l8zvxq.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 3,
+      "public_id": "15_jnar5l",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/15_jnar5l.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 4,
+      "public_id": "14_vilxig",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518937/14_vilxig.jpg",
+      "width": 1600,
+      "height": 631,
+      "format": "jpg"
+    },
+    {
+      "id": 5,
+      "public_id": "12_vcgq1v",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518840/12_vcgq1v.jpg",
+      "width": 974,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 6,
+      "public_id": "9_wkklsw",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518818/9_wkklsw.jpg",
+      "width": 1600,
+      "height": 1067,
+      "format": "jpg"
+    },
+    {
+      "id": 7,
+      "public_id": "11_b6txu4",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518813/11_b6txu4.jpg",
+      "width": 1600,
+      "height": 1067,
+      "format": "jpg"
+    },
+    {
+      "id": 8,
+      "public_id": "10_tbauki",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518813/10_tbauki.jpg",
+      "width": 1600,
+      "height": 900,
+      "format": "jpg"
+    },
+    {
+      "id": 9,
+      "public_id": "8_lfky7g",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518813/8_lfky7g.jpg",
+      "width": 1106,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 10,
+      "public_id": "7_s6ai6r",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/7_s6ai6r.jpg",
+      "width": 1067,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 11,
+      "public_id": "4_mezs0p",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/4_mezs0p.jpg",
+      "width": 1600,
+      "height": 1194,
+      "format": "jpg"
+    },
+    {
+      "id": 12,
+      "public_id": "6_oclk75",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/6_oclk75.jpg",
+      "width": 1600,
+      "height": 900,
+      "format": "jpg"
+    },
+    {
+      "id": 13,
+      "public_id": "5_xkswdw",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/5_xkswdw.jpg",
+      "width": 1000,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 14,
+      "public_id": "3_vb1u8c",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518104/3_vb1u8c.jpg",
+      "width": 1600,
+      "height": 699,
+      "format": "jpg"
+    },
+    {
+      "id": 15,
+      "public_id": "25_sbgbvn",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518067/25_sbgbvn.jpg",
+      "width": 1600,
+      "height": 1000,
+      "format": "jpg"
+    },
+    {
+      "id": 16,
+      "public_id": "2_pz9lu8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518067/2_pz9lu8.jpg",
+      "width": 1600,
+      "height": 1067,
+      "format": "jpg"
+    },
+    {
+      "id": 17,
+      "public_id": "1_psbgw9",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518067/1_psbgw9.jpg",
+      "width": 937,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 18,
+      "public_id": "24_nuj259",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518067/24_nuj259.jpg",
+      "width": 1600,
+      "height": 900,
+      "format": "jpg"
+    },
+    {
+      "id": 19,
+      "public_id": "23_h3xuym",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518067/23_h3xuym.jpg",
+      "width": 1600,
+      "height": 1000,
+      "format": "jpg"
+    },
+    {
+      "id": 20,
+      "public_id": "19_a3ptdi",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/19_a3ptdi.jpg",
+      "width": 1600,
+      "height": 1067,
+      "format": "jpg"
+    },
+    {
+      "id": 21,
+      "public_id": "17_qvjvbo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/17_qvjvbo.jpg",
+      "width": 1600,
+      "height": 1021,
+      "format": "jpg"
+    },
+    {
+      "id": 22,
+      "public_id": "20_ihvttk",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/20_ihvttk.jpg",
+      "width": 1600,
+      "height": 1189,
+      "format": "jpg"
+    },
+    {
+      "id": 23,
+      "public_id": "21_wq7irp",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/21_wq7irp.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 24,
+      "public_id": "22_u3dww8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/22_u3dww8.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg"
+    },
+    {
+      "id": 25,
+      "public_id": "18_oix9hy",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518066/18_oix9hy.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg"
+    }
+  ]
+}

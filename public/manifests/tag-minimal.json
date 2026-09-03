@@ -1,0 +1,181 @@
+{
+  "tag": "minimal",
+  "updated_at": "2026-09-03T14:29:13.058Z",
+  "count": 12,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC07307-Edit_suaqoe",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032138/DSC07307-Edit_suaqoe.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "fine art",
+        "noir",
+        "minimal"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC04377-Edit_f4myhr",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032072/DSC04377-Edit_f4myhr.jpg",
+      "width": 2473,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "fine art",
+        "noir",
+        "minimal"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC09357_iuy9ff",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031894/DSC09357_iuy9ff.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "sun",
+        "pareidolia"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC05533-Edit_aqtmnh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031802/DSC05533-Edit_aqtmnh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "lake",
+        "minimal",
+        "sun",
+        "sunset",
+        "india",
+        "kashmir"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n.jpg",
+      "width": 1920,
+      "height": 1280,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "sunset",
+        "bird",
+        "silhouette"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp.jpg",
+      "width": 640,
+      "height": 1138,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "conceptual",
+        "blue",
+        "summer"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "14_jfulok",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/14_jfulok.jpg",
+      "width": 800,
+      "height": 443,
+      "format": "jpg",
+      "tags": [
+        "bnw",
+        "noir",
+        "minimal"
+      ]
+    },
+    {
+      "id": 8,
+      "public_id": "abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol.jpg",
+      "width": 640,
+      "height": 1006,
+      "format": "jpg",
+      "tags": [
+        "conceptual",
+        "experimental",
+        "fine art",
+        "minimal",
+        "neutral"
+      ]
+    },
+    {
+      "id": 9,
+      "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "minimal",
+        "moon",
+        "blue"
+      ]
+    },
+    {
+      "id": 10,
+      "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
+      "width": 640,
+      "height": 360,
+      "format": "jpg",
+      "tags": [
+        "brown",
+        "fog",
+        "himachal pradesh",
+        "india",
+        "minimal",
+        "mountain",
+        "landscape",
+        "nature"
+      ]
+    },
+    {
+      "id": 11,
+      "public_id": "abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "moon",
+        "purple",
+        "leading lines"
+      ]
+    },
+    {
+      "id": 12,
+      "public_id": "abdullah-ahmad-qE5K_972f48-unsplash_hbpgvo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-qE5K_972f48-unsplash_hbpgvo.jpg",
+      "width": 640,
+      "height": 1138,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "yellow",
+        "moon"
+      ]
+    }
+  ]
+}

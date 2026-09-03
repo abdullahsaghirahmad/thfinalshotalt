@@ -1,0 +1,22 @@
+{
+  "tag": "forest",
+  "updated_at": "2026-09-03T14:29:05.518Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "127_yio7en",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/127_yio7en.jpg",
+      "width": 640,
+      "height": 800,
+      "format": "jpg",
+      "tags": [
+        "bnw",
+        "noir",
+        "forest",
+        "dreamy",
+        "nature"
+      ]
+    }
+  ]
+}

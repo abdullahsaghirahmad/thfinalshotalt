@@ -1,0 +1,19 @@
+{
+  "tag": "still life",
+  "updated_at": "2026-09-03T14:29:21.451Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-Bs3BDQQNqbU-unsplash_xe1mx9",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-Bs3BDQQNqbU-unsplash_xe1mx9.jpg",
+      "width": 640,
+      "height": 1076,
+      "format": "jpg",
+      "tags": [
+        "pareidolia",
+        "still life"
+      ]
+    }
+  ]
+}

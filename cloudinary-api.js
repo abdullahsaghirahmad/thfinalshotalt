@@ -107,5 +107,8 @@ function simulateCloudinaryResponse(folderPath) {
 }
 
 module.exports = {
-  listImagesInFolder
+  listImagesInFolder,
+  // Expose the configured cloudinary v2 instance so server.js can use
+  // the search and api namespaces directly (tags queries, etc.)
+  cloudinary
 };

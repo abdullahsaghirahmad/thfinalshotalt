@@ -1,0 +1,117 @@
+{
+  "tag": "landscape",
+  "updated_at": "2026-09-03T14:29:11.139Z",
+  "count": 7,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC09487-Edit-8_z4usy6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032172/DSC09487-Edit-8_z4usy6.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "nature",
+        "landscape",
+        "green",
+        "india",
+        "meghalaya"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03193-Edit_vdtqr8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "nature",
+        "landscape",
+        "switzerland",
+        "blue"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC04033-Edit_dz0ibj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
+      "width": 1540,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "sea",
+        "blue",
+        "nature",
+        "landscape",
+        "france"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "124_a55vni",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/124_a55vni.jpg",
+      "width": 800,
+      "height": 533,
+      "format": "jpg",
+      "tags": [
+        "bnw",
+        "noir",
+        "landscape",
+        "nature",
+        "france"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
+      "width": 640,
+      "height": 998,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "mountain",
+        "orange",
+        "sun",
+        "sunset",
+        "uttarakhand",
+        "landscape",
+        "nature"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv.jpg",
+      "width": 640,
+      "height": 427,
+      "format": "jpg",
+      "tags": [
+        "architecture",
+        "landscape",
+        "india",
+        "lucknow"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
+      "width": 640,
+      "height": 360,
+      "format": "jpg",
+      "tags": [
+        "brown",
+        "fog",
+        "himachal pradesh",
+        "india",
+        "minimal",
+        "mountain",
+        "landscape",
+        "nature"
+      ]
+    }
+  ]
+}

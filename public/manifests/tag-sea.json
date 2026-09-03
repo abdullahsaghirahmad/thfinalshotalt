@@ -1,0 +1,22 @@
+{
+  "tag": "sea",
+  "updated_at": "2026-09-03T14:29:19.510Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC04033-Edit_dz0ibj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
+      "width": 1540,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "sea",
+        "blue",
+        "nature",
+        "landscape",
+        "france"
+      ]
+    }
+  ]
+}

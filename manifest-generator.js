@@ -14,6 +14,89 @@ if (!fs.existsSync(MANIFEST_DIR)) {
 // List of categories to generate manifests for
 const categories = ['featured', 'bnw', 'about', 'info'];
 
+// ── Tag manifest generation ───────────────────────────────────────────────
+// Pre-generates a JSON manifest for each Cloudinary tag so /api/tag-images
+// can be served from disk (instant) rather than hitting the Cloudinary API.
+
+async function generateManifestForTag(tag) {
+  console.log(`Generating manifest for tag: ${tag}...`);
+  try {
+    const cld = cloudinary.cloudinary;
+    if (!cld) {
+      console.warn(`Cloudinary not configured, skipping tag manifest: ${tag}`);
+      return null;
+    }
+    const result = await cld.search
+      .expression(`tags=${tag} AND resource_type:image`)
+      .sort_by('created_at', 'desc')
+      .with_field('tags')
+      .max_results(200)
+      .execute();
+
+    if (!result.resources || result.resources.length === 0) {
+      console.warn(`No images found for tag: ${tag}`);
+      return null;
+    }
+
+    const manifest = {
+      tag,
+      updated_at: new Date().toISOString(),
+      count: result.resources.length,
+      images: result.resources.map((img, i) => ({
+        id: i + 1,
+        public_id: img.public_id,
+        secure_url: img.secure_url,
+        width: img.width,
+        height: img.height,
+        format: img.format,
+        tags: img.tags || []
+      }))
+    };
+
+    const filePath = path.join(MANIFEST_DIR, `tag-${tag.replace(/[^a-z0-9_-]/gi, '_')}.json`);
+    fs.writeFileSync(filePath, JSON.stringify(manifest, null, 2));
+    console.log(`✅ Tag manifest saved: ${tag} (${manifest.count} images)`);
+    return manifest;
+  } catch (err) {
+    console.error(`❌ Error generating tag manifest for "${tag}":`, err.message);
+    return null;
+  }
+}
+
+async function getTagManifest(tag) {
+  const safeName = tag.replace(/[^a-z0-9_-]/gi, '_');
+  const filePath = path.join(MANIFEST_DIR, `tag-${safeName}.json`);
+  // Check if cached file exists and is fresh
+  if (fs.existsSync(filePath)) {
+    try {
+      const stats = fs.statSync(filePath);
+      const age = Date.now() - new Date(stats.mtime).getTime();
+      if (age < CACHE_DURATION) {
+        const data = fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(data);
+      }
+    } catch (_) {}
+  }
+  // Not cached or stale — regenerate
+  return await generateManifestForTag(tag);
+}
+
+async function generateAllTagManifests() {
+  try {
+    const cld = cloudinary.cloudinary;
+    if (!cld) { console.warn('Cloudinary not configured, skipping tag manifests'); return; }
+    const result = await cld.api.tags({ max_results: 500 });
+    const tags = result.tags || [];
+    console.log(`Generating manifests for ${tags.length} tags...`);
+    for (const tag of tags) {
+      await generateManifestForTag(tag);
+    }
+    console.log('✅ All tag manifests generated');
+  } catch (err) {
+    console.error('❌ Error generating tag manifests:', err.message);
+  }
+}
+
 // How often to regenerate the manifest (in ms) - 1 hour by default
 const CACHE_DURATION = process.env.MANIFEST_CACHE_DURATION || 3600000;
 
@@ -127,12 +210,17 @@ async function getManifest(category) {
 // Schedule regular regeneration
 function scheduleRegenerateManifests() {
   // Do an initial generation
-  generateAllManifests();
-  
+  generateAllManifests().then(() => {
+    // After folder manifests are done, generate tag manifests in the background
+    generateAllTagManifests().catch(err => console.error('Tag manifest error:', err));
+  });
+
   // Schedule regeneration based on cache duration
   setInterval(() => {
     console.log('Scheduled manifest regeneration starting...');
-    generateAllManifests();
+    generateAllManifests().then(() => {
+      generateAllTagManifests().catch(() => {});
+    });
   }, CACHE_DURATION);
 }
 
@@ -141,6 +229,8 @@ module.exports = {
   generateAllManifests,
   getManifest,
   scheduleRegenerateManifests,
+  generateAllTagManifests,
+  getTagManifest,
   categories
 };
 

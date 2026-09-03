@@ -1,0 +1,26 @@
+{
+  "tag": "uttarakhand",
+  "updated_at": "2026-09-03T14:29:25.010Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
+      "width": 640,
+      "height": 998,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "mountain",
+        "orange",
+        "sun",
+        "sunset",
+        "uttarakhand",
+        "landscape",
+        "nature"
+      ]
+    }
+  ]
+}

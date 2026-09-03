@@ -1,0 +1,92 @@
+{
+  "tag": "architecture",
+  "updated_at": "2026-09-03T14:28:58.001Z",
+  "count": 6,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "120_tavm96",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
+      "width": 800,
+      "height": 613,
+      "format": "jpg",
+      "tags": [
+        "bnw",
+        "noir",
+        "architecture"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "12_hbkqqq",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
+      "width": 585,
+      "height": 800,
+      "format": "jpg",
+      "tags": [
+        "architecture",
+        "bnw",
+        "noir",
+        "symmetry",
+        "france"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "121_agcwif",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/121_agcwif.jpg",
+      "width": 800,
+      "height": 430,
+      "format": "jpg",
+      "tags": [
+        "architecture",
+        "bnw",
+        "noir",
+        "france"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "122_p43ndt",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/122_p43ndt.jpg",
+      "width": 800,
+      "height": 518,
+      "format": "jpg",
+      "tags": [
+        "architecture",
+        "bnw",
+        "noir",
+        "france"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv.jpg",
+      "width": 640,
+      "height": 427,
+      "format": "jpg",
+      "tags": [
+        "architecture",
+        "landscape",
+        "india",
+        "lucknow"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar.jpg",
+      "width": 640,
+      "height": 913,
+      "format": "jpg",
+      "tags": [
+        "framing",
+        "architecture",
+        "india",
+        "lucknow",
+        "red"
+      ]
+    }
+  ]
+}

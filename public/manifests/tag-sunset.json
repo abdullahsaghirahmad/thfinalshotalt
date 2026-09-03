@@ -1,0 +1,57 @@
+{
+  "tag": "sunset",
+  "updated_at": "2026-09-03T14:29:22.711Z",
+  "count": 3,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC05533-Edit_aqtmnh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031802/DSC05533-Edit_aqtmnh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "lake",
+        "minimal",
+        "sun",
+        "sunset",
+        "india",
+        "kashmir"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n.jpg",
+      "width": 1920,
+      "height": 1280,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "sunset",
+        "bird",
+        "silhouette"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
+      "width": 640,
+      "height": 998,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "mountain",
+        "orange",
+        "sun",
+        "sunset",
+        "uttarakhand",
+        "landscape",
+        "nature"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "tag": "yellow",
+  "updated_at": "2026-09-03T14:29:25.503Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "ZMoonC_actth6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1784747961/ZMoonC_actth6.jpg",
+      "width": 2710,
+      "height": 4335,
+      "format": "jpg",
+      "tags": [
+        "moon",
+        "yellow",
+        "experimental"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "abdullah-ahmad-qE5K_972f48-unsplash_hbpgvo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-qE5K_972f48-unsplash_hbpgvo.jpg",
+      "width": 640,
+      "height": 1138,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "yellow",
+        "moon"
+      ]
+    }
+  ]
+}

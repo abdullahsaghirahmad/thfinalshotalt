@@ -1,0 +1,51 @@
+{
+  "tag": "purple",
+  "updated_at": "2026-09-03T14:29:18.578Z",
+  "count": 3,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash.jpg",
+      "width": 640,
+      "height": 427,
+      "format": "jpg",
+      "tags": [
+        "night sky",
+        "purple",
+        "thunder",
+        "nature"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "astro",
+        "night sky",
+        "purple",
+        "star trail",
+        "stars",
+        "nature"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "moon",
+        "purple",
+        "leading lines"
+      ]
+    }
+  ]
+}

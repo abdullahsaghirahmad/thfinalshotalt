@@ -1,0 +1,36 @@
+{
+  "tag": "green",
+  "updated_at": "2026-09-03T14:29:07.104Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "15_jnar5l",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/15_jnar5l.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "clouds",
+        "plane",
+        "green"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC09487-Edit-8_z4usy6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032172/DSC09487-Edit-8_z4usy6.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "nature",
+        "landscape",
+        "green",
+        "india",
+        "meghalaya"
+      ]
+    }
+  ]
+}

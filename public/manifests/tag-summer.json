@@ -1,0 +1,21 @@
+{
+  "tag": "summer",
+  "updated_at": "2026-09-03T14:29:21.891Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp.jpg",
+      "width": 640,
+      "height": 1138,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "conceptual",
+        "blue",
+        "summer"
+      ]
+    }
+  ]
+}

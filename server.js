@@ -350,6 +350,117 @@ app.get('/api/manifests', (req, res) => {
   }
 });
 
+// API: all images from the entire Cloudinary account (for the Discover carousel)
+// Returns every image with its tags so discover.js can drive click-to-gallery by tag.
+app.get('/api/all-images', async (req, res) => {
+  try {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
+
+    const cld = cloudinaryApi.cloudinary;
+    if (!cld) {
+      return res.json({ images: [], count: 0 });
+    }
+
+    const result = await cld.search
+      .expression('resource_type:image AND NOT folder:about')
+      .sort_by('created_at', 'desc')
+      .with_field('tags')
+      .max_results(200)
+      .execute();
+
+    // Return explicit fields including folder so the client knows the actual source
+    res.json({
+      images: (result.resources || []).map(r => ({
+        public_id:  r.public_id,
+        secure_url: r.secure_url,
+        width:      r.width,
+        height:     r.height,
+        format:     r.format,
+        tags:       r.tags || [],
+        folder:     r.folder || r.asset_folder || ''
+      })),
+      count: result.total_count || 0
+    });
+  } catch (error) {
+    console.error('Error fetching all images:', error);
+    res.status(500).json({ error: 'Failed to fetch all images', message: error.message });
+  }
+});
+
+// Serve the Discover page
+app.get('/discover', (req, res) => {
+  res.sendFile(path.join(__dirname, 'discover.html'));
+});
+
+// API: images with a specific Cloudinary tag — checks cached manifest first
+app.get('/api/tag-images', async (req, res) => {
+  const tag = req.query.tag;
+  if (!tag) return res.status(400).json({ error: 'tag query parameter required' });
+
+  try {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
+
+    // Try cached manifest first (instant disk read — generated at server startup)
+    const cached = await manifestGenerator.getTagManifest(tag);
+    if (cached) {
+      return res.json({
+        tag,
+        images: cached.images || [],
+        count: cached.count || 0
+      });
+    }
+
+    // Fallback: live Cloudinary query if manifest unavailable
+    const cld = cloudinaryApi.cloudinary;
+    if (!cld) return res.json({ tag, images: [], count: 0 });
+
+    const result = await cld.search
+      .expression(`tags=${tag} AND resource_type:image`)
+      .sort_by('created_at', 'desc')
+      .max_results(100)
+      .execute();
+
+    res.json({
+      images: (result.resources || []).map(function(r) {
+        return {
+          public_id:  r.public_id,
+          secure_url: r.secure_url,
+          width:      r.width,
+          height:     r.height,
+          format:     r.format,
+          tags:       r.tags || [],
+          folder:     r.folder || r.asset_folder || ''  // actual Cloudinary folder
+        };
+      }),
+      count: result.total_count || 0
+    });
+  } catch (error) {
+    console.error(`Error fetching tag images for "${tag}":`, error);
+    res.status(500).json({ error: 'Failed to fetch tag images', message: error.message });
+  }
+});
+
+// API: all unique tags in the Cloudinary account (for search autocomplete)
+app.get('/api/available-tags', async (req, res) => {
+  try {
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
+
+    const cld = cloudinaryApi.cloudinary;
+    if (!cld) {
+      return res.json({ tags: [] });
+    }
+
+    const result = await cld.api.tags({ max_results: 500 });
+    res.json({ tags: result.tags || [] });
+  } catch (error) {
+    console.error('Error fetching available tags:', error);
+    res.status(500).json({ error: 'Failed to fetch tags', message: error.message });
+  }
+});
+
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));

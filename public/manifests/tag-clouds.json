@@ -1,0 +1,55 @@
+{
+  "tag": "clouds",
+  "updated_at": "2026-09-03T14:29:02.292Z",
+  "count": 3,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "15_jnar5l",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/15_jnar5l.jpg",
+      "width": 900,
+      "height": 1600,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "clouds",
+        "plane",
+        "green"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
+      "width": 640,
+      "height": 998,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "mountain",
+        "orange",
+        "sun",
+        "sunset",
+        "uttarakhand",
+        "landscape",
+        "nature"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
+      "width": 640,
+      "height": 960,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "minimal",
+        "moon",
+        "blue"
+      ]
+    }
+  ]
+}
