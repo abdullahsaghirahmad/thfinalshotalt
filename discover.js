@@ -621,13 +621,16 @@ class DiscoverGallery {
         var h = self.phatEl.offsetHeight || self.thumbsEl.scrollHeight;
         if (h > 100) { document.body.style.height = h + 'px'; self._cachedBodyH = h; }
 
-        // 10. Scroll to center the active item (spring lerps smoothly from 0)
+        // 10. Snap filmstrip to center the active item instantly.
+        //     Set BOTH scrollY AND springY to targetY so there's no spring drift
+        //     that would cause the bell-curve to briefly auto-select the wrong image.
         if (self.thumbItems[activeIdx]) {
           var el = self.thumbItems[activeIdx];
           var targetY = Math.max(0, el.offsetTop + el.offsetHeight / 2 - window.innerHeight / 2);
           window.scrollTo({ top: targetY });
           self.scrollY = targetY;
-          // Leave springY at 0 so the spring lerps smoothly into position
+          self.springY = targetY;                    // instant snap — no drift
+          self.phatEl.style.top = -targetY + 'px';  // apply immediately
         }
 
         // 11. Re-enable bell-curve auto-select after spring has started settling
