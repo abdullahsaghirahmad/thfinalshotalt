@@ -51,6 +51,24 @@
   outline: none;
 }
 
+/* Dreamy corner vignette — mirrors the unveil.fr 45° gradient overlay.
+   The 45° angle matches the card fan diagonal, so incoming cards (top-right)
+   and outgoing cards (bottom-left) dissolve into the #fafafa background.
+   The centre 50% stays fully transparent so the featured cards are crisp.  */
+.discover-carousel::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;   /* above canvas, below search bar + nav */
+  opacity: 0.75;
+  background: linear-gradient(45deg,
+    #fafafa 0%, #fafafa 1%,
+    transparent 25%, transparent 75%,
+    #fafafa 100%
+  );
+}
+
 /* ── Search bar ─────────────────────────────────────────────── */
 .discover-search-bar {
   position: absolute;
