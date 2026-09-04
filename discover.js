@@ -972,7 +972,7 @@ class DiscoverCarousel {
     this.scene.add(hitbox);
 
     // No separate glass overlay — blur-vignette blend in shader provides the glass look
-    this.cards.push({ mesh: mesh, hitbox: hitbox, data: data, hovered: false, hoverT: 0 });
+    this.cards.push({ mesh: mesh, hitbox: hitbox, cardW: H, data: data, hovered: false, hoverT: 0 });
     this.cardMeshes.push(hitbox);   // only hitboxes in cardMeshes — they never move
     this.visuals.push(mesh);        // visual meshes are separate
   }
@@ -1008,9 +1008,13 @@ class DiscoverCarousel {
       card.hoverT += (hoverTarget - card.hoverT) * 0.10;
 
       // ── Visual mesh: moves on hover (unveil.fr w.position pattern) ─
-      // Reference maps hoverT: 0 → -0.325 (resting), 1 → +0.325 (hovered)
-      // giving a total range of 0.65 vs our old 0.325 — doubles the pop-out feel.
-      card.mesh.position.set(x + (card.hoverT * 2 - 1) * 0.325, card.hoverT * -0.10, z);
+      // Per-card offset -(cardW-1.5)/2 mirrors unveil.fr's A.position.x:
+      //   portrait  (H<1.5) → positive offset → rests near centre (tiny Z drift)
+      //   landscape (H>1.5) → negative offset → rests further back
+      // Combined with hoverT mapping 0→-0.325 / 1→+0.325, portrait cards pop
+      // dramatically while staying correctly layered; landscape is more subtle.
+      var perOffset = -(card.cardW - 1.5) / 2;
+      card.mesh.position.set(x + perOffset + (card.hoverT * 2 - 1) * 0.325, card.hoverT * -0.10, z);
       card.mesh.visible = isVisible;
 
       // ── Distance-based opacity fade ───────────────────────────────
