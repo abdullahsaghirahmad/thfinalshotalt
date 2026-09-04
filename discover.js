@@ -1008,7 +1008,9 @@ class DiscoverCarousel {
       card.hoverT += (hoverTarget - card.hoverT) * 0.10;
 
       // ── Visual mesh: moves on hover (unveil.fr w.position pattern) ─
-      card.mesh.position.set(x + card.hoverT * 0.325, card.hoverT * -0.10, z);
+      // Reference maps hoverT: 0 → -0.325 (resting), 1 → +0.325 (hovered)
+      // giving a total range of 0.65 vs our old 0.325 — doubles the pop-out feel.
+      card.mesh.position.set(x + (card.hoverT * 2 - 1) * 0.325, card.hoverT * -0.10, z);
       card.mesh.visible = isVisible;
 
       // ── Distance-based opacity fade ───────────────────────────────
