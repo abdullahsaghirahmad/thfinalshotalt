@@ -902,7 +902,10 @@ class DiscoverCarousel {
       W *= fe;
     }
 
-    var geo = new THREE.PlaneGeometry(H, W);
+    // Reference uses BoxGeometry(H, W, 0.0175) — the 0.0175 depth is what creates
+    // the visible glass-slab edge at the card fan angle. Same ShaderMaterial applies
+    // to all faces; thin depth means only the top/side edges are visible.
+    var geo = new THREE.BoxGeometry(H, W, 0.0175);
 
     // ShaderMaterial using the exact unveil.fr vertex + fragment shaders
     var mat = new THREE.ShaderMaterial({
