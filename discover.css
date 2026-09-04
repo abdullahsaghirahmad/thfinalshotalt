@@ -64,7 +64,7 @@
   opacity: 0.55;
   background: linear-gradient(45deg,
     #fafafa 0%, #fafafa 1%,
-    transparent 18%, transparent 82%,
+    transparent 15%, transparent 85%,
     #fafafa 100%
   );
 }
