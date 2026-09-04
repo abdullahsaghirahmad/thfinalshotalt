@@ -891,6 +891,17 @@ class DiscoverCarousel {
   }
 
   /* ── Create a card mesh with the exact unveil.fr ShaderMaterial ────────── */
+
+  /* ── Card geometry A/B toggle ─────────────────────────────────────────────
+   * PLANE  (default) – flat PlaneGeometry, clean minimal look
+   * BOX    – BoxGeometry(H, W, 0.0175), glass-slab edge like unveil.fr
+   *          (depth 0.0175 = exact value from unveil.fr source, verified via
+   *           firecrawl analysis of _app/immutable/nodes/0.CvEaJ_33.js)
+   *
+   * To switch: change the value below and reload. Nothing else needs changing.
+   * ────────────────────────────────────────────────────────────────────────── */
+  get CARD_GEO() { return 'PLANE'; } // 'PLANE' | 'BOX'
+
   _createCard(data, i) {
     // Geometry — unveil.fr formula
     var H = 1.5, W = 1.5;
@@ -902,10 +913,9 @@ class DiscoverCarousel {
       W *= fe;
     }
 
-    // Reference uses BoxGeometry(H, W, 0.0175) — the 0.0175 depth is what creates
-    // the visible glass-slab edge at the card fan angle. Same ShaderMaterial applies
-    // to all faces; thin depth means only the top/side edges are visible.
-    var geo = new THREE.BoxGeometry(H, W, 0.0175);
+    var geo = this.CARD_GEO === 'BOX'
+      ? new THREE.BoxGeometry(H, W, 0.0175)   // glass-slab edge (unveil.fr)
+      : new THREE.PlaneGeometry(H, W);         // flat plane (default)
 
     // ShaderMaterial using the exact unveil.fr vertex + fragment shaders
     var mat = new THREE.ShaderMaterial({
