@@ -1053,15 +1053,9 @@ class DiscoverCarousel {
       if (this.labelEl) this.labelEl.style.display = 'none';
       return;
     }
-    var CARD_H = 1.5;
-    var cardPos = this.hoveredCard.mesh.position;
-    var bottomCenter = new THREE.Vector3(cardPos.x, cardPos.y - CARD_H/2, cardPos.z);
-    bottomCenter.project(this.camera);
-    var sx = (bottomCenter.x + 1) / 2 * this.canvas.clientWidth;
-    var sy = (1 - bottomCenter.y) / 2 * this.canvas.clientHeight + 10;
     if (this.labelEl) {
-      this.labelEl.style.left    = sx + 'px';
-      this.labelEl.style.top     = sy + 'px';
+      this.labelEl.style.left    = this.mouseClientX + 'px';
+      this.labelEl.style.top     = (this.mouseClientY - 20) + 'px';
       this.labelEl.style.display = 'block';
       this.labelEl.textContent   = this.hoveredCard.data.label;
     }
@@ -1079,6 +1073,8 @@ class DiscoverCarousel {
     var rect = this.canvas.getBoundingClientRect();
     this.mouseNDC.x =  ((e.clientX - rect.left) / rect.width)  * 2 - 1;
     this.mouseNDC.y = -((e.clientY - rect.top)  / rect.height) * 2 + 1;
+    this.mouseClientX = e.clientX;
+    this.mouseClientY = e.clientY;
   }
 
   _handleClick() {
