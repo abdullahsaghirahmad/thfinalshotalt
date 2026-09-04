@@ -938,10 +938,22 @@ class DiscoverCarousel {
       });
     }
 
+    // ── Thickness slab (BoxGeometry) ─────────────────────────────────────────
+    // Each card is a flat PlaneGeometry. Adding a BoxGeometry directly behind it
+    // exposes the top/side edges at the fan angle, giving the "thick glass slab"
+    // physical presence visible in the unveil.fr reference.
+    var SLAB_T = 0.06;
+    var slabGeo = new THREE.BoxGeometry(H, W, SLAB_T);
+    var slabMat = new THREE.MeshBasicMaterial({
+      color: 0x111111, transparent: true, opacity: 0.72, depthWrite: false
+    });
+    var slabMesh = new THREE.Mesh(slabGeo, slabMat);
+    slabMesh.rotation.y = -Math.PI / 6;
+    slabMesh.renderOrder = 0; // renders before the image plane
+
     var mesh = new THREE.Mesh(geo, mat);
     mesh.rotation.y = -Math.PI / 6;
-    mesh.rotation.x = 0;
-    mesh.rotation.z = 0;
+    mesh.renderOrder = 1; // renders on top of slab, covering its front face
 
     // ── Invisible hitbox — exact unveil.fr pattern ──────────────
     // Separate from the visual mesh so it never moves on hover.
@@ -955,11 +967,12 @@ class DiscoverCarousel {
     hitbox.scale.x = 1.5;          // 50% wider than visual card
     hitbox.userData.cardIndex = i;  // raycaster uses this to identify the card
 
+    this.scene.add(slabMesh); // add slab first (renderOrder=0)
     this.scene.add(mesh);
     this.scene.add(hitbox);
 
     // No separate glass overlay — blur-vignette blend in shader provides the glass look
-    this.cards.push({ mesh: mesh, hitbox: hitbox, data: data, hovered: false, hoverT: 0 });
+    this.cards.push({ mesh: mesh, slab: slabMesh, hitbox: hitbox, data: data, hovered: false, hoverT: 0 });
     this.cardMeshes.push(hitbox);   // only hitboxes in cardMeshes — they never move
     this.visuals.push(mesh);        // visual meshes are separate
   }
@@ -997,6 +1010,11 @@ class DiscoverCarousel {
       // ── Visual mesh: moves on hover (unveil.fr w.position pattern) ─
       card.mesh.position.set(x + card.hoverT * 0.325, card.hoverT * -0.10, z);
       card.mesh.visible = isVisible;
+
+      // ── Slab: same position as mesh, shifted back half its thickness so
+      //    its front face aligns with (and is covered by) the image plane.
+      card.slab.position.set(x + card.hoverT * 0.325, card.hoverT * -0.10, z - 0.03);
+      card.slab.visible = isVisible;
 
       // ── Distance-based opacity fade ───────────────────────────────
       var visRange    = 12.5 / Math.max(aspect * 1.5, 0.001);
