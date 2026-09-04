@@ -1054,8 +1054,8 @@ class DiscoverCarousel {
       return;
     }
     if (this.labelEl) {
-      this.labelEl.style.left    = this.mouseClientX + 'px';
-      this.labelEl.style.top     = (this.mouseClientY - 20) + 'px';
+      this.labelEl.style.left    = (this.mouseClientX + 16) + 'px';
+      this.labelEl.style.top     = (this.mouseClientY + 16) + 'px';
       this.labelEl.style.display = 'block';
       this.labelEl.textContent   = this.hoveredCard.data.label;
     }
