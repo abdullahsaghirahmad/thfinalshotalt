@@ -419,6 +419,29 @@ function resolveTagSynonym(input) {
   return tagSynonyms[q_] || q_;
 }
 
+// API: pre-flight count check for multi-tag search.
+// Returns the number of images matching ALL specified tags (AND logic).
+// Client calls this before navigating to avoid blank galleries.
+// GET /api/tag-count?tags=dreamy,mountain  OR  ?tags=india
+app.get('/api/tag-count', async (req, res) => {
+  const rawTags = (req.query.tags || req.query.tag || '').trim();
+  if (!rawTags) return res.json({ count: 0, tags: [] });
+
+  const tagList = rawTags.split(',').map(t => resolveTagSynonym(t.trim())).filter(Boolean);
+  if (tagList.length === 0) return res.json({ count: 0, tags: [] });
+
+  try {
+    const cld = cloudinaryApi.cloudinary;
+    if (!cld) return res.json({ count: 0, tags: tagList });
+
+    const expr = tagList.map(t => `tags=${t}`).join(' AND ') + ' AND resource_type:image';
+    const result = await cld.search.expression(expr).max_results(1).execute();
+    res.json({ count: result.total_count || 0, tags: tagList });
+  } catch (err) {
+    res.json({ count: 0, tags: tagList, error: err.message });
+  }
+});
+
 // API: images with a specific Cloudinary tag — checks cached manifest first
 app.get('/api/tag-images', async (req, res) => {
   const rawTag = req.query.tag;

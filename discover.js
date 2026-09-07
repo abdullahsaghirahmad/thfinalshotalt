@@ -327,6 +327,25 @@ class DiscoverGallery {
   _updateTagBar(imageTags) {
     if (!this.tagBarEl) return;
 
+    // Multi-tag search: show the query tags, not the image's individual tags
+    if (this.entryType === 'multi-tag') {
+      this.tagBarEl.style.display = '';
+      while (this.tagBarEl.firstChild) this.tagBarEl.removeChild(this.tagBarEl.firstChild);
+      var self = this;
+      var queryTags = this.activeTag.split(',');
+      queryTags.forEach(function(tag, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'gallery-tag-label' + (idx === 0 ? ' is--active' : '');
+        btn.textContent = displayTag(tag.trim());
+        btn.addEventListener('click', function() {
+          if (self._onTagClick) self._onTagClick(tag.trim());
+        });
+        self.tagBarEl.appendChild(btn);
+      });
+      return;
+    }
+
     // Don't show tag bar for folder-based galleries (Featured, BnW, etc.)
     // — folder names shouldn't appear as if they were photographer-applied tags
     if (this.entryType !== 'tag') {
@@ -1286,8 +1305,50 @@ class DiscoverCarousel {
         return;
       }
 
-      // Option D: always use the first resolved tag (full multi-tag gallery deferred)
-      if (self.onEnterGallery) self.onEnterGallery(tags[0], tags[0], 'tag');
+    this.searchEl.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { if (hintEl) hintEl.style.display = 'none'; }
+      if (e.key !== 'Enter') return;
+      var q = self.searchEl.value.trim();
+      if (!q) return;
+
+      var tags = parseTagQuery(q);
+      if (!tags) {
+        if (hintEl) { hintEl.innerHTML = ''; hintEl.textContent = 'no match found'; hintEl.style.display = 'block'; }
+        return;
+      }
+
+      if (tags.length === 1) {
+        // Single tag — enter directly (tag exists by definition, no pre-flight needed)
+        if (self.onEnterGallery) self.onEnterGallery(tags[0], tags[0], 'tag');
+        return;
+      }
+
+      // Multi-tag — pre-flight count check before navigating
+      if (hintEl) { hintEl.innerHTML = ''; hintEl.textContent = 'checking…'; hintEl.style.display = 'block'; }
+      fetch('/api/tag-count?tags=' + encodeURIComponent(tags.join(',')), { cache: 'no-store' })
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d.count > 0) {
+            if (hintEl) hintEl.style.display = 'none';
+            self.searchEl.value = '';
+            // Dismiss pills filter
+            if (self.pillsEl) {
+              self.pillsEl.querySelectorAll('.tag-pill').forEach(function(p) {
+                p.classList.remove('tag-pill--match', 'tag-pill--dimmed');
+              });
+            }
+            if (self.onEnterGallery) self.onEnterGallery(tags.join(','), tags.join(' · '), 'multi-tag');
+          } else {
+            if (hintEl) {
+              hintEl.innerHTML = '';
+              hintEl.textContent = '→ ' + tags.map(displayTag).join(' · ') + ' · no images match this combination';
+              hintEl.style.display = 'block';
+            }
+          }
+        })
+        .catch(function() {
+          if (hintEl) { hintEl.innerHTML = ''; hintEl.textContent = 'connection error'; hintEl.style.display = 'block'; }
+        });
     });
   }
 
