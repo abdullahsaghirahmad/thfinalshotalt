@@ -1,0 +1,38 @@
+{
+  "_comment": "Tag taxonomy for the admin tagger vocabulary panel. Edit freely — add new tags and groups as your library grows. Tags not listed here appear under 'Other'.",
+
+  "where": {
+    "label": "📍 Where",
+    "tags": ["india", "france", "switzerland", "kashmir", "meghalaya", "uttarakhand", "himachal_pradesh", "lucknow", "kerala", "paris", "europe", "asia"]
+  },
+
+  "what": {
+    "label": "🔍 What",
+    "tags": ["moon", "stars", "sun", "milky_way", "eclipse", "aurora", "cloud", "fog", "mist", "rain", "lightning", "rainbow", "mountain", "lake", "river", "sea", "ocean", "waterfall", "forest", "tree", "flower", "bird", "boat", "plane", "architecture", "bridge", "street", "city", "silhouette", "portrait", "reflection", "shadow"]
+  },
+
+  "how": {
+    "label": "⚙ How",
+    "tags": ["bnw", "long_exposure", "star_trail", "leading_lines", "symmetry", "framing", "minimal", "reflection", "silhouette", "multiple_exposure", "panorama", "high_key", "low_key"]
+  },
+
+  "when": {
+    "label": "🕐 When",
+    "tags": ["night", "golden_hour", "blue_hour", "dawn", "dusk", "sunrise", "sunset", "winter", "summer", "monsoon", "autumn", "spring"]
+  },
+
+  "mood": {
+    "label": "🎭 Mood",
+    "tags": ["dreamy", "experimental", "conceptual", "fine_art", "noir", "dramatic", "minimal", "ethereal", "melancholic", "serene", "surreal", "intimate", "still_life"]
+  },
+
+  "color": {
+    "label": "🎨 Color",
+    "tags": ["blue", "orange", "green", "yellow", "purple", "red", "brown", "neutral", "pastel", "warm", "cool"]
+  },
+
+  "project": {
+    "label": "📂 Project",
+    "tags": ["project:duration", "project:noir", "project:experimental"]
+  }
+}

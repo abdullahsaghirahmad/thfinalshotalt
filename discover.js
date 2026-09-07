@@ -22,6 +22,38 @@ function displayTag(tag) {
   return (tag || '').replace(/_/g, ' ');
 }
 
+/* ── Pick the most editorially relevant tag for a carousel card ─────────────
+ * Strategy: taxonomy group priority (where > what > how > when > mood > color)
+ *           + minimum gallery size (≥5 images) to avoid tiny galleries.
+ * Within each group, the tag with the most images wins (better browsing).
+ * Falls back to highest-count tag if taxonomy doesn't cover the image's tags.  */
+var BEST_TAG_MIN_COUNT = 5;
+
+function pickBestTag(tags, tagCounts, taxonomyGroups) {
+  if (!tags || tags.length === 0) return null;
+  if (tags.length === 1) return tags[0];
+
+  // Only consider tags with enough images for a decent gallery
+  var viable = tags.filter(function(t) { return (tagCounts[t] || 0) >= BEST_TAG_MIN_COUNT; });
+  if (viable.length === 0) viable = tags; // all tiny: use all (rare)
+
+  // Walk taxonomy groups in priority order, pick highest-count match
+  for (var g = 0; g < taxonomyGroups.length; g++) {
+    var group = taxonomyGroups[g];
+    var inGroup = viable.filter(function(t) { return group.indexOf(t) !== -1; });
+    if (inGroup.length > 0) {
+      return inGroup.reduce(function(best, t) {
+        return (tagCounts[t] || 0) > (tagCounts[best] || 0) ? t : best;
+      }, inGroup[0]);
+    }
+  }
+
+  // No taxonomy match: fall back to highest-count viable tag
+  return viable.reduce(function(best, t) {
+    return (tagCounts[t] || 0) > (tagCounts[best] || 0) ? t : best;
+  }, viable[0]);
+}
+
 /* ── GSAP-style modular wrap (no GSAP dependency) ──────────────────────── */
 function gWrap(min, max, val) {
   var range = max - min;
@@ -827,6 +859,12 @@ class DiscoverCarousel {
   async _buildCardData() {
     var baseDeck = [];
 
+    // Start taxonomy fetch NOW, in parallel with the slow all-images call.
+    // public/tag-taxonomy.json is ~2KB, served statically, browser-cached 24h.
+    var taxonomyPromise = fetch('/public/tag-taxonomy.json', { cache: 'default' })
+      .then(function(r) { return r.json(); })
+      .catch(function() { return {}; });
+
     // Primary: entire library via /api/all-images
     try {
       var res = await fetch('/api/all-images', { cache: 'no-store' });
@@ -908,15 +946,24 @@ class DiscoverCarousel {
     });
     // Expose counts so _loadAvailableTags can sort pills without an extra API call
     this._tagCounts = tagCounts;
-    // For each card with multiple tags, pick the most popular one as the gallery entry
+
+    // Await taxonomy (started at the top of _buildCardData, almost certainly ready by now)
+    var taxonomyRaw = await taxonomyPromise;
+    delete taxonomyRaw['_comment'];
+    var GROUP_ORDER = ['where', 'what', 'how', 'when', 'mood', 'color', 'project'];
+    var taxonomyGroups = GROUP_ORDER.map(function(g) {
+      return (taxonomyRaw[g] && taxonomyRaw[g].tags) ? taxonomyRaw[g].tags : [];
+    });
+
+    // Best-tag selection: taxonomy priority (where>what>how>mood) + minimum count threshold
     baseDeck.forEach(function(card) {
       if (card.tags && card.tags.length > 1) {
-        var best = card.tags.reduce(function(a, b) {
-          return (tagCounts[a] || 0) >= (tagCounts[b] || 0) ? a : b;
-        });
-        card.categoryId = best;
-        card.label      = best;
-        card.type       = 'tag';
+        var best = pickBestTag(card.tags, tagCounts, taxonomyGroups);
+        if (best) {
+          card.categoryId = best;
+          card.label      = best;
+          card.type       = 'tag';
+        }
       }
     });
 

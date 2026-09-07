@@ -17,9 +17,9 @@ router.get('/tagger', (req, res) => {
 });
 
 /* ── GET /admin/api/taxonomy
-   Serves tag-taxonomy.json so the frontend can group the vocabulary */
+   Serves tag-taxonomy.json from public/ so the frontend can group the vocabulary */
 router.get('/api/taxonomy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'tag-taxonomy.json'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'tag-taxonomy.json'));
 });
 
 /* ── GET /admin/api/images
