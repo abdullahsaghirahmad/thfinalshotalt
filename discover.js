@@ -1109,7 +1109,7 @@ class DiscoverCarousel {
 
     // Load synonym map (served as static file from /public)
     try {
-      var r2 = await fetch('/tag-synonyms.json', { cache: 'no-store' });
+      var r2 = await fetch('/public/tag-synonyms.json', { cache: 'no-store' });
       var raw = await r2.json();
       // Strip the _comment key
       delete raw['_comment'];
