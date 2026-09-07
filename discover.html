@@ -69,7 +69,6 @@
       <!-- Search bar sits below the pills -->
       <div id="discover-search-bar" class="discover-search-bar">
         <span class="discover-search-prefix">or type</span>
-        <span id="discover-search-cursor" class="discover-search-cursor"></span>
         <input
           id="discover-search"
           class="discover-search-input"
@@ -79,6 +78,8 @@
           spellcheck="false"
         >
       </div>
+      <!-- Inline match hint — shows resolved tag when user types a synonym -->
+      <div id="search-hint" class="search-hint" style="display:none;"></div>
 
     </div>
 

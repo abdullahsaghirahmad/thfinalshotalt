@@ -767,7 +767,11 @@ class DiscoverCarousel {
     this.raycaster = new THREE.Raycaster();
     this.mouseNDC  = new THREE.Vector2(9999, 9999); // off-screen until first mousemove
 
-    // Load card data and create meshes
+    // Load card data and create meshes.
+    // Start tags + search bar immediately (don't wait for slow card data fetch).
+    this._initSearchBar();
+    this._loadAvailableTags(); // fires in parallel with _buildCardData
+
     var cardData = await this._buildCardData();
     var self = this;
     cardData.forEach(function(data, i) { self._createCard(data, i); });
@@ -780,9 +784,6 @@ class DiscoverCarousel {
 
     this.animationRunning = true;
     this.renderer.setAnimationLoop(this._animate);
-
-    this._loadAvailableTags();
-    this._initSearchBar();
   }
 
   /* ── Card data: ALL images from the Cloudinary library ──────── */
@@ -1162,13 +1163,25 @@ class DiscoverCarousel {
   _initSearchBar() {
     if (!this.searchEl) return;
     var self = this;
-    var cursorEl = document.getElementById('discover-search-cursor');
+    var hintEl = document.getElementById('search-hint');
 
-    this.searchEl.addEventListener('focus', function() { if (cursorEl) cursorEl.style.display = 'none'; });
-    this.searchEl.addEventListener('blur',  function() { if (cursorEl) cursorEl.style.display = ''; });
+    function updateHint(q) {
+      if (!hintEl) return;
+      if (!q) { hintEl.style.display = 'none'; return; }
+      var resolved = self.resolveTag(q);
+      var isKnown = self.availableTags.some(function(t) { return t.toLowerCase() === resolved.toLowerCase(); });
+      if (isKnown) {
+        var label = resolved !== q ? '→ ' + resolved : '→ ' + resolved;
+        hintEl.textContent = label + '  ·  press Enter';
+        hintEl.style.display = 'block';
+      } else {
+        hintEl.style.display = 'none';
+      }
+    }
 
     this.searchEl.addEventListener('input', function() {
       var q = self.searchEl.value.toLowerCase().trim();
+      updateHint(q);
       if (!self.pillsEl) return;
       var resolved = q ? self.resolveTag(q) : '';
       var pills = self.pillsEl.querySelectorAll('.tag-pill');
@@ -1182,6 +1195,7 @@ class DiscoverCarousel {
     });
 
     this.searchEl.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { if (hintEl) hintEl.style.display = 'none'; }
       if (e.key !== 'Enter') return;
       var q = self.searchEl.value.trim();
       if (!q) return;

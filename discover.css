@@ -96,12 +96,31 @@
   text-transform: uppercase;
   flex-shrink: 0;
   margin-right: 10px;
+  font-family: inherit; /* site font, not monospace */
 }
 
 .discover-search-input {
   flex: 1;
   background: transparent;
   border: none;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  outline: none;
+}
+
+.discover-search-input::placeholder { color: rgba(0, 0, 0, 0.22); }
+.discover-search-input:focus { caret-color: rgba(0, 0, 0, 0.5); }
+
+/* Inline match hint — appears below search bar when input resolves to a known tag */
+.search-hint {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 5px;
+  font-family: inherit;
+}
   color: rgba(0, 0, 0, 0.7);
   font-size: 13px;
   font-family: inherit;
@@ -126,11 +145,6 @@
 @keyframes discover-blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
-}
-
-/* Cursor hidden when input is focused (JS also handles this via focus/blur) */
-.discover-search-input:focus {
-  caret-color: rgba(0, 0, 0, 0.5);
 }
 
 /* ── Tag pills (autocomplete) ───────────────────────────────── */
