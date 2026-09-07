@@ -191,12 +191,7 @@
 
   /* Add tag */
   #add-tag-row { display: flex; gap: 6px; }
-  #tag-input {
-    flex: 1; background: #1a1a1a; border: 1px solid #333;
-    color: #ccc; font-family: inherit; font-size: 13px;
-    padding: 6px 9px; outline: none;
-  }
-  #tag-input:focus { border-color: #666; }
+  #vocab-filter:focus { border-color: #666; }
   #add-tag-btn {
     padding: 6px 16px; background: #222; border: 1px solid #444;
     color: #aaa; font-family: inherit; font-size: 12px; cursor: pointer;
@@ -310,12 +305,14 @@
       <div id="completeness">–</div>
     </div>
 
-    <!-- Add tag -->
+    <!-- Vocabulary search + quick-add -->
     <div class="section">
-      <div class="section-label">Add tag</div>
+      <div class="section-label">Search vocabulary / add tag</div>
       <div id="add-tag-row">
-        <input id="tag-input" type="text" placeholder="type a tag and press Enter…" autocomplete="off" spellcheck="false">
-        <button id="add-tag-btn">+ Add</button>
+        <input id="vocab-filter" type="text" placeholder="type to filter or add a tag…"
+               autocomplete="off" spellcheck="false"
+               style="flex:1;background:#1a1a1a;border:1px solid #333;color:#ccc;font-family:inherit;font-size:13px;padding:6px 9px;outline:none;">
+        <button id="add-vocab-btn">+ Add</button>
       </div>
     </div>
 
@@ -706,19 +703,36 @@ document.getElementById('save-btn').addEventListener('click', saveAndNext);
 document.getElementById('bulk-mode-btn').addEventListener('click', () => setBulkMode(!bulkMode));
 document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => activateFilter(b.dataset.filter)));
 
-document.getElementById('add-tag-btn').addEventListener('click', () => {
-  const inp = document.getElementById('tag-input');
-  if (inp.value.trim()) { addTag(inp.value); inp.value = ''; }
+document.getElementById('add-vocab-btn').addEventListener('click', () => {
+  const inp = document.getElementById('vocab-filter');
+  if (inp.value.trim()) { addTag(inp.value); inp.value = ''; filterVocab(''); }
 });
-document.getElementById('tag-input').addEventListener('keydown', e => {
+document.getElementById('vocab-filter').addEventListener('keydown', e => {
   if (e.key === 'Enter') {
-    const v = e.target.value;
-    if (v.trim()) { addTag(v); e.target.value = ''; }
+    const v = e.target.value.trim();
+    if (v) { addTag(v); e.target.value = ''; filterVocab(''); }
   }
 });
+document.getElementById('vocab-filter').addEventListener('input', e => {
+  filterVocab(e.target.value.trim().toLowerCase());
+});
+
+function filterVocab(q) {
+  document.querySelectorAll('.vocab-tag').forEach(btn => {
+    // Match on display text (spaces) or underscore form
+    const text = btn.textContent.toLowerCase();
+    const visible = !q || text.indexOf(q) !== -1 || text.replace(/ /g,'_').indexOf(q) !== -1;
+    btn.style.display = visible ? '' : 'none';
+  });
+  // Hide group headers when all their tags are filtered out
+  document.querySelectorAll('.vocab-group').forEach(group => {
+    const anyVisible = Array.from(group.querySelectorAll('.vocab-tag')).some(t => t.style.display !== 'none');
+    group.style.display = anyVisible ? '' : 'none';
+  });
+}
 
 document.addEventListener('keydown', e => {
-  if (document.activeElement === document.getElementById('tag-input')) return;
+  if (document.activeElement === document.getElementById('vocab-filter')) return;
   if (!bulkMode) {
     if (e.key === 's' || e.key === 'S')   { e.preventDefault(); saveAndNext(); }
     if (e.key === 'ArrowRight') { e.preventDefault(); if (queueIdx < queue.length-1) showImage(queueIdx+1); }
