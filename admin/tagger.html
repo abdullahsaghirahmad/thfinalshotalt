@@ -8,6 +8,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Courier New', monospace;
+    font-size: 13px;
     background: #111;
     color: #ccc;
     height: 100vh;
@@ -20,29 +21,34 @@
   #topbar {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     padding: 10px 16px;
     background: #1a1a1a;
     border-bottom: 1px solid #333;
     font-size: 12px;
     flex-shrink: 0;
+    flex-wrap: wrap;
   }
-  #topbar h1 { font-size: 13px; color: #fff; font-weight: normal; letter-spacing: 0.1em; }
+  #topbar h1 { font-size: 14px; color: #fff; font-weight: normal; letter-spacing: 0.1em; }
   #topbar .sep { color: #444; }
-  #queue-info { color: #888; }
+  #queue-info { color: #888; font-size: 12px; }
   #queue-info span { color: #aaa; }
 
-  .filter-btn {
-    padding: 3px 10px; font-size: 11px; font-family: inherit;
+  .filter-btn, .mode-btn {
+    padding: 4px 12px; font-size: 12px; font-family: inherit;
     background: #222; border: 1px solid #444; color: #888;
     cursor: pointer; letter-spacing: 0.05em;
   }
   .filter-btn.active { background: #333; border-color: #888; color: #fff; }
-  .filter-btn:hover { border-color: #666; color: #ccc; }
+  .filter-btn:hover  { border-color: #666; color: #ccc; }
+
+  .mode-btn          { border-color: #553; color: #aa8; }
+  .mode-btn.active   { background: #332; border-color: #aa8; color: #ff0; }
+  .mode-btn:hover    { border-color: #aa8; color: #ff0; }
 
   #nav-btns { display: flex; gap: 6px; margin-left: auto; }
   #nav-btns button {
-    padding: 4px 12px; font-size: 11px; font-family: inherit;
+    padding: 4px 12px; font-size: 12px; font-family: inherit;
     background: #222; border: 1px solid #444; color: #888; cursor: pointer;
   }
   #nav-btns button:hover:not(:disabled) { border-color: #666; color: #ccc; }
@@ -55,7 +61,7 @@
     overflow: hidden;
   }
 
-  /* ── Left: image panel ───────────── */
+  /* ── Left: single image ──────────── */
   #img-panel {
     width: 45%;
     flex-shrink: 0;
@@ -76,16 +82,65 @@
   #img-meta {
     position: absolute;
     bottom: 8px; left: 8px;
-    font-size: 10px;
-    color: #555;
-    letter-spacing: 0.05em;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 0.04em;
   }
   #img-placeholder {
-    color: #333;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-align: center;
+    color: #333; font-size: 13px; letter-spacing: 0.1em; text-align: center;
   }
+
+  /* ── Left: bulk grid ─────────────── */
+  #bulk-panel {
+    width: 45%;
+    flex-shrink: 0;
+    display: none;
+    overflow-y: auto;
+    background: #0a0a0a;
+    border-right: 1px solid #2a2a2a;
+    padding: 10px;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+  #bulk-panel::-webkit-scrollbar { width: 4px; }
+  #bulk-panel::-webkit-scrollbar-thumb { background: #333; }
+
+  .bulk-thumb {
+    position: relative;
+    width: calc(25% - 5px);
+    aspect-ratio: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .bulk-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    border: 2px solid transparent;
+    transition: border-color 0.1s;
+  }
+  .bulk-thumb.selected img { border-color: #ff0; }
+  .bulk-thumb .chk {
+    position: absolute; top: 4px; left: 4px;
+    width: 18px; height: 18px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #666;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #ff0;
+  }
+  .bulk-thumb .chk-empty { color: transparent; }
+  #bulk-select-bar {
+    width: 100%;
+    display: flex; gap: 8px; align-items: center;
+    padding: 4px 0; margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+  #bulk-select-bar button {
+    padding: 3px 10px; font-size: 11px; font-family: inherit;
+    background: #222; border: 1px solid #444; color: #888; cursor: pointer;
+  }
+  #bulk-select-bar button:hover { border-color: #666; color: #ccc; }
+  #bulk-count { font-size: 12px; color: #888; }
 
   /* ── Right: tag panel ────────────── */
   #tag-panel {
@@ -95,190 +150,113 @@
     overflow: hidden;
   }
 
-  /* Image info bar */
   #img-info {
     padding: 8px 14px;
-    font-size: 11px;
-    color: #666;
+    font-size: 12px; color: #666;
     background: #161616;
     border-bottom: 1px solid #2a2a2a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     flex-shrink: 0;
   }
   #img-info strong { color: #999; }
 
-  /* Sections inside tag panel */
   .section {
     padding: 10px 14px;
     border-bottom: 1px solid #222;
     flex-shrink: 0;
   }
   .section-label {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #555;
-    margin-bottom: 7px;
+    font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #555; margin-bottom: 8px;
   }
 
   /* Current tags */
-  #current-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    min-height: 28px;
-  }
+  #current-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; }
   .tag-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-family: inherit;
-    background: #2a2a2a;
-    border: 1px solid #444;
-    color: #ccc;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 9px; font-size: 13px; font-family: inherit;
+    background: #2a2a2a; border: 1px solid #444; color: #ccc;
     letter-spacing: 0.03em;
-    cursor: default;
   }
-  .tag-chip .remove {
-    color: #666;
-    cursor: pointer;
-    font-size: 13px;
-    line-height: 1;
-  }
+  .tag-chip .remove { color: #666; cursor: pointer; font-size: 15px; line-height: 1; }
   .tag-chip .remove:hover { color: #f66; }
-  #no-tags { color: #444; font-size: 11px; font-style: italic; }
+  #no-tags { color: #444; font-size: 12px; font-style: italic; }
 
   /* Completeness */
-  #completeness {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .check-item {
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+  #completeness { display: flex; gap: 14px; flex-wrap: wrap; }
+  .check-item { font-size: 12px; letter-spacing: 0.05em; display: flex; align-items: center; gap: 4px; }
   .check-item.ok  { color: #5a5; }
   .check-item.bad { color: #a55; }
 
-  /* Add tag input */
+  /* Add tag */
   #add-tag-row { display: flex; gap: 6px; }
   #tag-input {
-    flex: 1;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: #ccc;
-    font-family: inherit;
-    font-size: 12px;
-    padding: 5px 8px;
-    outline: none;
+    flex: 1; background: #1a1a1a; border: 1px solid #333;
+    color: #ccc; font-family: inherit; font-size: 13px;
+    padding: 6px 9px; outline: none;
   }
   #tag-input:focus { border-color: #666; }
   #add-tag-btn {
-    padding: 5px 14px;
-    background: #222;
-    border: 1px solid #444;
-    color: #aaa;
-    font-family: inherit;
-    font-size: 11px;
-    cursor: pointer;
-    letter-spacing: 0.08em;
+    padding: 6px 16px; background: #222; border: 1px solid #444;
+    color: #aaa; font-family: inherit; font-size: 12px; cursor: pointer;
   }
   #add-tag-btn:hover { border-color: #888; color: #fff; }
 
-  /* Vocabulary */
-  #vocab-scroll {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 14px 10px;
+  /* Bulk-specific info banner */
+  #bulk-info-banner {
+    padding: 8px 14px; font-size: 12px; color: #998;
+    background: #1a1a10; border-bottom: 1px solid #333; flex-shrink: 0;
+    display: none;
   }
+  #bulk-info-banner strong { color: #ff0; }
+  #bulk-add-note { font-size: 11px; color: #665; margin-top: 3px; }
+
+  /* Vocabulary */
+  #vocab-scroll { flex: 1; overflow-y: auto; padding: 0 14px 10px; }
   #vocab-scroll::-webkit-scrollbar { width: 4px; }
-  #vocab-scroll::-webkit-scrollbar-track { background: #111; }
   #vocab-scroll::-webkit-scrollbar-thumb { background: #333; }
 
   .vocab-group { margin-top: 12px; }
   .vocab-group-label {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: #555;
-    margin-bottom: 6px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid #222;
+    font-size: 11px; letter-spacing: 0.12em; color: #555;
+    margin-bottom: 7px; padding-bottom: 3px; border-bottom: 1px solid #222;
   }
-  .vocab-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .vocab-tags { display: flex; flex-wrap: wrap; gap: 5px; }
   .vocab-tag {
-    padding: 2px 7px;
-    font-size: 10px;
-    font-family: inherit;
-    letter-spacing: 0.03em;
-    cursor: pointer;
-    border: 1px solid #2a2a2a;
-    color: #666;
-    background: transparent;
-    transition: all 0.1s;
+    padding: 3px 9px; font-size: 12px; font-family: inherit;
+    letter-spacing: 0.03em; cursor: pointer;
+    border: 1px solid #2a2a2a; color: #666; background: transparent; transition: all 0.1s;
   }
-  .vocab-tag:hover   { border-color: #555; color: #aaa; }
-  .vocab-tag.active  { background: #2a2a2a; border-color: #666; color: #fff; }
-  .vocab-tag .cnt    { color: #444; font-size: 9px; margin-left: 2px; }
+  .vocab-tag:hover  { border-color: #555; color: #aaa; }
+  .vocab-tag.active { background: #2a2a2a; border-color: #666; color: #fff; }
+  .vocab-tag .cnt   { color: #444; font-size: 10px; margin-left: 3px; }
   .vocab-tag.active .cnt { color: #777; }
 
   /* Action bar */
   #action-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
     padding: 10px 14px;
-    background: #161616;
-    border-top: 1px solid #2a2a2a;
-    flex-shrink: 0;
+    background: #161616; border-top: 1px solid #2a2a2a; flex-shrink: 0;
   }
   #save-btn {
-    padding: 7px 22px;
-    background: #2a4a2a;
-    border: 1px solid #4a7a4a;
-    color: #8fdf8f;
-    font-family: inherit;
-    font-size: 12px;
-    cursor: pointer;
+    padding: 8px 22px; background: #2a4a2a; border: 1px solid #4a7a4a;
+    color: #8fdf8f; font-family: inherit; font-size: 13px; cursor: pointer;
     letter-spacing: 0.06em;
   }
-  #save-btn:hover { background: #3a5a3a; border-color: #6aaa6a; }
+  #save-btn:hover    { background: #3a5a3a; border-color: #6aaa6a; }
   #save-btn:disabled { opacity: 0.4; cursor: default; }
   #skip-btn {
-    padding: 7px 16px;
-    background: transparent;
-    border: 1px solid #333;
-    color: #666;
-    font-family: inherit;
-    font-size: 12px;
-    cursor: pointer;
-    letter-spacing: 0.06em;
+    padding: 8px 16px; background: transparent; border: 1px solid #333;
+    color: #666; font-family: inherit; font-size: 13px; cursor: pointer;
   }
   #skip-btn:hover { border-color: #555; color: #aaa; }
-  #shortcuts {
-    margin-left: auto;
-    font-size: 10px;
-    color: #444;
-    letter-spacing: 0.05em;
-  }
-  #status-msg {
-    font-size: 11px;
-    color: #5a5;
-    min-width: 120px;
-    letter-spacing: 0.05em;
-  }
+  #shortcuts { margin-left: auto; font-size: 11px; color: #444; letter-spacing: 0.04em; }
+  #status-msg { font-size: 12px; color: #5a5; min-width: 130px; letter-spacing: 0.04em; }
 </style>
 </head>
 <body>
 
-<!-- Top bar -->
 <div id="topbar">
   <h1>IMAGE TAGGER</h1>
   <span class="sep">·</span>
@@ -287,35 +265,47 @@
   <button class="filter-btn" data-filter="few">Needs tags (&lt;4)</button>
   <button class="filter-btn" data-filter="none">Untagged (0)</button>
   <button class="filter-btn" data-filter="all">All</button>
+  <span class="sep">·</span>
+  <button class="mode-btn" id="bulk-mode-btn">⊞ Bulk</button>
   <div id="nav-btns">
     <button id="prev-btn" disabled>← Prev</button>
     <button id="next-btn" disabled>Next →</button>
   </div>
 </div>
 
-<!-- Main -->
 <div id="main">
 
-  <!-- Left: image -->
+  <!-- Single-image view -->
   <div id="img-panel">
     <div id="img-placeholder">Loading images…</div>
     <img id="preview-img" src="" alt="" style="display:none">
     <div id="img-meta"></div>
   </div>
 
-  <!-- Right: tagging -->
+  <!-- Bulk grid view -->
+  <div id="bulk-panel">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- Right: tag panel -->
   <div id="tag-panel">
 
     <div id="img-info">–</div>
 
-    <!-- Current tags -->
+    <!-- Bulk info banner (shown in bulk mode) -->
+    <div id="bulk-info-banner">
+      <div><strong id="bulk-selected-count">0</strong> images selected — tags below will be <strong>added</strong> to each</div>
+      <div id="bulk-add-note">Existing tags are preserved. Use to add common tags to a batch (e.g. india, kashmir, winter).</div>
+    </div>
+
+    <!-- Current / bulk tags -->
     <div class="section">
-      <div class="section-label">Current tags</div>
+      <div class="section-label" id="tags-label">Current tags</div>
       <div id="current-tags"><span id="no-tags">No tags yet</span></div>
     </div>
 
-    <!-- Completeness -->
-    <div class="section">
+    <!-- Completeness (single mode only) -->
+    <div class="section" id="completeness-section">
       <div class="section-label">Completeness</div>
       <div id="completeness">–</div>
     </div>
@@ -330,14 +320,12 @@
     </div>
 
     <!-- Vocabulary -->
-    <div id="vocab-scroll">
-      <!-- populated by JS -->
-    </div>
+    <div id="vocab-scroll"></div>
 
     <!-- Action bar -->
     <div id="action-bar">
       <span id="status-msg"></span>
-      <button id="save-btn" disabled>💾 Save & Next</button>
+      <button id="save-btn" disabled>💾 Save &amp; Next</button>
       <button id="skip-btn">→ Skip</button>
       <span id="shortcuts">S · Save &amp; Next &nbsp;|&nbsp; → · Skip &nbsp;|&nbsp; ← · Back</span>
     </div>
@@ -347,44 +335,42 @@
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   Admin Tagger — frontend logic
+   Admin Tagger
    ════════════════════════════════════════════════════════════════ */
 
-let images    = [];  // full queue
-let queue     = [];  // filtered queue
-let queueIdx  = 0;
-let vocabulary = []; // [{tag, count}]
-let taxonomy  = {};  // from tag-taxonomy.json
-let currentTags = []; // tags being edited for current image
+let images     = [];
+let queue      = [];
+let queueIdx   = 0;
+let vocabulary = [];
+let taxonomy   = {};
+let currentTags = [];
 let currentFilter = 'few';
+
+// Bulk mode state
+let bulkMode    = false;
+let bulkTags    = [];      // tags to ADD to all selected
+let bulkSelected = new Set(); // indices into queue[]
 
 /* ── Boot ─────────────────────────────────────────────────────── */
 async function boot() {
-  // Load taxonomy config
   try {
     const r = await fetch('/admin/api/taxonomy');
     taxonomy = await r.json();
   } catch (_) { taxonomy = {}; }
-
-  // Load vocabulary
   await refreshVocabulary();
-
-  // Load queue with default filter
   activateFilter('few');
 }
 
 async function refreshVocabulary() {
   try {
     const r = await fetch('/admin/api/vocabulary');
-    const d = await r.json();
-    vocabulary = d.tags || [];
+    vocabulary = (await r.json()).tags || [];
     renderVocabulary();
-  } catch (e) {
-    console.error('vocabulary error', e);
-  }
+  } catch(e) { console.error(e); }
 }
 
 async function loadQueue(filter) {
+  setStatus('');
   document.getElementById('queue-info').textContent = 'Loading…';
   document.getElementById('preview-img').style.display = 'none';
   document.getElementById('img-placeholder').textContent = 'Loading…';
@@ -395,180 +381,225 @@ async function loadQueue(filter) {
     const d = await r.json();
     queue    = d.images || [];
     queueIdx = 0;
+    bulkSelected.clear();
     updateQueueInfo();
-    if (queue.length > 0) showImage(0);
-    else {
-      document.getElementById('img-placeholder').textContent = '✓ All images tagged in this filter.';
-      document.getElementById('img-info').textContent = '–';
-      currentTags = [];
-      renderCurrentTags();
-      renderCompleteness();
-      document.getElementById('save-btn').disabled = true;
+    if (bulkMode) {
+      renderBulkGrid();
+    } else {
+      if (queue.length > 0) showImage(0);
+      else showEmpty();
     }
-  } catch (e) {
-    document.getElementById('img-placeholder').textContent = 'Error loading images.';
-    console.error(e);
+  } catch(e) {
+    document.getElementById('img-placeholder').textContent = 'Error: ' + e.message;
   }
 }
 
 function activateFilter(filter) {
   currentFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === filter);
-  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
   loadQueue(filter);
 }
 
-/* ── Image display ────────────────────────────────────────────── */
+function showEmpty() {
+  document.getElementById('img-placeholder').textContent = '✓ All done in this filter.';
+  document.getElementById('img-info').textContent = '–';
+  currentTags = [];
+  renderCurrentTags(); renderCompleteness();
+  document.getElementById('save-btn').disabled = true;
+}
+
+/* ── Single image ─────────────────────────────────────────────── */
 function showImage(idx) {
   if (idx < 0 || idx >= queue.length) return;
   queueIdx = idx;
   const img = queue[idx];
 
-  // Image preview
+  document.getElementById('img-placeholder').style.display = 'none';
   const el = document.getElementById('preview-img');
-  const placeholder = document.getElementById('img-placeholder');
-  placeholder.style.display = 'none';
   el.style.display = 'block';
   el.src = img.secure_url;
 
-  // Metadata
-  document.getElementById('img-meta').textContent =
-    img.public_id + (img.folder ? '  ·  ' + img.folder : '');
+  document.getElementById('img-meta').textContent = img.public_id + (img.folder ? '  ·  ' + img.folder : '');
   document.getElementById('img-info').innerHTML =
     '<strong>' + img.public_id + '</strong>' +
     '  ·  ' + img.width + '×' + img.height +
     (img.folder ? '  ·  ' + img.folder : '') +
     '  ·  ' + img.tags.length + ' existing tags';
 
-  // Edit tags (copy so we don't mutate original until save)
   currentTags = [...img.tags];
-  renderCurrentTags();
-  renderCompleteness();
-  renderVocabulary(); // re-render to update active states
-
-  updateNavButtons();
-  updateQueueInfo();
+  renderCurrentTags(); renderCompleteness(); renderVocabulary();
+  updateNavButtons(); updateQueueInfo();
   document.getElementById('save-btn').disabled = false;
-  document.getElementById('status-msg').textContent = '';
+  setStatus('');
 }
 
-function updateQueueInfo() {
-  const el = document.getElementById('queue-info');
-  if (queue.length === 0) {
-    el.innerHTML = 'No images in this filter';
+/* ── Bulk mode ────────────────────────────────────────────────── */
+function setBulkMode(on) {
+  bulkMode = on;
+  document.getElementById('bulk-mode-btn').classList.toggle('active', on);
+  document.getElementById('img-panel').style.display  = on ? 'none'  : 'flex';
+  document.getElementById('bulk-panel').style.display = on ? 'flex'  : 'none';
+  document.getElementById('bulk-info-banner').style.display = on ? 'block' : 'none';
+  document.getElementById('completeness-section').style.display = on ? 'none' : 'block';
+  document.getElementById('tags-label').textContent = on ? 'Tags to add to selected' : 'Current tags';
+  document.getElementById('nav-btns').style.display = on ? 'none' : 'flex';
+
+  const saveBtn = document.getElementById('save-btn');
+  const skipBtn = document.getElementById('skip-btn');
+  const shortcuts = document.getElementById('shortcuts');
+  if (on) {
+    bulkTags = [];
+    bulkSelected.clear();
+    renderCurrentTags(); renderVocabulary();
+    saveBtn.textContent = '💾 Apply to selected';
+    skipBtn.style.display = 'none';
+    shortcuts.textContent = 'Click thumbs to select · S to apply';
+    renderBulkGrid();
+    updateBulkCount();
+    saveBtn.disabled = bulkSelected.size === 0 || bulkTags.length === 0;
   } else {
-    el.innerHTML = 'Image <span>' + (queueIdx + 1) + ' of ' + queue.length + '</span>';
+    saveBtn.textContent = '💾 Save & Next';
+    skipBtn.style.display = '';
+    shortcuts.textContent = 'S · Save & Next  |  → · Skip  |  ← · Back';
+    if (queue.length > 0) showImage(Math.min(queueIdx, queue.length - 1));
+    else showEmpty();
   }
 }
 
-function updateNavButtons() {
-  document.getElementById('prev-btn').disabled = queueIdx <= 0;
-  document.getElementById('next-btn').disabled = queueIdx >= queue.length - 1;
+function renderBulkGrid() {
+  const panel = document.getElementById('bulk-panel');
+  panel.innerHTML = '';
+
+  // Select all / none bar
+  const bar = document.createElement('div');
+  bar.id = 'bulk-select-bar';
+  bar.style.display = 'flex';
+  bar.innerHTML =
+    '<button id="sel-all-btn">Select all</button>' +
+    '<button id="sel-none-btn">Select none</button>' +
+    '<span id="bulk-count">' + queue.length + ' images</span>';
+  panel.appendChild(bar);
+
+  panel.style.flexWrap = 'wrap';
+
+  queue.forEach((img, i) => {
+    const div = document.createElement('div');
+    div.className = 'bulk-thumb' + (bulkSelected.has(i) ? ' selected' : '');
+    div.dataset.idx = i;
+    const sel = bulkSelected.has(i);
+    div.innerHTML =
+      '<img src="' + img.secure_url.replace('/upload/', '/upload/w_200,q_50/') + '" alt="">' +
+      '<div class="chk' + (sel ? '' : ' chk-empty') + '">' + (sel ? '✓' : '·') + '</div>';
+    div.addEventListener('click', () => toggleBulkSelect(i));
+    panel.appendChild(div);
+  });
+
+  // Wire select all/none after they're in DOM
+  document.getElementById('sel-all-btn')  && document.getElementById('sel-all-btn').addEventListener('click', () => {
+    queue.forEach((_, i) => bulkSelected.add(i));
+    renderBulkGrid(); updateBulkCount();
+  });
+  document.getElementById('sel-none-btn') && document.getElementById('sel-none-btn').addEventListener('click', () => {
+    bulkSelected.clear();
+    renderBulkGrid(); updateBulkCount();
+  });
+}
+
+function toggleBulkSelect(i) {
+  if (bulkSelected.has(i)) bulkSelected.delete(i);
+  else bulkSelected.add(i);
+  // Update just this thumb
+  const thumbs = document.querySelectorAll('.bulk-thumb');
+  thumbs.forEach(t => {
+    const idx = parseInt(t.dataset.idx, 10);
+    const sel = bulkSelected.has(idx);
+    t.classList.toggle('selected', sel);
+    const chk = t.querySelector('.chk');
+    chk.textContent = sel ? '✓' : '·';
+    chk.classList.toggle('chk-empty', !sel);
+  });
+  updateBulkCount();
+}
+
+function updateBulkCount() {
+  const el = document.getElementById('bulk-selected-count');
+  if (el) el.textContent = bulkSelected.size;
+  const cnt = document.getElementById('bulk-count');
+  if (cnt) cnt.textContent = bulkSelected.size + ' of ' + queue.length + ' selected';
+  document.getElementById('save-btn').disabled = bulkSelected.size === 0 || bulkTags.length === 0;
 }
 
 /* ── Tag editing ──────────────────────────────────────────────── */
+function getActiveTags() { return bulkMode ? bulkTags : currentTags; }
+function setActiveTags(t) { if (bulkMode) bulkTags = t; else currentTags = t; }
+
 function addTag(raw) {
   const tag = raw.trim().toLowerCase().replace(/\s+/g, '_');
-  if (!tag || currentTags.includes(tag)) return;
-  currentTags.push(tag);
-  renderCurrentTags();
-  renderCompleteness();
-  renderVocabulary();
+  if (!tag) return;
+  const list = getActiveTags();
+  if (!list.includes(tag)) { list.push(tag); }
+  setActiveTags(list);
+  renderCurrentTags(); renderCompleteness(); renderVocabulary();
+  if (bulkMode) updateBulkCount();
 }
-
 function removeTag(tag) {
-  currentTags = currentTags.filter(t => t !== tag);
-  renderCurrentTags();
-  renderCompleteness();
-  renderVocabulary();
+  setActiveTags(getActiveTags().filter(t => t !== tag));
+  renderCurrentTags(); renderCompleteness(); renderVocabulary();
+  if (bulkMode) updateBulkCount();
 }
-
 function toggleTag(tag) {
-  if (currentTags.includes(tag)) removeTag(tag);
-  else addTag(tag);
+  if (getActiveTags().includes(tag)) removeTag(tag); else addTag(tag);
 }
 
-/* ── Render current tags ──────────────────────────────────────── */
+/* ── Render ───────────────────────────────────────────────────── */
 function renderCurrentTags() {
   const el = document.getElementById('current-tags');
+  const tags = getActiveTags();
   el.innerHTML = '';
-  if (currentTags.length === 0) {
-    el.innerHTML = '<span id="no-tags">No tags yet</span>';
-    return;
-  }
-  currentTags.forEach(tag => {
+  if (tags.length === 0) { el.innerHTML = '<span id="no-tags">No tags yet</span>'; return; }
+  tags.forEach(tag => {
     const chip = document.createElement('span');
     chip.className = 'tag-chip';
     chip.innerHTML = tag + ' <span class="remove" data-tag="' + tag + '">×</span>';
     el.appendChild(chip);
   });
-  // Remove clicks
-  el.querySelectorAll('.remove').forEach(btn => {
-    btn.addEventListener('click', () => removeTag(btn.dataset.tag));
-  });
+  el.querySelectorAll('.remove').forEach(b => b.addEventListener('click', () => removeTag(b.dataset.tag)));
 }
 
-/* ── Completeness check ───────────────────────────────────────── */
 function renderCompleteness() {
+  if (bulkMode) return;
   const el = document.getElementById('completeness');
-  // Build a set of all tags in each taxonomy group
   const grouped = {};
-  Object.entries(taxonomy).forEach(([groupKey, group]) => {
-    if (groupKey.startsWith('_')) return;
-    grouped[groupKey] = new Set(group.tags || []);
-  });
-
-  const checks = [
-    { key: 'where', label: 'Where' },
-    { key: 'what',  label: 'What'  },
-    { key: 'mood',  label: 'Mood'  },
-    { key: 'how',   label: 'How'   },
-  ];
-
+  Object.entries(taxonomy).forEach(([k, g]) => { if (!k.startsWith('_')) grouped[k] = new Set(g.tags || []); });
+  const checks = [{key:'where',label:'Where'},{key:'what',label:'What'},{key:'mood',label:'Mood'},{key:'how',label:'How'}];
   el.innerHTML = checks.map(c => {
-    const group = grouped[c.key];
-    if (!group) return '';
-    const hasOne = currentTags.some(t => group.has(t));
-    return '<span class="check-item ' + (hasOne ? 'ok' : 'bad') + '">' +
-      (hasOne ? '✓' : '✗') + ' ' + c.label + '</span>';
+    const g = grouped[c.key]; if (!g) return '';
+    const ok = currentTags.some(t => g.has(t));
+    return '<span class="check-item ' + (ok?'ok':'bad') + '">' + (ok?'✓':'✗') + ' ' + c.label + '</span>';
   }).join('');
 }
 
-/* ── Vocabulary panel ─────────────────────────────────────────── */
 function renderVocabulary() {
   const container = document.getElementById('vocab-scroll');
   container.innerHTML = '';
-
-  // Build a map from tag → count
   const countMap = {};
   vocabulary.forEach(v => { countMap[v.tag] = v.count; });
-
-  // Track which tags are already placed in a taxonomy group
   const placed = new Set();
+  const activeTags = getActiveTags();
 
-  // Render taxonomy groups
   Object.entries(taxonomy).forEach(([groupKey, group]) => {
     if (groupKey.startsWith('_')) return;
     const tags = (group.tags || []).filter(t => countMap[t] !== undefined);
     if (tags.length === 0) return;
-
     const div = document.createElement('div');
     div.className = 'vocab-group';
     div.innerHTML = '<div class="vocab-group-label">' + (group.label || groupKey) + '</div>';
     const tagDiv = document.createElement('div');
     tagDiv.className = 'vocab-tags';
-
-    tags.forEach(tag => {
-      placed.add(tag);
-      tagDiv.appendChild(makeVocabTag(tag, countMap[tag] || 0));
-    });
-
-    div.appendChild(tagDiv);
-    container.appendChild(div);
+    tags.forEach(tag => { placed.add(tag); tagDiv.appendChild(makeVocabTag(tag, countMap[tag]||0, activeTags)); });
+    div.appendChild(tagDiv); container.appendChild(div);
   });
 
-  // "Other" group — tags in the library but not in any taxonomy group
   const otherTags = vocabulary.filter(v => !placed.has(v.tag));
   if (otherTags.length > 0) {
     const div = document.createElement('div');
@@ -576,79 +607,104 @@ function renderVocabulary() {
     div.innerHTML = '<div class="vocab-group-label">🏷 Other (in library)</div>';
     const tagDiv = document.createElement('div');
     tagDiv.className = 'vocab-tags';
-    otherTags.forEach(v => {
-      tagDiv.appendChild(makeVocabTag(v.tag, v.count));
-    });
-    div.appendChild(tagDiv);
-    container.appendChild(div);
+    otherTags.forEach(v => tagDiv.appendChild(makeVocabTag(v.tag, v.count, activeTags)));
+    div.appendChild(tagDiv); container.appendChild(div);
   }
 }
 
-function makeVocabTag(tag, count) {
+function makeVocabTag(tag, count, activeTags) {
   const btn = document.createElement('button');
-  btn.className = 'vocab-tag' + (currentTags.includes(tag) ? ' active' : '');
+  btn.className = 'vocab-tag' + (activeTags.includes(tag) ? ' active' : '');
   btn.innerHTML = tag + '<span class="cnt">·' + count + '</span>';
   btn.addEventListener('click', () => toggleTag(tag));
   return btn;
 }
 
-/* ── Save ─────────────────────────────────────────────────────── */
+/* ── Save (single) ────────────────────────────────────────────── */
 async function saveAndNext() {
+  if (bulkMode) { await bulkApply(); return; }
   if (queue.length === 0) return;
   const img = queue[queueIdx];
   const btn = document.getElementById('save-btn');
-  const msg = document.getElementById('status-msg');
-
-  btn.disabled = true;
-  btn.textContent = 'Saving…';
-
+  btn.disabled = true; btn.textContent = 'Saving…';
   try {
     const r = await fetch('/admin/api/save-tags', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ public_id: img.public_id, tags: currentTags })
     });
     const d = await r.json();
-    if (!d.success) throw new Error(d.error || 'save failed');
-
-    // Update the image in our local queue
+    if (!d.success) throw new Error(d.error || 'failed');
     queue[queueIdx].tags = [...currentTags];
-    msg.textContent = '✓ Saved';
-    msg.style.color = '#5a5';
-
-    // Refresh vocabulary counts (async, don't block)
+    setStatus('✓ Saved');
     refreshVocabulary();
-
-    // Advance to next image
     setTimeout(() => {
+      btn.textContent = '💾 Save & Next';
       if (queueIdx < queue.length - 1) showImage(queueIdx + 1);
-      else {
-        msg.textContent = '✓ All done!';
-        btn.disabled = false;
-        btn.textContent = '💾 Save & Next';
-      }
+      else { btn.disabled = false; setStatus('✓ All done!'); }
     }, 300);
-
-  } catch (e) {
-    msg.textContent = '✗ Error: ' + e.message;
-    msg.style.color = '#a55';
-    btn.disabled = false;
-    btn.textContent = '💾 Save & Next';
-    console.error('[save-tags]', e);
+  } catch(e) {
+    setStatus('✗ ' + e.message, true);
+    btn.disabled = false; btn.textContent = '💾 Save & Next';
   }
 }
 
+/* ── Save (bulk) ──────────────────────────────────────────────── */
+async function bulkApply() {
+  if (bulkSelected.size === 0 || bulkTags.length === 0) return;
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  const ids = [...bulkSelected].map(i => queue[i]);
+  let done = 0, errors = 0;
+  for (const img of ids) {
+    try {
+      // MERGE tags: existing + bulkTags (deduplicated)
+      const merged = [...new Set([...img.tags, ...bulkTags])];
+      const r = await fetch('/admin/api/save-tags', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ public_id: img.public_id, tags: merged })
+      });
+      const d = await r.json();
+      if (!d.success) throw new Error(d.error);
+      img.tags = merged;
+      done++;
+      setStatus('Saved ' + done + '/' + ids.length + '…');
+    } catch(e) {
+      errors++;
+      console.error('bulk save error', img.public_id, e);
+    }
+  }
+  btn.disabled = false; btn.textContent = '💾 Apply to selected';
+  setStatus(errors === 0
+    ? '✓ Applied to ' + done + ' images'
+    : '⚠ Done with ' + errors + ' errors', errors > 0);
+  refreshVocabulary();
+}
+
+function setStatus(msg, isError) {
+  const el = document.getElementById('status-msg');
+  el.textContent = msg;
+  el.style.color = isError ? '#a55' : '#5a5';
+}
+
+function updateQueueInfo() {
+  const el = document.getElementById('queue-info');
+  el.innerHTML = bulkMode
+    ? queue.length + ' images'
+    : (queue.length === 0 ? 'No images' : 'Image <span>' + (queueIdx+1) + ' of ' + queue.length + '</span>');
+}
+
+function updateNavButtons() {
+  document.getElementById('prev-btn').disabled = queueIdx <= 0;
+  document.getElementById('next-btn').disabled = queueIdx >= queue.length - 1;
+}
+
 /* ── Event listeners ──────────────────────────────────────────── */
-document.getElementById('prev-btn').addEventListener('click', () => {
-  if (queueIdx > 0) showImage(queueIdx - 1);
-});
-document.getElementById('next-btn').addEventListener('click', () => {
-  if (queueIdx < queue.length - 1) showImage(queueIdx + 1);
-});
-document.getElementById('skip-btn').addEventListener('click', () => {
-  if (queueIdx < queue.length - 1) showImage(queueIdx + 1);
-});
+document.getElementById('prev-btn').addEventListener('click', () => { if (queueIdx > 0) showImage(queueIdx-1); });
+document.getElementById('next-btn').addEventListener('click', () => { if (queueIdx < queue.length-1) showImage(queueIdx+1); });
+document.getElementById('skip-btn').addEventListener('click', () => { if (queueIdx < queue.length-1) showImage(queueIdx+1); });
 document.getElementById('save-btn').addEventListener('click', saveAndNext);
+document.getElementById('bulk-mode-btn').addEventListener('click', () => setBulkMode(!bulkMode));
+document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => activateFilter(b.dataset.filter)));
 
 document.getElementById('add-tag-btn').addEventListener('click', () => {
   const inp = document.getElementById('tag-input');
@@ -656,27 +712,20 @@ document.getElementById('add-tag-btn').addEventListener('click', () => {
 });
 document.getElementById('tag-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') {
-    const inp = e.target;
-    if (inp.value.trim()) { addTag(inp.value); inp.value = ''; }
+    const v = e.target.value;
+    if (v.trim()) { addTag(v); e.target.value = ''; }
   }
 });
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => activateFilter(btn.dataset.filter));
-});
-
-// Keyboard shortcuts (when not focused on the input)
 document.addEventListener('keydown', e => {
   if (document.activeElement === document.getElementById('tag-input')) return;
-  if (e.key === 's' || e.key === 'S') { e.preventDefault(); saveAndNext(); }
-  if (e.key === 'ArrowRight') { e.preventDefault(); if (queueIdx < queue.length - 1) showImage(queueIdx + 1); }
-  if (e.key === 'ArrowLeft')  { e.preventDefault(); if (queueIdx > 0) showImage(queueIdx - 1); }
+  if (!bulkMode) {
+    if (e.key === 's' || e.key === 'S')   { e.preventDefault(); saveAndNext(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); if (queueIdx < queue.length-1) showImage(queueIdx+1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); if (queueIdx > 0) showImage(queueIdx-1); }
+  }
 });
 
-/* ── Taxonomy endpoint (served from admin routes) ─────────────── */
-// We load it from a static JSON file served by the admin routes
-
-/* ── Start ────────────────────────────────────────────────────── */
 boot();
 </script>
 </body>
