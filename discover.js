@@ -716,6 +716,9 @@ class DiscoverCarousel {
     this.raycaster = null;
     this.mouseNDC  = null;
 
+    this.mouseClientX = null;  // null until first mousemove — prevents phantom hover label
+    this.mouseClientY = null;
+
     this.cards      = [];
     this.cardMeshes = [];   // invisible hitboxes — raycasting targets (never move)
     this.visuals    = [];   // visible ShaderMaterial meshes — move on hover
@@ -762,7 +765,7 @@ class DiscoverCarousel {
     this.camera.lookAt(0, 0, 0);
 
     this.raycaster = new THREE.Raycaster();
-    this.mouseNDC  = new THREE.Vector2();
+    this.mouseNDC  = new THREE.Vector2(9999, 9999); // off-screen until first mousemove
 
     // Load card data and create meshes
     var cardData = await this._buildCardData();
@@ -1057,6 +1060,8 @@ class DiscoverCarousel {
       return;
     }
     if (this.labelEl) {
+      // Only show label once the mouse has actually moved (mouseClientX is set)
+      if (this.mouseClientX === null) return;
       this.labelEl.style.left    = (this.mouseClientX + 16) + 'px';
       this.labelEl.style.top     = (this.mouseClientY + 16) + 'px';
       this.labelEl.style.display = 'block';
