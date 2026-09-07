@@ -403,10 +403,27 @@ app.get('/discover', (req, res) => {
   res.sendFile(path.join(__dirname, 'discover.html'));
 });
 
+// Load synonym map once at startup (shared with client via /tag-synonyms.json)
+let tagSynonyms = {};
+try {
+  const rawSynonyms = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'public', 'tag-synonyms.json'), 'utf8'));
+  delete rawSynonyms['_comment'];
+  tagSynonyms = rawSynonyms;
+  console.log(`Loaded ${Object.keys(tagSynonyms).length} tag synonyms`);
+} catch(_) {}
+
+function resolveTagSynonym(input) {
+  const q  = (input || '').trim().toLowerCase();
+  if (tagSynonyms[q]) return tagSynonyms[q];
+  const q_ = q.replace(/\s+/g, '_');
+  return tagSynonyms[q_] || q_;
+}
+
 // API: images with a specific Cloudinary tag — checks cached manifest first
 app.get('/api/tag-images', async (req, res) => {
-  const tag = req.query.tag;
-  if (!tag) return res.status(400).json({ error: 'tag query parameter required' });
+  const rawTag = req.query.tag;
+  if (!rawTag) return res.status(400).json({ error: 'tag query parameter required' });
+  const tag = resolveTagSynonym(rawTag);  // resolve synonyms server-side
 
   try {
     res.set('Cache-Control', 'public, max-age=300, s-maxage=0');

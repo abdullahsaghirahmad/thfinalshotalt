@@ -1,0 +1,83 @@
+{
+  "_comment": "Synonym map for Discover search. Maps user-typed vocabulary to canonical Cloudinary tags. Add entries freely — keys are what users might type, values are the actual tag name.",
+
+  "monochrome":           "bnw",
+  "black and white":      "bnw",
+  "black_and_white":      "bnw",
+  "black  white":         "bnw",
+  "b&w":                  "bnw",
+  "bw":                   "bnw",
+  "grayscale":            "bnw",
+  "greyscale":            "bnw",
+
+  "long exposure":        "long_exposure",
+  "slow shutter":         "long_exposure",
+
+  "star trails":          "star_trail",
+  "star_trails":          "star_trail",
+
+  "night sky":            "night_sky",
+  "nightsky":             "night_sky",
+
+  "leading lines":        "leading_lines",
+
+  "dark":                 "noir",
+  "cinematic":            "noir",
+  "film noir":            "noir",
+
+  "peaceful":             "dreamy",
+  "soft":                 "dreamy",
+  "moody":                "dreamy",
+  "ethereal":             "dreamy",
+
+  "minimalist":           "minimal",
+  "minimalism":           "minimal",
+  "negative space":       "minimal",
+
+  "urban":                "city",
+  "cityscape":            "city",
+
+  "astrophotography":     "stars",
+  "astro":                "stars",
+  "milky way":            "stars",
+  "milky_way":            "stars",
+  "galaxy":               "stars",
+
+  "coast":                "sea",
+  "coastal":              "sea",
+  "ocean":                "sea",
+
+  "snow":                 "winter",
+  "snowy":                "winter",
+  "fall":                 "autumn",
+
+  "golden hour":          "golden_hour",
+  "magic hour":           "golden_hour",
+  "sunset":               "golden_hour",
+  "sunrise":              "golden_hour",
+
+  "architectural":        "architecture",
+  "buildings":            "architecture",
+
+  "birds":                "bird",
+  "avian":                "bird",
+
+  "boats":                "boat",
+  "ship":                 "boat",
+
+  "trees":                "tree",
+  "woods":                "forest",
+
+  "asia":                 "india",
+  "south asia":           "india",
+
+  "europe":               "france",
+
+  "abstract":             "experimental",
+  "fine art photography": "fine_art",
+  "conceptual art":       "conceptual",
+
+  "landscapes":           "landscape",
+  "nature photography":   "nature",
+  "portrait photography": "portrait"
+}

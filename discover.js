@@ -726,6 +726,7 @@ class DiscoverCarousel {
 
     this.hoveredCard      = null;
     this.availableTags    = [];
+    this.synonymMap       = {};   // loaded from /tag-synonyms.json
     this.animationRunning = false;
 
     this._onWheel     = this._handleWheel.bind(this);
@@ -1105,6 +1106,27 @@ class DiscoverCarousel {
       this.availableTags = data.tags || [];
       this._renderPills(this.availableTags);
     } catch(_) { this.availableTags = []; }
+
+    // Load synonym map (served as static file from /public)
+    try {
+      var r2 = await fetch('/tag-synonyms.json', { cache: 'no-store' });
+      var raw = await r2.json();
+      // Strip the _comment key
+      delete raw['_comment'];
+      this.synonymMap = raw;
+    } catch(_) { this.synonymMap = {}; }
+  }
+
+  /* ── Resolve a user query to a canonical tag ─────────────────
+   * 1. Exact match in synonymMap
+   * 2. Underscore-normalised match  (e.g. "long exposure" → "long_exposure")
+   * 3. Return normalised input as-is (spaces → underscores)              */
+  resolveTag(rawInput) {
+    var q  = rawInput.trim().toLowerCase();
+    if (this.synonymMap[q]) return this.synonymMap[q];
+    var q_ = q.replace(/\s+/g, '_');
+    if (this.synonymMap[q_]) return this.synonymMap[q_];
+    return q_;   // normalised but not in map → use as-is
   }
 
   _renderPills(tags) {
@@ -1133,9 +1155,12 @@ class DiscoverCarousel {
     this.searchEl.addEventListener('input', function() {
       var q = self.searchEl.value.toLowerCase().trim();
       if (!self.pillsEl) return;
+      var resolved = q ? self.resolveTag(q) : '';
       var pills = self.pillsEl.querySelectorAll('.tag-pill');
       for (var i = 0; i < pills.length; i++) {
-        var m = !q || pills[i].textContent.toLowerCase().indexOf(q) !== -1;
+        var pillText = pills[i].textContent.toLowerCase();
+        // Match if pill is the resolved canonical tag, OR contains the raw query
+        var m = !q || pillText === resolved || pillText.indexOf(q) !== -1 || (resolved !== q && pillText.indexOf(resolved) !== -1);
         pills[i].classList.toggle('tag-pill--match',  !!q && m);
         pills[i].classList.toggle('tag-pill--dimmed', !!q && !m);
       }
@@ -1145,12 +1170,19 @@ class DiscoverCarousel {
       if (e.key !== 'Enter') return;
       var q = self.searchEl.value.trim();
       if (!q) return;
-      var lq = q.toLowerCase();
+      var resolved = self.resolveTag(q);
+      // If resolved is a known tag, enter that gallery directly
+      var lresolved = resolved.toLowerCase();
+      if (self.availableTags.map(t => t.toLowerCase()).indexOf(lresolved) !== -1) {
+        if (self.onEnterGallery) self.onEnterGallery(resolved, resolved, 'tag');
+        return;
+      }
+      // Otherwise substring match against available tags
       var match = null;
       for (var i = 0; i < self.availableTags.length; i++) {
-        if (self.availableTags[i].toLowerCase().indexOf(lq) !== -1) { match = self.availableTags[i]; break; }
+        if (self.availableTags[i].toLowerCase().indexOf(lresolved) !== -1) { match = self.availableTags[i]; break; }
       }
-      if (self.onEnterGallery) self.onEnterGallery(match||q, match||q, 'tag');
+      if (self.onEnterGallery) self.onEnterGallery(match || resolved, match || resolved, 'tag');
     });
   }
 
