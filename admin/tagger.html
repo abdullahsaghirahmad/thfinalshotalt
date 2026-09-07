@@ -61,15 +61,63 @@
     overflow: hidden;
   }
 
-  /* ── Left: single image ──────────── */
-  #img-panel {
+  /* ── Left wrapper: filmstrip + image/bulk ── */
+  #left-area {
     width: 45%;
     flex-shrink: 0;
+    display: flex;
+    border-right: 1px solid #2a2a2a;
+    overflow: hidden;
+  }
+
+  /* ── Filmstrip strip ─────────────── */
+  #filmstrip-strip {
+    width: 76px;
+    flex-shrink: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #050505;
+    border-right: 1px solid #1a1a1a;
+    display: none; /* shown once queue loads */
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px;
+  }
+  #filmstrip-strip::-webkit-scrollbar { width: 3px; }
+  #filmstrip-strip::-webkit-scrollbar-thumb { background: #333; }
+
+  .film-wrap {
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .film-wrap img {
+    display: block;
+    width: 68px;
+    height: 48px;
+    object-fit: cover;
+    opacity: 0.5;
+    transition: opacity 0.1s;
+    border: 2px solid transparent;
+  }
+  .film-wrap:hover img { opacity: 0.85; }
+  .film-wrap.active img { opacity: 1; border-color: #fff; }
+  .film-dot {
+    position: absolute;
+    bottom: 3px; right: 3px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+  .film-dot.ok  { background: #4a7; }
+  .film-dot.bad { background: #a44; }
+
+  /* ── Left: single image ──────────── */
+  #img-panel {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #0a0a0a;
-    border-right: 1px solid #2a2a2a;
     position: relative;
     overflow: hidden;
   }
@@ -92,7 +140,7 @@
 
   /* ── Left: bulk grid ─────────────── */
   #bulk-panel {
-    width: 45%;
+    flex: 1;
     flex-shrink: 0;
     display: none;
     overflow-y: auto;
@@ -270,8 +318,14 @@
 
 <div id="main">
 
-  <!-- Single-image view -->
-  <div id="img-panel">
+  <!-- Left area: filmstrip strip + main image (or bulk grid) -->
+  <div id="left-area">
+
+    <!-- Filmstrip — vertical thumbnail strip for quick navigation -->
+    <div id="filmstrip-strip"></div>
+
+    <!-- Single-image view -->
+    <div id="img-panel">
     <div id="img-placeholder">Loading images…</div>
     <img id="preview-img" src="" alt="" style="display:none">
     <div id="img-meta"></div>
@@ -281,6 +335,8 @@
   <div id="bulk-panel">
     <!-- populated by JS -->
   </div>
+
+  </div><!-- end #left-area -->
 
   <!-- Right: tag panel -->
   <div id="tag-panel">
@@ -348,6 +404,41 @@ let bulkMode    = false;
 let bulkTags    = [];      // tags to ADD to all selected
 let bulkSelected = new Set(); // indices into queue[]
 
+/* ── Filmstrip strip helpers ──────────────────────────────────────────────── */
+function renderFilmstrip() {
+  const strip = document.getElementById('filmstrip-strip');
+  strip.innerHTML = '';
+  if (queue.length === 0) { strip.style.display = 'none'; return; }
+  strip.style.display = 'flex';
+  queue.forEach((img, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'film-wrap' + (i === queueIdx ? ' active' : '');
+    wrap.dataset.idx = i;
+    const thumb = document.createElement('img');
+    thumb.src = img.secure_url.replace('/upload/', '/upload/w_72,h_52,c_fill,q_30,f_auto/');
+    thumb.loading = 'lazy'; thumb.alt = '';
+    const dot = document.createElement('div');
+    dot.className = 'film-dot ' + (img.tags.length >= 3 ? 'ok' : 'bad');
+    wrap.appendChild(thumb); wrap.appendChild(dot); strip.appendChild(wrap);
+    wrap.addEventListener('click', () => showImage(i));
+  });
+}
+
+function updateFilmstripActive(idx) {
+  document.querySelectorAll('.film-wrap').forEach((w, i) => {
+    w.classList.toggle('active', i === idx);
+    if (i === idx) w.scrollIntoView({ block: 'nearest' });
+  });
+}
+
+function updateFilmstripDot(idx, tagCount) {
+  const wraps = document.querySelectorAll('.film-wrap');
+  if (wraps[idx]) {
+    const dot = wraps[idx].querySelector('.film-dot');
+    if (dot) dot.className = 'film-dot ' + (tagCount >= 3 ? 'ok' : 'bad');
+  }
+}
+
 /* ── Boot ─────────────────────────────────────────────────────── */
 async function boot() {
   try {
@@ -383,6 +474,7 @@ async function loadQueue(filter) {
     if (bulkMode) {
       renderBulkGrid();
     } else {
+      renderFilmstrip();  // populate the thumbnail strip
       if (queue.length > 0) showImage(0);
       else showEmpty();
     }
@@ -410,6 +502,8 @@ function showImage(idx) {
   if (idx < 0 || idx >= queue.length) return;
   queueIdx = idx;
   const img = queue[idx];
+
+  updateFilmstripActive(idx);  // keep filmstrip in sync
 
   document.getElementById('img-placeholder').style.display = 'none';
   const el = document.getElementById('preview-img');
@@ -632,6 +726,7 @@ async function saveAndNext() {
     const d = await r.json();
     if (!d.success) throw new Error(d.error || 'failed');
     queue[queueIdx].tags = [...currentTags];
+    updateFilmstripDot(queueIdx, currentTags.length);
     setStatus('✓ Saved');
     refreshVocabulary();
     setTimeout(() => {
