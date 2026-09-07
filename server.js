@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
+app.use(express.json()); // needed for POST /admin/api/save-tags
 const cloudinaryApi = require('./cloudinary-api');
 const manifestGenerator = require('./manifest-generator');
 const { Client } = require('@notionhq/client');
@@ -475,6 +476,14 @@ app.get('/api/available-tags', async (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// ── Admin tagger — LOCAL ONLY, never on Vercel ────────────────────────
+// Available at http://localhost:3001/admin/tagger
+// Registered only when process.env.VERCEL is not set (i.e. local dev).
+if (!process.env.VERCEL) {
+  const taggerRoutes = require('./admin/tagger-routes');
+  app.use('/admin', taggerRoutes);
+}
 
 // Start the server
 app.listen(PORT, () => {
