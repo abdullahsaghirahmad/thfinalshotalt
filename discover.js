@@ -17,6 +17,11 @@
 
 'use strict';
 
+/* ── Display helper — underscores → spaces for human-readable tag labels ── */
+function displayTag(tag) {
+  return (tag || '').replace(/_/g, ' ');
+}
+
 /* ── GSAP-style modular wrap (no GSAP dependency) ──────────────────────── */
 function gWrap(min, max, val) {
   var range = max - min;
@@ -343,7 +348,7 @@ class DiscoverGallery {
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'gallery-tag-label' + (tag === self.activeTag ? ' is--active' : '');
-      btn.textContent = tag;
+      btn.textContent = displayTag(tag);
       btn.addEventListener('click', function() {
         if (self._onTagClick) self._onTagClick(tag);
       });
@@ -1161,7 +1166,7 @@ class DiscoverCarousel {
     tags.forEach(function(tag) {
       var btn = document.createElement('button');
       btn.className = 'tag-pill'; btn.type = 'button';
-      btn.textContent = tag;
+      btn.textContent = displayTag(tag);
       btn.addEventListener('click', function() {
         if (self.onEnterGallery) self.onEnterGallery(tag, tag, 'tag');
       });
@@ -1217,7 +1222,7 @@ class DiscoverCarousel {
 
       if (tags) {
         // Full match (single or multi-word) — confirm first tag (Option D)
-        hintEl.textContent = '→ ' + tags[0] + '  ·  press Enter';
+        hintEl.textContent = '→ ' + displayTag(tags[0]) + '  ·  press Enter';
         hintEl.style.display = 'block';
         return;
       }
@@ -1234,7 +1239,7 @@ class DiscoverCarousel {
       candidates.forEach(function(tag) {
         var btn = document.createElement('button');
         btn.className = 'search-suggestion';
-        btn.textContent = tag;
+        btn.textContent = displayTag(tag);
         btn.addEventListener('click', function(e) {
           e.preventDefault();
           hintEl.innerHTML = '';
