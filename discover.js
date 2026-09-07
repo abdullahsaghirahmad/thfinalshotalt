@@ -1224,57 +1224,110 @@ class DiscoverCarousel {
       return result.length > 0 ? result : null;
     }
 
-    /* ── Typeahead + hint ────────────────────────────────────────────────
-     * - Partial input  ("dre")         → clickable suggestions
-     * - Full/synonym   ("dreamy")      → "→ dreamy · press Enter"
-     * - Multi-word     ("dreamy night") → "→ dreamy · press Enter" (first tag, Option D)
-     * - No match       ("xyz")         → hide hint                             */
+    /* ── Partial tag query parse ─────────────────────────────────────────────
+     * Returns { resolved: string[], incomplete: string|null }
+     * "dreamy clo"    → { resolved: ["dreamy"], incomplete: "clo" }
+     * "dreamy clouds" → { resolved: ["dreamy","clouds"], incomplete: null }
+     * "dre"           → { resolved: [], incomplete: "dre" }
+     * Tries progressively shorter prefixes so multi-word tags mid-type work.  */
+    function parseTagQueryPartial(raw) {
+      if (!raw || !raw.trim()) return { resolved: [], incomplete: null };
+      // Full parse first
+      var full = parseTagQuery(raw);
+      if (full) return { resolved: full, incomplete: null };
+
+      var words = raw.trim().toLowerCase().split(/\s+/);
+      // Try parsing all-but-last-N words to find the already-resolved prefix
+      for (var end = words.length - 1; end >= 1; end--) {
+        var prefix = words.slice(0, end).join(' ');
+        var prefixParse = parseTagQuery(prefix);
+        if (prefixParse) {
+          return { resolved: prefixParse, incomplete: words.slice(end).join(' ') };
+        }
+      }
+      // Nothing resolved yet — full input is the incomplete part
+      return { resolved: [], incomplete: raw.trim().toLowerCase() };
+    }
+
+    /* ── Typeahead + hint ────────────────────────────────────────────────────
+     * CASE 1: fully resolved ("dreamy clouds")  → "→ dreamy · clouds · Enter"
+     * CASE 2: partial ("dreamy clo")            → "→ dreamy + [clouds] [cloudy]"
+     * CASE 3: no context ("dre")                → "[dreamy] [dramatic]"
+     * CASE 4: no match                          → hide hint                     */
     function updateHint(q) {
       if (!hintEl) return;
       hintEl.innerHTML = '';
       hintEl.style.display = 'none';
-
       if (!q || q.length < 2) return;
 
-      var lq = q.toLowerCase();
-      var tags = parseTagQuery(q);
+      var partial = parseTagQueryPartial(q);
+      var resolved = partial.resolved;
+      var incomplete = partial.incomplete;
 
-      if (tags) {
-        // Full match (single or multi-word) — confirm first tag (Option D)
-        hintEl.textContent = '→ ' + displayTag(tags[0]) + '  ·  press Enter';
+      // CASE 1 — everything resolved
+      if (!incomplete && resolved.length > 0) {
+        hintEl.textContent = '→ ' + resolved.map(displayTag).join(' · ') + '  ·  press Enter';
         hintEl.style.display = 'block';
         return;
       }
 
-      // No full match — show typeahead suggestions from availableTags
-      var resolved = self.resolveTag(q);
-      var candidates = self.availableTags.filter(function(t) {
+      // CASE 2/3 — partial or no-context: get typeahead candidates
+      var lq = (incomplete || '').toLowerCase();
+      var resolvedSyn = lq ? self.resolveTag(lq).toLowerCase() : '';
+
+      var candidates = lq ? self.availableTags.filter(function(t) {
         var tl = t.toLowerCase();
-        return tl.indexOf(lq) !== -1 || tl.indexOf(resolved.toLowerCase()) !== -1;
-      }).slice(0, 6);
+        return (tl.indexOf(lq) !== -1 || (resolvedSyn && resolvedSyn !== lq && tl.indexOf(resolvedSyn) !== -1))
+          && !resolved.some(function(r) { return r.toLowerCase() === tl; });
+      }).slice(0, 5) : [];
 
-      if (candidates.length === 0) return;
+      if (candidates.length === 0 && resolved.length === 0) return;
 
+      // Prefix label for already-resolved tags
+      if (resolved.length > 0) {
+        var pfx = document.createElement('span');
+        pfx.textContent = '→ ' + resolved.map(displayTag).join(' · ') + (candidates.length ? ' + ' : '');
+        hintEl.appendChild(pfx);
+      }
+
+      // Clickable suggestion buttons
       candidates.forEach(function(tag) {
         var btn = document.createElement('button');
         btn.className = 'search-suggestion';
         btn.textContent = displayTag(tag);
         btn.addEventListener('click', function(e) {
           e.preventDefault();
+          var allTags = resolved.concat([tag]);
           hintEl.innerHTML = '';
           hintEl.style.display = 'none';
           self.searchEl.value = '';
-          // Dismiss pills filter
           if (self.pillsEl) {
             self.pillsEl.querySelectorAll('.tag-pill').forEach(function(p) {
               p.classList.remove('tag-pill--match', 'tag-pill--dimmed');
             });
           }
-          if (self.onEnterGallery) self.onEnterGallery(tag, tag, 'tag');
+          if (allTags.length === 1) {
+            if (self.onEnterGallery) self.onEnterGallery(allTags[0], allTags[0], 'tag');
+          } else {
+            // Multi-tag: pre-flight then navigate
+            fetch('/api/tag-count?tags=' + encodeURIComponent(allTags.join(',')), { cache: 'no-store' })
+              .then(function(r) { return r.json(); })
+              .then(function(d) {
+                if (d.count > 0) {
+                  if (self.onEnterGallery) self.onEnterGallery(allTags.join(','), allTags.join(' · '), 'multi-tag');
+                } else {
+                  hintEl.innerHTML = '';
+                  hintEl.textContent = '→ ' + allTags.map(displayTag).join(' · ') + ' · no images match';
+                  hintEl.style.display = 'block';
+                }
+              })
+              .catch(function() {});
+          }
         });
         hintEl.appendChild(btn);
       });
-      hintEl.style.display = 'block';
+
+      if (candidates.length > 0 || resolved.length > 0) hintEl.style.display = 'block';
     }
 
     this.searchEl.addEventListener('input', function() {
