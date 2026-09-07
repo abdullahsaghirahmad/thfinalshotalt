@@ -1282,15 +1282,16 @@ class DiscoverCarousel {
         if (self.availableTags[ei].toLowerCase() === rl) return self.availableTags[ei];
       }
 
-      // Bidirectional prefix (min 3 chars)
-      if (rl.length >= 3) {
+      // Bidirectional prefix match — ONLY for single words (no underscores).
+      // Prevents "france_noir" (compound input) from false-matching "france" via startsWith.
+      // "cloud" ↔ "clouds" works; "france_noir" → exact only → correctly returns null.
+      if (rl.length >= 3 && rl.indexOf('_') === -1) {
         var hits = self.availableTags.filter(function(t) {
           var tl = t.toLowerCase();
           return tl.startsWith(rl) || rl.startsWith(tl);
         });
         if (hits.length === 1) return hits[0];
         if (hits.length > 1) {
-          // Prefer exact (already checked), then shortest tag
           return hits.sort(function(a, b) { return a.length - b.length; })[0];
         }
       }
