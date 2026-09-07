@@ -1300,19 +1300,6 @@ class DiscoverCarousel {
 
       var tags = parseTagQuery(q);
       if (!tags) {
-        // No match — show gentle message, don't navigate
-        if (hintEl) { hintEl.textContent = 'no match found'; hintEl.style.display = 'block'; }
-        return;
-      }
-
-    this.searchEl.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { if (hintEl) hintEl.style.display = 'none'; }
-      if (e.key !== 'Enter') return;
-      var q = self.searchEl.value.trim();
-      if (!q) return;
-
-      var tags = parseTagQuery(q);
-      if (!tags) {
         if (hintEl) { hintEl.innerHTML = ''; hintEl.textContent = 'no match found'; hintEl.style.display = 'block'; }
         return;
       }
@@ -1331,7 +1318,6 @@ class DiscoverCarousel {
           if (d.count > 0) {
             if (hintEl) hintEl.style.display = 'none';
             self.searchEl.value = '';
-            // Dismiss pills filter
             if (self.pillsEl) {
               self.pillsEl.querySelectorAll('.tag-pill').forEach(function(p) {
                 p.classList.remove('tag-pill--match', 'tag-pill--dimmed');
