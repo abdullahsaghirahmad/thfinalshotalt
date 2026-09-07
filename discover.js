@@ -22,6 +22,22 @@ function displayTag(tag) {
   return (tag || '').replace(/_/g, ' ');
 }
 
+/* ── Stop words — stripped before tag parsing so "france at golden hour" works ── */
+var STOP_WORDS = new Set([
+  'a','an','the','and','or','but','in','on','at','to','for',
+  'of','with','by','from','as','into','during','like','between',
+  'some','that','this','these','those','is','are','was','were',
+  'be','been','have','has','had','do','does','did','will','would',
+  'could','should','may','might','shall','can','its','it','i'
+]);
+
+function stripStopWords(q) {
+  return (q || '').trim().toLowerCase()
+    .split(/\s+/)
+    .filter(function(w) { return w.length > 0 && !STOP_WORDS.has(w); })
+    .join(' ');
+}
+
 /* ── Pick the most editorially relevant tag for a carousel card ─────────────
  * Strategy: taxonomy group priority (where > what > how > when > mood > color)
  *           + minimum gallery size (≥5 images) to avoid tiny galleries.
@@ -1250,28 +1266,55 @@ class DiscoverCarousel {
     var self = this;
     var hintEl = document.getElementById('search-hint');
 
-    /* ── Parse user input into an array of resolved tag names ──────────────
-     * Uses greedy longest-phrase matching so "long exposure india" becomes
-     * ['long_exposure', 'india'] and "dreamy clouds" becomes ['dreamy','clouds'].
-     * Returns null if any word fails to match a known tag.               */
+    /* ── findMatchingTag ──────────────────────────────────────────────────────
+     * Returns the canonical tag from availableTags for a resolved input.
+     * Handles: 1) exact match  2) bidirectional prefix (plurals both ways):
+     *   "cloud"  → "clouds"  (tag is longer — user typed prefix)
+     *   "clouds" → "cloud"   (tag is shorter — user typed plural, tag is singular)
+     *   "arch"   → "architecture"
+     * Min 3 chars for prefix matching to avoid spurious hits.               */
+    function findMatchingTag(resolved) {
+      if (!resolved || resolved.length < 2) return null;
+      var rl = resolved.toLowerCase();
+
+      // Exact match
+      for (var ei = 0; ei < self.availableTags.length; ei++) {
+        if (self.availableTags[ei].toLowerCase() === rl) return self.availableTags[ei];
+      }
+
+      // Bidirectional prefix (min 3 chars)
+      if (rl.length >= 3) {
+        var hits = self.availableTags.filter(function(t) {
+          var tl = t.toLowerCase();
+          return tl.startsWith(rl) || rl.startsWith(tl);
+        });
+        if (hits.length === 1) return hits[0];
+        if (hits.length > 1) {
+          // Prefer exact (already checked), then shortest tag
+          return hits.sort(function(a, b) { return a.length - b.length; })[0];
+        }
+      }
+      return null;
+    }
+
+    /* ── parseTagQuery ────────────────────────────────────────────────────────
+     * Strips stop words, then greedily resolves space-separated concepts.    */
     function parseTagQuery(raw) {
-      var words = raw.trim().toLowerCase().split(/\s+/);
+      if (!raw || !raw.trim()) return null;
+      var cleaned = stripStopWords(raw);   // "france at golden hour" → "france golden hour"
+      if (!cleaned) return null;
+      var words = cleaned.split(/\s+/).filter(function(w) { return w.length > 0; });
       if (words.length === 0) return null;
       var result = [], i = 0;
       while (i < words.length) {
         var found = false;
-        // Try longest phrase first (up to 3 consecutive words)
         for (var j = Math.min(i + 3, words.length); j > i; j--) {
           var phrase = words.slice(i, j).join(' ');
-          var resolved = self.resolveTag(phrase);
-          if (self.availableTags.some(function(t) { return t.toLowerCase() === resolved.toLowerCase(); })) {
-            result.push(resolved);
-            i = j;
-            found = true;
-            break;
-          }
+          var r = self.resolveTag(phrase);
+          var matchedTag = findMatchingTag(r);
+          if (matchedTag) { result.push(matchedTag); i = j; found = true; break; }
         }
-        if (!found) return null; // this word doesn't match any known tag
+        if (!found) return null;
       }
       return result.length > 0 ? result : null;
     }
@@ -1284,11 +1327,14 @@ class DiscoverCarousel {
      * Tries progressively shorter prefixes so multi-word tags mid-type work.  */
     function parseTagQueryPartial(raw) {
       if (!raw || !raw.trim()) return { resolved: [], incomplete: null };
+      var cleaned = stripStopWords(raw);
+      if (!cleaned) return { resolved: [], incomplete: null };
+
       // Full parse first
-      var full = parseTagQuery(raw);
+      var full = parseTagQuery(cleaned);
       if (full) return { resolved: full, incomplete: null };
 
-      var words = raw.trim().toLowerCase().split(/\s+/);
+      var words = cleaned.split(/\s+/).filter(function(w) { return w.length > 0; });
       // Try parsing all-but-last-N words to find the already-resolved prefix
       for (var end = words.length - 1; end >= 1; end--) {
         var prefix = words.slice(0, end).join(' ');
@@ -1298,7 +1344,7 @@ class DiscoverCarousel {
         }
       }
       // Nothing resolved yet — full input is the incomplete part
-      return { resolved: [], incomplete: raw.trim().toLowerCase() };
+      return { resolved: [], incomplete: cleaned };
     }
 
     /* ── Typeahead + hint ────────────────────────────────────────────────────
