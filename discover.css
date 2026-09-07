@@ -69,19 +69,24 @@
   );
 }
 
-/* ── Search bar ─────────────────────────────────────────────── */
-.discover-search-bar {
+/* ── Search area wrapper (pills above, search below) ────────── */
+#discover-search-area {
   position: absolute;
   top: 18px;
   left: 24px;
   z-index: 20;
+  max-width: 480px;
+  width: calc(100% - 48px);
+}
+
+/* ── Search bar ─────────────────────────────────────────────── */
+.discover-search-bar {
   display: flex;
   align-items: center;
   gap: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.18);
   padding-bottom: 6px;
-  max-width: 420px;
-  width: calc(100% - 48px);
+  margin-top: 10px;
 }
 
 .discover-search-prefix {
@@ -123,24 +128,16 @@
   50%       { opacity: 0; }
 }
 
-/* Hide the custom cursor when the input has real caret */
-.discover-search-input:focus ~ .discover-search-cursor {
-  display: none;
-}
+/* Cursor hidden when input is focused (JS also handles this via focus/blur) */
 .discover-search-input:focus {
   caret-color: rgba(0, 0, 0, 0.5);
 }
 
 /* ── Tag pills (autocomplete) ───────────────────────────────── */
 .tag-pills {
-  position: absolute;
-  top: 58px;
-  left: 24px;
-  z-index: 20;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  max-width: 480px;
 }
 
 .tag-pill {

@@ -60,22 +60,27 @@
   ═══════════════════════════════════════════════════════════ -->
   <div id="discover-carousel" class="discover-carousel">
 
-    <!-- Search bar overlaid on the canvas -->
-    <div id="discover-search-bar" class="discover-search-bar">
-      <span class="discover-search-prefix">discover</span>
-      <input
-        id="discover-search"
-        class="discover-search-input"
-        type="text"
-        placeholder="type a place, time, technique or feeling..."
-        autocomplete="off"
-        spellcheck="false"
-      >
-      <span id="discover-search-cursor" class="discover-search-cursor"></span>
-    </div>
+    <!-- Search area: pills first, then "or type" search bar below -->
+    <div id="discover-search-area">
 
-    <!-- Tag pills — populated by JS from /api/available-tags -->
-    <div id="tag-pills" class="tag-pills"></div>
+      <!-- Tag pills — populated by JS from /api/available-tags -->
+      <div id="tag-pills" class="tag-pills"></div>
+
+      <!-- Search bar sits below the pills -->
+      <div id="discover-search-bar" class="discover-search-bar">
+        <span class="discover-search-prefix">or type</span>
+        <span id="discover-search-cursor" class="discover-search-cursor"></span>
+        <input
+          id="discover-search"
+          class="discover-search-input"
+          type="text"
+          placeholder="a place, time, technique or feeling..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+    </div>
 
     <!-- Three.js renders into this canvas -->
     <canvas id="three-canvas" class="three-canvas"></canvas>
