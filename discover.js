@@ -1120,13 +1120,20 @@ class DiscoverCarousel {
   /* ── Resolve a user query to a canonical tag ─────────────────
    * 1. Exact match in synonymMap
    * 2. Underscore-normalised match  (e.g. "long exposure" → "long_exposure")
-   * 3. Return normalised input as-is (spaces → underscores)              */
+   * 3. Prefix match — "monoch" matches "monochrome" → "bnw" (min 3 chars)
+   * 4. Return normalised input as-is                                       */
   resolveTag(rawInput) {
     var q  = rawInput.trim().toLowerCase();
     if (this.synonymMap[q]) return this.synonymMap[q];
     var q_ = q.replace(/\s+/g, '_');
     if (this.synonymMap[q_]) return this.synonymMap[q_];
-    return q_;   // normalised but not in map → use as-is
+    // Prefix match — let partial typing progressively highlight the right pill
+    if (q.length >= 3) {
+      for (var key in this.synonymMap) {
+        if (key.indexOf(q) === 0) return this.synonymMap[key]; // key starts with q
+      }
+    }
+    return q_;
   }
 
   _renderPills(tags) {
