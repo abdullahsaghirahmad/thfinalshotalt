@@ -1172,6 +1172,11 @@ class DiscoverCarousel {
     if (!this.animationRunning) return;
     if (!this.hoveredCard) return;
     var data = this.hoveredCard.data;
+
+    // Save the clicked card's index so exitGallery can center it on return.
+    // At scrollPos = cardIndex, that card has fe=0 → sits at center-front.
+    this._savedScrollPos = this.hoveredCard.hitbox.userData.cardIndex;
+
     if (this.onEnterGallery) this.onEnterGallery(data.categoryId, data.label, data.type, data.id);
   }
 
@@ -1467,6 +1472,11 @@ class DiscoverCarousel {
 
   function enterGallery(sourceId, label, sourceType, clickedImageId) {
     sourceType = sourceType || 'category';
+    // For pill/search entries there is no _savedScrollPos from a card click —
+    // save the current carousel position so we restore it on Back.
+    if (carousel._savedScrollPos === undefined) {
+      carousel._savedScrollPos = carousel.targetScrollPos;
+    }
     carousel.pause();
     carousel.hoveredCard = null;  // clear stale hover — prevents bubbled click re-opening gallery
     carouselEl.style.display = 'none';
@@ -1497,6 +1507,15 @@ class DiscoverCarousel {
 
     var mainNav = document.querySelector('.discover-menu-bar');
     if (mainNav) mainNav.style.display = '';
+
+    // Restore carousel to the saved position before showing it.
+    // Card click: the clicked card is centered (scrollPos = cardIndex).
+    // Pill/search: carousel is exactly where the user left it.
+    if (carousel._savedScrollPos !== undefined) {
+      carousel.scrollPos       = carousel._savedScrollPos;
+      carousel.targetScrollPos = carousel._savedScrollPos;
+      carousel._savedScrollPos = undefined;
+    }
 
     carouselEl.style.display = 'block';
     carousel.resume();
