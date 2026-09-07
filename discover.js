@@ -1200,21 +1200,57 @@ class DiscoverCarousel {
       return result.length > 0 ? result : null;
     }
 
+    /* ── Typeahead + hint ────────────────────────────────────────────────
+     * - Partial input  ("dre")         → clickable suggestions
+     * - Full/synonym   ("dreamy")      → "→ dreamy · press Enter"
+     * - Multi-word     ("dreamy night") → "→ dreamy · press Enter" (first tag, Option D)
+     * - No match       ("xyz")         → hide hint                             */
     function updateHint(q) {
       if (!hintEl) return;
-      if (!q) { hintEl.style.display = 'none'; return; }
+      hintEl.innerHTML = '';
+      hintEl.style.display = 'none';
+
+      if (!q || q.length < 2) return;
+
+      var lq = q.toLowerCase();
       var tags = parseTagQuery(q);
+
       if (tags) {
-        var label = tags.length > 1 ? '→ ' + tags.join(' + ') : '→ ' + tags[0];
-        hintEl.textContent = label + '  ·  press Enter';
+        // Full match (single or multi-word) — confirm first tag (Option D)
+        hintEl.textContent = '→ ' + tags[0] + '  ·  press Enter';
         hintEl.style.display = 'block';
-      } else {
-        // Partial match hint for single resolved token
-        var resolved = self.resolveTag(q);
-        var isKnown = self.availableTags.some(function(t) { return t.toLowerCase() === resolved.toLowerCase(); });
-        hintEl.textContent = isKnown ? '→ ' + resolved + '  ·  press Enter' : '';
-        hintEl.style.display = isKnown ? 'block' : 'none';
+        return;
       }
+
+      // No full match — show typeahead suggestions from availableTags
+      var resolved = self.resolveTag(q);
+      var candidates = self.availableTags.filter(function(t) {
+        var tl = t.toLowerCase();
+        return tl.indexOf(lq) !== -1 || tl.indexOf(resolved.toLowerCase()) !== -1;
+      }).slice(0, 6);
+
+      if (candidates.length === 0) return;
+
+      candidates.forEach(function(tag) {
+        var btn = document.createElement('button');
+        btn.className = 'search-suggestion';
+        btn.textContent = tag;
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          hintEl.innerHTML = '';
+          hintEl.style.display = 'none';
+          self.searchEl.value = '';
+          // Dismiss pills filter
+          if (self.pillsEl) {
+            self.pillsEl.querySelectorAll('.tag-pill').forEach(function(p) {
+              p.classList.remove('tag-pill--match', 'tag-pill--dimmed');
+            });
+          }
+          if (self.onEnterGallery) self.onEnterGallery(tag, tag, 'tag');
+        });
+        hintEl.appendChild(btn);
+      });
+      hintEl.style.display = 'block';
     }
 
     this.searchEl.addEventListener('input', function() {
@@ -1245,15 +1281,8 @@ class DiscoverCarousel {
         return;
       }
 
-      if (tags.length === 1) {
-        // Single tag — existing behaviour
-        if (self.onEnterGallery) self.onEnterGallery(tags[0], tags[0], 'tag');
-      } else {
-        // Multi-tag — comma-separated; server does AND query
-        var combined = tags.join(',');
-        var label    = tags.join(' + ');
-        if (self.onEnterGallery) self.onEnterGallery(combined, label, 'multi-tag');
-      }
+      // Option D: always use the first resolved tag (full multi-tag gallery deferred)
+      if (self.onEnterGallery) self.onEnterGallery(tags[0], tags[0], 'tag');
     });
   }
 

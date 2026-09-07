@@ -113,13 +113,31 @@
 .discover-search-input::placeholder { color: rgba(0, 0, 0, 0.22); }
 .discover-search-input:focus { caret-color: rgba(0, 0, 0, 0.5); }
 
-/* Inline match hint — appears below search bar when input resolves to a known tag */
+/* Inline match hint / typeahead suggestions */
 .search-hint {
   font-size: 11px;
   letter-spacing: 0.06em;
   color: rgba(0, 0, 0, 0.4);
   margin-top: 5px;
   font-family: inherit;
+}
+.search-suggestion {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: transparent;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-bottom: 3px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.search-suggestion:hover {
+  border-color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.85);
 }
   color: rgba(0, 0, 0, 0.7);
   font-size: 13px;
