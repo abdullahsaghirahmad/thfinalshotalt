@@ -1103,8 +1103,8 @@ class DiscoverCarousel {
     try {
       var res = await fetch('/api/available-tags', { cache: 'no-store' });
       var data = await res.json();
-      this.availableTags = data.tags || [];
-      this._renderPills(this.availableTags);
+      this.availableTags = data.tags || [];           // full list for search matching
+      this._renderPills(data.featured || this.availableTags.slice(0, 12)); // top N as pills
     } catch(_) { this.availableTags = []; }
 
     // Load synonym map (served as static file from /public)

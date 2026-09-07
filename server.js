@@ -474,15 +474,35 @@ app.get('/api/tag-images', async (req, res) => {
 app.get('/api/available-tags', async (req, res) => {
   try {
     res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
-    res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
 
     const cld = cloudinaryApi.cloudinary;
-    if (!cld) {
-      return res.json({ tags: [] });
-    }
+    if (!cld) return res.json({ tags: [], featured: [] });
 
-    const result = await cld.api.tags({ max_results: 500 });
-    res.json({ tags: result.tags || [] });
+    // Count tag frequencies across the whole library
+    const result = await cld.search
+      .expression('resource_type:image AND NOT folder:about')
+      .with_field('tags')
+      .max_results(500)
+      .execute();
+
+    const counts = {};
+    (result.resources || []).forEach(img => {
+      (img.tags || []).forEach(tag => {
+        counts[tag] = (counts[tag] || 0) + 1;
+      });
+    });
+
+    // All tags sorted by image count descending
+    const sorted = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([tag]) => tag);
+
+    const limit = parseInt(req.query.limit) || 12;
+
+    res.json({
+      tags:     sorted,              // full list (used by search)
+      featured: sorted.slice(0, limit)  // top N for pill display
+    });
   } catch (error) {
     console.error('Error fetching available tags:', error);
     res.status(500).json({ error: 'Failed to fetch tags', message: error.message });
