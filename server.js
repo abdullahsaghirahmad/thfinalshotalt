@@ -472,18 +472,18 @@ app.get('/api/available-tags', async (req, res) => {
   }
 });
 
-// Serve index.html for all other routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 // ── Admin tagger — LOCAL ONLY, never on Vercel ────────────────────────
+// Must be registered BEFORE the catch-all below.
 // Available at http://localhost:3001/admin/tagger
-// Registered only when process.env.VERCEL is not set (i.e. local dev).
 if (!process.env.VERCEL) {
   const taggerRoutes = require('./admin/tagger-routes');
   app.use('/admin', taggerRoutes);
 }
+
+// Serve index.html for all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Start the server
 app.listen(PORT, () => {
