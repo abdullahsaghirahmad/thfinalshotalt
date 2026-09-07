@@ -869,6 +869,8 @@ class DiscoverCarousel {
         tagCounts[tag] = (tagCounts[tag] || 0) + 1;
       });
     });
+    // Expose counts so _loadAvailableTags can sort pills without an extra API call
+    this._tagCounts = tagCounts;
     // For each card with multiple tags, pick the most popular one as the gallery entry
     baseDeck.forEach(function(card) {
       if (card.tags && card.tags.length > 1) {
@@ -1103,8 +1105,14 @@ class DiscoverCarousel {
     try {
       var res = await fetch('/api/available-tags', { cache: 'no-store' });
       var data = await res.json();
-      this.availableTags = data.tags || [];           // full list for search matching
-      this._renderPills(data.featured || this.availableTags.slice(0, 12)); // top N as pills
+      this.availableTags = data.tags || [];
+      // Sort by image count using _tagCounts already built in _buildCardData
+      // (no extra API call needed — reuses data from the carousel fetch)
+      var counts = this._tagCounts || {};
+      var sorted = this.availableTags.slice().sort(function(a, b) {
+        return (counts[b] || 0) - (counts[a] || 0);
+      });
+      this._renderPills(sorted.slice(0, 12));
     } catch(_) { this.availableTags = []; }
 
     // Load synonym map (served as static file from /public)
