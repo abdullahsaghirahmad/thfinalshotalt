@@ -473,14 +473,40 @@ app.get('/api/tag-images', async (req, res) => {
 // API: all unique tags in the Cloudinary account (for search autocomplete)
 app.get('/api/available-tags', async (req, res) => {
   try {
-    res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
+    // Tag counts come from the tag manifests already on disk (generated at deploy time).
+    // Zero Cloudinary API calls — just fast disk reads.
+    // Counts stay fresh because vercel-build regenerates manifests on every deploy.
+    res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600'); // 1 hour CDN cache
+    const fs = require('fs');
+    const manifestDir = path.join(__dirname, 'public', 'manifests');
+    const counts = {};
 
+    try {
+      fs.readdirSync(manifestDir)
+        .filter(f => f.startsWith('tag-') && f.endsWith('.json'))
+        .forEach(file => {
+          try {
+            const m = JSON.parse(fs.readFileSync(path.join(manifestDir, file), 'utf8'));
+            if (m.tag && m.count) counts[m.tag] = m.count;
+          } catch(_) {}
+        });
+    } catch(_) {}
+
+    // Sort by image count descending — most represented tags first
+    const sorted = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([tag]) => tag);
+
+    if (sorted.length > 0) {
+      return res.json({ tags: sorted, featured: sorted.slice(0, 12) });
+    }
+
+    // Fallback if manifests not yet generated: fast tag-names-only call
     const cld = cloudinaryApi.cloudinary;
     if (!cld) return res.json({ tags: [] });
-
-    // Fast call — just tag names, no image data (sorting happens client-side)
     const result = await cld.api.tags({ max_results: 500 });
-    res.json({ tags: result.tags || [] });
+    res.json({ tags: result.tags || [], featured: (result.tags || []).slice(0, 12) });
+
   } catch (error) {
     console.error('Error fetching available tags:', error);
     res.status(500).json({ error: 'Failed to fetch tags', message: error.message });
