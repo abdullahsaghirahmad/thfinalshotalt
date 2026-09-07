@@ -123,6 +123,15 @@ class DiscoverGallery {
                    publicId: img.public_id || '', tags: img.tags || [],
                    imgWidth: img.width || 0, imgHeight: img.height || 0 };
         });
+      } else if (sourceType === 'multi-tag') {
+        // comma-separated tags → server does AND query
+        var res3  = await fetch('/api/tag-images?tag=' + encodeURIComponent(sourceId), { cache: 'no-store' });
+        var data3 = await res3.json();
+        images = (data3.images || []).map(function(img, i) {
+          return { id: i, url: img.secure_url || img.url || '',
+                   publicId: img.public_id || '', tags: img.tags || [],
+                   imgWidth: img.width || 0, imgHeight: img.height || 0 };
+        });
       } else {
         var res2  = await fetch('/api/tag-images?tag=' + encodeURIComponent(sourceId), { cache: 'no-store' });
         var data2 = await res2.json();
@@ -1165,17 +1174,46 @@ class DiscoverCarousel {
     var self = this;
     var hintEl = document.getElementById('search-hint');
 
+    /* ── Parse user input into an array of resolved tag names ──────────────
+     * Uses greedy longest-phrase matching so "long exposure india" becomes
+     * ['long_exposure', 'india'] and "dreamy clouds" becomes ['dreamy','clouds'].
+     * Returns null if any word fails to match a known tag.               */
+    function parseTagQuery(raw) {
+      var words = raw.trim().toLowerCase().split(/\s+/);
+      if (words.length === 0) return null;
+      var result = [], i = 0;
+      while (i < words.length) {
+        var found = false;
+        // Try longest phrase first (up to 3 consecutive words)
+        for (var j = Math.min(i + 3, words.length); j > i; j--) {
+          var phrase = words.slice(i, j).join(' ');
+          var resolved = self.resolveTag(phrase);
+          if (self.availableTags.some(function(t) { return t.toLowerCase() === resolved.toLowerCase(); })) {
+            result.push(resolved);
+            i = j;
+            found = true;
+            break;
+          }
+        }
+        if (!found) return null; // this word doesn't match any known tag
+      }
+      return result.length > 0 ? result : null;
+    }
+
     function updateHint(q) {
       if (!hintEl) return;
       if (!q) { hintEl.style.display = 'none'; return; }
-      var resolved = self.resolveTag(q);
-      var isKnown = self.availableTags.some(function(t) { return t.toLowerCase() === resolved.toLowerCase(); });
-      if (isKnown) {
-        var label = resolved !== q ? '→ ' + resolved : '→ ' + resolved;
+      var tags = parseTagQuery(q);
+      if (tags) {
+        var label = tags.length > 1 ? '→ ' + tags.join(' + ') : '→ ' + tags[0];
         hintEl.textContent = label + '  ·  press Enter';
         hintEl.style.display = 'block';
       } else {
-        hintEl.style.display = 'none';
+        // Partial match hint for single resolved token
+        var resolved = self.resolveTag(q);
+        var isKnown = self.availableTags.some(function(t) { return t.toLowerCase() === resolved.toLowerCase(); });
+        hintEl.textContent = isKnown ? '→ ' + resolved + '  ·  press Enter' : '';
+        hintEl.style.display = isKnown ? 'block' : 'none';
       }
     }
 
@@ -1199,19 +1237,23 @@ class DiscoverCarousel {
       if (e.key !== 'Enter') return;
       var q = self.searchEl.value.trim();
       if (!q) return;
-      var resolved = self.resolveTag(q);
-      // If resolved is a known tag, enter that gallery directly
-      var lresolved = resolved.toLowerCase();
-      if (self.availableTags.map(t => t.toLowerCase()).indexOf(lresolved) !== -1) {
-        if (self.onEnterGallery) self.onEnterGallery(resolved, resolved, 'tag');
+
+      var tags = parseTagQuery(q);
+      if (!tags) {
+        // No match — show gentle message, don't navigate
+        if (hintEl) { hintEl.textContent = 'no match found'; hintEl.style.display = 'block'; }
         return;
       }
-      // Otherwise substring match against available tags
-      var match = null;
-      for (var i = 0; i < self.availableTags.length; i++) {
-        if (self.availableTags[i].toLowerCase().indexOf(lresolved) !== -1) { match = self.availableTags[i]; break; }
+
+      if (tags.length === 1) {
+        // Single tag — existing behaviour
+        if (self.onEnterGallery) self.onEnterGallery(tags[0], tags[0], 'tag');
+      } else {
+        // Multi-tag — comma-separated; server does AND query
+        var combined = tags.join(',');
+        var label    = tags.join(' + ');
+        if (self.onEnterGallery) self.onEnterGallery(combined, label, 'multi-tag');
       }
-      if (self.onEnterGallery) self.onEnterGallery(match || resolved, match || resolved, 'tag');
     });
   }
 

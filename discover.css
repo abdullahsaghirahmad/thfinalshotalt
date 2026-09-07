@@ -93,10 +93,10 @@
   font-size: 10px;
   letter-spacing: 0.2em;
   color: rgba(0, 0, 0, 0.35);
-  text-transform: uppercase;
+  text-transform: none;   /* lowercase as written */
   flex-shrink: 0;
   margin-right: 10px;
-  font-family: inherit; /* site font, not monospace */
+  font-family: inherit;
 }
 
 .discover-search-input {

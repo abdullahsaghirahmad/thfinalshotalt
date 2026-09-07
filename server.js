@@ -423,43 +423,55 @@ function resolveTagSynonym(input) {
 app.get('/api/tag-images', async (req, res) => {
   const rawTag = req.query.tag;
   if (!rawTag) return res.status(400).json({ error: 'tag query parameter required' });
-  const tag = resolveTagSynonym(rawTag);  // resolve synonyms server-side
+
+  // Support multi-tag: "dreamy,clouds" → Cloudinary AND query, bypass manifest
+  const tagList = rawTag.split(',').map(t => resolveTagSynonym(t.trim())).filter(Boolean);
+  const tag = tagList[0]; // single canonical tag for manifest lookup
 
   try {
     res.set('Cache-Control', 'public, max-age=300, s-maxage=0');
-    res.set('Expires', new Date(Date.now() + 3600000).toUTCString());
 
-    // Try cached manifest first (instant disk read — generated at server startup)
-    const cached = await manifestGenerator.getTagManifest(tag);
-    if (cached) {
+    const cld = cloudinaryApi.cloudinary;
+
+    // Multi-tag: skip manifest, do live AND query
+    if (tagList.length > 1) {
+      if (!cld) return res.json({ tags: tagList, images: [], count: 0 });
+      const expr = tagList.map(t => `tags=${t}`).join(' AND ') + ' AND resource_type:image';
+      const result = await cld.search.expression(expr)
+        .sort_by('created_at', 'desc').with_field('tags').max_results(100).execute();
       return res.json({
-        tag,
-        images: cached.images || [],
-        count: cached.count || 0
+        tags: tagList,
+        images: (result.resources || []).map(r => ({
+          public_id: r.public_id, secure_url: r.secure_url,
+          width: r.width, height: r.height, format: r.format,
+          tags: r.tags || [], folder: r.folder || r.asset_folder || ''
+        })),
+        count: result.total_count || 0
       });
     }
 
-    // Fallback: live Cloudinary query if manifest unavailable
-    const cld = cloudinaryApi.cloudinary;
+    // Single tag: try cached manifest first
+    const cached = await manifestGenerator.getTagManifest(tag);
+    if (cached) {
+      return res.json({ tag, images: cached.images || [], count: cached.count || 0 });
+    }
+
+    // Fallback: live Cloudinary query
     if (!cld) return res.json({ tag, images: [], count: 0 });
 
     const result = await cld.search
       .expression(`tags=${tag} AND resource_type:image`)
       .sort_by('created_at', 'desc')
-      .with_field('tags')   // needed so r.tags is populated (not in default fields)
+      .with_field('tags')
       .max_results(100)
       .execute();
 
     res.json({
       images: (result.resources || []).map(function(r) {
         return {
-          public_id:  r.public_id,
-          secure_url: r.secure_url,
-          width:      r.width,
-          height:     r.height,
-          format:     r.format,
-          tags:       r.tags || [],
-          folder:     r.folder || r.asset_folder || ''  // actual Cloudinary folder
+          public_id: r.public_id, secure_url: r.secure_url,
+          width: r.width, height: r.height, format: r.format,
+          tags: r.tags || [], folder: r.folder || r.asset_folder || ''
         };
       }),
       count: result.total_count || 0
