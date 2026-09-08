@@ -1,10 +1,63 @@
 {
   "tag": "minimal",
-  "updated_at": "2026-09-03T14:29:13.058Z",
-  "count": 12,
+  "updated_at": "2026-09-08T12:34:40.342Z",
+  "count": 15,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC00429_akygsc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630037/DSC00429_akygsc.jpg",
+      "width": 1161,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "minimal",
+        "pink",
+        "summer",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC09392-Edit_w11abi",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629982/DSC09392-Edit_w11abi.jpg",
+      "width": 3199,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "meghalaya",
+        "minimal",
+        "panorama",
+        "red",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC09383-Enhanced-NR-Edit-2_bkp1lk",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629981/DSC09383-Enhanced-NR-Edit-2_bkp1lk.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "meghalaya",
+        "minimal",
+        "orange",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 4,
       "public_id": "DSC07307-Edit_suaqoe",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032138/DSC07307-Edit_suaqoe.jpg",
       "width": 1920,
@@ -12,13 +65,13 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
     },
     {
-      "id": 2,
+      "id": 5,
       "public_id": "DSC04377-Edit_f4myhr",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032072/DSC04377-Edit_f4myhr.jpg",
       "width": 2473,
@@ -26,13 +79,13 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
     },
     {
-      "id": 3,
+      "id": 6,
       "public_id": "DSC09357_iuy9ff",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031894/DSC09357_iuy9ff.jpg",
       "width": 1728,
@@ -45,7 +98,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 7,
       "public_id": "DSC05533-Edit_aqtmnh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031802/DSC05533-Edit_aqtmnh.jpg",
       "width": 1620,
@@ -53,16 +106,17 @@
       "format": "jpg",
       "tags": [
         "boat",
+        "india",
+        "kashmir",
         "lake",
         "minimal",
         "sun",
         "sunset",
-        "india",
-        "kashmir"
+        "asia"
       ]
     },
     {
-      "id": 5,
+      "id": 8,
       "public_id": "abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n.jpg",
       "width": 1920,
@@ -76,7 +130,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 9,
       "public_id": "abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp.jpg",
       "width": 640,
@@ -90,7 +144,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": 10,
       "public_id": "14_jfulok",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/14_jfulok.jpg",
       "width": 800,
@@ -103,7 +157,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 11,
       "public_id": "abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol.jpg",
       "width": 640,
@@ -112,13 +166,13 @@
       "tags": [
         "conceptual",
         "experimental",
-        "fine art",
+        "fine_art",
         "minimal",
         "neutral"
       ]
     },
     {
-      "id": 9,
+      "id": 12,
       "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
       "width": 640,
@@ -133,7 +187,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": 13,
       "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
       "width": 640,
@@ -142,16 +196,17 @@
       "tags": [
         "brown",
         "fog",
-        "himachal pradesh",
+        "himachal_pradesh",
         "india",
+        "landscape",
         "minimal",
         "mountain",
-        "landscape",
-        "nature"
+        "nature",
+        "asia"
       ]
     },
     {
-      "id": 11,
+      "id": 14,
       "public_id": "abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug.jpg",
       "width": 640,
@@ -161,11 +216,11 @@
         "minimal",
         "moon",
         "purple",
-        "leading lines"
+        "leading_lines"
       ]
     },
     {
-      "id": 12,
+      "id": 15,
       "public_id": "abdullah-ahmad-qE5K_972f48-unsplash_hbpgvo",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-qE5K_972f48-unsplash_hbpgvo.jpg",
       "width": 640,

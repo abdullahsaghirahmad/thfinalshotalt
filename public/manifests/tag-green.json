@@ -1,10 +1,126 @@
 {
   "tag": "green",
-  "updated_at": "2026-09-03T14:29:07.104Z",
-  "count": 2,
+  "updated_at": "2026-09-08T12:34:34.971Z",
+  "count": 10,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC08548-Edit_e4r5w0",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630028/DSC08548-Edit_e4r5w0.jpg",
+      "width": 1711,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "fill_the_frame",
+        "green",
+        "india",
+        "meghalaya",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC08306-Edit-2_zdzkn8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630020/DSC08306-Edit-2_zdzkn8.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "green",
+        "india",
+        "meghalaya",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC08077-2_cztnv6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630019/DSC08077-2_cztnv6.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "india",
+        "meghalaya",
+        "waterfall",
+        "asia"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC09689-Edit-3_kcj9eg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630010/DSC09689-Edit-3_kcj9eg.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "india",
+        "meghalaya",
+        "tree",
+        "asia"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC02011-Edit_eztvll",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629143/DSC02011-Edit_eztvll.jpg",
+      "width": 1142,
+      "height": 1920,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "winter",
+        "fog"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC02085-Edit_4x5_pzgbym",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629060/DSC02085-Edit_4x5_pzgbym.jpg",
+      "width": 1080,
+      "height": 1440,
+      "format": "jpg",
+      "tags": [
+        "golden_hour",
+        "green",
+        "summer",
+        "dreamy"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "DSC01957_yy3xvi",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629038/DSC01957_yy3xvi.jpg",
+      "width": 1780,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "flower",
+        "lotus"
+      ]
+    },
+    {
+      "id": 8,
+      "public_id": "DSC01978-Edit_qnq8fl",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629032/DSC01978-Edit_qnq8fl.jpg",
+      "width": 2010,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "framing",
+        "green",
+        "india",
+        "kerala",
+        "tree",
+        "asia"
+      ]
+    },
+    {
+      "id": 9,
       "public_id": "15_jnar5l",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/15_jnar5l.jpg",
       "width": 900,
@@ -18,18 +134,19 @@
       ]
     },
     {
-      "id": 2,
+      "id": 10,
       "public_id": "DSC09487-Edit-8_z4usy6",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032172/DSC09487-Edit-8_z4usy6.jpg",
       "width": 1620,
       "height": 1080,
       "format": "jpg",
       "tags": [
-        "nature",
-        "landscape",
         "green",
         "india",
-        "meghalaya"
+        "landscape",
+        "meghalaya",
+        "nature",
+        "asia"
       ]
     }
   ]

@@ -1,0 +1,20 @@
+{
+  "tag": "winter",
+  "updated_at": "2026-09-08T12:34:54.491Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC02011-Edit_eztvll",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629143/DSC02011-Edit_eztvll.jpg",
+      "width": 1142,
+      "height": 1920,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "winter",
+        "fog"
+      ]
+    }
+  ]
+}

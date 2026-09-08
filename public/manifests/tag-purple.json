@@ -1,6 +1,6 @@
 {
   "tag": "purple",
-  "updated_at": "2026-09-03T14:29:18.578Z",
+  "updated_at": "2026-09-08T12:34:46.852Z",
   "count": 3,
   "images": [
     {
@@ -11,7 +11,7 @@
       "height": 427,
       "format": "jpg",
       "tags": [
-        "night sky",
+        "night_sky",
         "purple",
         "thunder",
         "nature"
@@ -26,9 +26,9 @@
       "format": "jpg",
       "tags": [
         "astro",
-        "night sky",
+        "night_sky",
         "purple",
-        "star trail",
+        "star_trail",
         "stars",
         "nature"
       ]
@@ -44,7 +44,7 @@
         "minimal",
         "moon",
         "purple",
-        "leading lines"
+        "leading_lines"
       ]
     }
   ]

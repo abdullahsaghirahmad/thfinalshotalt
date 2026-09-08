@@ -1,10 +1,27 @@
 {
-  "tag": "star trail",
-  "updated_at": "2026-09-03T14:29:20.488Z",
-  "count": 1,
+  "tag": "star_trail",
+  "updated_at": "2026-09-08T12:34:49.358Z",
+  "count": 2,
   "images": [
     {
       "id": 1,
+      "public_id": "Risa_Stacked-2_diuqia",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629986/Risa_Stacked-2_diuqia.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "fill_the_frame",
+        "india",
+        "long_exposure",
+        "meghalaya",
+        "night",
+        "star_trail",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-trRR1hB2kD4-unsplash_jcjhu7.jpg",
       "width": 640,
@@ -12,9 +29,9 @@
       "format": "jpg",
       "tags": [
         "astro",
-        "night sky",
+        "night_sky",
         "purple",
-        "star trail",
+        "star_trail",
         "stars",
         "nature"
       ]

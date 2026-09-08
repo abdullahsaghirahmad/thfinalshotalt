@@ -1,10 +1,74 @@
 {
   "tag": "orange",
-  "updated_at": "2026-09-03T14:29:17.204Z",
-  "count": 1,
+  "updated_at": "2026-09-08T12:34:44.293Z",
+  "count": 5,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC09383-Enhanced-NR-Edit-2_bkp1lk",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629981/DSC09383-Enhanced-NR-Edit-2_bkp1lk.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "meghalaya",
+        "minimal",
+        "orange",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC04424-Edit_de3ihh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "landscape",
+        "nature",
+        "pink",
+        "orange",
+        "sky",
+        "mountain",
+        "golden_hour",
+        "sunset"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC02512-Edit_o3mrtw",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC02512-Edit_o3mrtw.jpg",
+      "width": 1446,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "golden_hour",
+        "nature",
+        "orange",
+        "sunset"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC_0097_jezpnj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553564/DSC_0097_jezpnj.jpg",
+      "width": 3505,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "panorama",
+        "golden_hour",
+        "mountain",
+        "orange"
+      ]
+    },
+    {
+      "id": 5,
       "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
       "width": 640,
@@ -13,13 +77,14 @@
       "tags": [
         "clouds",
         "india",
+        "landscape",
         "mountain",
+        "nature",
         "orange",
         "sun",
         "sunset",
         "uttarakhand",
-        "landscape",
-        "nature"
+        "asia"
       ]
     }
   ]

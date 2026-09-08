@@ -1,10 +1,122 @@
 {
   "tag": "clouds",
-  "updated_at": "2026-09-03T14:29:02.292Z",
-  "count": 3,
+  "updated_at": "2026-09-08T12:34:29.212Z",
+  "count": 10,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC00429_akygsc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630037/DSC00429_akygsc.jpg",
+      "width": 1161,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "minimal",
+        "pink",
+        "summer",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC09357-Edit-2_ikymew",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630027/DSC09357-Edit-2_ikymew.jpg",
+      "width": 1639,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "meghalaya",
+        "nature",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC08306-Edit-2_zdzkn8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630020/DSC08306-Edit-2_zdzkn8.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "green",
+        "india",
+        "meghalaya",
+        "asia"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC07608-Pano-Edit_gjaf6x",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630016/DSC07608-Pano-Edit_gjaf6x.jpg",
+      "width": 802,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "meghalaya",
+        "panorama",
+        "asia"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC07601-Edit-2_duvfsm",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629541/DSC07601-Edit-2_duvfsm.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "clouds",
+        "golden_hour",
+        "india",
+        "meghalaya",
+        "asia"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC00429-Edit_tq0ujc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629527/DSC00429-Edit_tq0ujc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "pink",
+        "asia"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "DSC02512-Edit_o3mrtw",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC02512-Edit_o3mrtw.jpg",
+      "width": 1446,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "golden_hour",
+        "nature",
+        "orange",
+        "sunset"
+      ]
+    },
+    {
+      "id": 8,
       "public_id": "15_jnar5l",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/15_jnar5l.jpg",
       "width": 900,
@@ -18,7 +130,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 9,
       "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
       "width": 640,
@@ -27,17 +139,18 @@
       "tags": [
         "clouds",
         "india",
+        "landscape",
         "mountain",
+        "nature",
         "orange",
         "sun",
         "sunset",
         "uttarakhand",
-        "landscape",
-        "nature"
+        "asia"
       ]
     },
     {
-      "id": 3,
+      "id": 10,
       "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
       "width": 640,

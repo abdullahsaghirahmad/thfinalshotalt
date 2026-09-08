@@ -1,25 +1,55 @@
 {
   "tag": "france",
-  "updated_at": "2026-09-03T14:29:06.558Z",
-  "count": 5,
+  "updated_at": "2026-09-08T12:34:34.069Z",
+  "count": 8,
   "images": [
     {
       "id": 1,
+      "public_id": "6_oclk75",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/6_oclk75.jpg",
+      "width": 1600,
+      "height": 900,
+      "format": "jpg",
+      "tags": [
+        "experimental",
+        "france",
+        "night",
+        "europe"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "DSC04033-Edit_dz0ibj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
       "width": 1540,
       "height": 1080,
       "format": "jpg",
       "tags": [
-        "sea",
         "blue",
-        "nature",
+        "france",
         "landscape",
-        "france"
+        "nature",
+        "sea",
+        "europe"
       ]
     },
     {
-      "id": 2,
+      "id": 3,
+      "public_id": "11_brt6oo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285324/11_brt6oo.jpg",
+      "width": 523,
+      "height": 800,
+      "format": "jpg",
+      "tags": [
+        "noir",
+        "bnw",
+        "paris",
+        "france",
+        "europe"
+      ]
+    },
+    {
+      "id": 4,
       "public_id": "124_a55vni",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/124_a55vni.jpg",
       "width": 800,
@@ -27,14 +57,31 @@
       "format": "jpg",
       "tags": [
         "bnw",
-        "noir",
+        "france",
         "landscape",
         "nature",
-        "france"
+        "noir",
+        "europe"
       ]
     },
     {
-      "id": 3,
+      "id": 5,
+      "public_id": "120_tavm96",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
+      "width": 800,
+      "height": 613,
+      "format": "jpg",
+      "tags": [
+        "bnw",
+        "noir",
+        "architecture",
+        "paris",
+        "france",
+        "europe"
+      ]
+    },
+    {
+      "id": 6,
       "public_id": "12_hbkqqq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
       "width": 585,
@@ -43,13 +90,14 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
         "symmetry",
-        "france"
+        "europe"
       ]
     },
     {
-      "id": 4,
+      "id": 7,
       "public_id": "121_agcwif",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/121_agcwif.jpg",
       "width": 800,
@@ -58,12 +106,13 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
-        "france"
+        "europe"
       ]
     },
     {
-      "id": 5,
+      "id": 8,
       "public_id": "122_p43ndt",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/122_p43ndt.jpg",
       "width": 800,
@@ -72,8 +121,9 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
-        "france"
+        "europe"
       ]
     }
   ]

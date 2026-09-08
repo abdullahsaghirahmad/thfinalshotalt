@@ -1,0 +1,14 @@
+{
+  "_comment": "Location inheritance: child → parent. Tagging a child also writes every ancestor onto the image (lucknow → india → asia). Search stays exact-tag. Add a row when you add a new place.",
+  "lucknow": "india",
+  "kerala": "india",
+  "meghalaya": "india",
+  "uttarakhand": "india",
+  "himachal_pradesh": "india",
+  "kashmir": "india",
+  "paris": "france",
+  "india": "asia",
+  "france": "europe",
+  "switzerland": "europe",
+  "netherlands": "europe"
+}

@@ -1,10 +1,42 @@
 {
   "tag": "mountain",
-  "updated_at": "2026-09-03T14:29:14.139Z",
-  "count": 2,
+  "updated_at": "2026-09-08T12:34:41.174Z",
+  "count": 4,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC04424-Edit_de3ihh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "landscape",
+        "nature",
+        "pink",
+        "orange",
+        "sky",
+        "mountain",
+        "golden_hour",
+        "sunset"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC_0097_jezpnj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553564/DSC_0097_jezpnj.jpg",
+      "width": 3505,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "panorama",
+        "golden_hour",
+        "mountain",
+        "orange"
+      ]
+    },
+    {
+      "id": 3,
       "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
       "width": 640,
@@ -13,17 +45,18 @@
       "tags": [
         "clouds",
         "india",
+        "landscape",
         "mountain",
+        "nature",
         "orange",
         "sun",
         "sunset",
         "uttarakhand",
-        "landscape",
-        "nature"
+        "asia"
       ]
     },
     {
-      "id": 2,
+      "id": 4,
       "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
       "width": 640,
@@ -32,12 +65,13 @@
       "tags": [
         "brown",
         "fog",
-        "himachal pradesh",
+        "himachal_pradesh",
         "india",
+        "landscape",
         "minimal",
         "mountain",
-        "landscape",
-        "nature"
+        "nature",
+        "asia"
       ]
     }
   ]

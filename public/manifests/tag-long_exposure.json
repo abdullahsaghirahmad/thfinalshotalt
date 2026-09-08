@@ -1,0 +1,40 @@
+{
+  "tag": "long_exposure",
+  "updated_at": "2026-09-08T12:34:38.484Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "Risa_Stacked-2_diuqia",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629986/Risa_Stacked-2_diuqia.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "fill_the_frame",
+        "india",
+        "long_exposure",
+        "meghalaya",
+        "night",
+        "star_trail",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC00183-Edit-4_uimcjm",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629984/DSC00183-Edit-4_uimcjm.jpg",
+      "width": 727,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "long_exposure",
+        "meghalaya",
+        "reflection",
+        "waterfall",
+        "asia"
+      ]
+    }
+  ]
+}

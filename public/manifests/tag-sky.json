@@ -1,0 +1,25 @@
+{
+  "tag": "sky",
+  "updated_at": "2026-09-08T12:34:49.005Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC04424-Edit_de3ihh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "landscape",
+        "nature",
+        "pink",
+        "orange",
+        "sky",
+        "mountain",
+        "golden_hour",
+        "sunset"
+      ]
+    }
+  ]
+}

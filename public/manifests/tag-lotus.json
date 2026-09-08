@@ -1,0 +1,20 @@
+{
+  "tag": "lotus",
+  "updated_at": "2026-09-08T12:34:38.873Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC01957_yy3xvi",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629038/DSC01957_yy3xvi.jpg",
+      "width": 1780,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "flower",
+        "lotus"
+      ]
+    }
+  ]
+}

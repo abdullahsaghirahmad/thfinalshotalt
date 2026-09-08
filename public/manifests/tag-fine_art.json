@@ -1,7 +1,7 @@
 {
-  "tag": "fine art",
-  "updated_at": "2026-09-03T14:29:04.370Z",
-  "count": 4,
+  "tag": "fine_art",
+  "updated_at": "2026-09-08T12:34:31.878Z",
+  "count": 3,
   "images": [
     {
       "id": 1,
@@ -12,26 +12,13 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
     },
     {
       "id": 2,
-      "public_id": "DSC02205-Pano-Edit-Edit_wz0qvl",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032080/DSC02205-Pano-Edit-Edit_wz0qvl.jpg",
-      "width": 1454,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "experimental",
-        "fine art",
-        "noir"
-      ]
-    },
-    {
-      "id": 3,
       "public_id": "DSC04377-Edit_f4myhr",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032072/DSC04377-Edit_f4myhr.jpg",
       "width": 2473,
@@ -39,13 +26,13 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
     },
     {
-      "id": 4,
+      "id": 3,
       "public_id": "abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol.jpg",
       "width": 640,
@@ -54,7 +41,7 @@
       "tags": [
         "conceptual",
         "experimental",
-        "fine art",
+        "fine_art",
         "minimal",
         "neutral"
       ]

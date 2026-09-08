@@ -1,6 +1,6 @@
 {
   "tag": "switzerland",
-  "updated_at": "2026-09-03T14:29:23.152Z",
+  "updated_at": "2026-09-08T12:34:51.989Z",
   "count": 1,
   "images": [
     {
@@ -11,10 +11,11 @@
       "height": 1080,
       "format": "jpg",
       "tags": [
-        "nature",
+        "blue",
         "landscape",
+        "nature",
         "switzerland",
-        "blue"
+        "europe"
       ]
     }
   ]

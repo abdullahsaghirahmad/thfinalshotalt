@@ -1,0 +1,39 @@
+{
+  "tag": "fill_the_frame",
+  "updated_at": "2026-09-08T12:34:31.520Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC08548-Edit_e4r5w0",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630028/DSC08548-Edit_e4r5w0.jpg",
+      "width": 1711,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "fill_the_frame",
+        "green",
+        "india",
+        "meghalaya",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "Risa_Stacked-2_diuqia",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629986/Risa_Stacked-2_diuqia.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "fill_the_frame",
+        "india",
+        "long_exposure",
+        "meghalaya",
+        "night",
+        "star_trail",
+        "asia"
+      ]
+    }
+  ]
+}

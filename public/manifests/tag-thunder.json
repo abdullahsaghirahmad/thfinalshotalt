@@ -1,17 +1,33 @@
 {
   "tag": "thunder",
-  "updated_at": "2026-09-03T14:29:24.058Z",
-  "count": 1,
+  "updated_at": "2026-09-08T12:34:52.693Z",
+  "count": 2,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC04687_jwasne",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788628802/DSC04687_jwasne.jpg",
+      "width": 1574,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "alphabet",
+        "bnw",
+        "noir",
+        "thunder",
+        "night_sky",
+        "night"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-SLBjcE5IQxo-unsplash_xb4ash.jpg",
       "width": 640,
       "height": 427,
       "format": "jpg",
       "tags": [
-        "night sky",
+        "night_sky",
         "purple",
         "thunder",
         "nature"

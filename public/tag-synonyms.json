@@ -68,10 +68,7 @@
   "trees":                "tree",
   "woods":                "forest",
 
-  "asia":                 "india",
   "south asia":           "india",
-
-  "europe":               "france",
 
   "abstract":             "experimental",
   "fine art photography": "fine_art",

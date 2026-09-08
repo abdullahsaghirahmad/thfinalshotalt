@@ -1,10 +1,77 @@
 {
   "tag": "dreamy",
-  "updated_at": "2026-09-03T14:29:03.229Z",
-  "count": 2,
+  "updated_at": "2026-09-08T12:34:30.195Z",
+  "count": 6,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC00429_akygsc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630037/DSC00429_akygsc.jpg",
+      "width": 1161,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "minimal",
+        "pink",
+        "summer",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC07346-Edit-3_eotbpg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630014/DSC07346-Edit-3_eotbpg.jpg",
+      "width": 720,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "dreamy",
+        "india",
+        "lake",
+        "meghalaya",
+        "sun",
+        "sunset",
+        "yellow",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC00429-Edit_tq0ujc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629527/DSC00429-Edit_tq0ujc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "pink",
+        "asia"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC02085-Edit_4x5_pzgbym",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629060/DSC02085-Edit_4x5_pzgbym.jpg",
+      "width": 1080,
+      "height": 1440,
+      "format": "jpg",
+      "tags": [
+        "golden_hour",
+        "green",
+        "summer",
+        "dreamy"
+      ]
+    },
+    {
+      "id": 5,
       "public_id": "127_yio7en",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/127_yio7en.jpg",
       "width": 640,
@@ -19,7 +86,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 6,
       "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
       "width": 640,

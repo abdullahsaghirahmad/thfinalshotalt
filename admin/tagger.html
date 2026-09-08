@@ -229,7 +229,28 @@
   }
   .tag-chip .remove { color: #666; cursor: pointer; font-size: 15px; line-height: 1; }
   .tag-chip .remove:hover { color: #f66; }
+  .tag-chip.inherited { color: #888; border-style: dashed; }
   #no-tags { color: #444; font-size: 12px; font-style: italic; }
+
+  #place-suggest {
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #1a1a14;
+    border: 1px solid #443;
+    font-size: 12px;
+    color: #bb8;
+  }
+  #place-suggest-text { flex: 1; min-width: 160px; letter-spacing: 0.03em; }
+  #place-suggest button {
+    padding: 4px 10px; font-size: 12px; font-family: inherit;
+    background: #222; border: 1px solid #664; color: #cc8; cursor: pointer;
+  }
+  #place-suggest button:hover { border-color: #aa8; color: #ff0; }
+  #place-ignore { border-color: #444; color: #888; }
 
   /* Completeness */
   #completeness { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -346,13 +367,19 @@
     <!-- Bulk info banner (shown in bulk mode) -->
     <div id="bulk-info-banner">
       <div><strong id="bulk-selected-count">0</strong> images selected — tags below will be <strong>added</strong> to each</div>
-      <div id="bulk-add-note">Existing tags are preserved. Use to add common tags to a batch (e.g. india, kashmir, winter).</div>
+      <div id="bulk-add-note">Existing tags are preserved. Place parents are suggested; they only apply if you keep them on the chip list.</div>
     </div>
 
     <!-- Current / bulk tags -->
     <div class="section">
       <div class="section-label" id="tags-label">Current tags</div>
       <div id="current-tags"><span id="no-tags">No tags yet</span></div>
+      <div id="place-suggest">
+        <span id="place-suggest-text"></span>
+        <button type="button" id="place-accept">Add parents</button>
+        <button type="button" id="place-ignore">Just this tag</button>
+      </div>
+      <div id="hierarchy-hint" style="margin-top:6px;font-size:11px;color:#555;letter-spacing:0.03em;">Places: known parents are added as dashed chips (you can × them). New places look up a country/continent — accept or keep only your tag.</div>
     </div>
 
     <!-- Completeness (single mode only) -->
@@ -396,6 +423,9 @@ let queue      = [];
 let queueIdx   = 0;
 let vocabulary = [];
 let taxonomy   = {};
+let locationParents = {};
+let pendingPlace = null;
+let lookupSeq = 0;
 let currentTags = [];
 let currentFilter = 'few';
 
@@ -445,6 +475,12 @@ async function boot() {
     const r = await fetch('/admin/api/taxonomy');
     taxonomy = await r.json();
   } catch (_) { taxonomy = {}; }
+  try {
+    const r2 = await fetch('/admin/api/hierarchy');
+    const raw = await r2.json();
+    delete raw._comment;
+    locationParents = raw;
+  } catch (_) { locationParents = {}; }
   await refreshVocabulary();
   activateFilter('few');
 }
@@ -493,6 +529,7 @@ function showEmpty() {
   document.getElementById('img-placeholder').textContent = '✓ All done in this filter.';
   document.getElementById('img-info').textContent = '–';
   currentTags = [];
+  hidePlaceSuggest();
   renderCurrentTags(); renderCompleteness();
   document.getElementById('save-btn').disabled = true;
 }
@@ -517,7 +554,8 @@ function showImage(idx) {
     (img.folder ? '  ·  ' + img.folder : '') +
     '  ·  ' + img.tags.length + ' existing tags';
 
-  currentTags = [...img.tags];
+  currentTags = [...(img.tags || [])];
+  hidePlaceSuggest();
   renderCurrentTags(); renderCompleteness(); renderVocabulary();
   updateNavButtons(); updateQueueInfo();
   document.getElementById('save-btn').disabled = false;
@@ -527,6 +565,7 @@ function showImage(idx) {
 /* ── Bulk mode ────────────────────────────────────────────────── */
 function setBulkMode(on) {
   bulkMode = on;
+  hidePlaceSuggest();
   document.getElementById('bulk-mode-btn').classList.toggle('active', on);
   document.getElementById('img-panel').style.display  = on ? 'none'  : 'flex';
   document.getElementById('bulk-panel').style.display = on ? 'flex'  : 'none';
@@ -624,14 +663,114 @@ function updateBulkCount() {
 function getActiveTags() { return bulkMode ? bulkTags : currentTags; }
 function setActiveTags(t) { if (bulkMode) bulkTags = t; else currentTags = t; }
 
+function ancestorsOf(tag) {
+  const out = [];
+  const seen = new Set();
+  let cur = locationParents[tag];
+  while (cur && !seen.has(cur)) {
+    seen.add(cur);
+    out.push(cur);
+    cur = locationParents[cur];
+  }
+  return out;
+}
+
+function isImpliedParent(tag, tags) {
+  return (tags || []).some(t => t !== tag && ancestorsOf(t).includes(tag));
+}
+
+function couldBePlace(tag) {
+  if (!tag || tag.indexOf('project:') === 0) return false;
+  if (['asia', 'europe', 'africa', 'americas', 'oceania', 'antarctic'].indexOf(tag) !== -1) return false;
+  const skip = ['what', 'how', 'when', 'mood', 'color', 'project'];
+  for (let i = 0; i < skip.length; i++) {
+    const g = taxonomy[skip[i]];
+    if (g && Array.isArray(g.tags) && g.tags.indexOf(tag) !== -1) return false;
+  }
+  return true;
+}
+
+function hidePlaceSuggest() {
+  pendingPlace = null;
+  lookupSeq++;
+  const box = document.getElementById('place-suggest');
+  if (box) box.style.display = 'none';
+}
+
+async function suggestPlace(tag) {
+  const seq = ++lookupSeq;
+  const box = document.getElementById('place-suggest');
+  const text = document.getElementById('place-suggest-text');
+  box.style.display = 'flex';
+  text.textContent = 'Looking up ' + tag + '…';
+  document.getElementById('place-accept').style.display = 'none';
+  document.getElementById('place-ignore').style.display = 'none';
+  try {
+    const r = await fetch('/admin/api/place-lookup?q=' + encodeURIComponent(tag));
+    const d = await r.json();
+    if (seq !== lookupSeq) return;
+    if (!d.found || !d.parents || d.parents.length === 0) {
+      hidePlaceSuggest();
+      return;
+    }
+    pendingPlace = d;
+    text.textContent = d.chain.join(' → ') + (d.source ? '  ·  ' + d.source : '');
+    document.getElementById('place-accept').style.display = '';
+    document.getElementById('place-ignore').style.display = '';
+  } catch (_) {
+    if (seq === lookupSeq) hidePlaceSuggest();
+  }
+}
+
+async function acceptPlace() {
+  if (!pendingPlace) return;
+  const d = pendingPlace;
+  const list = getActiveTags().slice();
+  (d.parents || []).forEach(p => { if (p && list.indexOf(p) === -1) list.push(p); });
+  setActiveTags(list);
+  try {
+    const r = await fetch('/admin/api/place-accept', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tag: d.tag, parents: d.parents, links: d.links })
+    });
+    const saved = await r.json();
+    if (saved.hierarchy) locationParents = saved.hierarchy;
+    if (saved.taxonomy) taxonomy = saved.taxonomy;
+  } catch (e) { console.error(e); }
+  hidePlaceSuggest();
+  renderCurrentTags(); renderCompleteness(); renderVocabulary();
+  if (bulkMode) updateBulkCount();
+}
+
+async function ignorePlace() {
+  const d = pendingPlace;
+  try {
+    if (d && d.tag) {
+      const r = await fetch('/admin/api/place-accept', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tag: d.tag, ignore: true })
+      });
+      const saved = await r.json();
+      if (saved.taxonomy) taxonomy = saved.taxonomy;
+    }
+  } catch (e) { console.error(e); }
+  hidePlaceSuggest();
+  renderVocabulary();
+}
+
 function addTag(raw) {
   const tag = raw.trim().toLowerCase().replace(/\s+/g, '_');
   if (!tag) return;
-  const list = getActiveTags();
-  if (!list.includes(tag)) { list.push(tag); }
+  const list = getActiveTags().slice();
+  if (list.indexOf(tag) === -1) list.push(tag);
+  const known = ancestorsOf(tag);
+  known.forEach(a => { if (list.indexOf(a) === -1) list.push(a); });
   setActiveTags(list);
   renderCurrentTags(); renderCompleteness(); renderVocabulary();
   if (bulkMode) updateBulkCount();
+  if (known.length > 0) { hidePlaceSuggest(); return; }
+  if (couldBePlace(tag)) suggestPlace(tag);
+  else hidePlaceSuggest();
 }
 function removeTag(tag) {
   setActiveTags(getActiveTags().filter(t => t !== tag));
@@ -649,8 +788,10 @@ function renderCurrentTags() {
   el.innerHTML = '';
   if (tags.length === 0) { el.innerHTML = '<span id="no-tags">No tags yet</span>'; return; }
   tags.forEach(tag => {
+    const inherited = isImpliedParent(tag, tags);
     const chip = document.createElement('span');
-    chip.className = 'tag-chip';
+    chip.className = 'tag-chip' + (inherited ? ' inherited' : '');
+    if (inherited) chip.title = 'Location parent — click × to drop from this photo';
     chip.innerHTML = tag + ' <span class="remove" data-tag="' + tag + '">×</span>';
     el.appendChild(chip);
   });
@@ -661,7 +802,9 @@ function renderCompleteness() {
   if (bulkMode) return;
   const el = document.getElementById('completeness');
   const grouped = {};
-  Object.entries(taxonomy).forEach(([k, g]) => { if (!k.startsWith('_')) grouped[k] = new Set(g.tags || []); });
+  Object.entries(taxonomy).forEach(([k, g]) => {
+    if (!k.startsWith('_') && g && Array.isArray(g.tags)) grouped[k] = new Set(g.tags);
+  });
   const checks = [{key:'where',label:'Where'},{key:'what',label:'What'},{key:'mood',label:'Mood'},{key:'how',label:'How'}];
   el.innerHTML = checks.map(c => {
     const g = grouped[c.key]; if (!g) return '';
@@ -679,7 +822,7 @@ function renderVocabulary() {
   const activeTags = getActiveTags();
 
   Object.entries(taxonomy).forEach(([groupKey, group]) => {
-    if (groupKey.startsWith('_')) return;
+    if (groupKey.startsWith('_') || !group || !Array.isArray(group.tags)) return;
     const tags = (group.tags || []).filter(t => countMap[t] !== undefined);
     if (tags.length === 0) return;
     const div = document.createElement('div');
@@ -725,8 +868,11 @@ async function saveAndNext() {
     });
     const d = await r.json();
     if (!d.success) throw new Error(d.error || 'failed');
-    queue[queueIdx].tags = [...currentTags];
-    updateFilmstripDot(queueIdx, currentTags.length);
+    const saved = d.tags || currentTags;
+    queue[queueIdx].tags = [...saved];
+    currentTags = [...saved];
+    renderCurrentTags(); renderCompleteness(); renderVocabulary();
+    updateFilmstripDot(queueIdx, saved.length);
     setStatus('✓ Saved');
     refreshVocabulary();
     setTimeout(() => {
@@ -757,7 +903,7 @@ async function bulkApply() {
       });
       const d = await r.json();
       if (!d.success) throw new Error(d.error);
-      img.tags = merged;
+      img.tags = d.tags || merged;
       done++;
       setStatus('Saved ' + done + '/' + ids.length + '…');
     } catch(e) {
@@ -798,6 +944,8 @@ document.getElementById('save-btn').addEventListener('click', saveAndNext);
 document.getElementById('bulk-mode-btn').addEventListener('click', () => setBulkMode(!bulkMode));
 document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => activateFilter(b.dataset.filter)));
 
+document.getElementById('place-accept').addEventListener('click', acceptPlace);
+document.getElementById('place-ignore').addEventListener('click', ignorePlace);
 document.getElementById('add-vocab-btn').addEventListener('click', () => {
   const inp = document.getElementById('vocab-filter');
   if (inp.value.trim()) { addTag(inp.value); inp.value = ''; filterVocab(''); }

@@ -1,0 +1,23 @@
+{
+  "tag": "alphabet",
+  "updated_at": "2026-09-08T12:34:24.730Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC04687_jwasne",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788628802/DSC04687_jwasne.jpg",
+      "width": 1574,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "alphabet",
+        "bnw",
+        "noir",
+        "thunder",
+        "night_sky",
+        "night"
+      ]
+    }
+  ]
+}

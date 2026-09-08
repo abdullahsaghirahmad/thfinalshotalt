@@ -1,21 +1,40 @@
 {
   "tag": "red",
-  "updated_at": "2026-09-03T14:29:18.999Z",
-  "count": 1,
+  "updated_at": "2026-09-08T12:34:47.289Z",
+  "count": 2,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC09392-Edit_w11abi",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629982/DSC09392-Edit_w11abi.jpg",
+      "width": 3199,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "meghalaya",
+        "minimal",
+        "panorama",
+        "red",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar.jpg",
       "width": 640,
       "height": 913,
       "format": "jpg",
       "tags": [
-        "framing",
         "architecture",
+        "framing",
         "india",
         "lucknow",
-        "red"
+        "red",
+        "asia"
       ]
     }
   ]

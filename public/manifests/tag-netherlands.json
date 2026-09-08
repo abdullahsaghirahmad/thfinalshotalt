@@ -1,0 +1,21 @@
+{
+  "tag": "netherlands",
+  "updated_at": "2026-09-08T12:34:42.095Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "112_ls7azd",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285320/112_ls7azd.jpg",
+      "width": 800,
+      "height": 533,
+      "format": "jpg",
+      "tags": [
+        "noir",
+        "bnw",
+        "netherlands",
+        "europe"
+      ]
+    }
+  ]
+}

@@ -1,10 +1,81 @@
 {
   "tag": "sun",
-  "updated_at": "2026-09-03T14:29:22.288Z",
-  "count": 3,
+  "updated_at": "2026-09-08T12:34:51.026Z",
+  "count": 7,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC09357-Edit-2_ikymew",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630027/DSC09357-Edit-2_ikymew.jpg",
+      "width": 1639,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "india",
+        "meghalaya",
+        "nature",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC07346-Edit-3_eotbpg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630014/DSC07346-Edit-3_eotbpg.jpg",
+      "width": 720,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "dreamy",
+        "india",
+        "lake",
+        "meghalaya",
+        "sun",
+        "sunset",
+        "yellow",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC09392-Edit_w11abi",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629982/DSC09392-Edit_w11abi.jpg",
+      "width": 3199,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "meghalaya",
+        "minimal",
+        "panorama",
+        "red",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC09383-Enhanced-NR-Edit-2_bkp1lk",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629981/DSC09383-Enhanced-NR-Edit-2_bkp1lk.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "india",
+        "meghalaya",
+        "minimal",
+        "orange",
+        "sun",
+        "sunset",
+        "asia"
+      ]
+    },
+    {
+      "id": 5,
       "public_id": "DSC09357_iuy9ff",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031894/DSC09357_iuy9ff.jpg",
       "width": 1728,
@@ -17,7 +88,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 6,
       "public_id": "DSC05533-Edit_aqtmnh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031802/DSC05533-Edit_aqtmnh.jpg",
       "width": 1620,
@@ -25,16 +96,17 @@
       "format": "jpg",
       "tags": [
         "boat",
+        "india",
+        "kashmir",
         "lake",
         "minimal",
         "sun",
         "sunset",
-        "india",
-        "kashmir"
+        "asia"
       ]
     },
     {
-      "id": 3,
+      "id": 7,
       "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
       "width": 640,
@@ -43,13 +115,14 @@
       "tags": [
         "clouds",
         "india",
+        "landscape",
         "mountain",
+        "nature",
         "orange",
         "sun",
         "sunset",
         "uttarakhand",
-        "landscape",
-        "nature"
+        "asia"
       ]
     }
   ]

@@ -242,17 +242,17 @@ module.exports = {
 
 // If this file is run directly, generate all manifests
 if (require.main === module) {
-  generateAllManifests().then(() => {
-    console.log('Manifest generation complete.');
-    // Exit process when running in build environment (like Vercel)
-    if (process.env.VERCEL) {
-      console.log('Running in Vercel build environment, exiting process');
+  generateAllManifests()
+    .then(() => generateAllTagManifests())
+    .then(() => {
+      console.log('Manifest generation complete.');
+      if (process.env.VERCEL) {
+        console.log('Running in Vercel build environment, exiting process');
+        process.exit(0);
+      }
       process.exit(0);
-    }
-  }).catch(err => {
-    console.error('Error generating manifests:', err);
-    if (process.env.VERCEL) {
+    }).catch(err => {
+      console.error('Error generating manifests:', err);
       process.exit(1);
-    }
-  });
+    });
 }

@@ -1,10 +1,26 @@
 {
   "tag": "noir",
-  "updated_at": "2026-09-03T14:29:16.782Z",
+  "updated_at": "2026-09-08T12:34:43.862Z",
   "count": 31,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC04687_jwasne",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788628802/DSC04687_jwasne.jpg",
+      "width": 1574,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "alphabet",
+        "bnw",
+        "noir",
+        "thunder",
+        "night_sky",
+        "night"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "DSC07307-Edit_suaqoe",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032138/DSC07307-Edit_suaqoe.jpg",
       "width": 1920,
@@ -12,22 +28,9 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
-      ]
-    },
-    {
-      "id": 2,
-      "public_id": "DSC02205-Pano-Edit-Edit_wz0qvl",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032080/DSC02205-Pano-Edit-Edit_wz0qvl.jpg",
-      "width": 1454,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "experimental",
-        "fine art",
-        "noir"
       ]
     },
     {
@@ -39,7 +42,7 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
@@ -89,7 +92,10 @@
       "format": "jpg",
       "tags": [
         "noir",
-        "bnw"
+        "bnw",
+        "paris",
+        "france",
+        "europe"
       ]
     },
     {
@@ -185,7 +191,9 @@
       "format": "jpg",
       "tags": [
         "noir",
-        "bnw"
+        "bnw",
+        "netherlands",
+        "europe"
       ]
     },
     {
@@ -271,10 +279,11 @@
       "format": "jpg",
       "tags": [
         "bnw",
-        "noir",
+        "france",
         "landscape",
         "nature",
-        "france"
+        "noir",
+        "europe"
       ]
     },
     {
@@ -302,7 +311,10 @@
       "tags": [
         "bnw",
         "noir",
-        "architecture"
+        "architecture",
+        "paris",
+        "france",
+        "europe"
       ]
     },
     {
@@ -366,9 +378,10 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
         "symmetry",
-        "france"
+        "europe"
       ]
     },
     {
@@ -381,8 +394,9 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
-        "france"
+        "europe"
       ]
     },
     {
@@ -395,8 +409,9 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
-        "france"
+        "europe"
       ]
     }
   ]

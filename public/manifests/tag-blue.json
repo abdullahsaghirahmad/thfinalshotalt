@@ -1,6 +1,6 @@
 {
   "tag": "blue",
-  "updated_at": "2026-09-03T14:28:59.529Z",
+  "updated_at": "2026-09-08T12:34:26.879Z",
   "count": 5,
   "images": [
     {
@@ -24,10 +24,11 @@
       "height": 1080,
       "format": "jpg",
       "tags": [
-        "nature",
+        "blue",
         "landscape",
+        "nature",
         "switzerland",
-        "blue"
+        "europe"
       ]
     },
     {
@@ -38,11 +39,12 @@
       "height": 1080,
       "format": "jpg",
       "tags": [
-        "sea",
         "blue",
-        "nature",
+        "france",
         "landscape",
-        "france"
+        "nature",
+        "sea",
+        "europe"
       ]
     },
     {

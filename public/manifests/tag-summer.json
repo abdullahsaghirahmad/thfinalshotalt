@@ -1,10 +1,42 @@
 {
   "tag": "summer",
-  "updated_at": "2026-09-03T14:29:21.891Z",
-  "count": 1,
+  "updated_at": "2026-09-08T12:34:50.574Z",
+  "count": 3,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC00429_akygsc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630037/DSC00429_akygsc.jpg",
+      "width": 1161,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "minimal",
+        "pink",
+        "summer",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC02085-Edit_4x5_pzgbym",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629060/DSC02085-Edit_4x5_pzgbym.jpg",
+      "width": 1080,
+      "height": 1440,
+      "format": "jpg",
+      "tags": [
+        "golden_hour",
+        "green",
+        "summer",
+        "dreamy"
+      ]
+    },
+    {
+      "id": 3,
       "public_id": "abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp.jpg",
       "width": 640,

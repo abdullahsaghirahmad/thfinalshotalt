@@ -45,7 +45,28 @@ function stripStopWords(q) {
  * Falls back to highest-count tag if taxonomy doesn't cover the image's tags.  */
 var BEST_TAG_MIN_COUNT = 5;
 
-function pickBestTag(tags, tagCounts, taxonomyGroups) {
+function ancestorsOf(tag, parents) {
+  var out = [];
+  var seen = {};
+  var cur = parents && parents[tag];
+  while (cur && !seen[cur]) {
+    seen[cur] = true;
+    out.push(cur);
+    cur = parents[cur];
+  }
+  return out;
+}
+
+function mostSpecificTags(tags, parents) {
+  if (!parents) return tags;
+  return tags.filter(function(t) {
+    return !tags.some(function(other) {
+      return other !== t && ancestorsOf(other, parents).indexOf(t) !== -1;
+    });
+  });
+}
+
+function pickBestTag(tags, tagCounts, taxonomyGroups, parents) {
   if (!tags || tags.length === 0) return null;
   if (tags.length === 1) return tags[0];
 
@@ -58,16 +79,21 @@ function pickBestTag(tags, tagCounts, taxonomyGroups) {
     var group = taxonomyGroups[g];
     var inGroup = viable.filter(function(t) { return group.indexOf(t) !== -1; });
     if (inGroup.length > 0) {
-      return inGroup.reduce(function(best, t) {
+      // Prefer the most specific place (lucknow over india over asia)
+      var specific = mostSpecificTags(inGroup, parents);
+      if (specific.length === 0) specific = inGroup;
+      return specific.reduce(function(best, t) {
         return (tagCounts[t] || 0) > (tagCounts[best] || 0) ? t : best;
-      }, inGroup[0]);
+      }, specific[0]);
     }
   }
 
   // No taxonomy match: fall back to highest-count viable tag
-  return viable.reduce(function(best, t) {
+  var specificViable = mostSpecificTags(viable, parents);
+  if (specificViable.length === 0) specificViable = viable;
+  return specificViable.reduce(function(best, t) {
     return (tagCounts[t] || 0) > (tagCounts[best] || 0) ? t : best;
-  }, viable[0]);
+  }, specificViable[0]);
 }
 
 /* ── GSAP-style modular wrap (no GSAP dependency) ──────────────────────── */
@@ -880,6 +906,9 @@ class DiscoverCarousel {
     var taxonomyPromise = fetch('/public/tag-taxonomy.json', { cache: 'default' })
       .then(function(r) { return r.json(); })
       .catch(function() { return {}; });
+    var hierarchyPromise = fetch('/public/tag-hierarchy.json', { cache: 'default' })
+      .then(function(r) { return r.json(); })
+      .catch(function() { return {}; });
 
     // Primary: entire library via /api/all-images
     try {
@@ -966,15 +995,17 @@ class DiscoverCarousel {
     // Await taxonomy (started at the top of _buildCardData, almost certainly ready by now)
     var taxonomyRaw = await taxonomyPromise;
     delete taxonomyRaw['_comment'];
+    var hierarchyRaw = await hierarchyPromise;
+    delete hierarchyRaw['_comment'];
     var GROUP_ORDER = ['where', 'what', 'how', 'when', 'mood', 'color', 'project'];
     var taxonomyGroups = GROUP_ORDER.map(function(g) {
       return (taxonomyRaw[g] && taxonomyRaw[g].tags) ? taxonomyRaw[g].tags : [];
     });
 
-    // Best-tag selection: taxonomy priority (where>what>how>mood) + minimum count threshold
+    // Best-tag selection: taxonomy priority (where>what>how>mood) + most specific location
     baseDeck.forEach(function(card) {
       if (card.tags && card.tags.length > 1) {
-        var best = pickBestTag(card.tags, tagCounts, taxonomyGroups);
+        var best = pickBestTag(card.tags, tagCounts, taxonomyGroups, hierarchyRaw);
         if (best) {
           card.categoryId = best;
           card.label      = best;

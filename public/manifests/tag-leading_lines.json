@@ -1,6 +1,6 @@
 {
-  "tag": "leading lines",
-  "updated_at": "2026-09-03T14:29:11.687Z",
+  "tag": "leading_lines",
+  "updated_at": "2026-09-08T12:34:38.077Z",
   "count": 1,
   "images": [
     {
@@ -14,7 +14,7 @@
         "minimal",
         "moon",
         "purple",
-        "leading lines"
+        "leading_lines"
       ]
     }
   ]

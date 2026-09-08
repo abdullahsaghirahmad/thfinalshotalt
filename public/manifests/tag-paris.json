@@ -1,0 +1,38 @@
+{
+  "tag": "paris",
+  "updated_at": "2026-09-08T12:34:45.613Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "11_brt6oo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285324/11_brt6oo.jpg",
+      "width": 523,
+      "height": 800,
+      "format": "jpg",
+      "tags": [
+        "noir",
+        "bnw",
+        "paris",
+        "france",
+        "europe"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "120_tavm96",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
+      "width": 800,
+      "height": 613,
+      "format": "jpg",
+      "tags": [
+        "bnw",
+        "noir",
+        "architecture",
+        "paris",
+        "france",
+        "europe"
+      ]
+    }
+  ]
+}

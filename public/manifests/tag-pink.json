@@ -1,0 +1,59 @@
+{
+  "tag": "pink",
+  "updated_at": "2026-09-08T12:34:46.012Z",
+  "count": 3,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC00429_akygsc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630037/DSC00429_akygsc.jpg",
+      "width": 1161,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "minimal",
+        "pink",
+        "summer",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC00429-Edit_tq0ujc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629527/DSC00429-Edit_tq0ujc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "dreamy",
+        "india",
+        "meghalaya",
+        "pink",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC04424-Edit_de3ihh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "landscape",
+        "nature",
+        "pink",
+        "orange",
+        "sky",
+        "mountain",
+        "golden_hour",
+        "sunset"
+      ]
+    }
+  ]
+}

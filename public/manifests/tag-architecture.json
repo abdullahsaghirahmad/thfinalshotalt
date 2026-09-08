@@ -1,6 +1,6 @@
 {
   "tag": "architecture",
-  "updated_at": "2026-09-03T14:28:58.001Z",
+  "updated_at": "2026-09-08T12:34:25.231Z",
   "count": 6,
   "images": [
     {
@@ -13,7 +13,10 @@
       "tags": [
         "bnw",
         "noir",
-        "architecture"
+        "architecture",
+        "paris",
+        "france",
+        "europe"
       ]
     },
     {
@@ -26,9 +29,10 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
         "symmetry",
-        "france"
+        "europe"
       ]
     },
     {
@@ -41,8 +45,9 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
-        "france"
+        "europe"
       ]
     },
     {
@@ -55,8 +60,9 @@
       "tags": [
         "architecture",
         "bnw",
+        "france",
         "noir",
-        "france"
+        "europe"
       ]
     },
     {
@@ -68,9 +74,10 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "landscape",
         "india",
-        "lucknow"
+        "landscape",
+        "lucknow",
+        "asia"
       ]
     },
     {
@@ -81,11 +88,12 @@
       "height": 913,
       "format": "jpg",
       "tags": [
-        "framing",
         "architecture",
+        "framing",
         "india",
         "lucknow",
-        "red"
+        "red",
+        "asia"
       ]
     }
   ]

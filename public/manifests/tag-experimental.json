@@ -1,7 +1,7 @@
 {
   "tag": "experimental",
-  "updated_at": "2026-09-03T14:29:03.856Z",
-  "count": 32,
+  "updated_at": "2026-09-08T12:34:31.138Z",
+  "count": 30,
   "images": [
     {
       "id": 1,
@@ -97,7 +97,8 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "night"
+        "night",
+        "moon"
       ]
     },
     {
@@ -145,7 +146,9 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "night"
+        "france",
+        "night",
+        "europe"
       ]
     },
     {
@@ -316,37 +319,13 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
     },
     {
       "id": 28,
-      "public_id": "DSC06438-Edit_o8xxy0",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032129/DSC06438-Edit_o8xxy0.jpg",
-      "width": 1620,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "experimental"
-      ]
-    },
-    {
-      "id": 29,
-      "public_id": "DSC02205-Pano-Edit-Edit_wz0qvl",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032080/DSC02205-Pano-Edit-Edit_wz0qvl.jpg",
-      "width": 1454,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "experimental",
-        "fine art",
-        "noir"
-      ]
-    },
-    {
-      "id": 30,
       "public_id": "DSC04377-Edit_f4myhr",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032072/DSC04377-Edit_f4myhr.jpg",
       "width": 2473,
@@ -354,13 +333,13 @@
       "format": "jpg",
       "tags": [
         "experimental",
-        "fine art",
+        "fine_art",
         "noir",
         "minimal"
       ]
     },
     {
-      "id": 31,
+      "id": 29,
       "public_id": "abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-V5Osd0LKiLQ-unsplash_ugngol.jpg",
       "width": 640,
@@ -369,13 +348,13 @@
       "tags": [
         "conceptual",
         "experimental",
-        "fine art",
+        "fine_art",
         "minimal",
         "neutral"
       ]
     },
     {
-      "id": 32,
+      "id": 30,
       "public_id": "abdullah-ahmad-Hiy0Geba1yE-unsplash_x3huuf",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-Hiy0Geba1yE-unsplash_x3huuf.jpg",
       "width": 640,

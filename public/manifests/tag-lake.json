@@ -1,10 +1,29 @@
 {
   "tag": "lake",
-  "updated_at": "2026-09-03T14:29:10.486Z",
-  "count": 2,
+  "updated_at": "2026-09-08T12:34:37.248Z",
+  "count": 3,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC07346-Edit-3_eotbpg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630014/DSC07346-Edit-3_eotbpg.jpg",
+      "width": 720,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "dreamy",
+        "india",
+        "lake",
+        "meghalaya",
+        "sun",
+        "sunset",
+        "yellow",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "DSC05533-Edit_aqtmnh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031802/DSC05533-Edit_aqtmnh.jpg",
       "width": 1620,
@@ -12,16 +31,17 @@
       "format": "jpg",
       "tags": [
         "boat",
+        "india",
+        "kashmir",
         "lake",
         "minimal",
         "sun",
         "sunset",
-        "india",
-        "kashmir"
+        "asia"
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "public_id": "126_fjh8vx",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/126_fjh8vx.jpg",
       "width": 800,

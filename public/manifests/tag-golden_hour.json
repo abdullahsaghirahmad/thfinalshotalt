@@ -1,0 +1,84 @@
+{
+  "tag": "golden_hour",
+  "updated_at": "2026-09-08T12:34:34.440Z",
+  "count": 5,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC07601-Edit-2_duvfsm",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629541/DSC07601-Edit-2_duvfsm.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "boat",
+        "clouds",
+        "golden_hour",
+        "india",
+        "meghalaya",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC02085-Edit_4x5_pzgbym",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629060/DSC02085-Edit_4x5_pzgbym.jpg",
+      "width": 1080,
+      "height": 1440,
+      "format": "jpg",
+      "tags": [
+        "golden_hour",
+        "green",
+        "summer",
+        "dreamy"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC04424-Edit_de3ihh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "landscape",
+        "nature",
+        "pink",
+        "orange",
+        "sky",
+        "mountain",
+        "golden_hour",
+        "sunset"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC02512-Edit_o3mrtw",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC02512-Edit_o3mrtw.jpg",
+      "width": 1446,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "clouds",
+        "golden_hour",
+        "nature",
+        "orange",
+        "sunset"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC_0097_jezpnj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553564/DSC_0097_jezpnj.jpg",
+      "width": 3505,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "panorama",
+        "golden_hour",
+        "mountain",
+        "orange"
+      ]
+    }
+  ]
+}

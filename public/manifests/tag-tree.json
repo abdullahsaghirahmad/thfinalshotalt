@@ -1,10 +1,41 @@
 {
   "tag": "tree",
-  "updated_at": "2026-09-03T14:29:24.669Z",
-  "count": 1,
+  "updated_at": "2026-09-08T12:34:53.201Z",
+  "count": 3,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC09689-Edit-3_kcj9eg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630010/DSC09689-Edit-3_kcj9eg.jpg",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "green",
+        "india",
+        "meghalaya",
+        "tree",
+        "asia"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC01978-Edit_qnq8fl",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629032/DSC01978-Edit_qnq8fl.jpg",
+      "width": 2010,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "framing",
+        "green",
+        "india",
+        "kerala",
+        "tree",
+        "asia"
+      ]
+    },
+    {
+      "id": 3,
       "public_id": "8_lfky7g",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518813/8_lfky7g.jpg",
       "width": 1106,
