@@ -12,7 +12,8 @@
     "build": "mkdir -p public/manifests && node manifest-generator.js",
     "vercel-build": "mkdir -p public/manifests && node manifest-generator.js",
     "backfill-location-parents": "node scripts/backfill-location-parents.js",
-    "normalize-tag-underscores": "node scripts/normalize-tag-underscores.js"
+    "normalize-tag-underscores": "node scripts/normalize-tag-underscores.js",
+    "replace-cloudinary-tags": "node scripts/replace-cloudinary-tags.js"
   },
   "dependencies": {
     "@notionhq/client": "^4.0.2",

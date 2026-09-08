@@ -571,9 +571,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Listen for window resizing to update mobile detection
         window.addEventListener('resize', detectMobileDevice);
         
-        // Start loading images for current category
-        loadImages(currentCategory);
-        
         // Set up appropriate event listeners based on device type
         if (isMobileDevice) {
             console.log('Mobile device detected, setting up touch handlers');
@@ -612,6 +609,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         thresholdDecrease.addEventListener('click', () => adjustThreshold(-20));
         thresholdIncrease.addEventListener('click', () => adjustThreshold(20));
+
+        // Discover (and /about) deep-link into this SPA. Do this after listeners
+        // so About images can appear on move, and never start a Featured load in parallel.
+        if (isAboutDeepLink()) {
+            switchCategory('about');
+        } else {
+            loadImages(currentCategory);
+        }
     }
     
     // Function to refresh the current category display with new images
@@ -884,9 +889,29 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCounter();
     }
     
+    function isAboutDeepLink() {
+        try {
+            if (new URLSearchParams(window.location.search).get('category') === 'about') return true;
+            var path = (window.location.pathname || '').replace(/\/+$/, '');
+            return path === '/about';
+        } catch (_) {
+            return false;
+        }
+    }
+
+    function clearAboutDeepLink() {
+        if (!isAboutDeepLink()) return;
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '/');
+        }
+    }
+
     function switchCategory(category) {
         // Don't do anything if it's the same category
         if (category === currentCategory) return;
+
+        // Stale ?category=about or /about would reopen About on refresh.
+        if (currentCategory === 'about') clearAboutDeepLink();
         
         console.log(`Switching to category: ${category}`);
         

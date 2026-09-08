@@ -1,6 +1,6 @@
 {
   "tag": "architecture",
-  "updated_at": "2026-09-08T12:34:25.231Z",
+  "updated_at": "2026-09-08T13:26:39.313Z",
   "count": 6,
   "images": [
     {
@@ -11,8 +11,7 @@
       "height": 613,
       "format": "jpg",
       "tags": [
-        "bnw",
-        "noir",
+        "monochrome",
         "architecture",
         "paris",
         "france",
@@ -28,9 +27,8 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "bnw",
+        "monochrome",
         "france",
-        "noir",
         "symmetry",
         "europe"
       ]
@@ -44,9 +42,8 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "bnw",
+        "monochrome",
         "france",
-        "noir",
         "europe"
       ]
     },
@@ -59,9 +56,8 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "bnw",
+        "monochrome",
         "france",
-        "noir",
         "europe"
       ]
     },

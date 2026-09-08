@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(express.json()); // needed for POST /admin/api/save-tags
 const cloudinaryApi = require('./cloudinary-api');
 const manifestGenerator = require('./manifest-generator');
+const { loadParents, isAncestorOf } = require('./tag-hierarchy');
 const { Client } = require('@notionhq/client');
 
 // Load environment variables
@@ -505,6 +507,62 @@ app.get('/api/tag-images', async (req, res) => {
   }
 });
 
+function pickFeaturedTags(sorted, counts) {
+  const FEATURED_LIMIT = 12;
+  let pinned = [];
+  let share = 0.8;
+  try {
+    const tax = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'tag-taxonomy.json'), 'utf8'));
+    pinned = Array.isArray(tax.pinned) ? tax.pinned.filter(Boolean) : [];
+    if (typeof tax.featured_parent_share === 'number' && isFinite(tax.featured_parent_share)) {
+      share = Math.min(1, Math.max(0, tax.featured_parent_share));
+    }
+  } catch (_) {}
+
+  const parents = loadParents();
+  const pinnedSet = new Set(pinned);
+  const seen = new Set();
+  const featured = [];
+
+  function dominates(child, parent) {
+    const parentCount = counts[parent] || 0;
+    if (parentCount <= 0) return false;
+    return (counts[child] || 0) / parentCount >= share;
+  }
+
+  function tryAdd(t) {
+    if (!t || seen.has(t) || !counts[t]) return;
+
+    // Redundant parent of a selected child (india already in → skip asia).
+    for (var i = 0; i < featured.length; i++) {
+      if (isAncestorOf(t, featured[i], parents) && dominates(featured[i], t)) return;
+    }
+
+    // Dominant child of a selected parent (france after europe → replace europe).
+    var toRemove = [];
+    for (var j = 0; j < featured.length; j++) {
+      var p = featured[j];
+      if (isAncestorOf(p, t, parents) && dominates(t, p)) {
+        if (pinnedSet.has(p)) return;
+        toRemove.push(p);
+      }
+    }
+    if (featured.length >= FEATURED_LIMIT && toRemove.length === 0) return;
+
+    toRemove.forEach(function (p) {
+      featured.splice(featured.indexOf(p), 1);
+      seen.delete(p);
+    });
+    if (featured.length >= FEATURED_LIMIT) return;
+    featured.push(t);
+    seen.add(t);
+  }
+
+  pinned.forEach(tryAdd);
+  (sorted || []).forEach(tryAdd);
+  return featured;
+}
+
 // API: all unique tags in the Cloudinary account (for search autocomplete)
 app.get('/api/available-tags', async (req, res) => {
   try {
@@ -532,15 +590,20 @@ app.get('/api/available-tags', async (req, res) => {
       .sort((a, b) => b[1] - a[1])
       .map(([tag]) => tag);
 
+    const featured = pickFeaturedTags(sorted, counts);
+
     if (sorted.length > 0) {
-      return res.json({ tags: sorted, featured: sorted.slice(0, 12) });
+      return res.json({ tags: sorted, featured: featured });
     }
 
     // Fallback if manifests not yet generated: fast tag-names-only call
     const cld = cloudinaryApi.cloudinary;
     if (!cld) return res.json({ tags: [] });
     const result = await cld.api.tags({ max_results: 500 });
-    res.json({ tags: result.tags || [], featured: (result.tags || []).slice(0, 12) });
+    const all = result.tags || [];
+    const fallbackCounts = {};
+    all.forEach(t => { fallbackCounts[t] = 1; });
+    res.json({ tags: all, featured: pickFeaturedTags(all, fallbackCounts) });
 
   } catch (error) {
     console.error('Error fetching available tags:', error);

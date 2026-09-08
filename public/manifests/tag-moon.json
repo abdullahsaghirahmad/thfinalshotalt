@@ -1,6 +1,6 @@
 {
   "tag": "moon",
-  "updated_at": "2026-09-08T12:34:40.772Z",
+  "updated_at": "2026-09-08T13:26:57.979Z",
   "count": 8,
   "images": [
     {
@@ -50,8 +50,7 @@
       "height": 800,
       "format": "jpg",
       "tags": [
-        "bnw",
-        "noir",
+        "monochrome",
         "moon"
       ]
     },

@@ -58,7 +58,7 @@
   "how": {
     "label": "⚙ How",
     "tags": [
-      "bnw",
+      "monochrome",
       "long_exposure",
       "star_trail",
       "leading_lines",
@@ -97,7 +97,6 @@
       "experimental",
       "conceptual",
       "fine_art",
-      "noir",
       "dramatic",
       "minimal",
       "ethereal",
@@ -131,5 +130,10 @@
       "project:noir",
       "project:experimental"
     ]
-  }
+  },
+
+  "pinned": ["monochrome"],
+  "featured_parent_share": 0.8,
+
+  "_discover_pills": "Discover pills on /discover. (1) pinned — canonical tags listed first, same click behaviour as the others; skip a pin if it has zero images. Example: [\"monochrome\", \"project:experimental\"]. (2) featured_parent_share — 0–1, default 0.8. A location parent is hidden when a descendant already in the row has at least this fraction of the parent's images (asia vs india at 100% hides asia; india vs meghalaya at ~71% keeps both). Change the number here, not in server.js."
 }

@@ -1,6 +1,6 @@
 {
   "tag": "europe",
-  "updated_at": "2026-09-08T12:34:30.709Z",
+  "updated_at": "2026-09-08T13:26:44.689Z",
   "count": 10,
   "images": [
     {
@@ -56,8 +56,7 @@
       "height": 800,
       "format": "jpg",
       "tags": [
-        "noir",
-        "bnw",
+        "monochrome",
         "paris",
         "france",
         "europe"
@@ -71,8 +70,7 @@
       "height": 533,
       "format": "jpg",
       "tags": [
-        "noir",
-        "bnw",
+        "monochrome",
         "netherlands",
         "europe"
       ]
@@ -85,11 +83,10 @@
       "height": 533,
       "format": "jpg",
       "tags": [
-        "bnw",
+        "monochrome",
         "france",
         "landscape",
         "nature",
-        "noir",
         "europe"
       ]
     },
@@ -101,8 +98,7 @@
       "height": 613,
       "format": "jpg",
       "tags": [
-        "bnw",
-        "noir",
+        "monochrome",
         "architecture",
         "paris",
         "france",
@@ -118,9 +114,8 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "bnw",
+        "monochrome",
         "france",
-        "noir",
         "symmetry",
         "europe"
       ]
@@ -134,9 +129,8 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "bnw",
+        "monochrome",
         "france",
-        "noir",
         "europe"
       ]
     },
@@ -149,9 +143,8 @@
       "format": "jpg",
       "tags": [
         "architecture",
-        "bnw",
+        "monochrome",
         "france",
-        "noir",
         "europe"
       ]
     }

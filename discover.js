@@ -1229,6 +1229,7 @@ class DiscoverCarousel {
 
   /* ── Resize — adjust camera Z for portrait/landscape ─────────── */
   _handleResize() {
+    this._refitPills();
     if (!this.renderer || !this.camera) return;
     var w = window.innerWidth, h = window.innerHeight;
     this.camera.aspect = w / h;
@@ -1261,7 +1262,7 @@ class DiscoverCarousel {
   /* ── Resolve a user query to a canonical tag ─────────────────
    * 1. Exact match in synonymMap
    * 2. Underscore-normalised match  (e.g. "long exposure" → "long_exposure")
-   * 3. Prefix match — "monoch" matches "monochrome" → "bnw" (min 3 chars)
+   * 3. Prefix match — "monoch" matches "monochrome" (min 3 chars)
    * 4. Return normalised input as-is                                       */
   resolveTag(rawInput) {
     var q  = rawInput.trim().toLowerCase();
@@ -1278,6 +1279,15 @@ class DiscoverCarousel {
   }
 
   _renderPills(tags) {
+    this._featuredPills = (tags || []).slice(0, 12);
+    this._refitPills();
+    var self = this;
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() { self._refitPills(); });
+    }
+  }
+
+  _paintPills(tags) {
     if (!this.pillsEl) return;
     while (this.pillsEl.firstChild) this.pillsEl.removeChild(this.pillsEl.firstChild);
     var self = this;
@@ -1290,6 +1300,44 @@ class DiscoverCarousel {
       });
       self.pillsEl.appendChild(btn);
     });
+  }
+
+  _refitPills() {
+    if (!this.pillsEl || !this._featuredPills || !this._featuredPills.length) return;
+    this._paintPills(this._featuredPills);
+    this._fitPillsTwoLines();
+    this._syncPillHighlight();
+  }
+
+  /* Drop trailing pills until they occupy at most 2 lines. Cap is 12 from the server. */
+  _fitPillsTwoLines() {
+    if (!this.pillsEl) return;
+    var pills = this.pillsEl;
+    function rowCount() {
+      var tops = [];
+      var kids = pills.querySelectorAll('.tag-pill');
+      for (var i = 0; i < kids.length; i++) {
+        var t = kids[i].offsetTop;
+        if (tops.indexOf(t) === -1) tops.push(t);
+      }
+      return tops.length;
+    }
+    while (pills.children.length > 1 && rowCount() > 2) {
+      pills.removeChild(pills.lastChild);
+    }
+  }
+
+  _syncPillHighlight() {
+    if (!this.searchEl || !this.pillsEl) return;
+    var q = this.searchEl.value.toLowerCase().trim();
+    var resolved = q ? this.resolveTag(q) : '';
+    var pills = this.pillsEl.querySelectorAll('.tag-pill');
+    for (var i = 0; i < pills.length; i++) {
+      var pillText = pills[i].textContent.toLowerCase();
+      var m = !q || pillText === resolved || pillText.indexOf(q) !== -1 || (resolved !== q && pillText.indexOf(resolved) !== -1);
+      pills[i].classList.toggle('tag-pill--match',  !!q && m);
+      pills[i].classList.toggle('tag-pill--dimmed', !!q && !m);
+    }
   }
 
   _initSearchBar() {
@@ -1461,18 +1509,8 @@ class DiscoverCarousel {
     }
 
     this.searchEl.addEventListener('input', function() {
-      var q = self.searchEl.value.toLowerCase().trim();
-      updateHint(q);
-      if (!self.pillsEl) return;
-      var resolved = q ? self.resolveTag(q) : '';
-      var pills = self.pillsEl.querySelectorAll('.tag-pill');
-      for (var i = 0; i < pills.length; i++) {
-        var pillText = pills[i].textContent.toLowerCase();
-        // Match if pill is the resolved canonical tag, OR contains the raw query
-        var m = !q || pillText === resolved || pillText.indexOf(q) !== -1 || (resolved !== q && pillText.indexOf(resolved) !== -1);
-        pills[i].classList.toggle('tag-pill--match',  !!q && m);
-        pills[i].classList.toggle('tag-pill--dimmed', !!q && !m);
-      }
+      updateHint(self.searchEl.value.toLowerCase().trim());
+      self._syncPillHighlight();
     });
 
     this.searchEl.addEventListener('keydown', function(e) {

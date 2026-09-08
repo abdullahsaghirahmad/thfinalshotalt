@@ -1,14 +1,16 @@
 {
   "_comment": "Synonym map for Discover search. Maps user-typed vocabulary to canonical Cloudinary tags. Add entries freely — keys are what users might type, values are the actual tag name.",
 
-  "monochrome":           "bnw",
-  "black and white":      "bnw",
-  "black_and_white":      "bnw",
-  "black  white":         "bnw",
-  "b&w":                  "bnw",
-  "bw":                   "bnw",
-  "grayscale":            "bnw",
-  "greyscale":            "bnw",
+  "bnw":                  "monochrome",
+  "black and white":      "monochrome",
+  "black_and_white":      "monochrome",
+  "black  white":         "monochrome",
+  "b&w":                  "monochrome",
+  "bw":                   "monochrome",
+  "grayscale":            "monochrome",
+  "greyscale":            "monochrome",
+  "noir":                 "monochrome",
+  "film noir":            "monochrome",
 
   "long exposure":        "long_exposure",
   "slow shutter":         "long_exposure",
@@ -20,10 +22,6 @@
   "nightsky":             "night_sky",
 
   "leading lines":        "leading_lines",
-
-  "dark":                 "noir",
-  "cinematic":            "noir",
-  "film noir":            "noir",
 
   "peaceful":             "dreamy",
   "soft":                 "dreamy",

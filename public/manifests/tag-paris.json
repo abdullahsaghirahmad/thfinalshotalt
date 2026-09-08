@@ -1,6 +1,6 @@
 {
   "tag": "paris",
-  "updated_at": "2026-09-08T12:34:45.613Z",
+  "updated_at": "2026-09-08T13:27:02.809Z",
   "count": 2,
   "images": [
     {
@@ -11,8 +11,7 @@
       "height": 800,
       "format": "jpg",
       "tags": [
-        "noir",
-        "bnw",
+        "monochrome",
         "paris",
         "france",
         "europe"
@@ -26,8 +25,7 @@
       "height": 613,
       "format": "jpg",
       "tags": [
-        "bnw",
-        "noir",
+        "monochrome",
         "architecture",
         "paris",
         "france",

@@ -1,6 +1,6 @@
 {
   "tag": "nature",
-  "updated_at": "2026-09-08T12:34:41.678Z",
+  "updated_at": "2026-09-08T13:26:59.052Z",
   "count": 13,
   "images": [
     {
@@ -108,11 +108,10 @@
       "height": 533,
       "format": "jpg",
       "tags": [
-        "bnw",
+        "monochrome",
         "france",
         "landscape",
         "nature",
-        "noir",
         "europe"
       ]
     },
@@ -124,8 +123,7 @@
       "height": 800,
       "format": "jpg",
       "tags": [
-        "bnw",
-        "noir",
+        "monochrome",
         "forest",
         "dreamy",
         "nature"

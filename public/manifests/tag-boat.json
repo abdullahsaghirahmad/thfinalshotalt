@@ -1,6 +1,6 @@
 {
   "tag": "boat",
-  "updated_at": "2026-09-08T12:34:27.779Z",
+  "updated_at": "2026-09-08T13:26:41.781Z",
   "count": 4,
   "images": [
     {
@@ -64,8 +64,7 @@
       "height": 494,
       "format": "jpg",
       "tags": [
-        "bnw",
-        "noir",
+        "monochrome",
         "boat",
         "lake"
       ]

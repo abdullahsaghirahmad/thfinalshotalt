@@ -43,9 +43,9 @@ File: `public/tag-taxonomy.json`
 |-------|---------|----------|
 | `where` | Locations | `india`, `kerala`, `paris` |
 | `what` | Subjects / objects | `moon`, `mountain`, `bird` |
-| `how` | Technique / composition | `bnw`, `long_exposure`, `leading_lines` |
+| `how` | Technique / composition | `monochrome`, `long_exposure`, `leading_lines` |
 | `when` | Time / season / light | `night`, `golden_hour`, `winter` |
-| `mood` | Aesthetic / feel | `dreamy`, `noir`, `experimental` |
+| `mood` | Aesthetic / feel | `dreamy`, `experimental` |
 | `color` | Color labels | `blue`, `warm`, `neutral` |
 | `project` | Intentional series | `project:duration`, `project:noir` |
 
@@ -58,6 +58,23 @@ File: `public/tag-hierarchy.json`
 - Example: `"kerala": "india"` and `"india": "asia"`.
 - New countries/cities can be accepted from the tagger lookup (no LLM). That writes rows here.
 - Optional backfill of missing parents on old images: `node scripts/backfill-location-parents.js --apply`.
+
+### 3c. Discover pills (pin + parent/child collapse)
+
+File: `public/tag-taxonomy.json` — edit these keys, not `server.js`.
+
+**Pinned tags** — `"pinned"` array:
+
+- Canonical tags listed here always appear first in the Discover pill row (same pills, same click behaviour).
+- Remaining slots fill by image count, up to 12. Tags with zero images are skipped.
+- Example: `"pinned": ["monochrome", "project:experimental"]`
+- A pinned tag is never collapsed away. If you pin a location parent (`asia`) and a child would dominate it, the child is skipped instead.
+
+**Location parent/child** — `"featured_parent_share"` (0–1, default `0.8`):
+
+- Write-time hierarchy means a parent always has at least as many images as each child, so raw counts would show both (`asia` and `india`).
+- If a descendant has at least this fraction of the parent’s images, the parent is hidden and the child is kept.
+- Today: `asia`/`india` at 100% → hide `asia`; `india`/`meghalaya` at ~71% → keep both. Raise toward `1` to collapse only near-duplicates; lower toward `0` to hide more parents.
 
 ### 4. Add synonyms (when useful)
 
@@ -197,7 +214,7 @@ OUTPUT
 
 | File | Role |
 |------|------|
-| `public/tag-taxonomy.json` | Admin vocabulary groups + Discover best-tag priority |
+| `public/tag-taxonomy.json` | Admin vocabulary groups + Discover pills (`pinned`, `featured_parent_share`) + best-tag priority |
 | `public/tag-synonyms.json` | Discover / API search alias resolution |
 | `public/tag-hierarchy.json` | Location child → parent (written onto images when you accept) |
 | `public/country-continents.json` | Country/alias → continent for tagger lookup (no API key) |

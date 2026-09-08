@@ -216,21 +216,21 @@
   .section-label {
     font-size: 11px;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: #555; margin-bottom: 8px;
+    color: #888; margin-bottom: 8px;
   }
 
   /* Current tags */
   #current-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; }
   .tag-chip {
     display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 9px; font-size: 13px; font-family: inherit;
-    background: #2a2a2a; border: 1px solid #444; color: #ccc;
+    padding: 4px 9px; font-size: 14px; font-family: inherit;
+    background: #2a2a2a; border: 1px solid #555; color: #eee;
     letter-spacing: 0.03em;
   }
-  .tag-chip .remove { color: #666; cursor: pointer; font-size: 15px; line-height: 1; }
+  .tag-chip .remove { color: #888; cursor: pointer; font-size: 15px; line-height: 1; }
   .tag-chip .remove:hover { color: #f66; }
-  .tag-chip.inherited { color: #888; border-style: dashed; }
-  #no-tags { color: #444; font-size: 12px; font-style: italic; }
+  .tag-chip.inherited { color: #bbb; border-style: dashed; }
+  #no-tags { color: #666; font-size: 12px; font-style: italic; }
 
   #place-suggest {
     display: none;
@@ -258,14 +258,39 @@
   .check-item.ok  { color: #5a5; }
   .check-item.bad { color: #a55; }
 
-  /* Add tag */
-  #add-tag-row { display: flex; gap: 6px; }
-  #vocab-filter:focus { border-color: #666; }
-  #add-tag-btn {
-    padding: 6px 16px; background: #222; border: 1px solid #444;
-    color: #aaa; font-family: inherit; font-size: 12px; cursor: pointer;
+  /* Add tag — one field: type to filter, Enter or Add to create */
+  #add-tag-row {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid #444;
+    background: #1a1a1a;
   }
-  #add-tag-btn:hover { border-color: #888; color: #fff; }
+  #vocab-filter {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: #eee;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 10px;
+    outline: none;
+  }
+  #vocab-filter::placeholder { color: #777; }
+  #add-tag-row:focus-within { border-color: #888; }
+  #add-vocab-btn {
+    flex-shrink: 0;
+    padding: 0 14px;
+    background: #2a2a2a;
+    border: none;
+    border-left: 1px solid #444;
+    color: #ddd;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  #add-vocab-btn:hover { background: #333; color: #fff; }
 
   /* Bulk-specific info banner */
   #bulk-info-banner {
@@ -283,19 +308,19 @@
 
   .vocab-group { margin-top: 12px; }
   .vocab-group-label {
-    font-size: 11px; letter-spacing: 0.12em; color: #555;
-    margin-bottom: 7px; padding-bottom: 3px; border-bottom: 1px solid #222;
+    font-size: 12px; letter-spacing: 0.12em; color: #888;
+    margin-bottom: 7px; padding-bottom: 3px; border-bottom: 1px solid #2a2a2a;
   }
-  .vocab-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .vocab-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .vocab-tag {
-    padding: 3px 9px; font-size: 12px; font-family: inherit;
+    padding: 5px 11px; font-size: 14px; font-family: inherit;
     letter-spacing: 0.03em; cursor: pointer;
-    border: 1px solid #2a2a2a; color: #666; background: transparent; transition: all 0.1s;
+    border: 1px solid #3a3a3a; color: #ddd; background: transparent; transition: all 0.1s;
   }
-  .vocab-tag:hover  { border-color: #555; color: #aaa; }
-  .vocab-tag.active { background: #2a2a2a; border-color: #666; color: #fff; }
-  .vocab-tag .cnt   { color: #444; font-size: 10px; margin-left: 3px; }
-  .vocab-tag.active .cnt { color: #777; }
+  .vocab-tag:hover  { border-color: #777; color: #fff; background: #1f1f1f; }
+  .vocab-tag.active { background: #2a2a2a; border-color: #888; color: #fff; }
+  .vocab-tag .cnt   { color: #888; font-size: 12px; margin-left: 4px; }
+  .vocab-tag.active .cnt { color: #aaa; }
 
   /* Action bar */
   #action-bar {
@@ -392,10 +417,9 @@
     <div class="section">
       <div class="section-label">Search vocabulary / add tag</div>
       <div id="add-tag-row">
-        <input id="vocab-filter" type="text" placeholder="type to filter or add a tag…"
-               autocomplete="off" spellcheck="false"
-               style="flex:1;background:#1a1a1a;border:1px solid #333;color:#ccc;font-family:inherit;font-size:13px;padding:6px 9px;outline:none;">
-        <button id="add-vocab-btn">+ Add</button>
+        <input id="vocab-filter" type="text" placeholder="type to filter, or add a new tag"
+               autocomplete="off" spellcheck="false">
+        <button type="button" id="add-vocab-btn" title="Add this tag (Enter)">Add ↵</button>
       </div>
     </div>
 
@@ -949,6 +973,7 @@ document.getElementById('place-ignore').addEventListener('click', ignorePlace);
 document.getElementById('add-vocab-btn').addEventListener('click', () => {
   const inp = document.getElementById('vocab-filter');
   if (inp.value.trim()) { addTag(inp.value); inp.value = ''; filterVocab(''); }
+  else inp.focus();
 });
 document.getElementById('vocab-filter').addEventListener('keydown', e => {
   if (e.key === 'Enter') {

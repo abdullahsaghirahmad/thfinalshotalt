@@ -1,6 +1,6 @@
 {
   "tag": "landscape",
-  "updated_at": "2026-09-08T12:34:37.725Z",
+  "updated_at": "2026-09-08T13:26:53.625Z",
   "count": 8,
   "images": [
     {
@@ -76,11 +76,10 @@
       "height": 533,
       "format": "jpg",
       "tags": [
-        "bnw",
+        "monochrome",
         "france",
         "landscape",
         "nature",
-        "noir",
         "europe"
       ]
     },
