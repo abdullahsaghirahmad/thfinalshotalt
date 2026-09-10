@@ -1,28 +1,10 @@
 {
   "tag": "india",
-  "updated_at": "2026-09-08T13:26:51.394Z",
-  "count": 21,
+  "updated_at": "2026-09-10T19:43:04.427Z",
+  "count": 18,
   "images": [
     {
       "id": 1,
-      "public_id": "DSC00429_akygsc",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630037/DSC00429_akygsc.jpg",
-      "width": 1161,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "clouds",
-        "dreamy",
-        "india",
-        "meghalaya",
-        "minimal",
-        "pink",
-        "summer",
-        "asia"
-      ]
-    },
-    {
-      "id": 2,
       "public_id": "DSC08548-Edit_e4r5w0",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630028/DSC08548-Edit_e4r5w0.jpg",
       "width": 1711,
@@ -37,24 +19,7 @@
       ]
     },
     {
-      "id": 3,
-      "public_id": "DSC09357-Edit-2_ikymew",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630027/DSC09357-Edit-2_ikymew.jpg",
-      "width": 1639,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "clouds",
-        "india",
-        "meghalaya",
-        "nature",
-        "sun",
-        "sunset",
-        "asia"
-      ]
-    },
-    {
-      "id": 4,
+      "id": 2,
       "public_id": "DSC08306-Edit-2_zdzkn8",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630020/DSC08306-Edit-2_zdzkn8.jpg",
       "width": 1620,
@@ -69,7 +34,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 3,
       "public_id": "DSC08077-2_cztnv6",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630019/DSC08077-2_cztnv6.jpg",
       "width": 1620,
@@ -84,22 +49,7 @@
       ]
     },
     {
-      "id": 6,
-      "public_id": "DSC07608-Pano-Edit_gjaf6x",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630016/DSC07608-Pano-Edit_gjaf6x.jpg",
-      "width": 802,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "clouds",
-        "india",
-        "meghalaya",
-        "panorama",
-        "asia"
-      ]
-    },
-    {
-      "id": 7,
+      "id": 4,
       "public_id": "DSC07346-Edit-3_eotbpg",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630014/DSC07346-Edit-3_eotbpg.jpg",
       "width": 720,
@@ -118,7 +68,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 5,
       "public_id": "DSC09689-Edit-3_kcj9eg",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788630010/DSC09689-Edit-3_kcj9eg.jpg",
       "width": 1920,
@@ -133,24 +83,7 @@
       ]
     },
     {
-      "id": 9,
-      "public_id": "Risa_Stacked-2_diuqia",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629986/Risa_Stacked-2_diuqia.jpg",
-      "width": 1920,
-      "height": 1080,
-      "format": "jpg",
-      "tags": [
-        "fill_the_frame",
-        "india",
-        "long_exposure",
-        "meghalaya",
-        "night",
-        "star_trail",
-        "asia"
-      ]
-    },
-    {
-      "id": 10,
+      "id": 6,
       "public_id": "DSC00183-Edit-4_uimcjm",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629984/DSC00183-Edit-4_uimcjm.jpg",
       "width": 727,
@@ -166,7 +99,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": 7,
       "public_id": "DSC09392-Edit_w11abi",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629982/DSC09392-Edit_w11abi.jpg",
       "width": 3199,
@@ -184,7 +117,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 8,
       "public_id": "DSC09383-Enhanced-NR-Edit-2_bkp1lk",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629981/DSC09383-Enhanced-NR-Edit-2_bkp1lk.jpg",
       "width": 1728,
@@ -201,7 +134,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": 9,
       "public_id": "DSC07601-Edit-2_duvfsm",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629541/DSC07601-Edit-2_duvfsm.jpg",
       "width": 1920,
@@ -217,7 +150,7 @@
       ]
     },
     {
-      "id": 14,
+      "id": 10,
       "public_id": "DSC00429-Edit_tq0ujc",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629527/DSC00429-Edit_tq0ujc.jpg",
       "width": 1920,
@@ -233,7 +166,7 @@
       ]
     },
     {
-      "id": 15,
+      "id": 11,
       "public_id": "DSC01978-Edit_qnq8fl",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629032/DSC01978-Edit_qnq8fl.jpg",
       "width": 2010,
@@ -249,7 +182,21 @@
       ]
     },
     {
-      "id": 16,
+      "id": 12,
+      "public_id": "DSC_0082_Panorama-Edit_h3nhmr",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553571/DSC_0082_Panorama-Edit_h3nhmr.jpg",
+      "width": 3676,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "panorama",
+        "uttarakhand",
+        "india",
+        "asia"
+      ]
+    },
+    {
+      "id": 13,
       "public_id": "DSC09487-Edit-8_z4usy6",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032172/DSC09487-Edit-8_z4usy6.jpg",
       "width": 1620,
@@ -265,7 +212,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": 14,
       "public_id": "DSC05533-Edit_aqtmnh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781031802/DSC05533-Edit_aqtmnh.jpg",
       "width": 1620,
@@ -283,7 +230,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 15,
       "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
       "width": 640,
@@ -303,7 +250,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": 16,
       "public_id": "abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv.jpg",
       "width": 640,
@@ -318,7 +265,7 @@
       ]
     },
     {
-      "id": 20,
+      "id": 17,
       "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
       "width": 640,
@@ -337,7 +284,7 @@
       ]
     },
     {
-      "id": 21,
+      "id": 18,
       "public_id": "abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar.jpg",
       "width": 640,

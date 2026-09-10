@@ -1,0 +1,20 @@
+{
+  "tag": "amsterdam",
+  "updated_at": "2026-09-10T19:42:52.201Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC01473-Edit_e7pfbf",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067914/DSC01473-Edit_e7pfbf.jpg",
+      "width": 1080,
+      "height": 1429,
+      "format": "jpg",
+      "tags": [
+        "amsterdam",
+        "netherlands",
+        "europe"
+      ]
+    }
+  ]
+}

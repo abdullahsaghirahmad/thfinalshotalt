@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-09-08T13:26:37.710Z",
+  "updated_at": "2026-09-10T19:42:51.172Z",
   "categories": [
     {
       "name": "featured",
-      "count": 16,
+      "count": 15,
       "path": "/manifests/featured.json"
     },
     {
       "name": "bnw",
-      "count": 30,
+      "count": 29,
       "path": "/manifests/bnw.json"
     },
     {

@@ -7,8 +7,11 @@
   "himachal_pradesh": "india",
   "kashmir": "india",
   "paris": "france",
+  "etretat": "france",
   "india": "asia",
   "france": "europe",
   "switzerland": "europe",
-  "netherlands": "europe"
+  "netherlands": "europe",
+  "amsterdam": "netherlands",
+  "belgium": "europe"
 }

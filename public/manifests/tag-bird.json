@@ -1,10 +1,23 @@
 {
   "tag": "bird",
-  "updated_at": "2026-09-08T13:26:40.800Z",
-  "count": 2,
+  "updated_at": "2026-09-10T19:42:54.243Z",
+  "count": 3,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC04049-Edit-3_dq7lf1",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067910/DSC04049-Edit-3_dq7lf1.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "minimal",
+        "blue",
+        "bird"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-s3G9Wb3EC4Q-unsplash_k0ga0n.jpg",
       "width": 1920,
@@ -18,7 +31,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "public_id": "16_a4fcp4",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285319/16_a4fcp4.jpg",
       "width": 800,

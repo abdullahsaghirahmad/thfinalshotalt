@@ -1,10 +1,220 @@
 {
   "tag": "france",
-  "updated_at": "2026-09-08T13:26:48.733Z",
-  "count": 8,
+  "updated_at": "2026-09-10T19:43:01.198Z",
+  "count": 24,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC04265-Edit-Edit_j2x2fn",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067914/DSC04265-Edit-Edit_j2x2fn.jpg",
+      "width": 1080,
+      "height": 1637,
+      "format": "jpg",
+      "tags": [
+        "etretat",
+        "france",
+        "europe"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC04256-Edit-2_bv4tcf",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067913/DSC04256-Edit-2_bv4tcf.jpg",
+      "width": 1080,
+      "height": 1454,
+      "format": "jpg",
+      "tags": [
+        "etretat",
+        "france",
+        "europe"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC03958-Edit_erf2pb",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067909/DSC03958-Edit_erf2pb.jpg",
+      "width": 1080,
+      "height": 1448,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC03938-Edit_jcxmxm",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067908/DSC03938-Edit_jcxmxm.jpg",
+      "width": 1080,
+      "height": 1620,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC03863-Edit-Edit_czcgxv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067908/DSC03863-Edit-Edit_czcgxv.jpg",
+      "width": 1712,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "golden_hour"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC03709-Edit-Edit-2_bpnc34",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067907/DSC03709-Edit-Edit-2_bpnc34.jpg",
+      "width": 1080,
+      "height": 1688,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "DSC03700-Edit_oiuoj7",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067906/DSC03700-Edit_oiuoj7.jpg",
+      "width": 1080,
+      "height": 1728,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 8,
+      "public_id": "DSC03682_wcctwh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067905/DSC03682_wcctwh.jpg",
+      "width": 1856,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 9,
+      "public_id": "DSC03676-Edit_cibd3e",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067904/DSC03676-Edit_cibd3e.jpg",
+      "width": 2031,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 10,
+      "public_id": "DSC03573-Pano-Edit-3_ctujj6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067903/DSC03573-Pano-Edit-3_ctujj6.jpg",
+      "width": 1080,
+      "height": 1506,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "street"
+      ]
+    },
+    {
+      "id": 11,
+      "public_id": "DSC03628-Edit_ev3k8x",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067902/DSC03628-Edit_ev3k8x.jpg",
+      "width": 1080,
+      "height": 1267,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 12,
+      "public_id": "DSC03502-Edit_ulluft",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067889/DSC03502-Edit_ulluft.jpg",
+      "width": 1080,
+      "height": 1350,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 13,
+      "public_id": "DSC03501-Edit_xslgqd",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067889/DSC03501-Edit_xslgqd.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 14,
+      "public_id": "DSC03494-Edit_muzl7a",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067887/DSC03494-Edit_muzl7a.jpg",
+      "width": 1080,
+      "height": 1408,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 15,
+      "public_id": "DSC03469-Edit-Edit-3_r9lwif",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067886/DSC03469-Edit-Edit-3_r9lwif.jpg",
+      "width": 1080,
+      "height": 1651,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 16,
+      "public_id": "DSC03391-Edit_ihcyzc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067885/DSC03391-Edit_ihcyzc.jpg",
+      "width": 1080,
+      "height": 1478,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris"
+      ]
+    },
+    {
+      "id": 17,
       "public_id": "6_oclk75",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/6_oclk75.jpg",
       "width": 1600,
@@ -18,7 +228,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 18,
       "public_id": "DSC04033-Edit_dz0ibj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
       "width": 1540,
@@ -34,7 +244,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 19,
       "public_id": "11_brt6oo",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285324/11_brt6oo.jpg",
       "width": 523,
@@ -48,7 +258,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 20,
       "public_id": "124_a55vni",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/124_a55vni.jpg",
       "width": 800,
@@ -63,7 +273,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 21,
       "public_id": "120_tavm96",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
       "width": 800,
@@ -78,7 +288,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 22,
       "public_id": "12_hbkqqq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
       "width": 585,
@@ -93,7 +303,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": 23,
       "public_id": "121_agcwif",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/121_agcwif.jpg",
       "width": 800,
@@ -107,7 +317,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 24,
       "public_id": "122_p43ndt",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/122_p43ndt.jpg",
       "width": 800,

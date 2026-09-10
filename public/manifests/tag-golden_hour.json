@@ -1,10 +1,24 @@
 {
   "tag": "golden_hour",
-  "updated_at": "2026-09-08T13:26:49.244Z",
-  "count": 5,
+  "updated_at": "2026-09-10T19:43:03.101Z",
+  "count": 6,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03863-Edit-Edit_czcgxv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067908/DSC03863-Edit-Edit_czcgxv.jpg",
+      "width": 1712,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "golden_hour"
+      ]
+    },
+    {
+      "id": 2,
       "public_id": "DSC07601-Edit-2_duvfsm",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629541/DSC07601-Edit-2_duvfsm.jpg",
       "width": 1920,
@@ -20,7 +34,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "public_id": "DSC02085-Edit_4x5_pzgbym",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629060/DSC02085-Edit_4x5_pzgbym.jpg",
       "width": 1080,
@@ -34,7 +48,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 4,
       "public_id": "DSC04424-Edit_de3ihh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
       "width": 1620,
@@ -52,7 +66,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 5,
       "public_id": "DSC02512-Edit_o3mrtw",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC02512-Edit_o3mrtw.jpg",
       "width": 1446,
@@ -67,7 +81,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "public_id": "DSC_0097_jezpnj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553564/DSC_0097_jezpnj.jpg",
       "width": 3505,

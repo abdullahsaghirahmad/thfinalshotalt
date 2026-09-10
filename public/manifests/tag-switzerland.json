@@ -1,10 +1,288 @@
 {
   "tag": "switzerland",
-  "updated_at": "2026-09-08T13:27:09.890Z",
-  "count": 1,
+  "updated_at": "2026-09-10T19:43:20.219Z",
+  "count": 24,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03251-Edit_pnxkuh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067885/DSC03251-Edit_pnxkuh.jpg",
+      "width": 1608,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03311-Edit-Enhanced_jjxnem",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067884/DSC03311-Edit-Enhanced_jjxnem.jpg",
+      "width": 1889,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC03305-Edit_hnrgd0",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067883/DSC03305-Edit_hnrgd0.jpg",
+      "width": 1812,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC03264-Edit-Edit-Edit_lpxdri",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067882/DSC03264-Edit-Edit-Edit_lpxdri.jpg",
+      "width": 1080,
+      "height": 1620,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC03256-Edit_yvfuwv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067881/DSC03256-Edit_yvfuwv.jpg",
+      "width": 1548,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC03230-Edit_tbriky",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067880/DSC03230-Edit_tbriky.jpg",
+      "width": 1080,
+      "height": 1747,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "DSC03184-Edit-4_j3z65j",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067794/DSC03184-Edit-4_j3z65j.jpg",
+      "width": 1080,
+      "height": 1659,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 8,
+      "public_id": "DSC03085-Edit_fzlwdb",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067763/DSC03085-Edit_fzlwdb.jpg",
+      "width": 1080,
+      "height": 1868,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 9,
+      "public_id": "DSC03148-Edit_h3iigo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067763/DSC03148-Edit_h3iigo.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 10,
+      "public_id": "DSC03089-Edit_fxebd8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067762/DSC03089-Edit_fxebd8.jpg",
+      "width": 1616,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 11,
+      "public_id": "DSC03069-Edit-2_ktiqot",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067760/DSC03069-Edit-2_ktiqot.jpg",
+      "width": 1960,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 12,
+      "public_id": "DSC03056-Edit_kkswwy",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067759/DSC03056-Edit_kkswwy.jpg",
+      "width": 1607,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 13,
+      "public_id": "DSC03041-Edit_ksxus6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067758/DSC03041-Edit_ksxus6.jpg",
+      "width": 1636,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 14,
+      "public_id": "DSC03040-Edit_ywiinx",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067758/DSC03040-Edit_ywiinx.jpg",
+      "width": 1677,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 15,
+      "public_id": "DSC03029-Edit_brwtzg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067757/DSC03029-Edit_brwtzg.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 16,
+      "public_id": "DSC03002-Edit-5_trl12w",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067756/DSC03002-Edit-5_trl12w.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 17,
+      "public_id": "DSC02980-Edit_urcbvc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067755/DSC02980-Edit_urcbvc.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 18,
+      "public_id": "DSC02930-Edit-Enhanced_abieml",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067755/DSC02930-Edit-Enhanced_abieml.jpg",
+      "width": 1795,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 19,
+      "public_id": "DSC02615-Edit-2_wlemsj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067753/DSC02615-Edit-2_wlemsj.jpg",
+      "width": 1582,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 20,
+      "public_id": "DSC02584-Edit_x4dncb",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067752/DSC02584-Edit_x4dncb.jpg",
+      "width": 1080,
+      "height": 1270,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 21,
+      "public_id": "DSC02548-Edit-2_ehsqdg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067751/DSC02548-Edit-2_ehsqdg.jpg",
+      "width": 1566,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe"
+      ]
+    },
+    {
+      "id": 22,
+      "public_id": "DSC02130-Edit_gph788",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067707/DSC02130-Edit_gph788.jpg",
+      "width": 1080,
+      "height": 1659,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "belgium"
+      ]
+    },
+    {
+      "id": 23,
+      "public_id": "DSC02019-Edit-Edit-2_hadcn3",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067705/DSC02019-Edit-Edit-2_hadcn3.jpg",
+      "width": 1080,
+      "height": 1641,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "belgium"
+      ]
+    },
+    {
+      "id": 24,
       "public_id": "DSC03193-Edit_vdtqr8",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
       "width": 1620,

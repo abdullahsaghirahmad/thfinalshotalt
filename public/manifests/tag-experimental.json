@@ -1,6 +1,6 @@
 {
   "tag": "experimental",
-  "updated_at": "2026-09-08T13:26:45.266Z",
+  "updated_at": "2026-09-10T19:42:58.632Z",
   "count": 30,
   "images": [
     {
@@ -134,7 +134,8 @@
       "height": 1194,
       "format": "jpg",
       "tags": [
-        "experimental"
+        "experimental",
+        "monochrome"
       ]
     },
     {

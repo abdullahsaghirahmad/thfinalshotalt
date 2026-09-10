@@ -51,7 +51,6 @@
 
   "golden hour":          "golden_hour",
   "magic hour":           "golden_hour",
-  "sunset":               "golden_hour",
   "sunrise":              "golden_hour",
 
   "architectural":        "architecture",
@@ -74,5 +73,17 @@
 
   "landscapes":           "landscape",
   "nature photography":   "nature",
-  "portrait photography": "portrait"
+  "portrait photography": "portrait",
+
+  "fill the frame":       "fill_the_frame",
+  "still life":           "still_life",
+  "fine art":             "fine_art",
+  "himachal pradesh":     "himachal_pradesh",
+  "sun star":             "sunstar",
+  "starburst":            "sunstar",
+  "lotuses":              "lotus",
+  "étretat":              "etretat",
+  "thunderstorm":         "thunder",
+  "cloud":                "clouds",
+  "cloudy":               "clouds"
 }

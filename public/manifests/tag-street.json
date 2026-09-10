@@ -1,0 +1,21 @@
+{
+  "tag": "street",
+  "updated_at": "2026-09-10T19:43:18.058Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC03573-Pano-Edit-3_ctujj6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067903/DSC03573-Pano-Edit-3_ctujj6.jpg",
+      "width": 1080,
+      "height": 1506,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "street"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "tag": "panorama",
-  "updated_at": "2026-09-08T13:27:01.905Z",
+  "updated_at": "2026-09-10T19:43:12.376Z",
   "count": 15,
   "images": [
     {
@@ -12,10 +12,7 @@
       "format": "jpg",
       "tags": [
         "clouds",
-        "india",
-        "meghalaya",
-        "panorama",
-        "asia"
+        "panorama"
       ]
     },
     {
@@ -44,7 +41,10 @@
       "height": 1080,
       "format": "jpg",
       "tags": [
-        "panorama"
+        "panorama",
+        "uttarakhand",
+        "india",
+        "asia"
       ]
     },
     {

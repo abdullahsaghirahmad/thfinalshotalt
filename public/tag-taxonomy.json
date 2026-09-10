@@ -15,7 +15,10 @@
       "paris",
       "europe",
       "asia",
-      "netherlands"
+      "netherlands",
+      "amsterdam",
+      "belgium",
+      "etretat"
     ]
   },
   "what": {
@@ -28,6 +31,7 @@
       "eclipse",
       "aurora",
       "cloud",
+      "clouds",
       "fog",
       "mist",
       "rain",
@@ -42,6 +46,7 @@
       "forest",
       "tree",
       "flower",
+      "lotus",
       "bird",
       "boat",
       "plane",
@@ -49,6 +54,11 @@
       "bridge",
       "street",
       "city",
+      "landscape",
+      "nature",
+      "sky",
+      "thunder",
+      "alphabet",
       "silhouette",
       "portrait",
       "reflection",
@@ -64,6 +74,8 @@
       "leading_lines",
       "symmetry",
       "framing",
+      "fill_the_frame",
+      "sunstar",
       "minimal",
       "reflection",
       "silhouette",
@@ -77,6 +89,7 @@
     "label": "🕐 When",
     "tags": [
       "night",
+      "night_sky",
       "golden_hour",
       "blue_hour",
       "dawn",
@@ -104,7 +117,8 @@
       "serene",
       "surreal",
       "intimate",
-      "still_life"
+      "still_life",
+      "pareidolia"
     ]
   },
   "color": {
@@ -116,6 +130,7 @@
       "yellow",
       "purple",
       "red",
+      "pink",
       "brown",
       "neutral",
       "pastel",
@@ -131,9 +146,9 @@
       "project:experimental"
     ]
   },
-
-  "pinned": ["monochrome"],
+  "pinned": [
+    "monochrome"
+  ],
   "featured_parent_share": 0.8,
-
   "_discover_pills": "Discover pills on /discover. (1) pinned — canonical tags listed first, same click behaviour as the others; skip a pin if it has zero images. Example: [\"monochrome\", \"project:experimental\"]. (2) featured_parent_share — 0–1, default 0.8. A location parent is hidden when a descendant already in the row has at least this fraction of the parent's images (asia vs india at 100% hides asia; india vs meghalaya at ~71% keeps both). Change the number here, not in server.js."
 }

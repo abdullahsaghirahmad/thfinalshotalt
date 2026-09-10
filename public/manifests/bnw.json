@@ -1,7 +1,7 @@
 {
   "category": "bnw",
-  "updated_at": "2026-09-08T13:26:36.873Z",
-  "count": 30,
+  "updated_at": "2026-09-10T19:42:50.493Z",
+  "count": 29,
   "images": [
     {
       "id": 1,
@@ -93,14 +93,6 @@
     },
     {
       "id": 12,
-      "public_id": "17_zplsoi",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285320/17_zplsoi.jpg",
-      "width": 800,
-      "height": 500,
-      "format": "jpg"
-    },
-    {
-      "id": 13,
       "public_id": "113_ignrda",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285320/113_ignrda.jpg",
       "width": 800,
@@ -108,7 +100,7 @@
       "format": "jpg"
     },
     {
-      "id": 14,
+      "id": 13,
       "public_id": "112_ls7azd",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285320/112_ls7azd.jpg",
       "width": 800,
@@ -116,7 +108,7 @@
       "format": "jpg"
     },
     {
-      "id": 15,
+      "id": 14,
       "public_id": "111_ufdkda",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285320/111_ufdkda.jpg",
       "width": 800,
@@ -124,7 +116,7 @@
       "format": "jpg"
     },
     {
-      "id": 16,
+      "id": 15,
       "public_id": "18_mxwnbm",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285319/18_mxwnbm.jpg",
       "width": 533,
@@ -132,7 +124,7 @@
       "format": "jpg"
     },
     {
-      "id": 17,
+      "id": 16,
       "public_id": "19_flvxqk",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285319/19_flvxqk.jpg",
       "width": 640,
@@ -140,7 +132,7 @@
       "format": "jpg"
     },
     {
-      "id": 18,
+      "id": 17,
       "public_id": "15_rsgpx8",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285319/15_rsgpx8.jpg",
       "width": 800,
@@ -148,7 +140,7 @@
       "format": "jpg"
     },
     {
-      "id": 19,
+      "id": 18,
       "public_id": "16_a4fcp4",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285319/16_a4fcp4.jpg",
       "width": 800,
@@ -156,7 +148,7 @@
       "format": "jpg"
     },
     {
-      "id": 20,
+      "id": 19,
       "public_id": "14_jfulok",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/14_jfulok.jpg",
       "width": 800,
@@ -164,7 +156,7 @@
       "format": "jpg"
     },
     {
-      "id": 21,
+      "id": 20,
       "public_id": "124_a55vni",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/124_a55vni.jpg",
       "width": 800,
@@ -172,7 +164,7 @@
       "format": "jpg"
     },
     {
-      "id": 22,
+      "id": 21,
       "public_id": "127_yio7en",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/127_yio7en.jpg",
       "width": 640,
@@ -180,7 +172,7 @@
       "format": "jpg"
     },
     {
-      "id": 23,
+      "id": 22,
       "public_id": "120_tavm96",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
       "width": 800,
@@ -188,7 +180,7 @@
       "format": "jpg"
     },
     {
-      "id": 24,
+      "id": 23,
       "public_id": "13_fhgj8s",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/13_fhgj8s.jpg",
       "width": 640,
@@ -196,7 +188,7 @@
       "format": "jpg"
     },
     {
-      "id": 25,
+      "id": 24,
       "public_id": "126_fjh8vx",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/126_fjh8vx.jpg",
       "width": 800,
@@ -204,7 +196,7 @@
       "format": "jpg"
     },
     {
-      "id": 26,
+      "id": 25,
       "public_id": "125_h4nuo0",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/125_h4nuo0.jpg",
       "width": 800,
@@ -212,7 +204,7 @@
       "format": "jpg"
     },
     {
-      "id": 27,
+      "id": 26,
       "public_id": "123_yjgmjl",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/123_yjgmjl.jpg",
       "width": 533,
@@ -220,7 +212,7 @@
       "format": "jpg"
     },
     {
-      "id": 28,
+      "id": 27,
       "public_id": "12_hbkqqq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
       "width": 585,
@@ -228,7 +220,7 @@
       "format": "jpg"
     },
     {
-      "id": 29,
+      "id": 28,
       "public_id": "121_agcwif",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/121_agcwif.jpg",
       "width": 800,
@@ -236,7 +228,7 @@
       "format": "jpg"
     },
     {
-      "id": 30,
+      "id": 29,
       "public_id": "122_p43ndt",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/122_p43ndt.jpg",
       "width": 800,

@@ -803,6 +803,9 @@ function removeTag(tag) {
 }
 function toggleTag(tag) {
   if (getActiveTags().includes(tag)) removeTag(tag); else addTag(tag);
+  const inp = document.getElementById('vocab-filter');
+  inp.value = '';
+  filterVocab('');
 }
 
 /* ── Render ───────────────────────────────────────────────────── */
@@ -913,14 +916,20 @@ async function saveAndNext() {
 /* ── Save (bulk) ──────────────────────────────────────────────── */
 async function bulkApply() {
   if (bulkSelected.size === 0 || bulkTags.length === 0) return;
+  const tagsToAdd = [...bulkTags];
+  bulkTags = [];
+  hidePlaceSuggest();
+  renderCurrentTags();
+  renderVocabulary();
+
   const btn = document.getElementById('save-btn');
   btn.disabled = true; btn.textContent = 'Saving…';
   const ids = [...bulkSelected].map(i => queue[i]);
   let done = 0, errors = 0;
   for (const img of ids) {
     try {
-      // MERGE tags: existing + bulkTags (deduplicated)
-      const merged = [...new Set([...img.tags, ...bulkTags])];
+      // MERGE tags: existing + tagsToAdd (deduplicated)
+      const merged = [...new Set([...img.tags, ...tagsToAdd])];
       const r = await fetch('/admin/api/save-tags', {
         method: 'POST', headers: {'Content-Type':'application/json'},
         body: JSON.stringify({ public_id: img.public_id, tags: merged })
@@ -935,7 +944,8 @@ async function bulkApply() {
       console.error('bulk save error', img.public_id, e);
     }
   }
-  btn.disabled = false; btn.textContent = '💾 Apply to selected';
+  btn.textContent = '💾 Apply to selected';
+  updateBulkCount();
   setStatus(errors === 0
     ? '✓ Applied to ' + done + ' images'
     : '⚠ Done with ' + errors + ' errors', errors > 0);
