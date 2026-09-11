@@ -1,6 +1,6 @@
 {
-  "tag": "reflection",
-  "updated_at": "2026-09-11T10:54:27.880Z",
+  "tag": "zaanse_schans",
+  "updated_at": "2026-09-11T10:54:39.254Z",
   "count": 2,
   "images": [
     {
@@ -22,18 +22,17 @@
     },
     {
       "id": 2,
-      "public_id": "DSC00183-Edit-4_uimcjm",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629984/DSC00183-Edit-4_uimcjm.jpg",
-      "width": 727,
-      "height": 1080,
+      "public_id": "DSC01816-Edit_xgcc5f",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067701/DSC01816-Edit_xgcc5f.jpg",
+      "width": 1080,
+      "height": 1434,
       "format": "jpg",
       "tags": [
-        "india",
-        "long_exposure",
-        "meghalaya",
-        "reflection",
-        "waterfall",
-        "asia"
+        "netherlands",
+        "europe",
+        "monochrome",
+        "zaanse_schans",
+        "symmetry"
       ]
     }
   ]

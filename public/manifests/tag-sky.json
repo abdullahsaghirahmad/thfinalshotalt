@@ -1,10 +1,71 @@
 {
   "tag": "sky",
-  "updated_at": "2026-09-10T19:43:16.476Z",
-  "count": 1,
+  "updated_at": "2026-09-11T10:54:30.339Z",
+  "count": 5,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03041-Edit_ksxus6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067758/DSC03041-Edit_ksxus6.jpg",
+      "width": 1636,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "minimal",
+        "sky",
+        "mountain",
+        "purple"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03002-Edit-5_trl12w",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067756/DSC03002-Edit-5_trl12w.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "golden_hour",
+        "landscape",
+        "sky"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC02980-Edit_urcbvc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067755/DSC02980-Edit_urcbvc.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "sky",
+        "golden_hour"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC01835-Edit-3_bwsmsz",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067702/DSC01835-Edit-3_bwsmsz.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "netherlands",
+        "europe",
+        "pink",
+        "sky",
+        "landscape",
+        "windmill"
+      ]
+    },
+    {
+      "id": 5,
       "public_id": "DSC04424-Edit_de3ihh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
       "width": 1620,

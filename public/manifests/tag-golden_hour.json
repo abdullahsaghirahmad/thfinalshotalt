@@ -1,7 +1,7 @@
 {
   "tag": "golden_hour",
-  "updated_at": "2026-09-10T19:43:03.101Z",
-  "count": 6,
+  "updated_at": "2026-09-11T10:54:13.657Z",
+  "count": 9,
   "images": [
     {
       "id": 1,
@@ -19,6 +19,50 @@
     },
     {
       "id": 2,
+      "public_id": "DSC03002-Edit-5_trl12w",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067756/DSC03002-Edit-5_trl12w.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "golden_hour",
+        "landscape",
+        "sky"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC02980-Edit_urcbvc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067755/DSC02980-Edit_urcbvc.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "sky",
+        "golden_hour"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC02930-Edit-Enhanced_abieml",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067755/DSC02930-Edit-Enhanced_abieml.jpg",
+      "width": 1795,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "golden_hour",
+        "orange",
+        "minimal"
+      ]
+    },
+    {
+      "id": 5,
       "public_id": "DSC07601-Edit-2_duvfsm",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629541/DSC07601-Edit-2_duvfsm.jpg",
       "width": 1920,
@@ -34,7 +78,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 6,
       "public_id": "DSC02085-Edit_4x5_pzgbym",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629060/DSC02085-Edit_4x5_pzgbym.jpg",
       "width": 1080,
@@ -48,7 +92,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 7,
       "public_id": "DSC04424-Edit_de3ihh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
       "width": 1620,
@@ -66,7 +110,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 8,
       "public_id": "DSC02512-Edit_o3mrtw",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC02512-Edit_o3mrtw.jpg",
       "width": 1446,
@@ -81,7 +125,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 9,
       "public_id": "DSC_0097_jezpnj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553564/DSC_0097_jezpnj.jpg",
       "width": 3505,

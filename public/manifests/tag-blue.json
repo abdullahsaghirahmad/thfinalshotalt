@@ -1,7 +1,7 @@
 {
   "tag": "blue",
-  "updated_at": "2026-09-10T19:42:54.654Z",
-  "count": 6,
+  "updated_at": "2026-09-11T10:54:03.144Z",
+  "count": 10,
   "images": [
     {
       "id": 1,
@@ -18,6 +18,64 @@
     },
     {
       "id": 2,
+      "public_id": "DSC02615-Edit-2_wlemsj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067753/DSC02615-Edit-2_wlemsj.jpg",
+      "width": 1582,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "blue"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC02548-Edit-2_ehsqdg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067751/DSC02548-Edit-2_ehsqdg.jpg",
+      "width": 1566,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "landscape",
+        "blue"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC01972-Edit_le2byx",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067704/DSC01972-Edit_le2byx.jpg",
+      "width": 1644,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "long_exposure",
+        "blue"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC01845-Edit_vwrx6q",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067703/DSC01845-Edit_vwrx6q.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "netherlands",
+        "europe",
+        "blue_hour",
+        "blue",
+        "zaanse_schans",
+        "landscape",
+        "reflection"
+      ]
+    },
+    {
+      "id": 6,
       "public_id": "16_l8zvxq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518938/16_l8zvxq.jpg",
       "width": 900,
@@ -30,7 +88,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 7,
       "public_id": "DSC03193-Edit_vdtqr8",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
       "width": 1620,
@@ -45,7 +103,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 8,
       "public_id": "DSC04033-Edit_dz0ibj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
       "width": 1540,
@@ -61,7 +119,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 9,
       "public_id": "abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755329396/abdullah-ahmad-0BgeMBFUAVc-unsplash_qomodp.jpg",
       "width": 640,
@@ -75,7 +133,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 10,
       "public_id": "abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-rZB0NdiUr9Q-unsplash_jlt37f.jpg",
       "width": 640,

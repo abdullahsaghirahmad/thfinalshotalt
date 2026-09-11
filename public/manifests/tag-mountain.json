@@ -1,10 +1,99 @@
 {
   "tag": "mountain",
-  "updated_at": "2026-09-10T19:43:09.603Z",
-  "count": 4,
+  "updated_at": "2026-09-11T10:54:21.608Z",
+  "count": 10,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03251-Edit_pnxkuh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067885/DSC03251-Edit_pnxkuh.jpg",
+      "width": 1608,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "mountain",
+        "grindelwald"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03264-Edit-Edit-Edit_lpxdri",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067882/DSC03264-Edit-Edit-Edit_lpxdri.jpg",
+      "width": 1080,
+      "height": 1620,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "cable_car",
+        "grindelwald",
+        "mountain"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC03256-Edit_yvfuwv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067881/DSC03256-Edit_yvfuwv.jpg",
+      "width": 1548,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "mountain",
+        "landscape",
+        "grindelwald"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC03069-Edit-2_ktiqot",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067760/DSC03069-Edit-2_ktiqot.jpg",
+      "width": 1960,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "mountain",
+        "minimal"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC03041-Edit_ksxus6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067758/DSC03041-Edit_ksxus6.jpg",
+      "width": 1636,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "minimal",
+        "sky",
+        "mountain",
+        "purple"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC03040-Edit_ywiinx",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067758/DSC03040-Edit_ywiinx.jpg",
+      "width": 1677,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "pink",
+        "mountain",
+        "minimal"
+      ]
+    },
+    {
+      "id": 7,
       "public_id": "DSC04424-Edit_de3ihh",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629031/DSC04424-Edit_de3ihh.jpg",
       "width": 1620,
@@ -22,7 +111,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 8,
       "public_id": "DSC_0097_jezpnj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788553564/DSC_0097_jezpnj.jpg",
       "width": 3505,
@@ -36,7 +125,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 9,
       "public_id": "abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175923/abdullah-ahmad-tNK9Vo2Espc-unsplash_sncxb9.jpg",
       "width": 640,
@@ -56,7 +145,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 10,
       "public_id": "abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-QfyRskwJE3s-unsplash_kgmonj.jpg",
       "width": 640,

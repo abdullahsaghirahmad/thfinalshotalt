@@ -45,6 +45,9 @@
   .mode-btn          { border-color: #553; color: #aa8; }
   .mode-btn.active   { background: #332; border-color: #aa8; color: #ff0; }
   .mode-btn:hover    { border-color: #aa8; color: #ff0; }
+  #session-mode-btn.mode-btn { border-color: #356; color: #8ac; }
+  #session-mode-btn.mode-btn.active { background: #123; border-color: #8cf; color: #8cf; }
+  #session-mode-btn.mode-btn:hover { border-color: #8cf; color: #8cf; }
 
   #nav-btns { display: flex; gap: 6px; margin-left: auto; }
   #nav-btns button {
@@ -110,6 +113,7 @@
   }
   .film-dot.ok  { background: #4a7; }
   .film-dot.bad { background: #a44; }
+  .film-dot.dirty { box-shadow: 0 0 0 2px #cc8; }
 
   /* ── Left: single image ──────────── */
   #img-panel {
@@ -301,6 +305,13 @@
   #bulk-info-banner strong { color: #ff0; }
   #bulk-add-note { font-size: 11px; color: #665; margin-top: 3px; }
 
+  #session-info-banner {
+    padding: 8px 14px; font-size: 12px; color: #8aa;
+    background: #101418; border-bottom: 1px solid #333; flex-shrink: 0;
+    display: none;
+  }
+  #session-info-banner strong { color: #8cf; }
+
   /* Vocabulary */
   #vocab-scroll { flex: 1; overflow-y: auto; padding: 0 14px 10px; }
   #vocab-scroll::-webkit-scrollbar { width: 4px; }
@@ -317,7 +328,11 @@
     letter-spacing: 0.03em; cursor: pointer;
     border: 1px solid #3a3a3a; color: #ddd; background: transparent; transition: all 0.1s;
   }
-  .vocab-tag:hover  { border-color: #777; color: #fff; background: #1f1f1f; }
+  .vocab-tag:hover,
+  .vocab-tag.vocab-tag--hi {
+    border-color: #777; color: #fff; background: #1f1f1f;
+  }
+  .vocab-tag.vocab-tag--hi { border-color: #aaa; outline: 1px solid #888; }
   .vocab-tag.active { background: #2a2a2a; border-color: #888; color: #fff; }
   .vocab-tag .cnt   { color: #888; font-size: 12px; margin-left: 4px; }
   .vocab-tag.active .cnt { color: #aaa; }
@@ -356,6 +371,7 @@
   <button class="filter-btn" data-filter="all">All</button>
   <span class="sep">·</span>
   <button class="mode-btn" id="bulk-mode-btn">⊞ Bulk</button>
+  <button class="mode-btn" id="session-mode-btn">◎ Session</button>
   <div id="nav-btns">
     <button id="prev-btn" disabled>← Prev</button>
     <button id="next-btn" disabled>Next →</button>
@@ -394,6 +410,10 @@
       <div><strong id="bulk-selected-count">0</strong> images selected — tags below will be <strong>added</strong> to each</div>
       <div id="bulk-add-note">Existing tags are preserved. Place parents are suggested; they only apply if you keep them on the chip list.</div>
     </div>
+    <div id="session-info-banner">
+      <div><strong>Session</strong> — tag every photo here; Cloudinary is not written until <strong>Save all</strong>.</div>
+      <div id="session-add-note" style="font-size:11px;color:#567;margin-top:3px;">Arrows and Skip only change photos. Unsaved frames get a gold ring on the filmstrip dot.</div>
+    </div>
 
     <!-- Current / bulk tags -->
     <div class="section">
@@ -417,9 +437,9 @@
     <div class="section">
       <div class="section-label">Search vocabulary / add tag</div>
       <div id="add-tag-row">
-        <input id="vocab-filter" type="text" placeholder="type to filter, or add a new tag"
+        <input id="vocab-filter" type="text" placeholder="filter, Tab to pick, Enter to add"
                autocomplete="off" spellcheck="false">
-        <button type="button" id="add-vocab-btn" title="Add this tag (Enter)">Add ↵</button>
+        <button type="button" id="add-vocab-btn" title="Add exactly this as a new tag">Add ↵</button>
       </div>
     </div>
 
@@ -457,6 +477,13 @@ let currentFilter = 'few';
 let bulkMode    = false;
 let bulkTags    = [];      // tags to ADD to all selected
 let bulkSelected = new Set(); // indices into queue[]
+let vocabHi     = -1;      // keyboard highlight among visible vocab pills
+
+// Session mode: per-photo drafts in memory, one Cloudinary write at the end
+let sessionMode     = false;
+let sessionOriginal = new Map(); // public_id → tags at session start / last save
+let sessionDirty    = new Set(); // public_id
+let sessionSaving   = false;
 
 /* ── Filmstrip strip helpers ──────────────────────────────────────────────── */
 function renderFilmstrip() {
@@ -472,7 +499,7 @@ function renderFilmstrip() {
     thumb.src = img.secure_url.replace('/upload/', '/upload/w_72,h_52,c_fill,q_30,f_auto/');
     thumb.loading = 'lazy'; thumb.alt = '';
     const dot = document.createElement('div');
-    dot.className = 'film-dot ' + (img.tags.length >= 3 ? 'ok' : 'bad');
+    dot.className = filmDotClass(img);
     wrap.appendChild(thumb); wrap.appendChild(dot); strip.appendChild(wrap);
     wrap.addEventListener('click', () => showImage(i));
   });
@@ -487,10 +514,17 @@ function updateFilmstripActive(idx) {
 
 function updateFilmstripDot(idx, tagCount) {
   const wraps = document.querySelectorAll('.film-wrap');
-  if (wraps[idx]) {
+  if (wraps[idx] && queue[idx]) {
     const dot = wraps[idx].querySelector('.film-dot');
-    if (dot) dot.className = 'film-dot ' + (tagCount >= 3 ? 'ok' : 'bad');
+    if (dot) dot.className = filmDotClass(queue[idx], tagCount);
   }
+}
+
+function filmDotClass(img, tagCount) {
+  const n = tagCount == null ? (img.tags || []).length : tagCount;
+  let cls = 'film-dot ' + (n >= 3 ? 'ok' : 'bad');
+  if (sessionMode && img && sessionDirty.has(img.public_id)) cls += ' dirty';
+  return cls;
 }
 
 /* ── Boot ─────────────────────────────────────────────────────── */
@@ -530,9 +564,12 @@ async function loadQueue(filter) {
     queue    = d.images || [];
     queueIdx = 0;
     bulkSelected.clear();
+    if (sessionMode) captureSessionOriginals();
+    else { sessionOriginal = new Map(); sessionDirty = new Set(); }
     updateQueueInfo();
     if (bulkMode) {
       renderBulkGrid();
+      updateBulkCount();
     } else {
       renderFilmstrip();  // populate the thumbnail strip
       if (queue.length > 0) showImage(0);
@@ -544,6 +581,11 @@ async function loadQueue(filter) {
 }
 
 function activateFilter(filter) {
+  if (sessionMode) persistSessionDraft();
+  if (sessionMode && sessionDirty.size) {
+    if (!confirm('Load a different filter and discard ' + sessionDirty.size + ' unsaved session photo(s)?')) return;
+    sessionDirty.clear();
+  }
   currentFilter = filter;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
   loadQueue(filter);
@@ -555,12 +597,14 @@ function showEmpty() {
   currentTags = [];
   hidePlaceSuggest();
   renderCurrentTags(); renderCompleteness();
-  document.getElementById('save-btn').disabled = true;
+  if (sessionMode) updateSessionSaveBtn();
+  else document.getElementById('save-btn').disabled = true;
 }
 
 /* ── Single image ─────────────────────────────────────────────── */
 function showImage(idx) {
   if (idx < 0 || idx >= queue.length) return;
+  if (sessionMode && queue[queueIdx] && idx !== queueIdx) persistSessionDraft();
   queueIdx = idx;
   const img = queue[idx];
 
@@ -576,18 +620,135 @@ function showImage(idx) {
     '<strong>' + img.public_id + '</strong>' +
     '  ·  ' + img.width + '×' + img.height +
     (img.folder ? '  ·  ' + img.folder : '') +
-    '  ·  ' + img.tags.length + ' existing tags';
+    '  ·  ' + img.tags.length + (sessionMode ? ' tags (draft)' : ' existing tags');
 
   currentTags = [...(img.tags || [])];
   hidePlaceSuggest();
   renderCurrentTags(); renderCompleteness(); renderVocabulary();
   updateNavButtons(); updateQueueInfo();
-  document.getElementById('save-btn').disabled = false;
-  setStatus('');
+  if (sessionMode) updateSessionSaveBtn();
+  else document.getElementById('save-btn').disabled = false;
+  if (!sessionMode) setStatus('');
 }
 
 /* ── Bulk mode ────────────────────────────────────────────────── */
+function tagsEqual(a, b) {
+  const A = [...(a || [])].map(t => String(t).toLowerCase()).sort();
+  const B = [...(b || [])].map(t => String(t).toLowerCase()).sort();
+  if (A.length !== B.length) return false;
+  return A.every((t, i) => t === B[i]);
+}
+
+function captureSessionOriginals() {
+  sessionOriginal = new Map();
+  sessionDirty = new Set();
+  queue.forEach(img => {
+    sessionOriginal.set(img.public_id, [...(img.tags || [])]);
+  });
+}
+
+function persistSessionDraft() {
+  if (!sessionMode || !queue[queueIdx]) return;
+  const img = queue[queueIdx];
+  img.tags = [...currentTags];
+  const orig = sessionOriginal.get(img.public_id) || [];
+  if (tagsEqual(img.tags, orig)) sessionDirty.delete(img.public_id);
+  else sessionDirty.add(img.public_id);
+  updateFilmstripDot(queueIdx, img.tags.length);
+  updateSessionSaveBtn();
+  updateQueueInfo();
+}
+
+function updateSessionSaveBtn() {
+  const btn = document.getElementById('save-btn');
+  const n = sessionDirty.size;
+  btn.textContent = n ? ('💾 Save all (' + n + ')') : '💾 Save all';
+  btn.disabled = n === 0 || sessionSaving;
+}
+
+function applySessionChrome() {
+  document.getElementById('session-mode-btn').classList.toggle('active', true);
+  document.getElementById('bulk-mode-btn').classList.toggle('active', false);
+  document.getElementById('session-info-banner').style.display = 'block';
+  document.getElementById('bulk-info-banner').style.display = 'none';
+  document.getElementById('completeness-section').style.display = 'block';
+  document.getElementById('tags-label').textContent = 'Current tags';
+  document.getElementById('nav-btns').style.display = 'flex';
+  document.getElementById('skip-btn').style.display = '';
+  document.getElementById('shortcuts').textContent = 'S · Save all  |  → · Next (no write)  |  ← · Back';
+  updateSessionSaveBtn();
+}
+
+function applyDefaultChrome() {
+  document.getElementById('session-mode-btn').classList.toggle('active', false);
+  document.getElementById('session-info-banner').style.display = 'none';
+  document.getElementById('save-btn').textContent = '💾 Save & Next';
+  document.getElementById('skip-btn').style.display = '';
+  document.getElementById('shortcuts').textContent = 'S · Save & Next  |  → · Skip  |  ← · Back';
+  document.getElementById('tags-label').textContent = 'Current tags';
+  document.getElementById('nav-btns').style.display = 'flex';
+  document.getElementById('completeness-section').style.display = 'block';
+}
+
+function confirmLeaveSession(action) {
+  persistSessionDraft();
+  if (!sessionDirty.size) return true;
+  return confirm(action + ' and discard ' + sessionDirty.size + ' unsaved session photo(s)? Cloudinary tags will be reloaded.');
+}
+
+function exitSessionState() {
+  sessionMode = false;
+  sessionOriginal = new Map();
+  sessionDirty = new Set();
+  sessionSaving = false;
+  applyDefaultChrome();
+  setStatus('');
+}
+
+function setSessionMode(on) {
+  if (on) {
+    if (sessionMode) return;
+    if (bulkMode) setBulkMode(false);
+    captureSessionOriginals();
+    sessionMode = true;
+    persistSessionDraft();
+    applySessionChrome();
+    setStatus('');
+    updateQueueInfo();
+    if (queue[queueIdx]) {
+      document.getElementById('img-info').innerHTML =
+        document.getElementById('img-info').innerHTML.replace(' existing tags', ' tags (draft)');
+    }
+    return;
+  }
+  if (!sessionMode) return;
+  if (!confirmLeaveSession('Leave Session')) return;
+  exitSessionState();
+  loadQueue(currentFilter);
+}
+
 function setBulkMode(on) {
+  if (on && sessionMode) {
+    if (!confirmLeaveSession('Switch to Bulk')) return;
+    exitSessionState();
+    bulkMode = true;
+    hidePlaceSuggest();
+    document.getElementById('bulk-mode-btn').classList.toggle('active', true);
+    document.getElementById('img-panel').style.display  = 'none';
+    document.getElementById('bulk-panel').style.display = 'flex';
+    document.getElementById('bulk-info-banner').style.display = 'block';
+    document.getElementById('completeness-section').style.display = 'none';
+    document.getElementById('tags-label').textContent = 'Tags to add to selected';
+    document.getElementById('nav-btns').style.display = 'none';
+    document.getElementById('save-btn').textContent = '💾 Apply to selected';
+    document.getElementById('skip-btn').style.display = 'none';
+    document.getElementById('shortcuts').textContent = 'Click thumbs to select · S to apply';
+    bulkTags = [];
+    bulkSelected.clear();
+    loadQueue(currentFilter);
+    return;
+  }
+
   bulkMode = on;
   hidePlaceSuggest();
   document.getElementById('bulk-mode-btn').classList.toggle('active', on);
@@ -685,7 +846,13 @@ function updateBulkCount() {
 
 /* ── Tag editing ──────────────────────────────────────────────── */
 function getActiveTags() { return bulkMode ? bulkTags : currentTags; }
-function setActiveTags(t) { if (bulkMode) bulkTags = t; else currentTags = t; }
+function setActiveTags(t) {
+  if (bulkMode) bulkTags = t;
+  else {
+    currentTags = t;
+    if (sessionMode) persistSessionDraft();
+  }
+}
 
 function ancestorsOf(tag) {
   const out = [];
@@ -803,9 +970,7 @@ function removeTag(tag) {
 }
 function toggleTag(tag) {
   if (getActiveTags().includes(tag)) removeTag(tag); else addTag(tag);
-  const inp = document.getElementById('vocab-filter');
-  inp.value = '';
-  filterVocab('');
+  clearVocabFilter();
 }
 
 /* ── Render ───────────────────────────────────────────────────── */
@@ -871,18 +1036,75 @@ function renderVocabulary() {
     otherTags.forEach(v => tagDiv.appendChild(makeVocabTag(v.tag, v.count, activeTags)));
     div.appendChild(tagDiv); container.appendChild(div);
   }
+
+  const q = (document.getElementById('vocab-filter').value || '').trim().toLowerCase();
+  if (q) filterVocab(q);
+  else vocabHi = -1;
 }
 
 function makeVocabTag(tag, count, activeTags) {
   const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.tabIndex = -1;
+  btn.dataset.tag = tag;
   btn.className = 'vocab-tag' + (activeTags.includes(tag) ? ' active' : '');
   btn.innerHTML = tag + '<span class="cnt">·' + count + '</span>';
   btn.addEventListener('click', () => toggleTag(tag));
   return btn;
 }
 
+/* ── Save (session) ───────────────────────────────────────────── */
+async function saveSessionAll() {
+  if (!sessionMode || sessionSaving) return;
+  persistSessionDraft();
+  const dirtyIds = [...sessionDirty];
+  if (!dirtyIds.length) return;
+  sessionSaving = true;
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  let done = 0, errors = 0;
+  for (const pid of dirtyIds) {
+    const img = queue.find(x => x.public_id === pid);
+    if (!img) { sessionDirty.delete(pid); continue; }
+    btn.textContent = 'Saved ' + done + '/' + dirtyIds.length + '…';
+    setStatus('Saved ' + done + '/' + dirtyIds.length + '…');
+    try {
+      const r = await fetch('/admin/api/save-tags', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ public_id: img.public_id, tags: img.tags || [] })
+      });
+      const d = await r.json();
+      if (!d.success) throw new Error(d.error || 'failed');
+      const saved = d.tags || img.tags;
+      img.tags = [...saved];
+      sessionOriginal.set(pid, [...saved]);
+      sessionDirty.delete(pid);
+      done++;
+      if (queue[queueIdx] && queue[queueIdx].public_id === pid) {
+        currentTags = [...saved];
+        renderCurrentTags(); renderCompleteness(); renderVocabulary();
+      }
+      const idx = queue.findIndex(x => x.public_id === pid);
+      if (idx >= 0) updateFilmstripDot(idx, saved.length);
+      setStatus('Saved ' + done + '/' + dirtyIds.length + '…');
+      btn.textContent = 'Saved ' + done + '/' + dirtyIds.length + '…';
+    } catch (e) {
+      errors++;
+      console.error('session save error', pid, e);
+    }
+  }
+  sessionSaving = false;
+  updateSessionSaveBtn();
+  updateQueueInfo();
+  setStatus(errors === 0
+    ? '✓ Saved ' + done + ' photo(s)'
+    : '⚠ Saved ' + done + ', ' + errors + ' failed — those stay unsaved', errors > 0);
+  refreshVocabulary();
+}
+
 /* ── Save (single) ────────────────────────────────────────────── */
 async function saveAndNext() {
+  if (sessionMode) { await saveSessionAll(); return; }
   if (bulkMode) { await bulkApply(); return; }
   if (queue.length === 0) return;
   const img = queue[queueIdx];
@@ -960,9 +1182,14 @@ function setStatus(msg, isError) {
 
 function updateQueueInfo() {
   const el = document.getElementById('queue-info');
-  el.innerHTML = bulkMode
-    ? queue.length + ' images'
-    : (queue.length === 0 ? 'No images' : 'Image <span>' + (queueIdx+1) + ' of ' + queue.length + '</span>');
+  if (bulkMode) {
+    el.innerHTML = queue.length + ' images';
+    return;
+  }
+  if (queue.length === 0) { el.textContent = 'No images'; return; }
+  let html = 'Image <span>' + (queueIdx + 1) + ' of ' + queue.length + '</span>';
+  if (sessionMode && sessionDirty.size) html += ' · ' + sessionDirty.size + ' unsaved';
+  el.innerHTML = html;
 }
 
 function updateNavButtons() {
@@ -976,37 +1203,104 @@ document.getElementById('next-btn').addEventListener('click', () => { if (queueI
 document.getElementById('skip-btn').addEventListener('click', () => { if (queueIdx < queue.length-1) showImage(queueIdx+1); });
 document.getElementById('save-btn').addEventListener('click', saveAndNext);
 document.getElementById('bulk-mode-btn').addEventListener('click', () => setBulkMode(!bulkMode));
+document.getElementById('session-mode-btn').addEventListener('click', () => setSessionMode(!sessionMode));
 document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => activateFilter(b.dataset.filter)));
 
 document.getElementById('place-accept').addEventListener('click', acceptPlace);
 document.getElementById('place-ignore').addEventListener('click', ignorePlace);
 document.getElementById('add-vocab-btn').addEventListener('click', () => {
   const inp = document.getElementById('vocab-filter');
-  if (inp.value.trim()) { addTag(inp.value); inp.value = ''; filterVocab(''); }
+  if (inp.value.trim()) { addTag(inp.value); clearVocabFilter(); }
   else inp.focus();
 });
 document.getElementById('vocab-filter').addEventListener('keydown', e => {
+  const v = e.target.value.trim();
+  if (e.key === 'Tab' && v && visibleVocabTags().length) {
+    if (e.shiftKey && vocabHi < 0) return;
+    e.preventDefault();
+    moveVocabHi(e.shiftKey ? -1 : 1);
+    return;
+  }
+  if (e.key === 'ArrowDown' && visibleVocabTags().length) {
+    e.preventDefault();
+    moveVocabHi(1);
+    return;
+  }
+  if (e.key === 'ArrowUp' && visibleVocabTags().length) {
+    e.preventDefault();
+    moveVocabHi(-1);
+    return;
+  }
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    if (vocabHi >= 0) clearVocabHi();
+    else clearVocabFilter();
+    return;
+  }
   if (e.key === 'Enter') {
-    const v = e.target.value.trim();
-    if (v) { addTag(v); e.target.value = ''; filterVocab(''); }
+    e.preventDefault();
+    if (!v) return;
+    const tags = visibleVocabTags();
+    if (vocabHi >= 0 && tags[vocabHi]) toggleTag(tags[vocabHi].dataset.tag);
+    else { addTag(v); clearVocabFilter(); }
   }
 });
 document.getElementById('vocab-filter').addEventListener('input', e => {
   filterVocab(e.target.value.trim().toLowerCase());
 });
 
+function visibleVocabTags() {
+  return Array.from(document.querySelectorAll('.vocab-tag')).filter(btn => {
+    if (btn.style.display === 'none') return false;
+    const group = btn.closest('.vocab-group');
+    return !group || group.style.display !== 'none';
+  });
+}
+
+function clearVocabHi() {
+  vocabHi = -1;
+  document.querySelectorAll('.vocab-tag--hi').forEach(function (btn) {
+    btn.classList.remove('vocab-tag--hi');
+  });
+  document.getElementById('vocab-filter').focus();
+}
+
+function moveVocabHi(delta) {
+  const tags = visibleVocabTags();
+  const inp = document.getElementById('vocab-filter');
+  if (!tags.length) { clearVocabHi(); return; }
+  var next = vocabHi < 0 ? (delta > 0 ? 0 : -1) : vocabHi + delta;
+  if (next < 0) { clearVocabHi(); return; }
+  if (next >= tags.length) next = tags.length - 1;
+  vocabHi = next;
+  tags.forEach((btn, i) => btn.classList.toggle('vocab-tag--hi', i === vocabHi));
+  tags[vocabHi].scrollIntoView({ block: 'nearest' });
+  inp.focus();
+}
+
+function clearVocabFilter() {
+  const inp = document.getElementById('vocab-filter');
+  inp.value = '';
+  vocabHi = -1;
+  filterVocab('');
+  inp.focus();
+}
+
 function filterVocab(q) {
   document.querySelectorAll('.vocab-tag').forEach(btn => {
-    // Match on display text (spaces) or underscore form
+    const tag = (btn.dataset.tag || '').toLowerCase();
+    const q_ = q.replace(/\s+/g, '_');
     const text = btn.textContent.toLowerCase();
-    const visible = !q || text.indexOf(q) !== -1 || text.replace(/ /g,'_').indexOf(q) !== -1;
+    const visible = !q || tag.indexOf(q) !== -1 || tag.indexOf(q_) !== -1
+      || text.indexOf(q) !== -1 || text.replace(/ /g, '_').indexOf(q) !== -1;
     btn.style.display = visible ? '' : 'none';
+    btn.classList.remove('vocab-tag--hi');
   });
-  // Hide group headers when all their tags are filtered out
   document.querySelectorAll('.vocab-group').forEach(group => {
     const anyVisible = Array.from(group.querySelectorAll('.vocab-tag')).some(t => t.style.display !== 'none');
     group.style.display = anyVisible ? '' : 'none';
   });
+  vocabHi = -1;
 }
 
 document.addEventListener('keydown', e => {
@@ -1016,6 +1310,14 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') { e.preventDefault(); if (queueIdx < queue.length-1) showImage(queueIdx+1); }
     if (e.key === 'ArrowLeft')  { e.preventDefault(); if (queueIdx > 0) showImage(queueIdx-1); }
   }
+});
+
+window.addEventListener('beforeunload', e => {
+  if (!sessionMode) return;
+  persistSessionDraft();
+  if (!sessionDirty.size) return;
+  e.preventDefault();
+  e.returnValue = '';
 });
 
 boot();

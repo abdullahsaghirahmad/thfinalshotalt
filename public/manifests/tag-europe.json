@@ -1,7 +1,7 @@
 {
   "tag": "europe",
-  "updated_at": "2026-09-10T19:42:58.264Z",
-  "count": 65,
+  "updated_at": "2026-09-11T10:54:08.314Z",
+  "count": 66,
   "images": [
     {
       "id": 1,
@@ -170,7 +170,9 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "street",
+        "architecture"
       ]
     },
     {
@@ -183,7 +185,9 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "street",
+        "architecture"
       ]
     },
     {
@@ -196,7 +200,9 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "architecture",
+        "long_exposure"
       ]
     },
     {
@@ -209,7 +215,8 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "street"
       ]
     },
     {
@@ -222,7 +229,8 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "street"
       ]
     },
     {
@@ -234,7 +242,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "mountain",
+        "grindelwald"
       ]
     },
     {
@@ -247,7 +257,9 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "architecture",
+        "symmetry"
       ]
     },
     {
@@ -259,7 +271,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "minimal"
       ]
     },
     {
@@ -283,7 +296,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "cable_car",
+        "grindelwald",
+        "mountain"
       ]
     },
     {
@@ -295,7 +311,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "mountain",
+        "landscape",
+        "grindelwald"
       ]
     },
     {
@@ -307,7 +326,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "grindelwald"
       ]
     },
     {
@@ -319,7 +339,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "experimental"
       ]
     },
     {
@@ -331,7 +352,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "lauterbrunnen",
+        "leading_lines"
       ]
     },
     {
@@ -343,7 +366,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "landscape",
+        "grindelwald"
       ]
     },
     {
@@ -355,7 +380,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "lauterbrunnen"
       ]
     },
     {
@@ -367,7 +393,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "mountain",
+        "minimal"
       ]
     },
     {
@@ -379,7 +407,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "landscape"
       ]
     },
     {
@@ -391,7 +420,11 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "minimal",
+        "sky",
+        "mountain",
+        "purple"
       ]
     },
     {
@@ -403,7 +436,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "pink",
+        "mountain",
+        "minimal"
       ]
     },
     {
@@ -415,7 +451,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "blue_hour"
       ]
     },
     {
@@ -427,7 +464,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "golden_hour",
+        "landscape",
+        "sky"
       ]
     },
     {
@@ -439,7 +479,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "sky",
+        "golden_hour"
       ]
     },
     {
@@ -451,7 +493,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "golden_hour",
+        "orange",
+        "minimal"
       ]
     },
     {
@@ -463,7 +508,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "blue"
       ]
     },
     {
@@ -475,7 +521,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "monochrome",
+        "long_exposure",
+        "landscape"
       ]
     },
     {
@@ -487,7 +536,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "landscape",
+        "blue"
       ]
     },
     {
@@ -499,7 +550,10 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "purple",
+        "autumn",
+        "landscape"
       ]
     },
     {
@@ -511,7 +565,9 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "blue_hour",
+        "long_exposure"
       ]
     },
     {
@@ -523,7 +579,9 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "sunset",
+        "sunstar"
       ]
     },
     {
@@ -535,7 +593,9 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "blue_hour",
+        "architecture"
       ]
     },
     {
@@ -547,11 +607,25 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "evening"
       ]
     },
     {
       "id": 45,
+      "public_id": "DSC01856-Edit-Edit_gzlgah",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067710/DSC01856-Edit-Edit_gzlgah.jpg",
+      "width": 1080,
+      "height": 1368,
+      "format": "jpg",
+      "tags": [
+        "giethoorn",
+        "netherlands",
+        "europe"
+      ]
+    },
+    {
+      "id": 46,
       "public_id": "DSC02030-Edit_mykqky",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067707/DSC02030-Edit_mykqky.jpg",
       "width": 1080,
@@ -559,37 +633,39 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "street",
+        "evening"
       ]
     },
     {
-      "id": 46,
+      "id": 47,
       "public_id": "DSC02130-Edit_gph788",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067707/DSC02130-Edit_gph788.jpg",
       "width": 1080,
       "height": 1659,
       "format": "jpg",
       "tags": [
-        "switzerland",
         "europe",
-        "belgium"
+        "belgium",
+        "street",
+        "car"
       ]
     },
     {
-      "id": 47,
+      "id": 48,
       "public_id": "DSC02019-Edit-Edit-2_hadcn3",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067705/DSC02019-Edit-Edit-2_hadcn3.jpg",
       "width": 1080,
       "height": 1641,
       "format": "jpg",
       "tags": [
-        "switzerland",
         "europe",
         "belgium"
       ]
     },
     {
-      "id": 48,
+      "id": 49,
       "public_id": "DSC01590-Edit_dfh68g",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067705/DSC01590-Edit_dfh68g.jpg",
       "width": 1080,
@@ -597,11 +673,13 @@
       "format": "jpg",
       "tags": [
         "netherlands",
-        "europe"
+        "europe",
+        "windmill",
+        "sunstar"
       ]
     },
     {
-      "id": 49,
+      "id": 50,
       "public_id": "DSC01972-Edit_le2byx",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067704/DSC01972-Edit_le2byx.jpg",
       "width": 1644,
@@ -609,11 +687,13 @@
       "format": "jpg",
       "tags": [
         "belgium",
-        "europe"
+        "europe",
+        "long_exposure",
+        "blue"
       ]
     },
     {
-      "id": 50,
+      "id": 51,
       "public_id": "DSC01879-Edit-3_gvxpn6",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067703/DSC01879-Edit-3_gvxpn6.jpg",
       "width": 1549,
@@ -621,11 +701,12 @@
       "format": "jpg",
       "tags": [
         "europe",
-        "belgium"
+        "belgium",
+        "architecture"
       ]
     },
     {
-      "id": 51,
+      "id": 52,
       "public_id": "DSC01845-Edit_vwrx6q",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067703/DSC01845-Edit_vwrx6q.jpg",
       "width": 1620,
@@ -633,11 +714,16 @@
       "format": "jpg",
       "tags": [
         "netherlands",
-        "europe"
+        "europe",
+        "blue_hour",
+        "blue",
+        "zaanse_schans",
+        "landscape",
+        "reflection"
       ]
     },
     {
-      "id": 52,
+      "id": 53,
       "public_id": "DSC01835-Edit-3_bwsmsz",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067702/DSC01835-Edit-3_bwsmsz.jpg",
       "width": 1620,
@@ -645,11 +731,15 @@
       "format": "jpg",
       "tags": [
         "netherlands",
-        "europe"
+        "europe",
+        "pink",
+        "sky",
+        "landscape",
+        "windmill"
       ]
     },
     {
-      "id": 53,
+      "id": 54,
       "public_id": "DSC01816-Edit_xgcc5f",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067701/DSC01816-Edit_xgcc5f.jpg",
       "width": 1080,
@@ -657,11 +747,14 @@
       "format": "jpg",
       "tags": [
         "netherlands",
-        "europe"
+        "europe",
+        "monochrome",
+        "zaanse_schans",
+        "symmetry"
       ]
     },
     {
-      "id": 54,
+      "id": 55,
       "public_id": "DSC01660-Edit_qv7pmq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067701/DSC01660-Edit_qv7pmq.jpg",
       "width": 1080,
@@ -673,7 +766,7 @@
       ]
     },
     {
-      "id": 55,
+      "id": 56,
       "public_id": "Abdullah_Saghir_Ahmad_17_llzduc",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788978416/Abdullah_Saghir_Ahmad_17_llzduc.jpg",
       "width": 1067,
@@ -687,7 +780,7 @@
       ]
     },
     {
-      "id": 56,
+      "id": 57,
       "public_id": "6_oclk75",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1787518812/6_oclk75.jpg",
       "width": 1600,
@@ -701,7 +794,7 @@
       ]
     },
     {
-      "id": 57,
+      "id": 58,
       "public_id": "DSC03193-Edit_vdtqr8",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
       "width": 1620,
@@ -716,7 +809,7 @@
       ]
     },
     {
-      "id": 58,
+      "id": 59,
       "public_id": "DSC04033-Edit_dz0ibj",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032045/DSC04033-Edit_dz0ibj.jpg",
       "width": 1540,
@@ -732,7 +825,7 @@
       ]
     },
     {
-      "id": 59,
+      "id": 60,
       "public_id": "11_brt6oo",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285324/11_brt6oo.jpg",
       "width": 523,
@@ -746,7 +839,7 @@
       ]
     },
     {
-      "id": 60,
+      "id": 61,
       "public_id": "112_ls7azd",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285320/112_ls7azd.jpg",
       "width": 800,
@@ -759,7 +852,7 @@
       ]
     },
     {
-      "id": 61,
+      "id": 62,
       "public_id": "124_a55vni",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285318/124_a55vni.jpg",
       "width": 800,
@@ -774,7 +867,7 @@
       ]
     },
     {
-      "id": 62,
+      "id": 63,
       "public_id": "120_tavm96",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
       "width": 800,
@@ -789,7 +882,7 @@
       ]
     },
     {
-      "id": 63,
+      "id": 64,
       "public_id": "12_hbkqqq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
       "width": 585,
@@ -804,7 +897,7 @@
       ]
     },
     {
-      "id": 64,
+      "id": 65,
       "public_id": "121_agcwif",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/121_agcwif.jpg",
       "width": 800,
@@ -818,7 +911,7 @@
       ]
     },
     {
-      "id": 65,
+      "id": 66,
       "public_id": "122_p43ndt",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/122_p43ndt.jpg",
       "width": 800,

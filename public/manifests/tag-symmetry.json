@@ -1,10 +1,40 @@
 {
   "tag": "symmetry",
-  "updated_at": "2026-09-10T19:43:20.652Z",
-  "count": 1,
+  "updated_at": "2026-09-11T10:54:34.878Z",
+  "count": 3,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03391-Edit_ihcyzc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067885/DSC03391-Edit_ihcyzc.jpg",
+      "width": 1080,
+      "height": 1478,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "architecture",
+        "symmetry"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC01816-Edit_xgcc5f",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067701/DSC01816-Edit_xgcc5f.jpg",
+      "width": 1080,
+      "height": 1434,
+      "format": "jpg",
+      "tags": [
+        "netherlands",
+        "europe",
+        "monochrome",
+        "zaanse_schans",
+        "symmetry"
+      ]
+    },
+    {
+      "id": 3,
       "public_id": "12_hbkqqq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
       "width": 585,

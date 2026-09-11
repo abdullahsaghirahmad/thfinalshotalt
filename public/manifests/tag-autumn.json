@@ -1,0 +1,22 @@
+{
+  "tag": "autumn",
+  "updated_at": "2026-09-11T10:54:01.648Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC02189-Edit-2_cuubrj",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067751/DSC02189-Edit-2_cuubrj.jpg",
+      "width": 1675,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "purple",
+        "autumn",
+        "landscape"
+      ]
+    }
+  ]
+}

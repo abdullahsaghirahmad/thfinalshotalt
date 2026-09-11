@@ -1,0 +1,65 @@
+{
+  "tag": "blue_hour",
+  "updated_at": "2026-09-11T10:54:03.571Z",
+  "count": 4,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC03029-Edit_brwtzg",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067757/DSC03029-Edit_brwtzg.jpg",
+      "width": 1728,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "blue_hour"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC02362-ARW_DxO_DeepPRIME-Edit_zieolm",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067750/DSC02362-ARW_DxO_DeepPRIME-Edit_zieolm.jpg",
+      "width": 1587,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "blue_hour",
+        "long_exposure"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC02323-Edit-2_jpnnnd",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067749/DSC02323-Edit-2_jpnnnd.jpg",
+      "width": 1080,
+      "height": 1642,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "blue_hour",
+        "architecture"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC01845-Edit_vwrx6q",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067703/DSC01845-Edit_vwrx6q.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "netherlands",
+        "europe",
+        "blue_hour",
+        "blue",
+        "zaanse_schans",
+        "landscape",
+        "reflection"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "tag": "grindelwald",
+  "updated_at": "2026-09-11T10:54:14.563Z",
+  "count": 5,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC03251-Edit_pnxkuh",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067885/DSC03251-Edit_pnxkuh.jpg",
+      "width": 1608,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "mountain",
+        "grindelwald"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03264-Edit-Edit-Edit_lpxdri",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067882/DSC03264-Edit-Edit-Edit_lpxdri.jpg",
+      "width": 1080,
+      "height": 1620,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "cable_car",
+        "grindelwald",
+        "mountain"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC03256-Edit_yvfuwv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067881/DSC03256-Edit_yvfuwv.jpg",
+      "width": 1548,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "mountain",
+        "landscape",
+        "grindelwald"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC03230-Edit_tbriky",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067880/DSC03230-Edit_tbriky.jpg",
+      "width": 1080,
+      "height": 1747,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "grindelwald"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC03148-Edit_h3iigo",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067763/DSC03148-Edit_h3iigo.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "landscape",
+        "grindelwald"
+      ]
+    }
+  ]
+}

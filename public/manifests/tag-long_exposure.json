@@ -1,10 +1,68 @@
 {
   "tag": "long_exposure",
-  "updated_at": "2026-09-10T19:43:06.682Z",
-  "count": 2,
+  "updated_at": "2026-09-11T10:54:18.307Z",
+  "count": 6,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03501-Edit_xslgqd",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067889/DSC03501-Edit_xslgqd.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "architecture",
+        "long_exposure"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC02584-Edit_x4dncb",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067752/DSC02584-Edit_x4dncb.jpg",
+      "width": 1080,
+      "height": 1270,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "monochrome",
+        "long_exposure",
+        "landscape"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC02362-ARW_DxO_DeepPRIME-Edit_zieolm",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067750/DSC02362-ARW_DxO_DeepPRIME-Edit_zieolm.jpg",
+      "width": 1587,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "blue_hour",
+        "long_exposure"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC01972-Edit_le2byx",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067704/DSC01972-Edit_le2byx.jpg",
+      "width": 1644,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "long_exposure",
+        "blue"
+      ]
+    },
+    {
+      "id": 5,
       "public_id": "Risa_Stacked-2_diuqia",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629986/Risa_Stacked-2_diuqia.jpg",
       "width": 1920,
@@ -18,7 +76,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 6,
       "public_id": "DSC00183-Edit-4_uimcjm",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1788629984/DSC00183-Edit-4_uimcjm.jpg",
       "width": 727,

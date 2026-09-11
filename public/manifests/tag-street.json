@@ -1,7 +1,7 @@
 {
   "tag": "street",
-  "updated_at": "2026-09-10T19:43:18.058Z",
-  "count": 1,
+  "updated_at": "2026-09-11T10:54:32.110Z",
+  "count": 7,
   "images": [
     {
       "id": 1,
@@ -15,6 +15,91 @@
         "europe",
         "paris",
         "street"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03520-Edit-Edit_sodwtv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067890/DSC03520-Edit-Edit_sodwtv.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "street",
+        "architecture"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC03502-Edit_ulluft",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067889/DSC03502-Edit_ulluft.jpg",
+      "width": 1080,
+      "height": 1350,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "street",
+        "architecture"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC03494-Edit_muzl7a",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067887/DSC03494-Edit_muzl7a.jpg",
+      "width": 1080,
+      "height": 1408,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "street"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC03469-Edit-Edit-3_r9lwif",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067886/DSC03469-Edit-Edit-3_r9lwif.jpg",
+      "width": 1080,
+      "height": 1651,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "street"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC02030-Edit_mykqky",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067707/DSC02030-Edit_mykqky.jpg",
+      "width": 1080,
+      "height": 1436,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "street",
+        "evening"
+      ]
+    },
+    {
+      "id": 7,
+      "public_id": "DSC02130-Edit_gph788",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067707/DSC02130-Edit_gph788.jpg",
+      "width": 1080,
+      "height": 1659,
+      "format": "jpg",
+      "tags": [
+        "europe",
+        "belgium",
+        "street",
+        "car"
       ]
     }
   ]

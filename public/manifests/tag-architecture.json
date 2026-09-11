@@ -1,10 +1,96 @@
 {
   "tag": "architecture",
-  "updated_at": "2026-09-10T19:42:52.609Z",
-  "count": 6,
+  "updated_at": "2026-09-11T10:54:00.099Z",
+  "count": 12,
   "images": [
     {
       "id": 1,
+      "public_id": "DSC03520-Edit-Edit_sodwtv",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067890/DSC03520-Edit-Edit_sodwtv.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "street",
+        "architecture"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC03502-Edit_ulluft",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067889/DSC03502-Edit_ulluft.jpg",
+      "width": 1080,
+      "height": 1350,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "street",
+        "architecture"
+      ]
+    },
+    {
+      "id": 3,
+      "public_id": "DSC03501-Edit_xslgqd",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067889/DSC03501-Edit_xslgqd.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "architecture",
+        "long_exposure"
+      ]
+    },
+    {
+      "id": 4,
+      "public_id": "DSC03391-Edit_ihcyzc",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067885/DSC03391-Edit_ihcyzc.jpg",
+      "width": 1080,
+      "height": 1478,
+      "format": "jpg",
+      "tags": [
+        "france",
+        "europe",
+        "paris",
+        "architecture",
+        "symmetry"
+      ]
+    },
+    {
+      "id": 5,
+      "public_id": "DSC02323-Edit-2_jpnnnd",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067749/DSC02323-Edit-2_jpnnnd.jpg",
+      "width": 1080,
+      "height": 1642,
+      "format": "jpg",
+      "tags": [
+        "belgium",
+        "europe",
+        "blue_hour",
+        "architecture"
+      ]
+    },
+    {
+      "id": 6,
+      "public_id": "DSC01879-Edit-3_gvxpn6",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067703/DSC01879-Edit-3_gvxpn6.jpg",
+      "width": 1549,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "europe",
+        "belgium",
+        "architecture"
+      ]
+    },
+    {
+      "id": 7,
       "public_id": "120_tavm96",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285317/120_tavm96.jpg",
       "width": 800,
@@ -19,7 +105,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 8,
       "public_id": "12_hbkqqq",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/12_hbkqqq.jpg",
       "width": 585,
@@ -34,7 +120,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 9,
       "public_id": "121_agcwif",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/121_agcwif.jpg",
       "width": 800,
@@ -48,7 +134,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 10,
       "public_id": "122_p43ndt",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755285316/122_p43ndt.jpg",
       "width": 800,
@@ -62,7 +148,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 11,
       "public_id": "abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-F9fBJ91kiHI-unsplash_nkimuv.jpg",
       "width": 640,
@@ -77,7 +163,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 12,
       "public_id": "abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175922/abdullah-ahmad-E2sqXFMElgg-unsplash_xvyqar.jpg",
       "width": 640,

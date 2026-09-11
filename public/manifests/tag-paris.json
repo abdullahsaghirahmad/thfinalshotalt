@@ -1,6 +1,6 @@
 {
   "tag": "paris",
-  "updated_at": "2026-09-10T19:43:13.118Z",
+  "updated_at": "2026-09-11T10:54:25.698Z",
   "count": 16,
   "images": [
     {
@@ -132,7 +132,9 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "street",
+        "architecture"
       ]
     },
     {
@@ -145,7 +147,9 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "architecture",
+        "long_exposure"
       ]
     },
     {
@@ -158,7 +162,8 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "street"
       ]
     },
     {
@@ -171,7 +176,8 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "street"
       ]
     },
     {
@@ -184,7 +190,9 @@
       "tags": [
         "france",
         "europe",
-        "paris"
+        "paris",
+        "architecture",
+        "symmetry"
       ]
     },
     {

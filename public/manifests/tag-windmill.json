@@ -1,0 +1,37 @@
+{
+  "tag": "windmill",
+  "updated_at": "2026-09-11T10:54:37.877Z",
+  "count": 2,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC01590-Edit_dfh68g",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067705/DSC01590-Edit_dfh68g.jpg",
+      "width": 1080,
+      "height": 1620,
+      "format": "jpg",
+      "tags": [
+        "netherlands",
+        "europe",
+        "windmill",
+        "sunstar"
+      ]
+    },
+    {
+      "id": 2,
+      "public_id": "DSC01835-Edit-3_bwsmsz",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067702/DSC01835-Edit-3_bwsmsz.jpg",
+      "width": 1620,
+      "height": 1080,
+      "format": "jpg",
+      "tags": [
+        "netherlands",
+        "europe",
+        "pink",
+        "sky",
+        "landscape",
+        "windmill"
+      ]
+    }
+  ]
+}

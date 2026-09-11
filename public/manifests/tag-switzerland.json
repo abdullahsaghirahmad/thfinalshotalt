@@ -1,7 +1,7 @@
 {
   "tag": "switzerland",
-  "updated_at": "2026-09-10T19:43:20.219Z",
-  "count": 24,
+  "updated_at": "2026-09-11T10:54:34.443Z",
+  "count": 22,
   "images": [
     {
       "id": 1,
@@ -12,7 +12,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "mountain",
+        "grindelwald"
       ]
     },
     {
@@ -24,7 +26,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "minimal"
       ]
     },
     {
@@ -48,7 +51,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "cable_car",
+        "grindelwald",
+        "mountain"
       ]
     },
     {
@@ -60,7 +66,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "mountain",
+        "landscape",
+        "grindelwald"
       ]
     },
     {
@@ -72,7 +81,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "grindelwald"
       ]
     },
     {
@@ -84,7 +94,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "experimental"
       ]
     },
     {
@@ -96,7 +107,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "lauterbrunnen",
+        "leading_lines"
       ]
     },
     {
@@ -108,7 +121,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "landscape",
+        "grindelwald"
       ]
     },
     {
@@ -120,7 +135,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "lauterbrunnen"
       ]
     },
     {
@@ -132,7 +148,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "mountain",
+        "minimal"
       ]
     },
     {
@@ -144,7 +162,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "landscape"
       ]
     },
     {
@@ -156,7 +175,11 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "minimal",
+        "sky",
+        "mountain",
+        "purple"
       ]
     },
     {
@@ -168,7 +191,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "pink",
+        "mountain",
+        "minimal"
       ]
     },
     {
@@ -180,7 +206,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "blue_hour"
       ]
     },
     {
@@ -192,7 +219,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "golden_hour",
+        "landscape",
+        "sky"
       ]
     },
     {
@@ -204,7 +234,9 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "sky",
+        "golden_hour"
       ]
     },
     {
@@ -216,7 +248,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "golden_hour",
+        "orange",
+        "minimal"
       ]
     },
     {
@@ -228,7 +263,8 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "blue"
       ]
     },
     {
@@ -240,7 +276,10 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "monochrome",
+        "long_exposure",
+        "landscape"
       ]
     },
     {
@@ -252,37 +291,13 @@
       "format": "jpg",
       "tags": [
         "switzerland",
-        "europe"
+        "europe",
+        "landscape",
+        "blue"
       ]
     },
     {
       "id": 22,
-      "public_id": "DSC02130-Edit_gph788",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067707/DSC02130-Edit_gph788.jpg",
-      "width": 1080,
-      "height": 1659,
-      "format": "jpg",
-      "tags": [
-        "switzerland",
-        "europe",
-        "belgium"
-      ]
-    },
-    {
-      "id": 23,
-      "public_id": "DSC02019-Edit-Edit-2_hadcn3",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067705/DSC02019-Edit-Edit-2_hadcn3.jpg",
-      "width": 1080,
-      "height": 1641,
-      "format": "jpg",
-      "tags": [
-        "switzerland",
-        "europe",
-        "belgium"
-      ]
-    },
-    {
-      "id": 24,
       "public_id": "DSC03193-Edit_vdtqr8",
       "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1781032054/DSC03193-Edit_vdtqr8.jpg",
       "width": 1620,

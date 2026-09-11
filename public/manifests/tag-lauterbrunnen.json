@@ -1,6 +1,6 @@
 {
-  "tag": "leading_lines",
-  "updated_at": "2026-09-11T10:54:17.961Z",
+  "tag": "lauterbrunnen",
+  "updated_at": "2026-09-11T10:54:17.567Z",
   "count": 2,
   "images": [
     {
@@ -19,16 +19,15 @@
     },
     {
       "id": 2,
-      "public_id": "abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug",
-      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1755175921/abdullah-ahmad-eJkQ_LmCEdI-unsplash_z8gvug.jpg",
-      "width": 640,
-      "height": 960,
+      "public_id": "DSC03089-Edit_fxebd8",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067762/DSC03089-Edit_fxebd8.jpg",
+      "width": 1616,
+      "height": 1080,
       "format": "jpg",
       "tags": [
-        "minimal",
-        "moon",
-        "purple",
-        "leading_lines"
+        "switzerland",
+        "europe",
+        "lauterbrunnen"
       ]
     }
   ]

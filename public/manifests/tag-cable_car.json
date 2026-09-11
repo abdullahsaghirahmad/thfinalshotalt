@@ -1,0 +1,22 @@
+{
+  "tag": "cable_car",
+  "updated_at": "2026-09-11T10:54:04.769Z",
+  "count": 1,
+  "images": [
+    {
+      "id": 1,
+      "public_id": "DSC03264-Edit-Edit-Edit_lpxdri",
+      "secure_url": "https://res.cloudinary.com/dess344fq/image/upload/v1789067882/DSC03264-Edit-Edit-Edit_lpxdri.jpg",
+      "width": 1080,
+      "height": 1620,
+      "format": "jpg",
+      "tags": [
+        "switzerland",
+        "europe",
+        "cable_car",
+        "grindelwald",
+        "mountain"
+      ]
+    }
+  ]
+}
